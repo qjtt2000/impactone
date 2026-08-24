@@ -837,3 +837,134 @@ footer {
   }
 
 }
+/* =========================
+   MEMBER / LOGIN / REGISTER
+========================= */
+
+.login-link {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.login-link:hover {
+  color: var(--gold);
+}
+
+.account-page {
+  min-height: calc(100vh - 72px);
+  background: var(--soft);
+  padding: 90px 20px;
+}
+
+.account-card {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 48px;
+  background: #fff;
+  border: 1px solid var(--line);
+}
+
+.account-card h1 {
+  font-size: 48px;
+  margin-bottom: 15px;
+}
+
+.account-intro {
+  color: var(--muted);
+  margin-bottom: 35px;
+}
+
+.account-form {
+  display: grid;
+  gap: 12px;
+}
+
+.account-form label {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.account-form label span {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.account-form input[type="text"],
+.account-form input[type="email"],
+.account-form input[type="password"] {
+  width: 100%;
+  padding: 14px 15px;
+  border: 1px solid #ccd2d9;
+  background: #fff;
+  font-size: 16px;
+  outline: none;
+}
+
+.account-form input:focus {
+  border-color: var(--gold);
+}
+
+.account-button {
+  width: 100%;
+  margin-top: 15px;
+  padding: 14px;
+  font-size: 15px;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0;
+  cursor: pointer;
+}
+
+.checkbox-row input {
+  width: 17px;
+  height: 17px;
+}
+
+.account-switch {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.account-switch a {
+  color: var(--gold);
+  font-weight: 800;
+}
+
+.account-note {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+}
+
+.account-message {
+  margin-top: 18px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+@media (max-width: 560px) {
+
+  .account-page {
+    padding: 45px 14px;
+  }
+
+  .account-card {
+    padding: 30px 22px;
+  }
+
+  .account-card h1 {
+    font-size: 38px;
+  }
+
+}
