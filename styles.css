@@ -640,13 +640,11 @@ p {
   line-height: 1.12;
 
 }
-/* 首页 TOP STORY 主标题 */
-
-.hero h1 {
-  font-size: 50px;
-  line-height: 1.16;
-  letter-spacing: -0.02em;
-  white-space: nowrap;
+section.hero h1 {
+  font-size: 46px !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.02em !important;
+  white-space: nowrap !important;
 }
 
 
