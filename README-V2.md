@@ -76,3 +76,4 @@ window.IMPACTONE_CONFIG = {
 ## 重要
 
 正式上线邮件订阅前，建议再补充双重确认（double opt-in）、退订链接、退信处理和隐私政策。当前 V2 的后端代码是可部署的结构骨架，不能替代这些正式邮件合规流程。
+Preview deployment test
