@@ -1,8 +1,17 @@
-/* IMPACTONE production endpoints.
-   Leave empty while previewing on GitHub Pages.
-   After deploying the Supabase functions below, fill in the URLs here. */
+/* IMPACTONE runtime endpoints and social profile links.
+   Preview works with empty endpoints using localStorage.
+   Production: deploy Supabase Edge Functions and paste their URLs here. */
 window.IMPACTONE_CONFIG = {
   subscribeEndpoint: "",
   commentsEndpoint: "",
-  favoriteEndpoint: ""
+  favoriteEndpoint: "",
+  sendDailyEndpoint: "",
+  socialProfiles: {
+    facebook: "",
+    instagram: "",
+    x: "",
+    linkedin: "",
+    youtube: "",
+    wechat: ""
+  }
 };

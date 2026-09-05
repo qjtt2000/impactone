@@ -1,34 +1,3 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
-
-Deno.serve(async (req) => {
-  if (req.method !== 'POST') return new Response('Method not allowed', { status: 405 })
-  const adminSecret = Deno.env.get('IMPACTONE_ADMIN_SECRET')
-  if (!adminSecret || req.headers.get('x-impactone-secret') !== adminSecret) return new Response('Unauthorized', { status: 401 })
-
-  try {
-    const { subject, issueUrl, preview = '', headlines = [] } = await req.json()
-    if (!subject || !issueUrl) return json({ error: 'subject and issueUrl are required' }, 400)
-
-    const supabase = createClient(Deno.env.get('SUPABASE_URL')!, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!)
-    const { data: subscribers, error } = await supabase.from('subscribers').select('email').eq('status','active')
-    if (error) throw error
-
-    const apiKey = Deno.env.get('RESEND_API_KEY')!
-    const from = Deno.env.get('RESEND_FROM') || 'IMPACTONE <daily@impactone.news>'
-    const rows = (headlines as string[]).slice(0,8).map((h,i)=>`<li style="margin:0 0 8px"><b>${String(i+1).padStart(2,'0')}｜</b>${escapeHtml(h)}</li>`).join('')
-    const html = `<!doctype html><html><body style="font-family:Arial,'PingFang SC',sans-serif;color:#1f2227;background:#F7F4EE;margin:0;padding:28px"><div style="max-width:620px;margin:auto"><div style="background:#062A5E;color:white;padding:26px"><div style="font-size:11px;letter-spacing:.12em">IMPACTONE</div><h1 style="font-family:Georgia,serif;margin:10px 0 8px">影响力·每日必读</h1><div style="color:#C8A84B">筛选全球资讯，把握天下大势。</div></div><div style="padding:24px 4px"><p>${escapeHtml(preview)}</p><ol style="padding-left:22px">${rows}</ol><p style="margin-top:24px"><a href="${issueUrl}" style="display:inline-block;background:#062A5E;color:#fff;text-decoration:none;padding:11px 18px">阅读全文</a></p></div></div></body></html>`
-
-    let sent = 0, failed = 0
-    for (const s of subscribers || []) {
-      const r = await fetch('https://api.resend.com/emails', { method:'POST', headers:{'Authorization':`Bearer ${apiKey}`,'Content-Type':'application/json'}, body:JSON.stringify({ from, to:[s.email], subject, html }) })
-      r.ok ? sent++ : failed++
-    }
-    return json({ ok:true, sent, failed })
-  } catch (e) {
-    console.error(e)
-    return json({ error:'Send failed' }, 500)
-  }
-})
-
-function escapeHtml(v: unknown) { return String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]!)) }
-function json(data: unknown, status=200){ return new Response(JSON.stringify(data),{status,headers:{'Content-Type':'application/json; charset=utf-8'}}) }
+Deno.serve(async(req)=>{if(req.method!=='POST')return new Response('Method not allowed',{status:405});const adminSecret=Deno.env.get('IMPACTONE_ADMIN_SECRET');if(!adminSecret||req.headers.get('x-impactone-secret')!==adminSecret)return new Response('Unauthorized',{status:401});try{const {subject,issueUrl,preview='',headlines=[]}=await req.json();if(!subject||!issueUrl)return json({error:'subject and issueUrl are required'},400);const supabase=createClient(Deno.env.get('SUPABASE_URL')!,Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!);const {data:subscribers,error}=await supabase.from('subscribers').select('email,unsubscribe_token').eq('status','active');if(error)throw error;const apiKey=Deno.env.get('RESEND_API_KEY')!,from=Deno.env.get('RESEND_FROM')||'IMPACTONE <daily@impactone.news>',unsubscribeBase=Deno.env.get('UNSUBSCRIBE_URL')||'';const rows=(headlines as string[]).slice(0,12).map((h,i)=>`<li style="margin:0 0 8px"><b>${String(i+1).padStart(2,'0')}｜</b>${escapeHtml(h)}</li>`).join('');let sent=0,failed=0;for(const s of subscribers||[]){const unsubscribe=unsubscribeBase?`${unsubscribeBase}${unsubscribeBase.includes('?')?'&':'?'}token=${encodeURIComponent(s.unsubscribe_token)}`:'';const html=`<!doctype html><html><body style="font-family:Arial,'PingFang SC',sans-serif;color:#1f2227;background:#F7F4EE;margin:0;padding:28px"><div style="max-width:620px;margin:auto"><div style="background:#062A5E;color:white;padding:26px"><div style="font-size:11px;letter-spacing:.12em">IMPACTONE</div><h1 style="font-family:Georgia,serif;margin:10px 0 8px">影响力·每日必读</h1><div style="color:#C8A84B">筛选全球资讯，把握天下大势。</div></div><div style="padding:24px 4px"><p>${escapeHtml(preview)}</p><ol style="padding-left:22px">${rows}</ol><p style="margin-top:24px"><a href="${issueUrl}" style="display:inline-block;background:#062A5E;color:#fff;text-decoration:none;padding:11px 18px">阅读全文</a></p>${unsubscribe?`<p style="margin-top:28px;font-size:11px;color:#777"><a href="${unsubscribe}" style="color:#777">取消订阅</a></p>`:''}</div></div></body></html>`;const r=await fetch('https://api.resend.com/emails',{method:'POST',headers:{Authorization:`Bearer ${apiKey}`,'Content-Type':'application/json'},body:JSON.stringify({from,to:[s.email],subject,html})});r.ok?sent++:failed++}return json({ok:true,sent,failed})}catch(e){console.error(e);return json({error:'Send failed'},500)}})
+function escapeHtml(v:unknown){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]!))}function json(data:unknown,status=200){return new Response(JSON.stringify(data),{status,headers:{'Content-Type':'application/json; charset=utf-8'}})}
