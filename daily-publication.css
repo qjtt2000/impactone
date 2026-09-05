@@ -1,3 +1,4 @@
+
 /* IMPACTONE · 影响力·每日必读 — V3.1 SAMPLE-LED + FUNCTIONAL INTERACTIONS
    Visual priority: approved sample. PDF spec is secondary.
 */
@@ -116,3 +117,13 @@ html,body{overflow-x:hidden}
   .fixed-actions .ico,.fixed-actions .ico svg{width:21px!important;height:21px!important;font-size:22px!important}
   .fixed-actions button+button:before{top:15px;bottom:15px}
 }
+
+
+/* V3.4 — sample-matched NYC skyline; interaction bar intentionally unchanged */
+.skyline svg{overflow:visible}
+.skyline .city,.skyline .empire,.skyline .spire-detail{stroke:var(--gold);fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.skyline .city{stroke-width:.9}
+.skyline .empire{stroke-width:1}
+.skyline .spire-detail{stroke-width:.72;opacity:.9}
+.skyline .ground{stroke-width:.9}
+@media(max-width:600px){.skyline .city{stroke-width:.82}.skyline .empire{stroke-width:.92}.skyline .ground{stroke-width:.82}}
