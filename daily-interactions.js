@@ -30,7 +30,7 @@
 
   // Dynamic numbering: focus 01–04, scan continues 05 onward.
   $$('.story-number').forEach((el,i)=>el.textContent=String(i+1).padStart(2,'0')+'｜');
-  const focusCount=$$('.story-number').length;
+  const focusCount=Math.max(4,$$('.story-number').length);
   $$('.scan-number').forEach((el,i)=>el.textContent=String(focusCount+i+1).padStart(2,'0')+'｜');
   const scanSub=$$('.section-title .section-sub').find(el=>el.textContent.includes('值得关注'));
   if(scanSub) scanSub.textContent=`${$$('.scan-item').length} 个值得关注的信号`;
