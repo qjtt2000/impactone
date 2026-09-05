@@ -37,3 +37,82 @@
   .faef-logo{width:64px;height:64px}
   .footer-brands b{font-size:9.5px}
 }
+
+
+/* V3.3 — sample-first corrections: real fixed action bar + native fold + footer/logo cleanup */
+:root{--action-h:64px}
+html,body{overflow-x:hidden}
+.page{padding-bottom:calc(var(--action-h) + var(--safe-bottom));}
+
+/* Cover: closer to approved sample */
+.brand-block{height:338px;padding-top:38px}
+.skyline{height:150px}
+.skyline polyline,.skyline .empire{stroke:var(--gold);stroke-width:1;fill:none;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
+
+/* Native fold: no JavaScript dependency */
+.scan-details{margin:7px 0 0;border:0}
+.scan-details summary{list-style:none;cursor:pointer;color:var(--navy);font-size:11px;font-weight:700;padding:4px 0 0;user-select:none;-webkit-tap-highlight-color:transparent}
+.scan-details summary::-webkit-details-marker{display:none}
+.scan-details .open-label{display:none}
+.scan-details[open] .closed-label{display:none}
+.scan-details[open] .open-label{display:inline}
+.scan-details .scan-body{display:block;margin-top:12px}
+.scan-details .scan-body p{margin:0}
+
+/* Footer: approved sample hierarchy */
+.publication-footer{padding:38px 42px 88px;min-height:390px}
+.footer-brands{align-items:start}
+.footer-logo{background:transparent!important}
+.impactone-logo{width:148px;height:auto;max-height:82px;object-fit:contain}
+.faef-logo{width:78px;height:78px;object-fit:contain}
+.share-line{font-size:19px;margin:28px 0 25px}
+.footer-info{font-size:10px;line-height:1.7}
+.footer-info b,.legal b{color:var(--gold);font-size:10px}
+.legal{font-size:8.5px;line-height:1.65}
+
+/* The four actions must ALWAYS stay on screen while scrolling. */
+.fixed-actions{
+  position:fixed!important;
+  z-index:99999!important;
+  left:50%!important;
+  right:auto!important;
+  bottom:0!important;
+  top:auto!important;
+  transform:translateX(-50%)!important;
+  width:min(100vw,var(--publication-width))!important;
+  height:calc(var(--action-h) + var(--safe-bottom))!important;
+  min-height:var(--action-h)!important;
+  padding:0 0 var(--safe-bottom)!important;
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  visibility:visible!important;
+  opacity:1!important;
+  pointer-events:auto!important;
+  background:var(--navy)!important;
+  border-top:1px solid rgba(200,168,75,.62)!important;
+  box-shadow:0 -3px 12px rgba(0,0,0,.18)!important;
+}
+.fixed-actions button{min-width:0;height:var(--action-h);padding:0 4px!important;color:#fff!important;font-family:Georgia,"Songti SC","STSong",serif;font-size:15px!important;font-weight:700!important;gap:6px!important;-webkit-tap-highlight-color:transparent}
+.fixed-actions button+button:before{content:"";position:absolute;left:0;top:17px;bottom:17px;width:1px;background:rgba(255,255,255,.18)}
+.fixed-actions button.active{color:var(--gold)!important}
+.fixed-actions .ico{width:23px!important;height:23px!important;font-size:24px!important;font-family:Arial,sans-serif;font-weight:300}
+.fixed-actions .ico svg{width:23px!important;height:23px!important;stroke-width:1.75!important}
+.fixed-actions small{top:6px;right:8px}
+
+/* Closed comments must be completely invisible; it must never cover the fixed bar. */
+.comments-panel{display:none!important;transform:none!important;z-index:99998!important;bottom:calc(var(--action-h) + var(--safe-bottom))!important}
+.comments-panel.open{display:block!important;transform:none!important}
+.modal-backdrop{z-index:100000!important}
+.io-toast{z-index:100001!important;bottom:calc(var(--action-h) + 18px)!important}
+
+@media(max-width:600px){
+  :root{--action-h:58px}
+  .brand-block{height:306px;padding:30px 20px 0}
+  .skyline{height:136px}
+  .publication-footer{padding:30px 20px 82px;min-height:360px}
+  .impactone-logo{width:126px;max-height:70px}
+  .faef-logo{width:64px;height:64px}
+  .fixed-actions button{height:var(--action-h);font-size:14px!important;gap:4px!important}
+  .fixed-actions .ico,.fixed-actions .ico svg{width:21px!important;height:21px!important;font-size:22px!important}
+  .fixed-actions button+button:before{top:15px;bottom:15px}
+}
