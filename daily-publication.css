@@ -1,0 +1,201 @@
+/* IMPACTONE · 影响力·每日必读 — Publication template V2
+   Visual priority: the approved long-form sample. PDF spec is supplementary.
+*/
+:root{
+  --navy:#062A5E;
+  --navy-deep:#03224d;
+  --gold:#C8A84B;
+  --paper:#F7F4EE;
+  --ink:#1f2227;
+  --muted:#6f7278;
+  --line:#ded8cc;
+  --reader-size:17px;
+  --publication-width:760px;
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:#e9e6df}
+body{margin:0!important;background:#e9e6df!important;color:var(--ink)!important;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body.io-panel-open{overflow:hidden}
+button,input,textarea{font:inherit}
+button{-webkit-tap-highlight-color:transparent}
+.page{width:100%!important;max-width:var(--publication-width)!important;margin:0 auto!important;min-height:100vh;background:var(--paper)!important;box-shadow:0 0 28px rgba(19,28,38,.09);padding-bottom:calc(64px + var(--safe-bottom))!important;overflow:hidden}
+.content{padding:0!important}
+
+/* COVER */
+.brand-block{position:relative!important;min-height:300px!important;padding:28px 30px 24px!important;background:var(--navy)!important;border:0!important;overflow:hidden!important}
+.impactone-wordmark{position:relative;z-index:2;margin:0 0 11px;color:#fff;font:500 11px/1.2 Arial,"Helvetica Neue",sans-serif;letter-spacing:.09em}
+.brand-title{position:relative;z-index:2;max-width:72%;margin:0 0 10px!important;color:#fff!important;font-family:Georgia,"Songti SC","STSong","Noto Serif CJK SC",serif!important;font-size:34px!important;font-weight:700!important;line-height:1.12!important;letter-spacing:.01em!important;text-wrap:balance}
+.brand-subtitle{position:relative;z-index:2;margin:0!important;color:var(--gold)!important;font-size:12px!important;line-height:1.55!important;letter-spacing:.02em!important}
+.issue-date{position:absolute!important;z-index:2;left:30px;bottom:81px;color:#e6e4df!important;font-size:10.5px!important;font-weight:400!important;line-height:1.4;letter-spacing:.04em!important}
+.skyline{position:absolute!important;z-index:1;width:66%!important;height:148px!important;right:10px!important;top:auto!important;bottom:4px!important;opacity:.95!important}
+.skyline svg{width:100%!important;height:100%!important}
+.skyline svg path{stroke:var(--gold)!important;stroke-width:.9!important;vector-effect:non-scaling-stroke}
+.brand-block:after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:rgba(200,168,75,.7)}
+
+/* READER SIZE */
+.font-tool{display:flex;align-items:center;justify-content:flex-end;gap:3px;padding:9px 24px 8px;background:var(--paper);border-bottom:1px solid var(--line);color:#85817a;font-size:10.5px;line-height:1}
+.font-tool button{min-width:28px;border:0;background:transparent;padding:5px 4px;color:#696761;font-size:11px;line-height:1;border-radius:0}
+.font-tool button.active{color:var(--gold);font-weight:700}
+.font-tool button:focus-visible,.fixed-actions button:focus-visible,.scan-toggle:focus-visible,.modal-close:focus-visible,.panel-close:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+/* SECTION BANNERS */
+.section-title{margin:0!important;padding:18px 24px 16px!important;background:var(--navy)!important;color:#fff!important;display:grid!important;grid-template-columns:28px 1fr!important;grid-template-rows:auto auto!important;column-gap:8px!important;row-gap:3px!important;align-items:center!important}
+.section-title h2{margin:0!important;color:#fff!important;font-family:Georgia,"Songti SC","STSong",serif!important;font-size:23px!important;font-weight:700!important;line-height:1.05!important;letter-spacing:.01em!important}
+.section-en{display:inline-block;margin-left:9px;color:var(--gold);font:600 8.5px/1 Arial,"Helvetica Neue",sans-serif;letter-spacing:.13em;vertical-align:middle}
+.section-sub{grid-column:2;color:#e2e5ea;font-size:9.5px;line-height:1.35;letter-spacing:.01em;margin:0!important}
+.section-icon{position:relative!important;width:25px!important;height:25px!important;flex:0 0 25px!important;border:1px solid var(--gold)!important;border-radius:50%!important;opacity:1!important}
+.section-icon.search:before{content:"";position:absolute;inset:4px;border:1px solid var(--gold);border-radius:50%}
+.section-icon.search:after{content:""!important;position:absolute!important;left:11px!important;top:-4px!important;width:1px!important;height:33px!important;background:linear-gradient(transparent 0 12%,var(--gold) 12% 25%,transparent 25% 75%,var(--gold) 75% 88%,transparent 88%)!important;transform:none!important;border-radius:0!important;box-shadow:none!important}
+.section-icon.target:before,.section-icon.target:after{content:"";position:absolute;border-radius:50%}
+.section-icon.target:before{inset:4px;border:1px solid var(--gold)}
+.section-icon.target:after{width:3px;height:3px;left:10px;top:10px;background:var(--gold)}
+.section-icon.bulb{border:0!important;border-radius:0!important}
+.section-icon.bulb:before{content:"";position:absolute;left:4px;top:2px;width:13px;height:13px;border:1px solid var(--gold);border-radius:50% 50% 44% 44%}
+.section-icon.bulb:after{content:"";position:absolute;left:9px;top:17px;width:8px;height:4px;border-top:1px solid var(--gold);border-bottom:1px solid var(--gold)}
+.section-line{display:none!important}
+
+/* FOCUS STORIES */
+.story,.scan-item{display:block!important;margin:0 24px!important;padding:23px 0 24px!important;border-bottom:1px solid var(--line)!important;background:transparent!important}
+.story-number,.scan-number{display:block!important;width:auto!important;height:auto!important;margin:0 0 8px!important;border:0!important;border-radius:0!important;background:transparent!important;color:var(--gold)!important;text-align:left!important;font:500 15px/1.15 Georgia,"Times New Roman",serif!important;letter-spacing:.04em!important}
+.story h3,.scan-item h3{margin:0 0 11px!important;color:var(--navy)!important;font-family:Georgia,"Songti SC","STSong","Noto Serif CJK SC",serif!important;font-size:21px!important;font-weight:700!important;line-height:1.38!important;letter-spacing:.005em!important;text-wrap:balance;overflow-wrap:anywhere}
+.story p,.scan-item p,.daily-view p{margin:0 0 12px!important;color:var(--ink)!important;font-size:var(--reader-size)!important;line-height:1.76!important;letter-spacing:.005em!important;word-break:normal!important;overflow-wrap:break-word}
+.story p:last-child,.scan-item p:last-of-type,.daily-view p:last-child{margin-bottom:0!important}
+.analysis,.scan-quick{margin-top:14px!important;padding:0!important;background:transparent!important;border:0!important}
+.label{display:inline!important;color:var(--navy)!important;font-weight:800!important;white-space:nowrap}
+
+/* IMAGES + CHARTS */
+.story img,.scan-item img{display:block;width:100%;height:auto;margin:15px 0 5px;border:0;border-radius:0;object-fit:cover}
+.image-caption,.story figcaption{margin:5px 0 0;color:#777;font-size:9.5px;line-height:1.45;text-align:center}
+.chart-wrap{margin:0 24px 18px!important;padding:0 0 22px!important;border-bottom:1px solid var(--line)}
+.chart-title{color:var(--navy)!important;font-size:10.5px!important;font-weight:700!important;margin:0 0 8px!important}
+.chart{background:transparent!important;border:0!important;padding:0!important}
+.chart-grid{opacity:.18!important}
+.chart-years{color:#8a867e!important;font-size:9px!important}
+
+/* DAILY SCAN — compact by default */
+.scan-item{padding-top:20px!important;padding-bottom:19px!important}
+.scan-item h3{font-size:19px!important;margin-bottom:9px!important}
+.scan-body{display:none!important;margin-top:12px!important}
+.scan-item.open .scan-body{display:block!important;animation:ioReveal .18s ease-out}
+.scan-quick{margin-top:6px!important;margin-bottom:0!important}
+.scan-toggle{display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:4px 0!important;border:0!important;background:transparent!important;color:var(--navy)!important;font-size:11px!important;font-weight:700!important;line-height:1.2!important}
+.scan-toggle:hover{color:var(--gold)!important}
+@keyframes ioReveal{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
+
+/* IMPACTONE VIEW — special brand treatment */
+.view-section-title{display:block!important;padding:19px 24px 17px!important;background:var(--navy)!important;color:#fff!important}
+.view-section-title .view-cn{display:block;color:#fff;font-family:Georgia,"Songti SC","STSong",serif;font-size:22px;font-weight:700;line-height:1.1}
+.view-section-title .view-enline{display:flex;align-items:center;gap:8px;margin-top:7px;color:var(--gold);font:600 8.5px/1 Arial,sans-serif;letter-spacing:.24em;white-space:nowrap}
+.view-section-title .view-enline:after{content:"◆";font-size:5px;letter-spacing:0;display:inline-flex;align-items:center;gap:5px;width:76px;background:linear-gradient(var(--gold),var(--gold)) center/100% 1px no-repeat;text-indent:35px}
+.daily-view{padding:25px 24px 29px!important;background:var(--paper)!important}
+.view-title{margin:0 0 17px!important;color:var(--navy)!important;font-family:Georgia,"Songti SC","STSong",serif!important;font-size:21px!important;font-weight:700!important;line-height:1.35!important;text-wrap:balance}
+.view-conclusion{font-weight:800!important}
+
+/* PRODUCT VALUE */
+.product-value{padding:29px 24px 27px;text-align:center;background:var(--paper);border-top:1px solid var(--line)}
+.product-value strong{display:block;color:var(--gold);font:600 15px/1.65 Georgia,"Songti SC","STSong",serif;letter-spacing:.005em}
+.product-value span{display:block;margin-top:8px;color:#52545a;font-size:9.5px;line-height:1.5}
+
+/* FOOTER */
+.publication-footer{background:var(--navy)!important;color:#fff!important;padding:28px 24px 92px!important}
+.footer-brands{display:grid!important;grid-template-columns:1fr 1fr!important;gap:14px!important;align-items:start!important;padding-bottom:17px!important;border-bottom:1px solid rgba(255,255,255,.18)!important}
+.footer-brands>div{display:flex!important;flex-direction:column!important;min-width:0}
+.footer-brands b{font:600 10px/1.25 Arial,sans-serif!important;letter-spacing:.04em!important;color:#fff!important}
+.footer-brands span{margin-top:4px!important;color:#d6dbe4!important;font-size:8px!important;line-height:1.35!important}
+.foundation{text-align:right!important}
+.share-line{padding:22px 0 19px!important;color:var(--gold)!important;font:600 16px/1.45 Georgia,"Songti SC","STSong",serif!important;border-bottom:1px solid rgba(255,255,255,.14)}
+.footer-info{display:flex!important;flex-direction:column!important;gap:2px!important;padding-top:18px!important;color:#e1e5eb!important;font-size:9.5px!important;line-height:1.7!important}
+.footer-info b{color:#fff!important;font-size:10px!important}
+.footer-info a{color:#fff!important;text-decoration:underline!important;text-underline-offset:2px}
+.legal{margin-top:20px!important;color:#d1d7e1!important;font-size:8.5px!important;line-height:1.65!important}
+.legal b{color:#fff!important;font-size:9px!important}
+.legal p{margin:5px 0 14px!important}
+
+/* FIXED ACTION BAR */
+.fixed-actions{position:fixed!important;z-index:1000!important;left:50%!important;bottom:0!important;transform:translateX(-50%)!important;width:min(var(--publication-width),100%)!important;height:calc(60px + var(--safe-bottom))!important;padding:0 5px var(--safe-bottom)!important;background:rgba(4,35,79,.985)!important;display:grid!important;grid-template-columns:repeat(4,1fr)!important;border-top:1px solid rgba(200,168,75,.44)!important;box-shadow:0 -5px 18px rgba(0,0,0,.12)!important;backdrop-filter:blur(8px)}
+.fixed-actions button{position:relative;border:0!important;background:transparent!important;color:#fff!important;display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;gap:5px!important;min-width:0;padding:0 3px!important;font-size:11px!important;line-height:1!important;white-space:nowrap}
+.fixed-actions button.active{color:var(--gold)!important}
+.fixed-actions .ico{display:inline-flex;width:18px;height:18px;align-items:center;justify-content:center;font-size:17px!important;line-height:1!important}
+.fixed-actions .ico svg{width:18px;height:18px;display:block;stroke:currentColor;fill:none;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}
+.fixed-actions small{position:absolute;top:12px;left:calc(50% + 22px);min-width:14px;height:14px;padding:0 3px;border-radius:8px;background:var(--gold);color:var(--navy);font-size:8px!important;font-weight:700;line-height:14px;text-align:center}
+.fixed-actions small:empty{display:none}
+
+/* SUBSCRIBE MODAL */
+.modal-backdrop{position:fixed!important;z-index:1200!important;inset:0!important;display:none!important;align-items:flex-end!important;justify-content:center!important;padding:16px 16px calc(16px + var(--safe-bottom))!important;background:rgba(2,15,34,.58)!important;backdrop-filter:blur(2px)}
+.modal-backdrop.open{display:flex!important}
+.subscribe-modal{position:relative!important;width:min(430px,100%)!important;padding:25px 22px 22px!important;background:var(--paper)!important;color:var(--ink)!important;border-top:3px solid var(--gold)!important;box-shadow:0 20px 50px rgba(0,0,0,.2)!important}
+.subscribe-modal h3{margin:0 30px 6px 0!important;color:var(--navy)!important;font-family:Georgia,"Songti SC","STSong",serif!important;font-size:20px!important;line-height:1.35!important}
+.subscribe-modal p{margin:0!important;color:#666!important;font-size:11px!important;line-height:1.6!important}
+.subscribe-modal form{display:grid!important;grid-template-columns:1fr auto!important;gap:7px!important;margin-top:16px!important}
+.subscribe-modal input,.comments-panel input,.comments-panel textarea{width:100%!important;border:1px solid #cfc8bb!important;border-radius:0!important;background:#fff!important;color:var(--ink)!important;padding:10px 11px!important;font:inherit!important;outline:none!important}
+.subscribe-modal input:focus,.comments-panel input:focus,.comments-panel textarea:focus{border-color:var(--gold)!important;box-shadow:0 0 0 1px var(--gold)!important}
+.subscribe-modal form button,.comments-panel form button{border:0!important;border-radius:0!important;background:var(--navy)!important;color:#fff!important;padding:10px 14px!important;font-weight:700!important}
+.modal-close,.panel-close{position:absolute!important;right:13px!important;top:9px!important;width:34px!important;height:34px!important;border:0!important;background:transparent!important;color:#666!important;font-size:24px!important;line-height:1!important}
+#subscribeStatus{min-height:18px;margin-top:9px;color:var(--navy);font-size:10px;line-height:1.5}
+
+/* COMMENTS BOTTOM SHEET */
+.comments-panel{position:fixed!important;z-index:1190!important;left:50%!important;bottom:calc(60px + var(--safe-bottom))!important;transform:translate(-50%,105%)!important;width:min(var(--publication-width),100%)!important;max-height:min(72vh,660px)!important;overflow:auto!important;overscroll-behavior:contain;background:var(--paper)!important;color:var(--ink)!important;box-shadow:0 -12px 35px rgba(0,0,0,.18)!important;padding:20px 22px 25px!important;border-top:3px solid var(--gold)!important;transition:transform .22s ease!important}
+.comments-panel.open{transform:translate(-50%,0)!important}
+.panel-head{position:relative!important;margin:0 0 2px!important;padding-right:40px!important;color:var(--navy)!important;font-family:Georgia,"Songti SC",serif!important;font-size:20px!important;line-height:1.3!important}
+.comment-prompt{margin:0 0 12px!important;color:#65686d!important;font-size:11px!important}
+.comments-panel form{display:grid!important;grid-template-columns:110px 1fr auto!important;gap:7px!important;align-items:start!important;padding-bottom:15px!important;border-bottom:1px solid var(--line)!important}
+.comments-panel textarea{min-height:44px!important;height:44px!important;resize:vertical!important;line-height:1.45!important}
+.comments-panel form button{height:44px!important;white-space:nowrap!important}
+.comment-item{padding:13px 0!important;border-bottom:1px solid var(--line)!important;font-size:12px!important;line-height:1.65!important}
+.comment-meta{margin-bottom:3px!important;color:#7a7770!important;font-size:9.5px!important}
+.comment-actions{margin-top:5px!important}
+.comment-actions button{border:0!important;background:transparent!important;color:var(--navy)!important;padding:3px 12px 3px 0!important;font-size:9.5px!important}
+.comment-pending{color:var(--gold);font-size:9px;margin-left:6px}
+
+/* TOAST */
+.io-toast{position:fixed;z-index:1400;left:50%;bottom:calc(76px + var(--safe-bottom));transform:translate(-50%,12px);max-width:calc(100% - 32px);padding:8px 12px;background:#1f2731;color:#fff;font-size:10px;line-height:1.4;opacity:0;pointer-events:none;transition:.18s ease;box-shadow:0 5px 18px rgba(0,0,0,.18)}
+.io-toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media (max-width:600px){
+  body{background:var(--paper)!important}
+  .page{box-shadow:none!important}
+  .brand-block{min-height:286px!important;padding:24px 20px 22px!important}
+  .impactone-wordmark{font-size:10px}
+  .brand-title{max-width:78%;font-size:29px!important;margin-bottom:9px!important}
+  .brand-subtitle{font-size:10.5px!important}
+  .issue-date{left:20px!important;bottom:76px!important;font-size:9.5px!important}
+  .skyline{width:70%!important;height:135px!important;right:4px!important}
+  .font-tool{padding:8px 16px 7px}
+  .section-title{padding:15px 18px 13px!important;grid-template-columns:25px 1fr!important}
+  .section-title h2{font-size:20px!important}
+  .section-en{font-size:7.5px;margin-left:7px}
+  .section-sub{font-size:8.5px}
+  .section-icon{width:22px!important;height:22px!important}
+  .section-icon.search:before,.section-icon.target:before{inset:3px}
+  .section-icon.target:after{left:9px;top:9px}
+  .section-icon.search:after{left:10px!important;height:30px!important}
+  .story,.scan-item{margin:0 20px!important;padding:21px 0 22px!important}
+  .story h3{font-size:20px!important}
+  .scan-item h3{font-size:18px!important}
+  .story p,.scan-item p,.daily-view p{font-size:var(--reader-size)!important;line-height:1.72!important}
+  .chart-wrap{margin:0 20px 16px!important}
+  .view-section-title{padding:17px 20px 15px!important}
+  .view-section-title .view-cn{font-size:20px}
+  .daily-view{padding:23px 20px 27px!important}
+  .view-title{font-size:20px!important}
+  .product-value{padding:27px 20px 25px}
+  .publication-footer{padding:26px 20px 90px!important}
+  .fixed-actions{height:calc(58px + var(--safe-bottom))!important}
+  .fixed-actions button{font-size:10.5px!important}
+  .comments-panel{bottom:calc(58px + var(--safe-bottom))!important;padding:18px 18px 23px!important}
+  .comments-panel form{grid-template-columns:1fr auto!important}
+  .comments-panel form input{grid-column:1/-1!important}
+  .comments-panel textarea{min-height:68px!important;height:68px!important}
+  .comments-panel form button{height:68px!important}
+  .subscribe-modal form{grid-template-columns:1fr!important}
+}
+
+@media (min-width:761px){
+  .page{margin-top:24px!important;margin-bottom:24px!important}
+  .fixed-actions{bottom:0!important}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{scroll-behavior:auto!important;animation:none!important;transition:none!important}
+}
