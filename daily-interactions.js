@@ -29,16 +29,41 @@
   renderSubscribed();subAction?.addEventListener('click',()=>openOverlay(subModal));$('[data-close-subscribe]')?.addEventListener('click',()=>closeOverlay(subModal));subModal?.addEventListener('click',e=>{if(e.target===subModal)closeOverlay(subModal)});
   subForm?.addEventListener('submit',async e=>{e.preventDefault();const email=(subEmail?.value||'').trim();if(!email)return;const btn=subForm.querySelector('button[type="submit"]');btn.disabled=true;btn.textContent='提交中…';if(subStatus)subStatus.textContent='';try{if(cfg.subscribeEndpoint){const res=await fetch(cfg.subscribeEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,source:'daily',issue:issueKey,url:location.href})});if(!res.ok)throw new Error('subscribe failed')}storage.set('impactone_subscriber_email',email);renderSubscribed();if(subStatus)subStatus.textContent='订阅成功。新一期发布后将发送到这个邮箱。';toast('已订阅「影响力·每日必读」');setTimeout(()=>closeOverlay(subModal),1000)}catch{if(subStatus)subStatus.textContent='暂时无法完成订阅，请稍后再试。'}finally{btn.disabled=false;btn.textContent='立即订阅'}});
 
-  // Share center: Web Share + direct social share URLs + WeChat guidance.
+  // Share: on phones/tablets use the OS share sheet directly (WeChat appears there when installed).
+  // No WeChat Official Account is required for this. Desktop/non-supporting browsers use our share center.
   const shareModal=$('#shareModal');
-  $('#shareAction')?.addEventListener('click',()=>openOverlay(shareModal));$('[data-close-share]')?.addEventListener('click',()=>closeOverlay(shareModal));shareModal?.addEventListener('click',e=>{if(e.target===shareModal)closeOverlay(shareModal)});
   const shareTitle=document.title, shareText='筛选全球资讯，把握天下大势。', shareUrl=location.href;
   const enc=encodeURIComponent;
   const links={facebook:`https://www.facebook.com/sharer/sharer.php?u=${enc(shareUrl)}`,x:`https://twitter.com/intent/tweet?text=${enc(shareTitle)}&url=${enc(shareUrl)}`,linkedin:`https://www.linkedin.com/sharing/share-offsite/?url=${enc(shareUrl)}`,whatsapp:`https://wa.me/?text=${enc(shareTitle+' '+shareUrl)}`,email:`mailto:?subject=${enc(shareTitle)}&body=${enc(shareText+'\n\n'+shareUrl)}`};
   $$('[data-share-link]').forEach(a=>{a.href=links[a.dataset.shareLink]||shareUrl});
-  $('[data-share="system"]')?.addEventListener('click',async()=>{try{if(navigator.share)await navigator.share({title:shareTitle,text:shareText,url:shareUrl});else await copyLink()}catch(e){if(e?.name!=='AbortError')toast('系统分享暂不可用')}});
+
+  async function nativeShare(){
+    if(!navigator.share)return false;
+    try{
+      await navigator.share({title:shareTitle,text:shareText,url:shareUrl});
+      return true;
+    }catch(e){
+      if(e?.name==='AbortError')return true;
+      return false;
+    }
+  }
+
+  $('#shareAction')?.addEventListener('click',async()=>{
+    // Native share is the preferred route on supported mobile browsers.
+    // If WeChat is installed and exposed by iOS/Android, it appears in this system sheet.
+    if(navigator.share){
+      const handled=await nativeShare();
+      if(handled)return;
+    }
+    openOverlay(shareModal);
+  });
+  $('[data-close-share]')?.addEventListener('click',()=>closeOverlay(shareModal));
+  shareModal?.addEventListener('click',e=>{if(e.target===shareModal)closeOverlay(shareModal)});
+  $('[data-share="system"]')?.addEventListener('click',async()=>{
+    const handled=await nativeShare();
+    if(!handled)toast('当前浏览器不支持系统分享，请选择其它方式');
+  });
   $('[data-share="copy"]')?.addEventListener('click',copyLink);
-  $('[data-share="wechat"]')?.addEventListener('click',()=>{$('#wechatHint')?.classList.add('show');toast('请在微信内使用右上角菜单转发')});
   async function copyLink(){try{if(navigator.clipboard)await navigator.clipboard.writeText(shareUrl);else fallbackCopy(shareUrl);toast('链接已复制')}catch{fallbackCopy(shareUrl)}}
 
   // Optional official social profile links in footer.
