@@ -155,3 +155,15 @@ html,body{overflow-x:hidden}
   .font-tool button{min-width:26px;min-height:26px;padding:3px 6px;font-size:10.5px}
   .skyline .city{stroke-width:.72}.skyline .tower{stroke-width:.78}.skyline .empire{stroke-width:.88}.skyline .empire-crown{stroke-width:.76}
 }
+
+/* V3.7 — exact approved sample skyline artwork + preserved reader controls */
+.skyline{pointer-events:none}
+.skyline img{position:absolute;left:0;right:0;bottom:0;width:100%;height:100%;object-fit:fill;display:block;pointer-events:none}
+/* We intentionally use the approved sample artwork rather than re-drawing the buildings in SVG. */
+.font-tool{position:relative;z-index:3}
+.wechat-share-hint{display:none;margin-top:12px;padding:10px 12px;border:1px solid rgba(200,168,75,.35);background:#fffaf0;color:#665d50;font-size:11px;line-height:1.55}
+.wechat-share-hint.show{display:block}
+@media(max-width:600px){
+  .skyline{height:142px}
+  .font-tool{justify-content:flex-end}
+}

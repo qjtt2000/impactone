@@ -53,37 +53,33 @@
       (navigator.maxTouchPoints>1 && window.innerWidth<1100);
   }
 
-  $('#shareAction')?.addEventListener('click',async()=>{
-    // Mobile: use the OS share sheet directly; WeChat can appear there when installed.
-    // Desktop: do NOT use the Windows share sheet because desktop WeChat often does not register as a Windows share target.
-    if(isMobileShareContext() && navigator.share){
-      const handled=await nativeShare();
-      if(handled)return;
-    }
+  $('#shareAction')?.addEventListener('click',()=>{
+    // Keep the multi-platform share center on every device, as in the approved UI.
+    // On mobile, the “系统分享” and “微信” buttons below call the OS share sheet directly.
     openOverlay(shareModal);
   });
-  $('[data-close-share]')?.addEventListener('click',()=>closeOverlay(shareModal));
+  $('[data-close-share]')?.addEventListener('click',()=>{closeOverlay(shareModal);$('#wechatShareHint')?.classList.remove('show')});
   shareModal?.addEventListener('click',e=>{if(e.target===shareModal)closeOverlay(shareModal)});
   $('[data-share="system"]')?.addEventListener('click',async()=>{
     const handled=await nativeShare();
     if(!handled)toast('当前浏览器不支持系统分享，请选择其它方式');
   });
   $('[data-share="wechat"]')?.addEventListener('click',async()=>{
-    // Mobile: use the native share sheet; WeChat can be chosen there when installed.
-    if(isMobileShareContext() && navigator.share){
+    const hint=$('#wechatShareHint');
+    // This restores the old practical flow on iPhone/Android: website → native share sheet → WeChat → friend.
+    // It does NOT require a WeChat Official Account.
+    if(navigator.share && isMobileShareContext()){
       const handled=await nativeShare();
-      if(handled)return;
+      if(handled){ if(hint)hint.classList.remove('show'); return; }
     }
-    // Desktop: copy the current article link only. Do not invoke weixin://,
-    // which causes the browser's external-app confirmation dialog.
+    // Desktop browsers cannot reliably hand a webpage directly to a WeChat chat.
+    // Copy the exact article URL instead of invoking weixin:// (which only opens the app and triggers a browser warning).
     try{
       if(navigator.clipboard) await navigator.clipboard.writeText(shareUrl);
       else fallbackCopy(shareUrl);
-      toast('链接已复制，请打开微信粘贴发送');
-    }catch{
-      fallbackCopy(shareUrl);
-      toast('链接已复制，请打开微信粘贴发送');
-    }
+    }catch{ fallbackCopy(shareUrl); }
+    if(hint){hint.textContent='文章链接已复制。请在电脑微信中粘贴发送；在手机上点击“微信”会直接调用系统分享，可选择微信好友。';hint.classList.add('show');}
+    toast('文章链接已复制');
   });
   $('[data-share="copy"]')?.addEventListener('click',copyLink);
   async function copyLink(){try{if(navigator.clipboard)await navigator.clipboard.writeText(shareUrl);else fallbackCopy(shareUrl);toast('链接已复制')}catch{fallbackCopy(shareUrl)}}
