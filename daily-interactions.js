@@ -66,20 +66,28 @@
   });
   $('[data-share="wechat"]')?.addEventListener('click',async()=>{
     const hint=$('#wechatShareHint');
-    // This restores the old practical flow on iPhone/Android: website → native share sheet → WeChat → friend.
-    // It does NOT require a WeChat Official Account.
-    if(navigator.share && isMobileShareContext()){
-      const handled=await nativeShare();
-      if(handled){ if(hint)hint.classList.remove('show'); return; }
+    hint?.classList.remove('show');
+
+    // V3.8: never turn the WeChat button into a "copy link" action.
+    // On devices/browsers that expose the native Web Share API, hand the article
+    // directly to the operating-system share sheet. When WeChat is installed and
+    // registered as a share target (typical on iPhone/Android), the user can choose
+    // WeChat and send the article card to a friend — no Official Account required.
+    if(navigator.share){
+      const ok=await nativeShare();
+      if(ok){ closeOverlay(shareModal); return; }
     }
-    // Desktop browsers cannot reliably hand a webpage directly to a WeChat chat.
-    // Copy the exact article URL instead of invoking weixin:// (which only opens the app and triggers a browser warning).
-    try{
-      if(navigator.clipboard) await navigator.clipboard.writeText(shareUrl);
-      else fallbackCopy(shareUrl);
-    }catch{ fallbackCopy(shareUrl); }
-    if(hint){hint.textContent='文章链接已复制。请在电脑微信中粘贴发送；在手机上点击“微信”会直接调用系统分享，可选择微信好友。';hint.classList.add('show');}
-    toast('文章链接已复制');
+
+    // Desktop browsers cannot directly inject a webpage into a WeChat conversation.
+    // Do not copy the link automatically and do not invoke weixin:// (which causes
+    // the browser's "Open WeChat?" security prompt). Keep the other share channels
+    // available and explain the desktop limitation clearly.
+    if(hint){
+      hint.textContent='当前桌面浏览器无法把网页直接送入微信好友列表。请在手机打开本页后点击“微信”或“系统分享”，即可从系统分享菜单选择微信；这不需要微信公众号。';
+      hint.classList.add('show');
+    }else{
+      toast('请在手机端使用微信直接转发');
+    }
   });
   $('[data-share="copy"]')?.addEventListener('click',copyLink);
   async function copyLink(){try{if(navigator.clipboard)await navigator.clipboard.writeText(shareUrl);else fallbackCopy(shareUrl);toast('链接已复制')}catch{fallbackCopy(shareUrl)}}

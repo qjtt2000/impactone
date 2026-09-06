@@ -167,3 +167,15 @@ html,body{overflow-x:hidden}
   .skyline{height:142px}
   .font-tool{justify-content:flex-end}
 }
+
+/* V3.8 — preserve the approved sample skyline geometry (no non-uniform stretching) */
+.skyline{position:absolute;left:0;right:0;bottom:0;height:158px;overflow:hidden;pointer-events:none}
+.skyline .skyline-ground{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
+.skyline .skyline-ground path{fill:none;stroke:var(--gold);stroke-width:.8;vector-effect:non-scaling-stroke;opacity:.9}
+.skyline .skyline-ground .skyline-ground-soft{opacity:.22;stroke-dasharray:1.4 3}
+.skyline img.skyline-buildings{position:absolute!important;right:-1px!important;left:auto!important;bottom:1px!important;width:79%!important;height:auto!important;max-width:none!important;object-fit:contain!important;object-position:right bottom!important;display:block!important;pointer-events:none}
+@media(max-width:600px){
+  .skyline{height:145px}
+  .skyline img.skyline-buildings{width:80%!important;bottom:0!important}
+  .skyline .skyline-ground path{stroke-width:.72}
+}
