@@ -1,4 +1,4 @@
-const CACHE='impactone-daily-v315-headerfix';
+const CACHE='impactone-daily-v316-samplematch';
 const STATIC=[
   '/daily-publication.css','/daily-interactions.js','/impactone-config.js','/manifest.webmanifest',
   '/images/brand/impactone-icon-192.png','/images/brand/impactone-icon-512.png',

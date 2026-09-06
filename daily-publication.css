@@ -1,7 +1,7 @@
 /* IMPACTONE · 影响力·每日必读 — V3.1 SAMPLE-LED + FUNCTIONAL INTERACTIONS
    Visual priority: approved sample. PDF spec is secondary.
 */
-:root{--navy:#062A5E;--gold:#C8A84B;--paper:#F7F4EE;--ink:#17191d;--muted:#77736c;--line:#ded8ce;--reader-size:17px;--publication-width:760px;--safe-bottom:env(safe-area-inset-bottom,0px)}
+:root{--navy:#011C43;--gold:#C8A84B;--paper:#FFFFFF;--ink:#17191d;--muted:#77736c;--line:#ded8ce;--reader-size:17px;--publication-width:760px;--safe-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box}html{background:#e8e6e0;scroll-behavior:smooth}body{margin:0;background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}body.io-panel-open{overflow:hidden}button,input,textarea{font:inherit}.page{width:min(100%,var(--publication-width));margin:0 auto;min-height:100vh;background:var(--paper);box-shadow:0 0 26px rgba(0,0,0,.08);padding-bottom:calc(68px + var(--safe-bottom));overflow:hidden}.content{padding:0}
 /* cover */
 .brand-block{position:relative;height:330px;padding:42px 42px 0;background:var(--navy);overflow:hidden;color:#fff}.impactone-wordmark{margin:0 0 18px;font-size:13px;line-height:1;letter-spacing:.10em;font-weight:400}.brand-title{margin:0;color:#fff;font-family:Georgia,"Songti SC","STSong",serif;font-size:39px;line-height:1.05;font-weight:700;font-style:italic;letter-spacing:.01em}.brand-subtitle{margin:20px 0 0;color:var(--gold);font-size:12px;font-weight:700;letter-spacing:.02em}.issue-date{position:absolute;left:42px;bottom:111px;color:#fff;font-size:10.5px;letter-spacing:.08em}.skyline{position:absolute;left:0;right:0;bottom:0;height:142px}.skyline svg{width:100%;height:100%;display:block}.skyline path,.skyline line,.skyline polyline{stroke:var(--gold);stroke-width:1.05;fill:none;vector-effect:non-scaling-stroke}.skyline .ground{stroke-width:1.15}.skyline .moon{fill:var(--gold);stroke:none}
@@ -262,10 +262,10 @@ html,body{overflow-x:hidden}
 }
 .publication-footer .impactone-logo{width:min(260px,72%);height:auto;max-height:none;object-fit:contain;background:transparent!important}
 .story figure img[src*="sample-oil-clear"]{width:100%;height:auto;display:block;object-fit:contain;image-rendering:auto}
-.notification-optin{position:fixed;left:50%;bottom:78px;transform:translateX(-50%);z-index:1200;width:min(92vw,620px);background:#f7f4ee;border-top:3px solid #c8a84b;box-shadow:0 8px 28px rgba(0,0,0,.24);padding:15px 82px 15px 18px;color:#062a5e}
+.notification-optin{position:fixed;left:50%;bottom:78px;transform:translateX(-50%);z-index:1200;width:min(92vw,620px);background:#f7f4ee;border-top:3px solid #c8a84b;box-shadow:0 8px 28px rgba(0,0,0,.24);padding:15px 82px 15px 18px;color:#011c43}
 .notification-optin:not([hidden]){display:block}
 .notification-optin strong,.notification-optin span{display:block}.notification-optin strong{font-size:16px;margin-bottom:3px}.notification-optin span{font-size:13px;color:#555}
-.notification-optin #enableNotificationButton{position:absolute;right:38px;top:50%;transform:translateY(-50%);border:0;background:#062a5e;color:#fff;padding:9px 13px;font-weight:700;cursor:pointer}
+.notification-optin #enableNotificationButton{position:absolute;right:38px;top:50%;transform:translateY(-50%);border:0;background:#011c43;color:#fff;padding:9px 13px;font-weight:700;cursor:pointer}
 .notification-optin-close{position:absolute;right:8px;top:7px;border:0;background:transparent;color:#777;font-size:20px;cursor:pointer}
 @media(max-width:640px){
  .brand-block .header-impactone-wordmark{left:18px;top:25px;font-size:12px;letter-spacing:.2em}
@@ -288,7 +288,7 @@ html,body{overflow-x:hidden}
   min-height:0!important;
   padding:0!important;
   overflow:hidden!important;
-  background:#062a5e!important;
+  background:#011c43!important;
 }
 .header-impactone-wordmark{
   position:absolute!important;
@@ -381,4 +381,162 @@ html,body{overflow-x:hidden}
   .skyline.skyline-original{inset:auto 0 0 0!important;width:100%!important;height:auto!important}
   .skyline.skyline-original>img{width:100%!important;bottom:0!important}
   .story figure{width:100%!important;margin:18px 0 16px!important}
+}
+
+
+/* V3.16 — approved sample pixel-match pass (sample image is final authority)
+   Scope: typography/spacing, navy backgrounds, skyline artwork. Interactions unchanged. */
+:root{
+  --navy:#011C43;
+  --paper:#FFFFFF;
+  --gold:#D9AD3C;
+  --ink:#17191d;
+  --reader-size:15px;
+}
+html{background:#e8e6e0}
+body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif}
+.page{background:#fff}
+
+/* Exact cover structure and dark navy from the approved image. */
+.brand-block{background:#011C43!important}
+.header-impactone-wordmark{
+  font-family:Arial,Helvetica,sans-serif!important;
+  font-weight:400!important;
+  letter-spacing:.22em!important;
+}
+.brand-title{
+  font-family:"Songti SC","STSong","SimSun","Noto Serif CJK SC",serif!important;
+  font-weight:700!important;
+  font-style:italic!important;
+}
+.brand-subtitle{color:#D9AD3C!important;font-family:Arial,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif!important}
+.issue-date{font-family:Arial,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif!important}
+.skyline.skyline-original>img{width:100%!important;height:auto!important;bottom:0!important;transform:none!important;filter:none!important}
+
+/* All navy publication blocks use the same approved deep navy. */
+.section-title,.view-section-title,.publication-footer,.fixed-actions{background:#011C43!important}
+.story h3,.scan-item h3,.view-title,.label{color:#011C43!important}
+.story-number,.scan-number,.section-en,.view-en,.share-line,.product-value strong{color:#D9AD3C!important}
+
+/* Typography families from top to bottom. */
+.section-title h2,.view-cn,.view-title,.story h3,.scan-item h3,.share-line,.product-value strong{
+  font-family:"Songti SC","STSong","SimSun","Noto Serif CJK SC",serif!important;
+}
+.story p,.scan-item p,.daily-view p,.section-sub,.font-tool,.footer-info,.legal{
+  font-family:Arial,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif!important;
+}
+
+/* The approved image places the insight title inside the navy header. */
+.view-section-title .view-title{
+  margin:18px 0 0!important;
+  color:#fff!important;
+  font-size:24px!important;
+  line-height:1.25!important;
+}
+.daily-view>.view-title{display:none!important}
+.daily-view{background:#fff!important}
+.product-value{background:#fff!important}
+
+@media(max-width:600px){
+  body{background:#fff}
+  .page{background:#fff;box-shadow:none}
+
+  /* Cover proportions/positions are already derived directly from the 192×146 sample. */
+  .brand-block{aspect-ratio:192 / 146!important}
+  .header-impactone-wordmark{font-size:3.2vw!important}
+  .brand-title{font-size:8.25vw!important;line-height:1.02!important;letter-spacing:-.035em!important}
+  .brand-subtitle{font-size:2.75vw!important;line-height:1.1!important}
+  .issue-date{font-size:2.25vw!important;letter-spacing:.02em!important}
+
+  /* Sample: the reader-size strip is deliberately very shallow. */
+  .font-tool{
+    height:28px!important;
+    min-height:28px!important;
+    padding:0 27px!important;
+    gap:2px!important;
+    font-size:8px!important;
+    border-bottom:1px solid #ddd8cf!important;
+  }
+  .font-tool button{font-size:8px!important;padding:3px 4px!important}
+
+  /* Sample section header: approximately 84 CSS px at a 375px viewport. */
+  .section-title{
+    min-height:84px!important;
+    padding:16px 24px 15px!important;
+    grid-template-columns:31px 1fr!important;
+    grid-template-rows:auto auto!important;
+    column-gap:9px!important;
+    align-content:center!important;
+  }
+  .section-title h2{font-size:21px!important;line-height:1.12!important}
+  .section-en{margin-left:8px!important;font-size:7.2px!important;letter-spacing:.14em!important}
+  .section-sub{margin-top:7px!important;font-size:8.5px!important;line-height:1.35!important}
+  .section-icon{width:22px!important;height:22px!important}
+
+  /* Approved story column is noticeably narrower than the previous website rendering. */
+  .story,.scan-item{
+    margin:0 47px!important;
+    padding:42px 0 38px!important;
+    border-bottom:1px solid #e2ddd4!important;
+  }
+  .story-number,.scan-number{
+    margin-bottom:16px!important;
+    font-size:16px!important;
+    line-height:1!important;
+  }
+  .story h3,.scan-item h3{
+    margin:0 0 17px!important;
+    font-size:20px!important;
+    line-height:1.32!important;
+    letter-spacing:0!important;
+  }
+  .story p,.scan-item p,.daily-view p{
+    margin:0 0 17px!important;
+    font-size:15px!important;
+    line-height:1.55!important;
+    letter-spacing:0!important;
+  }
+  .analysis,.scan-quick{margin-top:19px!important}
+  .label{font-weight:800!important}
+  .story figure{width:100%!important;margin:21px 0 18px!important}
+  .story figcaption{font-size:9px!important;line-height:1.4!important;margin-top:6px!important}
+
+  /* Scan keeps the same editorial type scale as the reference. */
+  .scan-item{padding-top:35px!important;padding-bottom:35px!important}
+  .scan-item h3{font-size:19px!important;margin-bottom:15px!important}
+  .scan-details summary,.scan-toggle{font-size:10px!important}
+
+  /* Insight header in the reference includes title + English line + insight title. */
+  .view-section-title{
+    min-height:145px!important;
+    padding:25px 31px 23px!important;
+  }
+  .view-cn{font-size:21px!important;line-height:1.1!important}
+  .view-en{margin-top:14px!important;font-size:7.8px!important;letter-spacing:.25em!important;gap:8px!important}
+  .view-en:after{width:83px!important}
+  .view-section-title .view-title{
+    margin-top:19px!important;
+    font-size:20px!important;
+    line-height:1.25!important;
+  }
+  .daily-view{padding:30px 30px 34px!important}
+  .daily-view p{font-size:15px!important;line-height:1.6!important;margin-bottom:18px!important}
+
+  .product-value{padding:28px 20px 30px!important;border-top:0!important}
+  .product-value strong{font-size:13px!important;line-height:1.65!important}
+  .product-value span{margin-top:7px!important;font-size:8.5px!important}
+
+  /* Footer in the sample has generous side insets and the same dark navy. */
+  .publication-footer{padding:35px 39px 102px!important;min-height:400px!important}
+  .footer-brands{gap:20px!important}
+  .publication-footer .impactone-logo{width:min(190px,78%)!important}
+  .faef-logo{width:64px!important;height:64px!important}
+  .footer-brands b{font-size:9px!important;line-height:1.4!important}
+  .share-line{margin:25px 0 22px!important;font-size:16px!important;line-height:1.35!important}
+  .footer-info{font-size:8.5px!important;line-height:1.7!important}
+  .footer-info b,.legal b{font-size:9px!important}
+  .legal{font-size:7.5px!important;line-height:1.55!important}
+  .legal p{margin:5px 0 12px!important}
+
+  .fixed-actions{background:#011C43!important}
 }
