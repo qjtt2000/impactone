@@ -275,10 +275,16 @@ html,body{overflow-x:hidden}
 
 
 /* V3.15 — cover composition matched to approved reference; new supplied skyline; clean oil photo */
+/*
+   Header authority: the supplied sample image is the visual master.
+   At 192px reference width, the cover is 146px high.  All key positions below
+   are therefore percentage-based so the same composition scales cleanly.
+*/
 .brand-block{
   position:relative!important;
+  width:100%!important;
   height:auto!important;
-  aspect-ratio:563 / 404!important;
+  aspect-ratio:192 / 146!important;
   min-height:0!important;
   padding:0!important;
   overflow:hidden!important;
@@ -286,25 +292,26 @@ html,body{overflow-x:hidden}
 }
 .header-impactone-wordmark{
   position:absolute!important;
-  left:10.1%!important;
-  top:10.8%!important;
+  left:10.0%!important;
+  top:17.0%!important;
   margin:0!important;
   color:#fff!important;
   font-family:Arial,Helvetica,sans-serif!important;
-  font-size:clamp(12px,2.25vw,23px)!important;
+  font-size:clamp(6.5px,3.4vw,20px)!important;
   line-height:1!important;
   font-weight:400!important;
-  letter-spacing:.18em!important;
+  letter-spacing:.22em!important;
+  white-space:nowrap!important;
   z-index:3!important;
 }
 .brand-title{
   position:absolute!important;
   left:10.0%!important;
-  top:21.0%!important;
+  top:26.7%!important;
   margin:0!important;
   color:#fff!important;
   font-family:Georgia,"Songti SC","STSong","Noto Serif SC",serif!important;
-  font-size:clamp(31px,6.6vw,67px)!important;
+  font-size:clamp(16px,8.6vw,50px)!important;
   line-height:1.02!important;
   font-weight:700!important;
   font-style:italic!important;
@@ -314,22 +321,25 @@ html,body{overflow-x:hidden}
 }
 .brand-subtitle{
   position:absolute!important;
-  left:10.2%!important;
-  top:42.0%!important;
+  left:10.0%!important;
+  top:45.9%!important;
   margin:0!important;
   color:#c8a84b!important;
-  font-size:clamp(11px,2.05vw,20px)!important;
+  font-size:clamp(5.8px,3.0vw,17px)!important;
   line-height:1.1!important;
   font-weight:700!important;
   letter-spacing:.01em!important;
+  white-space:nowrap!important;
   z-index:3!important;
 }
 .issue-date{
   position:absolute!important;
   left:10.0%!important;
-  bottom:32.8%!important;
+  top:66.4%!important;
+  bottom:auto!important;
+  margin:0!important;
   color:#fff!important;
-  font-size:clamp(10px,1.7vw,17px)!important;
+  font-size:clamp(5px,2.7vw,15px)!important;
   line-height:1!important;
   letter-spacing:.02em!important;
   white-space:nowrap!important;
@@ -348,7 +358,7 @@ html,body{overflow-x:hidden}
   position:absolute!important;
   left:0!important;
   right:0!important;
-  bottom:-0.8%!important;
+  bottom:0!important;
   width:100%!important;
   height:auto!important;
   max-width:none!important;
@@ -363,11 +373,11 @@ html,body{overflow-x:hidden}
 .story figure img[src*="sample-oil-clean-v315"]{display:block!important;width:100%!important;height:auto!important;margin:0!important;padding:0!important;border:0!important;object-fit:cover!important;background:transparent!important}
 .story figure:has(img[src*="sample-oil-clean-v315"]) figcaption{display:none!important}
 @media(max-width:600px){
-  .brand-block{aspect-ratio:563 / 404!important;height:auto!important;padding:0!important}
-  .header-impactone-wordmark{left:9.6%!important;top:11.0%!important;font-size:clamp(11px,3.4vw,14px)!important}
-  .brand-title{left:9.5%!important;top:21.2%!important;font-size:clamp(29px,8.6vw,35px)!important}
-  .brand-subtitle{left:9.7%!important;top:42.0%!important;font-size:clamp(10px,3.0vw,12px)!important}
-  .issue-date{left:9.6%!important;bottom:32.3%!important;font-size:clamp(9px,2.7vw,11px)!important}
+  .brand-block{aspect-ratio:192 / 146!important;height:auto!important;padding:0!important}
+  .header-impactone-wordmark{left:10.0%!important;top:17.0%!important;font-size:3.4vw!important}
+  .brand-title{left:10.0%!important;top:26.7%!important;font-size:8.6vw!important}
+  .brand-subtitle{left:10.0%!important;top:45.9%!important;font-size:3.0vw!important}
+  .issue-date{left:10.0%!important;top:66.4%!important;bottom:auto!important;font-size:2.7vw!important}
   .skyline.skyline-original{inset:auto 0 0 0!important;width:100%!important;height:auto!important}
   .skyline.skyline-original>img{width:100%!important;bottom:0!important}
   .story figure{width:100%!important;margin:18px 0 16px!important}
