@@ -540,3 +540,41 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
 
   .fixed-actions{background:#011C43!important}
 }
+
+/* V3.16 layout/icon update — 2026-09-06
+   Scope limited to requested visual assets, scan disclosure, issue navigation and reader sizing.
+   Existing subscription/share/favorite/comment/PWA/backend behavior is intentionally untouched. */
+:root{--source-size:10px}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.section-icon-img{display:block;width:27px;height:27px;object-fit:contain;align-self:center;justify-self:center}
+.section-icon-img.focus-icon{width:29px;height:29px}
+.section-icon-img.scan-icon{width:28px;height:28px}
+.view-mark{display:block;width:180px;max-width:55%;height:auto;margin-top:10px;object-fit:contain;object-position:left center}
+.story figcaption{display:block!important;margin-top:8px!important;text-align:left!important;color:#77736d!important;font-size:var(--source-size)!important;line-height:1.5!important}
+.story figure:has(img[src*="sample-oil-clean-v315"]) figcaption{display:block!important}
+.scan-summary{margin-bottom:0!important}
+.scan-toggle,.scan-collapse{display:inline;border:0;background:none;color:var(--navy);padding:0;margin:0;font-size:.78em;font-weight:700;cursor:pointer;white-space:nowrap}
+.scan-toggle:hover,.scan-toggle:focus-visible,.scan-collapse:hover,.scan-collapse:focus-visible{color:var(--gold);outline:none}
+.scan-body{display:block;margin-top:10px!important}
+.scan-body[hidden]{display:none!important}
+.scan-body p{margin-bottom:5px!important}
+.scan-collapse{margin-top:0}
+.issue-navigation{padding:18px 52px 4px;background:#fff;border-top:1px solid var(--line)}
+.issue-navigation[hidden]{display:none!important}
+.previous-issue{display:inline-flex;align-items:baseline;gap:8px;color:var(--navy);text-decoration:none;font-family:Arial,"PingFang SC","Microsoft YaHei",sans-serif;font-size:12px;font-weight:700;letter-spacing:.02em}
+.previous-issue span{color:var(--gold);font-size:8px;letter-spacing:.12em;font-weight:700}
+.previous-issue:hover{color:var(--gold)}
+.publication-footer .impactone-logo{width:min(250px,78%)!important;height:auto!important;object-fit:contain!important;object-position:left center!important}
+
+@media(max-width:600px){
+  /* Force publication-section Chinese headings to a serif face on mobile. */
+  .section-title h2,.view-cn{
+    font-family:"Songti SC","STSong","Noto Serif SC","Noto Serif CJK SC","Source Han Serif SC",serif!important;
+    font-weight:700!important;
+  }
+  .section-title{grid-template-columns:31px 1fr!important}
+  .section-icon-img.focus-icon,.section-icon-img.scan-icon{width:27px;height:27px}
+  .view-mark{width:154px;max-width:64%;margin-top:9px}
+  .story figcaption{font-size:var(--source-size)!important;line-height:1.45!important}
+  .issue-navigation{padding:16px 24px 2px}
+}

@@ -8,8 +8,8 @@
   let toastTimer;
   function toast(message){let el=$('#ioToast');if(!el){el=document.createElement('div');el.id='ioToast';el.className='io-toast';el.setAttribute('role','status');el.setAttribute('aria-live','polite');document.body.appendChild(el)}el.textContent=message;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2400)}
 
-  const sizeMap={small:'15px',medium:'17px',large:'20px'};
-  function setSize(size){const safe=sizeMap[size]?size:'medium';document.documentElement.style.setProperty('--reader-size',sizeMap[safe]);$$('.font-tool button').forEach(b=>{const on=b.dataset.font===safe;b.classList.toggle('active',on);b.setAttribute('aria-pressed',String(on))});storage.set('impactone_reader_size',safe)}
+  const sizeMap={small:{body:'15.3px',source:'10px'},medium:{body:'17px',source:'10px'},large:{body:'20px',source:'10.7px'}};
+  function setSize(size){const safe=sizeMap[size]?size:'medium';document.documentElement.style.setProperty('--reader-size',sizeMap[safe].body);document.documentElement.style.setProperty('--source-size',sizeMap[safe].source);$$('.font-tool button').forEach(b=>{const on=b.dataset.font===safe;b.classList.toggle('active',on);b.setAttribute('aria-pressed',String(on))});storage.set('impactone_reader_size',safe)}
   setSize(storage.get('impactone_reader_size','medium'));$$('.font-tool button').forEach(b=>b.addEventListener('click',()=>setSize(b.dataset.font)));
 
   // Focus numbering 01–04; scan always continues at 05 even if a sample issue has fewer focus stories.
@@ -17,8 +17,11 @@
   $$('.scan-number').forEach((el,i)=>el.textContent=String(5+i).padStart(2,'0')+'｜');
   const scanSub=$$('.section-title .section-sub').find(el=>el.textContent.includes('值得关注'));if(scanSub)scanSub.textContent=`${$$('.scan-item').length}个值得关注的信号`;
 
-  // DAILY SCAN: title + 快评 visible; event summary folded by default.
-  $$('.scan-toggle').forEach(btn=>btn.addEventListener('click',()=>{const item=btn.closest('.scan-item');const open=item.classList.toggle('open');btn.setAttribute('aria-expanded',String(open));btn.textContent=open?'收起 －':'展开全文 ＋'}));
+  // DAILY SCAN: summary stays visible; only supplemental details expand/collapse.
+  $$('.scan-item').forEach(item=>{const openBtn=$('.scan-toggle',item),closeBtn=$('.scan-collapse',item),body=$('.scan-body',item);if(!openBtn||!body)return;const setOpen=open=>{body.hidden=!open;openBtn.hidden=open;openBtn.setAttribute('aria-expanded',String(open));if(closeBtn)closeBtn.hidden=!open};openBtn.addEventListener('click',()=>setOpen(true));closeBtn?.addEventListener('click',()=>setOpen(false));setOpen(false)});
+
+  // ISSUE NAVIGATION: issue 001 hides automatically. Later issues show when data-previous-url is supplied.
+  const issueNav=$('.issue-navigation');if(issueNav){const issueNo=Number(issueNav.dataset.issueNumber||0),prevUrl=(issueNav.dataset.previousUrl||'').trim(),link=$('.previous-issue',issueNav);if(issueNo>1&&prevUrl&&link){link.href=prevUrl;issueNav.hidden=false}else issueNav.hidden=true}
 
   function openOverlay(el){if(!el)return;el.classList.add('open');el.setAttribute('aria-hidden','false');document.body.classList.add('io-panel-open');setTimeout(()=>el.querySelector('input,textarea,button,a')?.focus(),30)}
   function closeOverlay(el){if(!el)return;el.classList.remove('open');el.setAttribute('aria-hidden','true');if(!$('.modal-backdrop.open')&&!$('.comments-panel.open'))document.body.classList.remove('io-panel-open')}
