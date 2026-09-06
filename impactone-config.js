@@ -12,6 +12,7 @@ window.IMPACTONE_CONFIG = {
     x: "",
     linkedin: "",
     youtube: "",
-    wechat: ""
+    wechat: "",
+    xiaohongshu: ""
   }
 };

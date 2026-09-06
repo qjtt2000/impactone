@@ -27,16 +27,17 @@
   const subAction=$('#subscribeAction'),subModal=$('#subscribeModal'),subForm=$('#subscribeForm'),subEmail=$('#subscribeEmail'),subStatus=$('#subscribeStatus');
   function renderSubscribed(){const email=storage.get('impactone_subscriber_email','');if(!subAction)return;subAction.classList.toggle('active',!!email);subAction.innerHTML=email?`${icon('check')}<span>已订阅</span>`:`${icon('plus')}<span>订阅</span>`}
   renderSubscribed();subAction?.addEventListener('click',()=>openOverlay(subModal));$('[data-close-subscribe]')?.addEventListener('click',()=>closeOverlay(subModal));subModal?.addEventListener('click',e=>{if(e.target===subModal)closeOverlay(subModal)});
+  $('[data-toggle-email]')?.addEventListener('click',()=>{const f=$('#subscribeForm');if(!f)return;f.hidden=!f.hidden;if(!f.hidden)setTimeout(()=>subEmail?.focus(),20)});
+  $$('[data-follow]').forEach(btn=>btn.addEventListener('click',()=>{const platform=btn.dataset.follow;const url=cfg.socialProfiles?.[platform];if(url){window.open(url,'_blank','noopener')}else{const names={wechat:'微信',xiaohongshu:'小红书',instagram:'Instagram'};if(subStatus)subStatus.textContent=`${names[platform]||platform}关注入口尚未配置；正式账号链接确定后即可接入。`}}));
   subForm?.addEventListener('submit',async e=>{e.preventDefault();const email=(subEmail?.value||'').trim();if(!email)return;const btn=subForm.querySelector('button[type="submit"]');btn.disabled=true;btn.textContent='提交中…';if(subStatus)subStatus.textContent='';try{if(cfg.subscribeEndpoint){const res=await fetch(cfg.subscribeEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,source:'daily',issue:issueKey,url:location.href})});if(!res.ok)throw new Error('subscribe failed')}storage.set('impactone_subscriber_email',email);renderSubscribed();if(subStatus)subStatus.textContent='订阅成功。新一期发布后将发送到这个邮箱。';toast('已订阅「影响力·每日必读」');setTimeout(()=>closeOverlay(subModal),1000)}catch{if(subStatus)subStatus.textContent='暂时无法完成订阅，请稍后再试。'}finally{btn.disabled=false;btn.textContent='立即订阅'}});
 
   // Share: on phones/tablets use the OS share sheet directly (WeChat appears there when installed).
   // No WeChat Official Account is required for this. Desktop/non-supporting browsers use our share center.
   const shareModal=$('#shareModal');
   const shareTitle=document.title, shareText='筛选全球资讯，把握天下大势。';
-  const canonicalShareUrl=document.querySelector('link[rel="canonical"]')?.href;
-  const shareUrl=(/\.vercel\.app$/i.test(location.hostname)&&canonicalShareUrl)?canonicalShareUrl:location.href;
+  const shareUrl=location.href;
   const enc=encodeURIComponent;
-  const links={facebook:`https://www.facebook.com/sharer/sharer.php?u=${enc(shareUrl)}`,x:`https://twitter.com/intent/tweet?text=${enc(shareTitle)}&url=${enc(shareUrl)}`,linkedin:`https://www.linkedin.com/sharing/share-offsite/?url=${enc(shareUrl)}`,whatsapp:`https://wa.me/?text=${enc(shareTitle+' '+shareUrl)}`,email:`mailto:?subject=${enc(shareTitle)}&body=${enc(shareText+'\n\n'+shareUrl)}`};
+  const links={linkedin:`https://www.linkedin.com/sharing/share-offsite/?url=${enc(shareUrl)}`,whatsapp:`https://wa.me/?text=${enc(shareTitle+' '+shareUrl)}`};
   $$('[data-share-link]').forEach(a=>{a.href=links[a.dataset.shareLink]||shareUrl});
 
   async function nativeShare(){
@@ -66,22 +67,18 @@
     const handled=await nativeShare();
     if(!handled)toast('当前浏览器不支持系统分享，请选择其它方式');
   });
-  $('[data-share="wechat"]')?.addEventListener('click',()=>{
-    const hint=$('#wechatShareHint');
-    hint?.classList.remove('show');
-    // V3.9: WeChat is deliberately different from "系统分享".
-    // This button launches the installed WeChat client directly. It does not copy the URL
-    // and it does not open the OS share sheet. Browser/OS security may still ask for permission.
-    try{
-      window.location.href='weixin://';
-      closeOverlay(shareModal);
-    }catch{
-      if(hint){
-        hint.textContent='未能打开微信客户端。请确认设备已安装微信；也可以使用“系统分享”并选择微信发送文章卡片。';
-        hint.classList.add('show');
-      }else toast('未能打开微信客户端');
+  $('[data-share="wechat"]')?.addEventListener('click',()=>shareViaSystem('微信'));
+  $('[data-share="instagram"]')?.addEventListener('click',()=>shareViaSystem('Instagram'));
+  $('[data-share="facebook-native"]')?.addEventListener('click',()=>shareViaSystem('Facebook'));
+  $('[data-share="xiaohongshu"]')?.addEventListener('click',()=>shareViaSystem('小红书'));
+  async function shareViaSystem(platform){
+    const handled=await nativeShare();
+    if(!handled){
+      const hint=$('#wechatShareHint');
+      if(hint){hint.textContent=`当前浏览器无法直接调用 ${platform} 分享。请使用“复制链接”后在 ${platform} 中发送。`;hint.classList.add('show')}
+      else toast('当前浏览器不支持系统分享');
     }
-  });
+  }
   $('[data-share="copy"]')?.addEventListener('click',copyLink);
   async function copyLink(){try{if(navigator.clipboard)await navigator.clipboard.writeText(shareUrl);else fallbackCopy(shareUrl);toast('链接已复制')}catch{fallbackCopy(shareUrl)}}
 
@@ -93,7 +90,7 @@
   const favAction=$('#favoriteAction');
   async function loadFavorite(){if(cfg.favoriteEndpoint){try{const r=await fetch(`${cfg.favoriteEndpoint}?issue=${encodeURIComponent(issueKey)}&client_id=${encodeURIComponent(clientId)}`);if(r.ok){const j=await r.json();storage.set('impactone_favorite_'+issueKey,!!j.favorite)}}catch{}}renderFavorite()}
   function renderFavorite(){const on=storage.get('impactone_favorite_'+issueKey,false);favAction?.classList.toggle('active',on);if(favAction)favAction.innerHTML=on?`${icon('heartFill')}<span>已收藏</span>`:`${icon('heart')}<span>收藏</span>`}
-  loadFavorite();favAction?.addEventListener('click',async()=>{const next=!storage.get('impactone_favorite_'+issueKey,false);storage.set('impactone_favorite_'+issueKey,next);renderFavorite();toast(next?'已收藏':'已取消收藏');if(cfg.favoriteEndpoint){try{await fetch(cfg.favoriteEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({issue:issueKey,client_id:clientId,favorite:next,url:location.href})})}catch{toast('收藏已保存在本机，云端同步稍后重试')}}});
+  loadFavorite();favAction?.addEventListener('click',async()=>{const next=!storage.get('impactone_favorite_'+issueKey,false);storage.set('impactone_favorite_'+issueKey,next);renderFavorite();toast(next?'已收藏到 IMPACTONE（当前保存在本机）':'已取消收藏');if(cfg.favoriteEndpoint){try{await fetch(cfg.favoriteEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({issue:issueKey,client_id:clientId,favorite:next,url:location.href})})}catch{toast('收藏已保存在本机，云端同步稍后重试')}}});
 
   // Comments: server moderation in production; localStorage fallback for preview.
   const panel=$('#commentsPanel'),commentAction=$('#commentAction'),form=$('#commentForm'),list=$('#commentList'),count=$('#commentCount');const commentsKey='impactone_comments_'+issueKey;const getLocal=()=>storage.get(commentsKey,[]),setLocal=v=>storage.set(commentsKey,v);let remoteComments=null;
