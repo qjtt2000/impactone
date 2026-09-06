@@ -668,3 +668,107 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
     line-height:1.35!important;
   }
 }
+
+/* V3.17.1 — footer precision pass from approved sample.
+   Scope: footer visual layout only. Existing interaction/data/auth/PWA logic is untouched.
+   Two alignment rails are intentional:
+   1) brand row + gold share line use the wider brand rail;
+   2) contact/legal copy uses a slightly inset reading rail. */
+.publication-footer{
+  min-height:0!important;
+  padding:30px 54px 88px!important;
+}
+.publication-footer .footer-brands,
+.publication-footer .share-line{
+  width:100%!important;
+  max-width:650px!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+.publication-footer .footer-brands{
+  gap:30px!important;
+}
+.publication-footer .impactone-logo{
+  width:96px!important;
+  height:64px!important;
+  margin:0 auto!important;
+}
+.publication-footer .faef-logo{
+  width:62px!important;
+  height:62px!important;
+  margin:0 auto!important;
+}
+.publication-footer .footer-brands b{
+  margin-top:3px!important;
+  font-family:"Songti SC","STSong","Noto Serif SC","Source Han Serif SC",serif!important;
+  font-size:16px!important;
+  line-height:1.28!important;
+  font-weight:700!important;
+}
+.publication-footer .share-line{
+  margin-top:28px!important;
+  margin-bottom:23px!important;
+  font-size:22px!important;
+  line-height:1.34!important;
+  font-weight:700!important;
+  text-align:left!important;
+}
+.publication-footer .footer-info,
+.publication-footer .legal{
+  width:calc(100% - 28px)!important;
+  max-width:610px!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+.publication-footer .footer-info{
+  font-size:9.5px!important;
+  line-height:1.72!important;
+}
+.publication-footer .footer-info b,
+.publication-footer .legal b{
+  font-size:10px!important;
+}
+.publication-footer .legal{
+  margin-top:17px!important;
+  font-size:8.5px!important;
+  line-height:1.62!important;
+}
+
+@media(max-width:600px){
+  /* Keep the already-good mobile scale, but preserve the sample's two alignment rails. */
+  .publication-footer{
+    min-height:0!important;
+    padding:28px 20px 92px!important;
+  }
+  .publication-footer .footer-brands,
+  .publication-footer .share-line{
+    width:100%!important;
+    max-width:none!important;
+  }
+  .publication-footer .footer-brands{
+    gap:14px!important;
+  }
+  .publication-footer .impactone-logo{
+    width:88px!important;
+    height:58px!important;
+  }
+  .publication-footer .faef-logo{
+    width:58px!important;
+    height:58px!important;
+  }
+  .publication-footer .footer-brands b{
+    font-size:13px!important;
+    line-height:1.3!important;
+  }
+  .publication-footer .share-line{
+    margin-top:27px!important;
+    margin-bottom:21px!important;
+    font-size:20px!important;
+    line-height:1.35!important;
+  }
+  .publication-footer .footer-info,
+  .publication-footer .legal{
+    width:calc(100% - 16px)!important;
+    max-width:none!important;
+  }
+}
