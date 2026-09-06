@@ -814,3 +814,26 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
     white-space:nowrap!important;
   }
 }
+
+/* V3.17.4 — compact footer brand span to match the approved reference.
+   Desktop only: keep the left edge of the brand row aligned with the gold
+   slogan, but do NOT stretch the two brand groups across the whole rail.
+   The combined logo/brand row is intentionally shorter than the gold slogan.
+   Mobile and all functional logic remain unchanged. */
+@media (min-width:601px){
+  .publication-footer .footer-brands{
+    width:100%!important;
+    max-width:650px!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    grid-template-columns:max-content max-content!important;
+    justify-content:start!important;
+    column-gap:52px!important;
+  }
+  .publication-footer .share-line{
+    width:100%!important;
+    max-width:650px!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+}
