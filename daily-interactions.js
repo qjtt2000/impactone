@@ -32,7 +32,9 @@
   // Share: on phones/tablets use the OS share sheet directly (WeChat appears there when installed).
   // No WeChat Official Account is required for this. Desktop/non-supporting browsers use our share center.
   const shareModal=$('#shareModal');
-  const shareTitle=document.title, shareText='筛选全球资讯，把握天下大势。', shareUrl=location.href;
+  const shareTitle=document.title, shareText='筛选全球资讯，把握天下大势。';
+  const canonicalShareUrl=document.querySelector('link[rel="canonical"]')?.href;
+  const shareUrl=(/\.vercel\.app$/i.test(location.hostname)&&canonicalShareUrl)?canonicalShareUrl:location.href;
   const enc=encodeURIComponent;
   const links={facebook:`https://www.facebook.com/sharer/sharer.php?u=${enc(shareUrl)}`,x:`https://twitter.com/intent/tweet?text=${enc(shareTitle)}&url=${enc(shareUrl)}`,linkedin:`https://www.linkedin.com/sharing/share-offsite/?url=${enc(shareUrl)}`,whatsapp:`https://wa.me/?text=${enc(shareTitle+' '+shareUrl)}`,email:`mailto:?subject=${enc(shareTitle)}&body=${enc(shareText+'\n\n'+shareUrl)}`};
   $$('[data-share-link]').forEach(a=>{a.href=links[a.dataset.shareLink]||shareUrl});
@@ -64,29 +66,20 @@
     const handled=await nativeShare();
     if(!handled)toast('当前浏览器不支持系统分享，请选择其它方式');
   });
-  $('[data-share="wechat"]')?.addEventListener('click',async()=>{
+  $('[data-share="wechat"]')?.addEventListener('click',()=>{
     const hint=$('#wechatShareHint');
     hint?.classList.remove('show');
-
-    // V3.8: never turn the WeChat button into a "copy link" action.
-    // On devices/browsers that expose the native Web Share API, hand the article
-    // directly to the operating-system share sheet. When WeChat is installed and
-    // registered as a share target (typical on iPhone/Android), the user can choose
-    // WeChat and send the article card to a friend — no Official Account required.
-    if(navigator.share){
-      const ok=await nativeShare();
-      if(ok){ closeOverlay(shareModal); return; }
-    }
-
-    // Desktop browsers cannot directly inject a webpage into a WeChat conversation.
-    // Do not copy the link automatically and do not invoke weixin:// (which causes
-    // the browser's "Open WeChat?" security prompt). Keep the other share channels
-    // available and explain the desktop limitation clearly.
-    if(hint){
-      hint.textContent='当前桌面浏览器无法把网页直接送入微信好友列表。请在手机打开本页后点击“微信”或“系统分享”，即可从系统分享菜单选择微信；这不需要微信公众号。';
-      hint.classList.add('show');
-    }else{
-      toast('请在手机端使用微信直接转发');
+    // V3.9: WeChat is deliberately different from "系统分享".
+    // This button launches the installed WeChat client directly. It does not copy the URL
+    // and it does not open the OS share sheet. Browser/OS security may still ask for permission.
+    try{
+      window.location.href='weixin://';
+      closeOverlay(shareModal);
+    }catch{
+      if(hint){
+        hint.textContent='未能打开微信客户端。请确认设备已安装微信；也可以使用“系统分享”并选择微信发送文章卡片。';
+        hint.classList.add('show');
+      }else toast('未能打开微信客户端');
     }
   });
   $('[data-share="copy"]')?.addEventListener('click',copyLink);

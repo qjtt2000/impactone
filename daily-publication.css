@@ -179,3 +179,16 @@ html,body{overflow-x:hidden}
   .skyline img.skyline-buildings{width:80%!important;bottom:0!important}
   .skyline .skyline-ground path{stroke-width:.72}
 }
+
+
+/* V3.9 — use the approved sample's skyline geometry without redrawing or stretching */
+.skyline{overflow:hidden!important;pointer-events:none}
+.skyline img.skyline-buildings{
+  position:absolute!important;right:0!important;left:auto!important;bottom:0!important;
+  width:62%!important;height:auto!important;max-width:none!important;
+  object-fit:contain!important;object-position:right bottom!important;display:block!important;
+  filter:none!important;transform:none!important;image-rendering:auto!important;
+}
+@media(max-width:600px){
+  .skyline img.skyline-buildings{width:100%!important;right:0!important;bottom:0!important}
+}
