@@ -48,10 +48,15 @@
     }
   }
 
+  function isMobileShareContext(){
+    return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+      (navigator.maxTouchPoints>1 && window.innerWidth<1100);
+  }
+
   $('#shareAction')?.addEventListener('click',async()=>{
-    // Native share is the preferred route on supported mobile browsers.
-    // If WeChat is installed and exposed by iOS/Android, it appears in this system sheet.
-    if(navigator.share){
+    // Mobile: use the OS share sheet directly; WeChat can appear there when installed.
+    // Desktop: do NOT use the Windows share sheet because desktop WeChat often does not register as a Windows share target.
+    if(isMobileShareContext() && navigator.share){
       const handled=await nativeShare();
       if(handled)return;
     }
@@ -62,6 +67,24 @@
   $('[data-share="system"]')?.addEventListener('click',async()=>{
     const handled=await nativeShare();
     if(!handled)toast('当前浏览器不支持系统分享，请选择其它方式');
+  });
+  $('[data-share="wechat"]')?.addEventListener('click',async()=>{
+    // No Official Account is required. On mobile, native share is still the best direct route.
+    if(isMobileShareContext() && navigator.share){
+      const handled=await nativeShare();
+      if(handled)return;
+    }
+    // Desktop fallback: copy the article URL, then try to launch the installed WeChat client.
+    // Browsers/Windows do not provide a standard API to inject the URL directly into a selected WeChat chat.
+    try{
+      if(navigator.clipboard) await navigator.clipboard.writeText(shareUrl);
+      else fallbackCopy(shareUrl);
+      toast('链接已复制，正在尝试打开微信');
+      setTimeout(()=>{ window.location.href='weixin://'; },120);
+    }catch{
+      fallbackCopy(shareUrl);
+      setTimeout(()=>{ window.location.href='weixin://'; },120);
+    }
   });
   $('[data-share="copy"]')?.addEventListener('click',copyLink);
   async function copyLink(){try{if(navigator.clipboard)await navigator.clipboard.writeText(shareUrl);else fallbackCopy(shareUrl);toast('链接已复制')}catch{fallbackCopy(shareUrl)}}

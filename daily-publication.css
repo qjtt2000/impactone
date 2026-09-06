@@ -1,4 +1,3 @@
-
 /* IMPACTONE · 影响力·每日必读 — V3.1 SAMPLE-LED + FUNCTIONAL INTERACTIONS
    Visual priority: approved sample. PDF spec is secondary.
 */
@@ -127,3 +126,11 @@ html,body{overflow-x:hidden}
 .skyline .spire-detail{stroke-width:.72;opacity:.9}
 .skyline .ground{stroke-width:.9}
 @media(max-width:600px){.skyline .city{stroke-width:.82}.skyline .empire{stroke-width:.92}.skyline .ground{stroke-width:.82}}
+
+/* V3.5 — approved-sample header skyline + scan body position */
+.skyline .perspective{stroke:rgba(200,168,75,.48);stroke-width:.55;fill:none;vector-effect:non-scaling-stroke}
+.skyline .perspective-2{stroke:rgba(200,168,75,.34)}
+.scan-details{margin:4px 0 12px}
+.scan-details summary{padding:4px 0 2px}
+.scan-details .scan-body{margin-top:10px}
+.scan-quick{margin-top:12px!important}
