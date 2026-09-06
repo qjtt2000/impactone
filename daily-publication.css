@@ -772,3 +772,14 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
     max-width:none!important;
   }
 }
+
+/* V3.17.2 — align gold share line with the left edge of the IMPACTONE logo
+   Desktop only. Mobile layout and all functionality remain unchanged. */
+@media (min-width:601px){
+  .publication-footer .share-line{
+    width:100%!important;
+    max-width:436px!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+}
