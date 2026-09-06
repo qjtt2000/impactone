@@ -155,6 +155,28 @@
 
   renderSubscribed();renderInstallState();getSWRegistration();
 
+  // V3.14: when the installed PWA is opened from the Home Screen for the first time,
+  // show a small in-app prompt. The system permission dialog is only requested after the user taps “开启”.
+  const notificationOptin=$('#notificationOptin');
+  const enableNotificationButton=$('#enableNotificationButton');
+  const dismissNotificationButton=$('#dismissNotificationButton');
+  function renderNotificationOptin(){
+    if(!notificationOptin)return;
+    const dismissed=storage.get('impactone_notification_prompt_dismissed',false);
+    const shouldShow=standaloneNow()&&notificationsSupported()&&Notification.permission==='default'&&!dismissed;
+    notificationOptin.hidden=!shouldShow;
+  }
+  if(standaloneNow())setTimeout(renderNotificationOptin,650);
+  enableNotificationButton?.addEventListener('click',async()=>{
+    notificationOptin.hidden=true;
+    await requestDailyNotifications();
+    renderNotificationOptin();
+  });
+  dismissNotificationButton?.addEventListener('click',()=>{
+    storage.set('impactone_notification_prompt_dismissed',true);
+    notificationOptin.hidden=true;
+  });
+
   subAction?.addEventListener('click',async()=>{
     // Once opened from the Home Screen, the same “订阅” button becomes the notification permission action.
     if(standaloneNow()&&notificationsSupported()&&Notification.permission==='default'){
