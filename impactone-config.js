@@ -6,6 +6,10 @@ window.IMPACTONE_CONFIG = {
   commentsEndpoint: "",
   favoriteEndpoint: "",
   sendDailyEndpoint: "",
+  /* Web Push: leave blank during front-end testing. Fill these after the push backend is deployed. */
+  pushSubscribeEndpoint: "",
+  pushUnsubscribeEndpoint: "",
+  vapidPublicKey: "",
   socialProfiles: {
     facebook: "",
     instagram: "",

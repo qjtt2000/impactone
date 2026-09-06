@@ -23,44 +23,169 @@
   function openOverlay(el){if(!el)return;el.classList.add('open');el.setAttribute('aria-hidden','false');document.body.classList.add('io-panel-open');setTimeout(()=>el.querySelector('input,textarea,button,a')?.focus(),30)}
   function closeOverlay(el){if(!el)return;el.classList.remove('open');el.setAttribute('aria-hidden','true');if(!$('.modal-backdrop.open')&&!$('.comments-panel.open'))document.body.classList.remove('io-panel-open')}
 
-  // V3.11 Subscription: PWA / Add-to-Home-Screen first; email remains a backup.
+  // V3.13 Subscription: install the PWA first, then complete subscription by granting notification permission.
+  // Browsers require the notification permission prompt to follow a user action; it cannot be silently enabled.
   const subAction=$('#subscribeAction'),subModal=$('#subscribeModal'),subForm=$('#subscribeForm'),subEmail=$('#subscribeEmail'),subStatus=$('#subscribeStatus');
   const installBtn=$('#installAppButton'),installHelp=$('#installHelp');
   let deferredInstallPrompt=null;
+  let swRegistrationPromise=null;
   const isIOS=/iPhone|iPad|iPod/i.test(navigator.userAgent);
-  const isStandalone=window.matchMedia?.('(display-mode: standalone)').matches || window.navigator.standalone===true;
+  const isAndroid=/Android/i.test(navigator.userAgent);
+  const standaloneNow=()=>window.matchMedia?.('(display-mode: standalone)').matches || window.navigator.standalone===true;
+  const notificationsSupported=()=>('Notification' in window)&&('serviceWorker' in navigator);
+
+  function urlBase64ToUint8Array(base64String){
+    const padding='='.repeat((4-base64String.length%4)%4);
+    const base64=(base64String+padding).replace(/-/g,'+').replace(/_/g,'/');
+    const raw=atob(base64);return Uint8Array.from([...raw].map(c=>c.charCodeAt(0)));
+  }
+
+  async function getSWRegistration(){
+    if(!('serviceWorker' in navigator))return null;
+    if(!swRegistrationPromise){
+      swRegistrationPromise=navigator.serviceWorker.register('/service-worker.js').then(()=>navigator.serviceWorker.ready).catch(()=>null);
+    }
+    return swRegistrationPromise;
+  }
+
+  async function registerPushSubscription(reg){
+    if(!reg||!cfg.vapidPublicKey||!cfg.pushSubscribeEndpoint)return {connected:false,reason:'backend-pending'};
+    try{
+      let pushSub=await reg.pushManager.getSubscription();
+      if(!pushSub){pushSub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:urlBase64ToUint8Array(cfg.vapidPublicKey)})}
+      const res=await fetch(cfg.pushSubscribeEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({subscription:pushSub.toJSON(),issue:issueKey,url:location.href,client_id:clientId})});
+      if(!res.ok)throw new Error('push subscribe failed');
+      storage.set('impactone_push_connected',true);
+      return {connected:true};
+    }catch(e){
+      storage.set('impactone_push_connected',false);
+      return {connected:false,reason:'subscribe-failed'};
+    }
+  }
+
+  async function requestDailyNotifications(){
+    if(!notificationsSupported()){
+      if(installHelp)installHelp.innerHTML='当前浏览器不支持网页通知。你仍可以把 IMPACTONE 添加到手机桌面。';
+      return false;
+    }
+    let permission=Notification.permission;
+    if(permission==='denied'){
+      if(installHelp)installHelp.innerHTML='通知已被关闭。如需恢复，请到手机“设置 → 通知”中允许 IMPACTONE 通知。';
+      renderSubscribed();renderInstallState();
+      return false;
+    }
+    if(permission==='default'){
+      try{permission=await Notification.requestPermission()}catch{permission='default'}
+    }
+    if(permission!=='granted'){
+      if(installHelp)installHelp.innerHTML='你暂未允许通知。以后仍可点底部“订阅”再次设置。';
+      renderSubscribed();renderInstallState();
+      return false;
+    }
+
+    storage.set('impactone_notification_permission',true);
+    const reg=await getSWRegistration();
+    const result=await registerPushSubscription(reg);
+
+    // During front-end testing the push backend may not be configured yet. Show one local confirmation only.
+    if(reg){
+      try{await reg.showNotification('IMPACTONE｜通知已允许',{body:result.connected?'《每日必读》更新后将通过这里提醒你。':'手机通知权限已开启；正式每日推送将在推送后台接入后生效。',icon:'/images/brand/impactone-icon-192.png',badge:'/images/brand/impactone-icon-192.png',tag:'impactone-permission-confirm',data:{url:location.pathname}})}catch{}
+    }
+    if(installHelp){
+      installHelp.innerHTML=result.connected
+        ?'<strong>订阅完成。</strong>《每日必读》更新后会通过 IMPACTONE 通知提醒你。'
+        :'<strong>手机通知权限已开启。</strong>当前测试版尚未连接正式推送后台；接入后即可自动发送每日更新通知。';
+    }
+    renderSubscribed();renderInstallState();
+    return true;
+  }
 
   window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;renderInstallState()});
-  window.addEventListener('appinstalled',()=>{deferredInstallPrompt=null;storage.set('impactone_pwa_installed',true);renderInstallState();toast('已添加到手机桌面')});
+  window.addEventListener('appinstalled',()=>{
+    deferredInstallPrompt=null;storage.set('impactone_pwa_installed',true);renderSubscribed();renderInstallState();
+    toast('已添加到手机桌面');
+  });
 
   function renderSubscribed(){
-    const installed=isStandalone||storage.get('impactone_pwa_installed',false);
     if(!subAction)return;
-    subAction.classList.toggle('active',installed);
-    subAction.innerHTML=installed?`${icon('check')}<span>已添加</span>`:`${icon('plus')}<span>订阅</span>`;
+    const installed=standaloneNow()||storage.get('impactone_pwa_installed',false);
+    const permission=notificationsSupported()?Notification.permission:'unsupported';
+    const pushConnected=storage.get('impactone_push_connected',false);
+    const complete=installed&&permission==='granted'&&pushConnected;
+    const notificationReady=installed&&permission==='granted';
+    subAction.classList.toggle('active',complete||notificationReady);
+    if(complete)subAction.innerHTML=`${icon('check')}<span>已订阅</span>`;
+    else if(notificationReady)subAction.innerHTML=`${icon('check')}<span>已添加</span>`;
+    else subAction.innerHTML=`${icon('plus')}<span>订阅</span>`;
   }
+
   function renderInstallState(){
     if(!installBtn||!installHelp)return;
-    if(isStandalone){installBtn.textContent='已从桌面打开';installBtn.disabled=true;installHelp.innerHTML='你已经通过手机桌面的 <strong>IMPACTONE</strong> 图标进入《每日必读》。';return}
+    const installed=standaloneNow();
+    const permission=notificationsSupported()?Notification.permission:'unsupported';
+
+    if(installed){
+      if(permission==='granted'){
+        installBtn.textContent=storage.get('impactone_push_connected',false)?'✓ 已完成订阅':'✓ 通知已允许';
+        installBtn.disabled=true;
+        installHelp.innerHTML=storage.get('impactone_push_connected',false)
+          ?'你已从桌面进入 IMPACTONE，并已订阅《每日必读》更新通知。'
+          :'你已从桌面进入 IMPACTONE，手机通知权限已开启。';
+        return;
+      }
+      if(permission==='denied'){
+        installBtn.textContent='通知已关闭';installBtn.disabled=true;
+        installHelp.innerHTML='你已经安装 IMPACTONE，但通知被系统关闭。可在手机“设置 → 通知”中重新允许。';
+        return;
+      }
+      installBtn.textContent='完成订阅';installBtn.disabled=false;
+      installHelp.innerHTML='最后一步：点“完成订阅”，手机会询问是否允许 IMPACTONE 发送《每日必读》更新通知。';
+      return;
+    }
+
     installBtn.disabled=false;installBtn.textContent='＋ 添加到手机桌面';
-    if(deferredInstallPrompt){installHelp.textContent='点击上方按钮即可安装，不需要 App Store。';return}
-    if(isIOS){installHelp.innerHTML='iPhone：点 Safari 底部/顶部的 <strong>分享</strong> 按钮，再选择“添加到主屏幕”。';return}
-    installHelp.textContent='如果浏览器没有立即出现安装按钮，请打开浏览器菜单，选择“添加到主屏幕”或“安装应用”。';
+    if(deferredInstallPrompt){
+      installHelp.innerHTML=isAndroid?'Android：点击上方按钮安装。安装完成后，按系统提示允许 IMPACTONE 通知。':'点击上方按钮即可安装，不需要 App Store。';
+      return;
+    }
+    if(isIOS){installHelp.innerHTML='iPhone / iPad：先用 <strong>Safari 分享 → 添加到主屏幕 → 添加</strong>。然后从桌面打开 IMPACTONE，点“订阅”完成通知授权。';return}
+    if(isAndroid){installHelp.innerHTML='Android：用 Chrome，点右上角 <strong>⋮ → 添加到主屏幕 / 安装应用 → 安装</strong>。安装后允许 IMPACTONE 通知。';return}
+    installHelp.textContent='请打开浏览器菜单，选择“添加到主屏幕”或“安装应用”。';
   }
-  renderSubscribed();renderInstallState();
-  subAction?.addEventListener('click',()=>{renderInstallState();openOverlay(subModal)});
+
+  renderSubscribed();renderInstallState();getSWRegistration();
+
+  subAction?.addEventListener('click',async()=>{
+    // Once opened from the Home Screen, the same “订阅” button becomes the notification permission action.
+    if(standaloneNow()&&notificationsSupported()&&Notification.permission==='default'){
+      await requestDailyNotifications();return;
+    }
+    renderInstallState();openOverlay(subModal);
+  });
   $('[data-close-subscribe]')?.addEventListener('click',()=>closeOverlay(subModal));
   subModal?.addEventListener('click',e=>{if(e.target===subModal)closeOverlay(subModal)});
+
   installBtn?.addEventListener('click',async()=>{
-    if(isStandalone)return;
+    if(standaloneNow()){
+      await requestDailyNotifications();return;
+    }
     if(deferredInstallPrompt){
       deferredInstallPrompt.prompt();
-      try{const choice=await deferredInstallPrompt.userChoice;if(choice?.outcome==='accepted'){storage.set('impactone_pwa_installed',true);renderSubscribed()}}catch{}
+      try{
+        const choice=await deferredInstallPrompt.userChoice;
+        if(choice?.outcome==='accepted'){
+          storage.set('impactone_pwa_installed',true);renderSubscribed();
+          // Android/Chromium may allow the notification prompt to continue from the same user action.
+          if(isAndroid)await requestDailyNotifications();
+        }
+      }catch{}
       deferredInstallPrompt=null;renderInstallState();return;
     }
-    if(isIOS){installHelp.innerHTML='iPhone 安装方法：<strong>Safari 分享 → 添加到主屏幕 → 添加</strong>。完成后桌面会出现 IMPACTONE 图标。';return}
+    if(isIOS){installHelp.innerHTML='iPhone / iPad：<strong>Safari 分享 → 添加到主屏幕 → 添加</strong>。完成后请从桌面打开 IMPACTONE，再点底部“订阅”；系统会直接询问是否允许通知。';return}
+    if(isAndroid){installHelp.innerHTML='Android：<strong>Chrome 右上角 ⋮ → 添加到主屏幕 / 安装应用 → 安装</strong>。完成后允许 IMPACTONE 通知即可。';return}
     installHelp.textContent='请打开浏览器菜单，选择“添加到主屏幕”或“安装应用”。';
   });
+
   $('[data-toggle-email]')?.addEventListener('click',()=>{const f=$('#subscribeForm');if(!f)return;f.hidden=!f.hidden;if(!f.hidden)setTimeout(()=>subEmail?.focus(),20)});
   subForm?.addEventListener('submit',async e=>{e.preventDefault();const email=(subEmail?.value||'').trim();if(!email)return;const btn=subForm.querySelector('button[type="submit"]');btn.disabled=true;btn.textContent='提交中…';if(subStatus)subStatus.textContent='';try{if(cfg.subscribeEndpoint){const res=await fetch(cfg.subscribeEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,source:'daily',issue:issueKey,url:location.href})});if(!res.ok)throw new Error('subscribe failed')}storage.set('impactone_subscriber_email',email);if(subStatus)subStatus.textContent='邮件订阅成功。';toast('邮件订阅成功')}catch{if(subStatus)subStatus.textContent='暂时无法完成邮件订阅，请稍后再试。'}finally{btn.disabled=false;btn.textContent='邮件订阅'}});
 
@@ -120,7 +245,6 @@
   loadComments();commentAction?.addEventListener('click',()=>panel.classList.contains('open')?closeOverlay(panel):openOverlay(panel));$('[data-close-comments]')?.addEventListener('click',()=>closeOverlay(panel));
   form?.addEventListener('submit',async e=>{e.preventDefault();const name=($('#commentName')?.value||'').trim(),text=($('#commentText')?.value||'').trim();if(!name||!text)return;const btn=form.querySelector('button[type="submit"]');btn.disabled=true;try{if(cfg.commentsEndpoint){const res=await fetch(cfg.commentsEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({issue:issueKey,name,text,url:location.href})});if(!res.ok)throw 0;const created=await res.json();remoteComments=[{name,text,time:Date.now(),likes:0,pending:true,...created},...(remoteComments||[])];toast('评论已提交，审核后公开显示')}else{const cs=getLocal();cs.unshift({name,text,time:Date.now(),likes:0});setLocal(cs);toast('评论已发布（本机预览）')}$('#commentText').value='';renderComments()}catch{toast('评论提交失败，请稍后再试')}finally{btn.disabled=false}});
 
-  if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('/service-worker.js').catch(()=>{}))}
 
   document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeOverlay(subModal);closeOverlay(shareModal);closeOverlay(panel)}});
   function formatTime(v){const d=v?new Date(v):new Date();try{return d.toLocaleString('zh-CN',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'})}catch{return''}}

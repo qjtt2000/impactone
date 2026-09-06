@@ -238,3 +238,18 @@ html,body{overflow-x:hidden}
   .skyline.skyline-original>img{width:100%!important;right:0!important;bottom:0!important;transform:none!important}
   .share-grid-v311{grid-template-columns:repeat(2,1fr)}
 }
+
+
+/* V3.12 — explicit iPhone + Android installation guide */
+.install-platform-guide{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 8px}
+.install-platform-card{border:1px solid #ddd4c5;background:#fbfaf6;padding:10px 12px;min-height:76px}
+.install-platform-card strong{display:block;color:var(--navy);font-size:12px;margin-bottom:5px}
+.install-platform-card span{display:block;color:#666;font-size:11px;line-height:1.55}
+.install-guide-link{display:inline-block;margin:5px 0 5px;color:var(--navy);font-size:11px;text-decoration:underline;text-underline-offset:2px}
+@media(max-width:600px){.install-platform-guide{grid-template-columns:1fr}.install-platform-card{min-height:auto}}
+
+/* V3.13 — subscription = Home Screen + notification permission */
+.subscribe-modal-v313{max-width:470px}
+.subscribe-modal-v313 .install-platform-guide{display:grid!important;grid-template-columns:1fr 1fr!important;gap:10px!important}
+.subscribe-modal-v313 .install-platform-card{display:block!important}
+@media(max-width:600px){.subscribe-modal-v313 .install-platform-guide{grid-template-columns:1fr!important}}
