@@ -1,4 +1,4 @@
-const CACHE='impactone-daily-v317-footer-reference-fix-20260906';
+const CACHE='impactone-daily-v317-footer-final-align-fix-20260906';
 const STATIC=[
   '/daily-publication.css','/daily-interactions.js','/impactone-config.js','/manifest.webmanifest',
   '/images/brand/impactone-icon-192.png','/images/brand/impactone-icon-512.png',

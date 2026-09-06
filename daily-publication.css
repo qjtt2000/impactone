@@ -783,3 +783,34 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
     margin-right:auto!important;
   }
 }
+
+/* V3.17.3 — footer reference alignment correction.
+   Desktop: the gold share line starts exactly on the same vertical rail as
+   “出品｜IMPACTONE”; its visual span is widened to track the approved sample,
+   ending approximately beneath the “家” character in the right brand line.
+   Mobile and all existing interaction/business logic remain unchanged. */
+@media (min-width:601px){
+  .publication-footer .footer-brands{
+    width:100%!important;
+    max-width:650px!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    grid-template-columns:max-content max-content!important;
+    justify-content:space-between!important;
+    column-gap:34px!important;
+  }
+  .publication-footer .footer-brand,
+  .publication-footer .foundation{
+    width:max-content!important;
+  }
+  .publication-footer .share-line{
+    /* Same left rail as “出品｜IMPACTONE”, not the image edge or info block. */
+    width:100%!important;
+    max-width:650px!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    font-size:30px!important;
+    letter-spacing:.015em!important;
+    white-space:nowrap!important;
+  }
+}
