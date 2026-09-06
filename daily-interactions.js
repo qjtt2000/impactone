@@ -23,62 +23,81 @@
   function openOverlay(el){if(!el)return;el.classList.add('open');el.setAttribute('aria-hidden','false');document.body.classList.add('io-panel-open');setTimeout(()=>el.querySelector('input,textarea,button,a')?.focus(),30)}
   function closeOverlay(el){if(!el)return;el.classList.remove('open');el.setAttribute('aria-hidden','true');if(!$('.modal-backdrop.open')&&!$('.comments-panel.open'))document.body.classList.remove('io-panel-open')}
 
-  // Subscription -> Supabase Edge Function in production; local fallback in preview.
+  // V3.11 Subscription: PWA / Add-to-Home-Screen first; email remains a backup.
   const subAction=$('#subscribeAction'),subModal=$('#subscribeModal'),subForm=$('#subscribeForm'),subEmail=$('#subscribeEmail'),subStatus=$('#subscribeStatus');
-  function renderSubscribed(){const email=storage.get('impactone_subscriber_email','');if(!subAction)return;subAction.classList.toggle('active',!!email);subAction.innerHTML=email?`${icon('check')}<span>已订阅</span>`:`${icon('plus')}<span>订阅</span>`}
-  renderSubscribed();subAction?.addEventListener('click',()=>openOverlay(subModal));$('[data-close-subscribe]')?.addEventListener('click',()=>closeOverlay(subModal));subModal?.addEventListener('click',e=>{if(e.target===subModal)closeOverlay(subModal)});
-  $('[data-toggle-email]')?.addEventListener('click',()=>{const f=$('#subscribeForm');if(!f)return;f.hidden=!f.hidden;if(!f.hidden)setTimeout(()=>subEmail?.focus(),20)});
-  $$('[data-follow]').forEach(btn=>btn.addEventListener('click',()=>{const platform=btn.dataset.follow;const url=cfg.socialProfiles?.[platform];if(url){window.open(url,'_blank','noopener')}else{const names={wechat:'微信',xiaohongshu:'小红书',instagram:'Instagram'};if(subStatus)subStatus.textContent=`${names[platform]||platform}关注入口尚未配置；正式账号链接确定后即可接入。`}}));
-  subForm?.addEventListener('submit',async e=>{e.preventDefault();const email=(subEmail?.value||'').trim();if(!email)return;const btn=subForm.querySelector('button[type="submit"]');btn.disabled=true;btn.textContent='提交中…';if(subStatus)subStatus.textContent='';try{if(cfg.subscribeEndpoint){const res=await fetch(cfg.subscribeEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,source:'daily',issue:issueKey,url:location.href})});if(!res.ok)throw new Error('subscribe failed')}storage.set('impactone_subscriber_email',email);renderSubscribed();if(subStatus)subStatus.textContent='订阅成功。新一期发布后将发送到这个邮箱。';toast('已订阅「影响力·每日必读」');setTimeout(()=>closeOverlay(subModal),1000)}catch{if(subStatus)subStatus.textContent='暂时无法完成订阅，请稍后再试。'}finally{btn.disabled=false;btn.textContent='立即订阅'}});
+  const installBtn=$('#installAppButton'),installHelp=$('#installHelp');
+  let deferredInstallPrompt=null;
+  const isIOS=/iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const isStandalone=window.matchMedia?.('(display-mode: standalone)').matches || window.navigator.standalone===true;
 
-  // Share: on phones/tablets use the OS share sheet directly (WeChat appears there when installed).
-  // No WeChat Official Account is required for this. Desktop/non-supporting browsers use our share center.
+  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;renderInstallState()});
+  window.addEventListener('appinstalled',()=>{deferredInstallPrompt=null;storage.set('impactone_pwa_installed',true);renderInstallState();toast('已添加到手机桌面')});
+
+  function renderSubscribed(){
+    const installed=isStandalone||storage.get('impactone_pwa_installed',false);
+    if(!subAction)return;
+    subAction.classList.toggle('active',installed);
+    subAction.innerHTML=installed?`${icon('check')}<span>已添加</span>`:`${icon('plus')}<span>订阅</span>`;
+  }
+  function renderInstallState(){
+    if(!installBtn||!installHelp)return;
+    if(isStandalone){installBtn.textContent='已从桌面打开';installBtn.disabled=true;installHelp.innerHTML='你已经通过手机桌面的 <strong>IMPACTONE</strong> 图标进入《每日必读》。';return}
+    installBtn.disabled=false;installBtn.textContent='＋ 添加到手机桌面';
+    if(deferredInstallPrompt){installHelp.textContent='点击上方按钮即可安装，不需要 App Store。';return}
+    if(isIOS){installHelp.innerHTML='iPhone：点 Safari 底部/顶部的 <strong>分享</strong> 按钮，再选择“添加到主屏幕”。';return}
+    installHelp.textContent='如果浏览器没有立即出现安装按钮，请打开浏览器菜单，选择“添加到主屏幕”或“安装应用”。';
+  }
+  renderSubscribed();renderInstallState();
+  subAction?.addEventListener('click',()=>{renderInstallState();openOverlay(subModal)});
+  $('[data-close-subscribe]')?.addEventListener('click',()=>closeOverlay(subModal));
+  subModal?.addEventListener('click',e=>{if(e.target===subModal)closeOverlay(subModal)});
+  installBtn?.addEventListener('click',async()=>{
+    if(isStandalone)return;
+    if(deferredInstallPrompt){
+      deferredInstallPrompt.prompt();
+      try{const choice=await deferredInstallPrompt.userChoice;if(choice?.outcome==='accepted'){storage.set('impactone_pwa_installed',true);renderSubscribed()}}catch{}
+      deferredInstallPrompt=null;renderInstallState();return;
+    }
+    if(isIOS){installHelp.innerHTML='iPhone 安装方法：<strong>Safari 分享 → 添加到主屏幕 → 添加</strong>。完成后桌面会出现 IMPACTONE 图标。';return}
+    installHelp.textContent='请打开浏览器菜单，选择“添加到主屏幕”或“安装应用”。';
+  });
+  $('[data-toggle-email]')?.addEventListener('click',()=>{const f=$('#subscribeForm');if(!f)return;f.hidden=!f.hidden;if(!f.hidden)setTimeout(()=>subEmail?.focus(),20)});
+  subForm?.addEventListener('submit',async e=>{e.preventDefault();const email=(subEmail?.value||'').trim();if(!email)return;const btn=subForm.querySelector('button[type="submit"]');btn.disabled=true;btn.textContent='提交中…';if(subStatus)subStatus.textContent='';try{if(cfg.subscribeEndpoint){const res=await fetch(cfg.subscribeEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,source:'daily',issue:issueKey,url:location.href})});if(!res.ok)throw new Error('subscribe failed')}storage.set('impactone_subscriber_email',email);if(subStatus)subStatus.textContent='邮件订阅成功。';toast('邮件订阅成功')}catch{if(subStatus)subStatus.textContent='暂时无法完成邮件订阅，请稍后再试。'}finally{btn.disabled=false;btn.textContent='邮件订阅'}});
+
+  // V3.11 Share center. Preview shares the current Preview URL; production naturally shares production URL.
   const shareModal=$('#shareModal');
   const shareTitle=document.title, shareText='筛选全球资讯，把握天下大势。';
   const shareUrl=location.href;
   const enc=encodeURIComponent;
-  const links={linkedin:`https://www.linkedin.com/sharing/share-offsite/?url=${enc(shareUrl)}`,whatsapp:`https://wa.me/?text=${enc(shareTitle+' '+shareUrl)}`};
+  const links={
+    linkedin:`https://www.linkedin.com/sharing/share-offsite/?url=${enc(shareUrl)}`,
+    whatsapp:`https://wa.me/?text=${enc(shareTitle+' '+shareUrl)}`
+  };
   $$('[data-share-link]').forEach(a=>{a.href=links[a.dataset.shareLink]||shareUrl});
 
   async function nativeShare(){
     if(!navigator.share)return false;
-    try{
-      await navigator.share({title:shareTitle,text:shareText,url:shareUrl});
-      return true;
-    }catch(e){
-      if(e?.name==='AbortError')return true;
-      return false;
-    }
+    try{await navigator.share({title:shareTitle,text:shareText,url:shareUrl});return true}
+    catch(e){if(e?.name==='AbortError')return true;return false}
+  }
+  async function copySilently(){
+    try{if(navigator.clipboard)await navigator.clipboard.writeText(shareUrl);else fallbackCopyNoToast(shareUrl);return true}catch{fallbackCopyNoToast(shareUrl);return false}
+  }
+  function openDeepLink(uri,webFallback,label){
+    const started=Date.now();
+    window.location.href=uri;
+    setTimeout(()=>{if(Date.now()-started<1800&&document.visibilityState==='visible'&&webFallback)window.location.href=webFallback},900);
+    toast(`${label} 已打开；文章链接已复制，可直接粘贴发布`);
   }
 
-  function isMobileShareContext(){
-    return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ||
-      (navigator.maxTouchPoints>1 && window.innerWidth<1100);
-  }
-
-  $('#shareAction')?.addEventListener('click',()=>{
-    // Keep the multi-platform share center on every device, as in the approved UI.
-    // On mobile, the “系统分享” and “微信” buttons below call the OS share sheet directly.
-    openOverlay(shareModal);
-  });
+  $('#shareAction')?.addEventListener('click',()=>openOverlay(shareModal));
   $('[data-close-share]')?.addEventListener('click',()=>{closeOverlay(shareModal);$('#wechatShareHint')?.classList.remove('show')});
   shareModal?.addEventListener('click',e=>{if(e.target===shareModal)closeOverlay(shareModal)});
-  $('[data-share="system"]')?.addEventListener('click',async()=>{
-    const handled=await nativeShare();
-    if(!handled)toast('当前浏览器不支持系统分享，请选择其它方式');
-  });
-  $('[data-share="wechat"]')?.addEventListener('click',()=>shareViaSystem('微信'));
-  $('[data-share="instagram"]')?.addEventListener('click',()=>shareViaSystem('Instagram'));
-  $('[data-share="facebook-native"]')?.addEventListener('click',()=>shareViaSystem('Facebook'));
-  $('[data-share="xiaohongshu"]')?.addEventListener('click',()=>shareViaSystem('小红书'));
-  async function shareViaSystem(platform){
-    const handled=await nativeShare();
-    if(!handled){
-      const hint=$('#wechatShareHint');
-      if(hint){hint.textContent=`当前浏览器无法直接调用 ${platform} 分享。请使用“复制链接”后在 ${platform} 中发送。`;hint.classList.add('show')}
-      else toast('当前浏览器不支持系统分享');
-    }
-  }
+  $('[data-share="system"]')?.addEventListener('click',async()=>{const handled=await nativeShare();if(!handled)toast('当前浏览器不支持系统分享，请使用复制链接')});
+  $('[data-share="wechat"]')?.addEventListener('click',async()=>{const handled=await nativeShare();if(!handled){await copyLink();toast('链接已复制，请在微信中发送')}});
+  $('[data-share="facebook-native"]')?.addEventListener('click',()=>{window.open(`https://www.facebook.com/sharer/sharer.php?u=${enc(shareUrl)}`,'_blank','noopener,noreferrer')});
+  $('[data-share="instagram"]')?.addEventListener('click',async()=>{await copySilently();openDeepLink('instagram://camera','https://www.instagram.com/','Instagram')});
+  $('[data-share="xiaohongshu"]')?.addEventListener('click',async()=>{await copySilently();openDeepLink('xhsdiscover://post','https://www.xiaohongshu.com/explore','小红书')});
   $('[data-share="copy"]')?.addEventListener('click',copyLink);
   async function copyLink(){try{if(navigator.clipboard)await navigator.clipboard.writeText(shareUrl);else fallbackCopy(shareUrl);toast('链接已复制')}catch{fallbackCopy(shareUrl)}}
 
@@ -101,8 +120,11 @@
   loadComments();commentAction?.addEventListener('click',()=>panel.classList.contains('open')?closeOverlay(panel):openOverlay(panel));$('[data-close-comments]')?.addEventListener('click',()=>closeOverlay(panel));
   form?.addEventListener('submit',async e=>{e.preventDefault();const name=($('#commentName')?.value||'').trim(),text=($('#commentText')?.value||'').trim();if(!name||!text)return;const btn=form.querySelector('button[type="submit"]');btn.disabled=true;try{if(cfg.commentsEndpoint){const res=await fetch(cfg.commentsEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({issue:issueKey,name,text,url:location.href})});if(!res.ok)throw 0;const created=await res.json();remoteComments=[{name,text,time:Date.now(),likes:0,pending:true,...created},...(remoteComments||[])];toast('评论已提交，审核后公开显示')}else{const cs=getLocal();cs.unshift({name,text,time:Date.now(),likes:0});setLocal(cs);toast('评论已发布（本机预览）')}$('#commentText').value='';renderComments()}catch{toast('评论提交失败，请稍后再试')}finally{btn.disabled=false}});
 
+  if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('/service-worker.js').catch(()=>{}))}
+
   document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeOverlay(subModal);closeOverlay(shareModal);closeOverlay(panel)}});
   function formatTime(v){const d=v?new Date(v):new Date();try{return d.toLocaleString('zh-CN',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'})}catch{return''}}
+  function fallbackCopyNoToast(text){const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch{}ta.remove()}
   function fallbackCopy(text){const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('链接已复制')}catch{toast('请复制浏览器地址进行转发')}ta.remove()}
   function icon(type){const paths={plus:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>',check:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg>',heart:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg>',heartFill:'<svg viewBox="0 0 24 24" aria-hidden="true" style="fill:currentColor"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg>'};return `<span class="ico">${paths[type]||''}</span>`}
 })();

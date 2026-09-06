@@ -215,3 +215,26 @@ html,body{overflow-x:hidden}
  .skyline.skyline-original>img{width:100%!important;bottom:0!important}
  .share-grid-v310,.subscribe-channels{grid-template-columns:repeat(2,1fr)}
 }
+
+/* V3.11 — desktop skyline fix + PWA-first subscription */
+/* Keep the original skyline artwork undistorted. Desktop scales the whole asset down
+   instead of stretching/cropping it; mobile retains the approved full-width rendering. */
+.skyline.skyline-original{height:205px!important;overflow:visible!important;left:0!important;right:0!important;bottom:0!important;width:100%!important}
+.skyline.skyline-original>img{
+  width:100%!important;height:auto!important;max-width:none!important;
+  left:auto!important;right:0!important;bottom:0!important;
+  object-fit:contain!important;object-position:right bottom!important;
+  transform:scale(.64)!important;transform-origin:right bottom!important;
+}
+.share-grid-v311{grid-template-columns:repeat(4,1fr)}
+.subscribe-modal-v311{max-width:470px}
+.install-primary{width:100%;margin:18px 0 10px;border:0;background:var(--navy);color:#fff;padding:14px 16px;font-weight:700;cursor:pointer}
+.install-primary:hover{background:#0a3979}.install-primary:disabled{opacity:.55;cursor:default}
+.install-help{font-size:12px;line-height:1.7;color:#666;margin:4px 0 10px;padding:0 2px}
+.install-help strong{color:var(--navy)}
+.email-backup-toggle{display:block;margin:10px auto 0;border:0;background:transparent;color:#777;text-decoration:underline;cursor:pointer;font-size:11px}
+@media(max-width:600px){
+  .skyline.skyline-original{height:148px!important;overflow:visible!important}
+  .skyline.skyline-original>img{width:100%!important;right:0!important;bottom:0!important;transform:none!important}
+  .share-grid-v311{grid-template-columns:repeat(2,1fr)}
+}
