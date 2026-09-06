@@ -134,3 +134,24 @@ html,body{overflow-x:hidden}
 .scan-details summary{padding:4px 0 2px}
 .scan-details .scan-body{margin-top:10px}
 .scan-quick{margin-top:12px!important}
+
+
+/* V3.6 — approved-sample skyline, visible font controls, sharper lead image */
+.skyline .city,.skyline .tower,.skyline .empire,.skyline .empire-crown{stroke:var(--gold);fill:none;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.skyline .city{stroke-width:.78}
+.skyline .tower{stroke-width:.84}
+.skyline .empire{stroke-width:.94}
+.skyline .empire-crown{stroke-width:.82}
+.skyline .ground{stroke:var(--gold);stroke-width:.84;fill:none;vector-effect:non-scaling-stroke}
+.skyline .perspective{stroke:rgba(200,168,75,.44);stroke-width:.5;fill:none;vector-effect:non-scaling-stroke}
+.skyline .perspective-2{stroke:rgba(200,168,75,.31)}
+.font-tool{gap:1px;padding-right:24px;color:#8b877f;font-size:11px}
+.font-tool button{min-width:28px;min-height:28px;padding:4px 7px;border-radius:0;color:#8b877f;font-size:11px;line-height:1;cursor:pointer}
+.font-tool button:hover,.font-tool button:focus-visible{color:var(--navy);outline:1px solid rgba(200,168,75,.45);outline-offset:-2px}
+.font-tool button.active{color:var(--gold);font-weight:700}
+.story figure img{display:block;width:100%;height:auto;image-rendering:auto;filter:contrast(1.015) saturate(1.015)}
+@media(max-width:600px){
+  .font-tool{height:34px;padding-right:12px;font-size:10px}
+  .font-tool button{min-width:26px;min-height:26px;padding:3px 6px;font-size:10.5px}
+  .skyline .city{stroke-width:.72}.skyline .tower{stroke-width:.78}.skyline .empire{stroke-width:.88}.skyline .empire-crown{stroke-width:.76}
+}

@@ -69,21 +69,20 @@
     if(!handled)toast('当前浏览器不支持系统分享，请选择其它方式');
   });
   $('[data-share="wechat"]')?.addEventListener('click',async()=>{
-    // No Official Account is required. On mobile, native share is still the best direct route.
+    // Mobile: use the native share sheet; WeChat can be chosen there when installed.
     if(isMobileShareContext() && navigator.share){
       const handled=await nativeShare();
       if(handled)return;
     }
-    // Desktop fallback: copy the article URL, then try to launch the installed WeChat client.
-    // Browsers/Windows do not provide a standard API to inject the URL directly into a selected WeChat chat.
+    // Desktop: copy the current article link only. Do not invoke weixin://,
+    // which causes the browser's external-app confirmation dialog.
     try{
       if(navigator.clipboard) await navigator.clipboard.writeText(shareUrl);
       else fallbackCopy(shareUrl);
-      toast('链接已复制，正在尝试打开微信');
-      setTimeout(()=>{ window.location.href='weixin://'; },120);
+      toast('链接已复制，请打开微信粘贴发送');
     }catch{
       fallbackCopy(shareUrl);
-      setTimeout(()=>{ window.location.href='weixin://'; },120);
+      toast('链接已复制，请打开微信粘贴发送');
     }
   });
   $('[data-share="copy"]')?.addEventListener('click',copyLink);
