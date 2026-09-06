@@ -272,3 +272,103 @@ html,body{overflow-x:hidden}
  .notification-optin{bottom:76px;width:calc(100% - 24px);padding:13px 78px 13px 14px}
  .notification-optin strong{font-size:14px}.notification-optin span{font-size:12px}
 }
+
+
+/* V3.15 — cover composition matched to approved reference; new supplied skyline; clean oil photo */
+.brand-block{
+  position:relative!important;
+  height:auto!important;
+  aspect-ratio:563 / 404!important;
+  min-height:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  background:#062a5e!important;
+}
+.header-impactone-wordmark{
+  position:absolute!important;
+  left:10.1%!important;
+  top:10.8%!important;
+  margin:0!important;
+  color:#fff!important;
+  font-family:Arial,Helvetica,sans-serif!important;
+  font-size:clamp(12px,2.25vw,23px)!important;
+  line-height:1!important;
+  font-weight:400!important;
+  letter-spacing:.18em!important;
+  z-index:3!important;
+}
+.brand-title{
+  position:absolute!important;
+  left:10.0%!important;
+  top:21.0%!important;
+  margin:0!important;
+  color:#fff!important;
+  font-family:Georgia,"Songti SC","STSong","Noto Serif SC",serif!important;
+  font-size:clamp(31px,6.6vw,67px)!important;
+  line-height:1.02!important;
+  font-weight:700!important;
+  font-style:italic!important;
+  letter-spacing:-.035em!important;
+  white-space:nowrap!important;
+  z-index:3!important;
+}
+.brand-subtitle{
+  position:absolute!important;
+  left:10.2%!important;
+  top:42.0%!important;
+  margin:0!important;
+  color:#c8a84b!important;
+  font-size:clamp(11px,2.05vw,20px)!important;
+  line-height:1.1!important;
+  font-weight:700!important;
+  letter-spacing:.01em!important;
+  z-index:3!important;
+}
+.issue-date{
+  position:absolute!important;
+  left:10.0%!important;
+  bottom:32.8%!important;
+  color:#fff!important;
+  font-size:clamp(10px,1.7vw,17px)!important;
+  line-height:1!important;
+  letter-spacing:.02em!important;
+  white-space:nowrap!important;
+  z-index:3!important;
+}
+.skyline.skyline-original{
+  position:absolute!important;
+  inset:auto 0 0 0!important;
+  width:100%!important;
+  height:auto!important;
+  overflow:visible!important;
+  pointer-events:none!important;
+  z-index:1!important;
+}
+.skyline.skyline-original>img{
+  position:absolute!important;
+  left:0!important;
+  right:0!important;
+  bottom:-0.8%!important;
+  width:100%!important;
+  height:auto!important;
+  max-width:none!important;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+  transform:none!important;
+  filter:none!important;
+  display:block!important;
+  pointer-events:none!important;
+}
+.story figure{width:100%!important;margin:21px 0 18px!important;background:transparent!important;padding:0!important}
+.story figure img[src*="sample-oil-clean-v315"]{display:block!important;width:100%!important;height:auto!important;margin:0!important;padding:0!important;border:0!important;object-fit:cover!important;background:transparent!important}
+.story figure:has(img[src*="sample-oil-clean-v315"]) figcaption{display:none!important}
+@media(max-width:600px){
+  .brand-block{aspect-ratio:563 / 404!important;height:auto!important;padding:0!important}
+  .header-impactone-wordmark{left:9.6%!important;top:11.0%!important;font-size:clamp(11px,3.4vw,14px)!important}
+  .brand-title{left:9.5%!important;top:21.2%!important;font-size:clamp(29px,8.6vw,35px)!important}
+  .brand-subtitle{left:9.7%!important;top:42.0%!important;font-size:clamp(10px,3.0vw,12px)!important}
+  .issue-date{left:9.6%!important;bottom:32.3%!important;font-size:clamp(9px,2.7vw,11px)!important}
+  .skyline.skyline-original{inset:auto 0 0 0!important;width:100%!important;height:auto!important}
+  .skyline.skyline-original>img{width:100%!important;bottom:0!important}
+  .story figure{width:100%!important;margin:18px 0 16px!important}
+}

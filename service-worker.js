@@ -2,6 +2,8 @@ const CACHE='impactone-daily-v314';
 const STATIC=[
   '/daily-publication.css','/daily-interactions.js','/impactone-config.js','/manifest.webmanifest',
   '/images/brand/impactone-icon-192.png','/images/brand/impactone-icon-512.png',
+  '/images/daily/impactone-skyline-v315.png',
+  '/images/daily/sample-oil-clean-v315.png',
   '/images/brand/impactone-logo-original.png','/images/daily/impactone-nyc-skyline-original.png'
 ];
 
