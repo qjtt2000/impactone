@@ -887,3 +887,31 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
     margin-right:auto!important;
   }
 }
+
+/* V3.17.7 — final footer slogan alignment to approved sample.
+   Preserve the approved brand-group spacing/centering. On desktop only,
+   align the gold slogan's left edge with the visible left edge of
+   “出品｜IMPACTONE”, and size the slogan rail so its right edge lands
+   approximately below the “家” character in “五大道企业家基金会”.
+   Mobile and all functional behavior remain unchanged. */
+@media (min-width:601px){
+  .publication-footer .footer-brands{
+    max-width:610px!important;
+    grid-template-columns:1fr 1fr!important;
+    justify-content:center!important;
+    column-gap:54px!important;
+  }
+  /* The left caption begins inset from the centered brand-row edge because
+     each brand is centered in its own grid cell. Match that visible caption rail. */
+  .publication-footer .share-line{
+    box-sizing:border-box!important;
+    width:565px!important;
+    max-width:calc(100% - 84px)!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    padding:0!important;
+    transform:translateX(21px)!important;
+    text-align:left!important;
+    white-space:nowrap!important;
+  }
+}
