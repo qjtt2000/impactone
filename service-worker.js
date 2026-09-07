@@ -1,10 +1,11 @@
-const CACHE='impactone-daily-v316-samplematch';
+const CACHE='impactone-daily-v317-sample-colors-20260907';
 const STATIC=[
   '/daily-publication.css','/daily-interactions.js','/impactone-config.js','/manifest.webmanifest',
   '/images/brand/impactone-icon-192.png','/images/brand/impactone-icon-512.png',
-  '/images/daily/impactone-skyline-v315.png',
+  '/images/daily/impactone-skyline-20260906.png',
+  '/images/daily/ui/focus-icon.png','/images/daily/ui/scan-icon.png','/images/daily/ui/view-mark.png',
   '/images/daily/sample-oil-clean-v315.png',
-  '/images/brand/impactone-logo-original.png','/images/daily/impactone-nyc-skyline-original.png'
+  '/images/brand/impactone-logo-original.png','/images/brand/impactone-logo-raw-20260906.png','/images/daily/impactone-nyc-skyline-original.png'
 ];
 
 self.addEventListener('install',event=>{
@@ -75,3 +76,9 @@ self.addEventListener('notificationclick',event=>{
     return clients.openWindow(target);
   })());
 });
+
+// V3.17.14 mobile footer + oil caption cache bump
+
+// V3.17.15 mobile upper rail + FAEF vertical + oil caption cache bump
+
+// V3.17.16 sample colors: navy #001B40, gold #C3A348

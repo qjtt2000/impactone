@@ -5,8 +5,8 @@
   "start_url": "/daily/2026-08-19.html?source=pwa",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#011C43",
-  "theme_color": "#011C43",
+  "background_color": "#001B40",
+  "theme_color": "#001B40",
   "lang": "zh-CN",
   "icons": [
     {"src":"/images/brand/impactone-icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},

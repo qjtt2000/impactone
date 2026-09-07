@@ -1,7 +1,7 @@
 /* IMPACTONE · 影响力·每日必读 — V3.1 SAMPLE-LED + FUNCTIONAL INTERACTIONS
    Visual priority: approved sample. PDF spec is secondary.
 */
-:root{--navy:#011C43;--gold:#C8A84B;--paper:#FFFFFF;--ink:#17191d;--muted:#77736c;--line:#ded8ce;--reader-size:17px;--publication-width:760px;--safe-bottom:env(safe-area-inset-bottom,0px)}
+:root{--navy:#001B40;--gold:#C3A348;--paper:#FFFFFF;--ink:#17191d;--muted:#77736c;--line:#ded8ce;--reader-size:17px;--publication-width:760px;--safe-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box}html{background:#e8e6e0;scroll-behavior:smooth}body{margin:0;background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}body.io-panel-open{overflow:hidden}button,input,textarea{font:inherit}.page{width:min(100%,var(--publication-width));margin:0 auto;min-height:100vh;background:var(--paper);box-shadow:0 0 26px rgba(0,0,0,.08);padding-bottom:calc(68px + var(--safe-bottom));overflow:hidden}.content{padding:0}
 /* cover */
 .brand-block{position:relative;height:330px;padding:42px 42px 0;background:var(--navy);overflow:hidden;color:#fff}.impactone-wordmark{margin:0 0 18px;font-size:13px;line-height:1;letter-spacing:.10em;font-weight:400}.brand-title{margin:0;color:#fff;font-family:Georgia,"Songti SC","STSong",serif;font-size:39px;line-height:1.05;font-weight:700;font-style:italic;letter-spacing:.01em}.brand-subtitle{margin:20px 0 0;color:var(--gold);font-size:12px;font-weight:700;letter-spacing:.02em}.issue-date{position:absolute;left:42px;bottom:111px;color:#fff;font-size:10.5px;letter-spacing:.08em}.skyline{position:absolute;left:0;right:0;bottom:0;height:142px}.skyline svg{width:100%;height:100%;display:block}.skyline path,.skyline line,.skyline polyline{stroke:var(--gold);stroke-width:1.05;fill:none;vector-effect:non-scaling-stroke}.skyline .ground{stroke-width:1.15}.skyline .moon{fill:var(--gold);stroke:none}
@@ -18,7 +18,7 @@
 /* footer */
 .publication-footer{background:var(--navy);color:#fff;padding:38px 42px 102px}.footer-brands{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}.footer-brand{text-align:left}.foundation{text-align:right}.footer-mark{font-family:Georgia,serif;font-size:19px;color:#fff;line-height:1}.footer-brands b{display:block;margin-top:6px;font-size:9px;font-weight:500}.footer-brands span{display:block;margin-top:4px;color:#dce2eb;font-size:8px}.share-line{margin:28px 0 23px;color:var(--gold);font-family:Georgia,"Songti SC","STSong",serif;font-size:18px;font-weight:700}.footer-info{display:flex;flex-direction:column;gap:4px;font-size:9px;line-height:1.75;color:#eef1f5}.footer-info b{font-size:10px}.footer-info a{color:#fff}.social-profiles{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}.social-profiles a{color:#dfe5ee;text-decoration:none;font-size:9px}.social-profiles a:hover{color:var(--gold)}.legal{margin-top:18px;color:#d8dee8;font-size:8px;line-height:1.6}.legal b{color:#fff;font-size:9px}.legal p{margin:5px 0 13px}
 /* fixed actions: always visible while reading, like a public-account action bar */
-.fixed-actions{position:fixed;z-index:1000;left:50%;bottom:0;transform:translateX(-50%);width:min(100%,var(--publication-width));height:calc(68px + var(--safe-bottom));padding-bottom:var(--safe-bottom);display:grid;grid-template-columns:repeat(4,1fr);background:var(--navy);border-top:1px solid rgba(200,168,75,.45);box-shadow:0 -5px 18px rgba(0,0,0,.16)}.fixed-actions button{position:relative;border:0;background:none;color:#fff;display:flex;align-items:center;justify-content:center;gap:6px;font-size:12px;cursor:pointer}.fixed-actions button.active{color:var(--gold)}.fixed-actions .ico{display:inline-flex;width:19px;height:19px;align-items:center;justify-content:center;font-size:19px}.fixed-actions .ico svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}.fixed-actions small{position:absolute;top:8px;right:12px;min-width:14px;height:14px;padding:0 3px;border-radius:8px;background:var(--gold);color:var(--navy);font-size:8px;line-height:14px}.fixed-actions small:empty{display:none}
+.fixed-actions{position:fixed;z-index:1000;left:50%;bottom:0;transform:translateX(-50%);width:min(100%,var(--publication-width));height:calc(68px + var(--safe-bottom));padding-bottom:var(--safe-bottom);display:grid;grid-template-columns:repeat(4,1fr);background:var(--navy);border-top:1px solid rgba(195,163,72,.45);box-shadow:0 -5px 18px rgba(0,0,0,.16)}.fixed-actions button{position:relative;border:0;background:none;color:#fff;display:flex;align-items:center;justify-content:center;gap:6px;font-size:12px;cursor:pointer}.fixed-actions button.active{color:var(--gold)}.fixed-actions .ico{display:inline-flex;width:19px;height:19px;align-items:center;justify-content:center;font-size:19px}.fixed-actions .ico svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}.fixed-actions small{position:absolute;top:8px;right:12px;min-width:14px;height:14px;padding:0 3px;border-radius:8px;background:var(--gold);color:var(--navy);font-size:8px;line-height:14px}.fixed-actions small:empty{display:none}
 /* overlays */
 .modal-backdrop{position:fixed;z-index:1200;inset:0;display:none;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.56);padding:16px}.modal-backdrop.open{display:flex}.subscribe-modal,.share-modal{position:relative;width:min(460px,100%);padding:26px;background:var(--paper);border-top:3px solid var(--gold);box-shadow:0 -12px 40px rgba(0,0,0,.18)}.subscribe-modal h3,.share-modal h3{margin:0 32px 8px 0;color:var(--navy);font-family:Georgia,"Songti SC",serif;font-size:21px}.subscribe-modal p,.share-modal p{margin:0;color:#666;font-size:12px;line-height:1.6}.subscribe-modal form{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:17px}.subscribe-modal input,.comments-panel input,.comments-panel textarea{width:100%;border:1px solid #cfc8bb;border-radius:0;background:#fff;padding:11px}.subscribe-modal form button,.comments-panel form button{border:0;background:var(--navy);color:#fff;padding:11px 15px;font-weight:700;cursor:pointer}.modal-close,.panel-close{position:absolute;right:11px;top:8px;border:0;background:none;font-size:25px;color:#666;cursor:pointer}.share-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.share-grid button,.share-grid a{border:1px solid #d8d1c5;background:transparent;color:var(--navy);padding:12px 5px;text-align:center;text-decoration:none;font-size:11px;cursor:pointer}.share-grid button:hover,.share-grid a:hover{border-color:var(--gold);color:var(--gold)}.wechat-hint{display:none;margin-top:13px;padding-top:12px;border-top:1px solid var(--line);color:#555;font-size:11px;line-height:1.6}.wechat-hint.show{display:block}.comments-panel{position:fixed;z-index:1190;left:50%;bottom:calc(68px + var(--safe-bottom));transform:translate(-50%,105%);width:min(100%,var(--publication-width));max-height:72vh;overflow:auto;background:var(--paper);padding:24px 26px;box-shadow:0 -10px 30px rgba(0,0,0,.18);border-top:3px solid var(--gold);transition:.2s}.comments-panel.open{transform:translate(-50%,0)}.panel-head{position:relative;margin:0 0 4px;color:var(--navy);font-family:Georgia,"Songti SC",serif;font-size:22px}.comment-prompt{margin:0 0 14px;color:#666;font-size:12px}.comments-panel form{display:grid;grid-template-columns:115px 1fr auto;gap:8px}.comments-panel textarea{min-height:46px;resize:vertical}.comment-item{padding:14px 0;border-bottom:1px solid var(--line);font-size:13px;line-height:1.65}.comment-meta{font-size:10px;color:#777}.comment-actions button{border:0;background:none;color:var(--navy);padding:5px 12px 5px 0;font-size:10px;cursor:pointer}.comment-pending{color:var(--gold);margin-left:6px}.io-toast{position:fixed;z-index:1400;left:50%;bottom:86px;transform:translate(-50%,10px);padding:9px 13px;background:#222;color:#fff;font-size:11px;opacity:0;pointer-events:none;transition:.18s}.io-toast.show{opacity:1;transform:translate(-50%,0)}
 @media(max-width:600px){body{background:var(--paper)}.page{box-shadow:none}.brand-block{height:300px;padding:32px 20px 0}.impactone-wordmark{font-size:10.5px;margin-bottom:13px}.brand-title{font-size:30px}.brand-subtitle{font-size:9.5px;margin-top:15px}.issue-date{left:20px;bottom:101px;font-size:8.5px}.skyline{height:133px}.font-tool{height:34px;padding:0 14px}.section-title{padding:18px 17px 16px;grid-template-columns:27px 1fr}.section-title h2{font-size:21px}.section-en{font-size:7.2px}.section-sub{font-size:8.2px}.story,.scan-item{margin:0 24px;padding:27px 0 25px}.story-number,.scan-number{font-size:16px;margin-bottom:10px}.story h3{font-size:20px;margin-bottom:12px}.scan-item h3{font-size:19px}.story p,.scan-item p,.daily-view p{font-size:var(--reader-size);line-height:1.72}.story figure{width:100%;margin:18px 0 16px}.view-section-title{padding:21px 19px 18px}.view-cn{font-size:21px}.view-en{font-size:7.8px}.daily-view{padding:26px 24px 30px}.view-title{font-size:21px}.product-value{padding:23px 18px 25px}.publication-footer{padding:29px 20px 98px}.share-line{font-size:16px}.comments-panel form{grid-template-columns:1fr auto}.comments-panel form input{grid-column:1/-1}.subscribe-modal form{grid-template-columns:1fr}.share-grid{grid-template-columns:repeat(2,1fr)}}
@@ -89,7 +89,7 @@ html,body{overflow-x:hidden}
   opacity:1!important;
   pointer-events:auto!important;
   background:var(--navy)!important;
-  border-top:1px solid rgba(200,168,75,.62)!important;
+  border-top:1px solid rgba(195,163,72,.62)!important;
   box-shadow:0 -3px 12px rgba(0,0,0,.18)!important;
 }
 .fixed-actions button{min-width:0;height:var(--action-h);padding:0 4px!important;color:#fff!important;font-family:Georgia,"Songti SC","STSong",serif;font-size:15px!important;font-weight:700!important;gap:6px!important;-webkit-tap-highlight-color:transparent}
@@ -128,8 +128,8 @@ html,body{overflow-x:hidden}
 @media(max-width:600px){.skyline .city{stroke-width:.82}.skyline .empire{stroke-width:.92}.skyline .ground{stroke-width:.82}}
 
 /* V3.5 — approved-sample header skyline + scan body position */
-.skyline .perspective{stroke:rgba(200,168,75,.48);stroke-width:.55;fill:none;vector-effect:non-scaling-stroke}
-.skyline .perspective-2{stroke:rgba(200,168,75,.34)}
+.skyline .perspective{stroke:rgba(195,163,72,.48);stroke-width:.55;fill:none;vector-effect:non-scaling-stroke}
+.skyline .perspective-2{stroke:rgba(195,163,72,.34)}
 .scan-details{margin:4px 0 12px}
 .scan-details summary{padding:4px 0 2px}
 .scan-details .scan-body{margin-top:10px}
@@ -143,11 +143,11 @@ html,body{overflow-x:hidden}
 .skyline .empire{stroke-width:.94}
 .skyline .empire-crown{stroke-width:.82}
 .skyline .ground{stroke:var(--gold);stroke-width:.84;fill:none;vector-effect:non-scaling-stroke}
-.skyline .perspective{stroke:rgba(200,168,75,.44);stroke-width:.5;fill:none;vector-effect:non-scaling-stroke}
-.skyline .perspective-2{stroke:rgba(200,168,75,.31)}
+.skyline .perspective{stroke:rgba(195,163,72,.44);stroke-width:.5;fill:none;vector-effect:non-scaling-stroke}
+.skyline .perspective-2{stroke:rgba(195,163,72,.31)}
 .font-tool{gap:1px;padding-right:24px;color:#8b877f;font-size:11px}
 .font-tool button{min-width:28px;min-height:28px;padding:4px 7px;border-radius:0;color:#8b877f;font-size:11px;line-height:1;cursor:pointer}
-.font-tool button:hover,.font-tool button:focus-visible{color:var(--navy);outline:1px solid rgba(200,168,75,.45);outline-offset:-2px}
+.font-tool button:hover,.font-tool button:focus-visible{color:var(--navy);outline:1px solid rgba(195,163,72,.45);outline-offset:-2px}
 .font-tool button.active{color:var(--gold);font-weight:700}
 .story figure img{display:block;width:100%;height:auto;image-rendering:auto;filter:contrast(1.015) saturate(1.015)}
 @media(max-width:600px){
@@ -161,7 +161,7 @@ html,body{overflow-x:hidden}
 .skyline img{position:absolute;left:0;right:0;bottom:0;width:100%;height:100%;object-fit:fill;display:block;pointer-events:none}
 /* We intentionally use the approved sample artwork rather than re-drawing the buildings in SVG. */
 .font-tool{position:relative;z-index:3}
-.wechat-share-hint{display:none;margin-top:12px;padding:10px 12px;border:1px solid rgba(200,168,75,.35);background:#fffaf0;color:#665d50;font-size:11px;line-height:1.55}
+.wechat-share-hint{display:none;margin-top:12px;padding:10px 12px;border:1px solid rgba(195,163,72,.35);background:#fffaf0;color:#665d50;font-size:11px;line-height:1.55}
 .wechat-share-hint.show{display:block}
 @media(max-width:600px){
   .skyline{height:142px}
@@ -262,10 +262,10 @@ html,body{overflow-x:hidden}
 }
 .publication-footer .impactone-logo{width:min(260px,72%);height:auto;max-height:none;object-fit:contain;background:transparent!important}
 .story figure img[src*="sample-oil-clear"]{width:100%;height:auto;display:block;object-fit:contain;image-rendering:auto}
-.notification-optin{position:fixed;left:50%;bottom:78px;transform:translateX(-50%);z-index:1200;width:min(92vw,620px);background:#f7f4ee;border-top:3px solid #c8a84b;box-shadow:0 8px 28px rgba(0,0,0,.24);padding:15px 82px 15px 18px;color:#011c43}
+.notification-optin{position:fixed;left:50%;bottom:78px;transform:translateX(-50%);z-index:1200;width:min(92vw,620px);background:#f7f4ee;border-top:3px solid #c3a348;box-shadow:0 8px 28px rgba(0,0,0,.24);padding:15px 82px 15px 18px;color:#001b40}
 .notification-optin:not([hidden]){display:block}
 .notification-optin strong,.notification-optin span{display:block}.notification-optin strong{font-size:16px;margin-bottom:3px}.notification-optin span{font-size:13px;color:#555}
-.notification-optin #enableNotificationButton{position:absolute;right:38px;top:50%;transform:translateY(-50%);border:0;background:#011c43;color:#fff;padding:9px 13px;font-weight:700;cursor:pointer}
+.notification-optin #enableNotificationButton{position:absolute;right:38px;top:50%;transform:translateY(-50%);border:0;background:#001b40;color:#fff;padding:9px 13px;font-weight:700;cursor:pointer}
 .notification-optin-close{position:absolute;right:8px;top:7px;border:0;background:transparent;color:#777;font-size:20px;cursor:pointer}
 @media(max-width:640px){
  .brand-block .header-impactone-wordmark{left:18px;top:25px;font-size:12px;letter-spacing:.2em}
@@ -288,7 +288,7 @@ html,body{overflow-x:hidden}
   min-height:0!important;
   padding:0!important;
   overflow:hidden!important;
-  background:#011c43!important;
+  background:#001b40!important;
 }
 .header-impactone-wordmark{
   position:absolute!important;
@@ -324,7 +324,7 @@ html,body{overflow-x:hidden}
   left:10.0%!important;
   top:45.9%!important;
   margin:0!important;
-  color:#c8a84b!important;
+  color:#c3a348!important;
   font-size:clamp(5.8px,3.0vw,17px)!important;
   line-height:1.1!important;
   font-weight:700!important;
@@ -387,9 +387,9 @@ html,body{overflow-x:hidden}
 /* V3.16 — approved sample pixel-match pass (sample image is final authority)
    Scope: typography/spacing, navy backgrounds, skyline artwork. Interactions unchanged. */
 :root{
-  --navy:#011C43;
+  --navy:#001B40;
   --paper:#FFFFFF;
-  --gold:#D9AD3C;
+  --gold:#C3A348;
   --ink:#17191d;
   --reader-size:15px;
 }
@@ -398,7 +398,7 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
 .page{background:#fff}
 
 /* Exact cover structure and dark navy from the approved image. */
-.brand-block{background:#011C43!important}
+.brand-block{background:#001B40!important}
 .header-impactone-wordmark{
   font-family:Arial,Helvetica,sans-serif!important;
   font-weight:400!important;
@@ -409,14 +409,14 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
   font-weight:700!important;
   font-style:italic!important;
 }
-.brand-subtitle{color:#D9AD3C!important;font-family:Arial,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif!important}
+.brand-subtitle{color:#C3A348!important;font-family:Arial,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif!important}
 .issue-date{font-family:Arial,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif!important}
 .skyline.skyline-original>img{width:100%!important;height:auto!important;bottom:0!important;transform:none!important;filter:none!important}
 
 /* All navy publication blocks use the same approved deep navy. */
-.section-title,.view-section-title,.publication-footer,.fixed-actions{background:#011C43!important}
-.story h3,.scan-item h3,.view-title,.label{color:#011C43!important}
-.story-number,.scan-number,.section-en,.view-en,.share-line,.product-value strong{color:#D9AD3C!important}
+.section-title,.view-section-title,.publication-footer,.fixed-actions{background:#001B40!important}
+.story h3,.scan-item h3,.view-title,.label{color:#001B40!important}
+.story-number,.scan-number,.section-en,.view-en,.share-line,.product-value strong{color:#C3A348!important}
 
 /* Typography families from top to bottom. */
 .section-title h2,.view-cn,.view-title,.story h3,.scan-item h3,.share-line,.product-value strong{
@@ -492,7 +492,7 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
   }
   .story p,.scan-item p,.daily-view p{
     margin:0 0 17px!important;
-    font-size:15px!important;
+    font-size:var(--reader-size)!important;
     line-height:1.55!important;
     letter-spacing:0!important;
   }
@@ -520,7 +520,7 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
     line-height:1.25!important;
   }
   .daily-view{padding:30px 30px 34px!important}
-  .daily-view p{font-size:15px!important;line-height:1.6!important;margin-bottom:18px!important}
+  .daily-view p{font-size:var(--reader-size)!important;line-height:1.6!important;margin-bottom:18px!important}
 
   .product-value{padding:28px 20px 30px!important;border-top:0!important}
   .product-value strong{font-size:13px!important;line-height:1.65!important}
@@ -538,5 +538,404 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
   .legal{font-size:7.5px!important;line-height:1.55!important}
   .legal p{margin:5px 0 12px!important}
 
-  .fixed-actions{background:#011C43!important}
+  .fixed-actions{background:#001B40!important}
+}
+
+/* V3.16 layout/icon update — 2026-09-06
+   Scope limited to requested visual assets, scan disclosure, issue navigation and reader sizing.
+   Existing subscription/share/favorite/comment/PWA/backend behavior is intentionally untouched. */
+:root{--source-size:10px}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.section-icon-img{display:block;width:27px;height:27px;object-fit:contain;align-self:center;justify-self:center}
+.section-icon-img.focus-icon{width:29px;height:29px}
+.section-icon-img.scan-icon{width:28px;height:28px}
+.view-mark{display:block;width:180px;max-width:55%;height:auto;margin-top:10px;object-fit:contain;object-position:left center}
+.story figcaption{display:block!important;margin-top:8px!important;text-align:left!important;color:#77736d!important;font-size:var(--source-size)!important;line-height:1.5!important}
+.story figure:has(img[src*="sample-oil-clean-v315"]) figcaption{display:block!important}
+.scan-summary{margin-bottom:0!important}
+.scan-toggle,.scan-collapse{display:inline;border:0;background:none;color:var(--navy);padding:0;margin:0;font-size:.78em;font-weight:700;cursor:pointer;white-space:nowrap}
+.scan-toggle:hover,.scan-toggle:focus-visible,.scan-collapse:hover,.scan-collapse:focus-visible{color:var(--gold);outline:none}
+.scan-body{display:block;margin-top:10px!important}
+.scan-body[hidden]{display:none!important}
+.scan-body p{margin-bottom:5px!important}
+.scan-collapse{margin-top:0}
+.issue-navigation{padding:18px 52px 4px;background:#fff;border-top:1px solid var(--line)}
+.issue-navigation[hidden]{display:none!important}
+.previous-issue{display:inline-flex;align-items:baseline;gap:8px;color:var(--navy);text-decoration:none;font-family:Arial,"PingFang SC","Microsoft YaHei",sans-serif;font-size:12px;font-weight:700;letter-spacing:.02em}
+.previous-issue span{color:var(--gold);font-size:8px;letter-spacing:.12em;font-weight:700}
+.previous-issue:hover{color:var(--gold)}
+.publication-footer .impactone-logo{width:min(250px,78%)!important;height:auto!important;object-fit:contain!important;object-position:left center!important}
+
+@media(max-width:600px){
+  /* Force publication-section Chinese headings to a serif face on mobile. */
+  .section-title h2,.view-cn{
+    font-family:"Songti SC","STSong","Noto Serif SC","Noto Serif CJK SC","Source Han Serif SC",serif!important;
+    font-weight:700!important;
+  }
+  .section-title{grid-template-columns:31px 1fr!important}
+  .section-icon-img.focus-icon,.section-icon-img.scan-icon{width:27px;height:27px}
+  .view-mark{width:154px;max-width:64%;margin-top:9px}
+  .story figcaption{font-size:var(--source-size)!important;line-height:1.45!important}
+  .issue-navigation{padding:16px 24px 2px}
+}
+
+/* V3.17 footer brand lock — match approved reference artwork.
+   Visual-only override: no interaction, data, auth, subscription, share,
+   favorite, comments, PWA or backend behavior is changed. */
+.publication-footer .footer-brands{
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  align-items:start!important;
+  gap:34px!important;
+  margin:0!important;
+}
+.publication-footer .footer-brand,
+.publication-footer .foundation{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  text-align:center!important;
+  min-width:0!important;
+}
+.publication-footer .impactone-logo{
+  width:116px!important;
+  height:77px!important;
+  max-width:none!important;
+  max-height:none!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+  margin:0!important;
+}
+.publication-footer .faef-logo{
+  width:76px!important;
+  height:76px!important;
+  max-width:none!important;
+  max-height:none!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+  margin:0!important;
+}
+.publication-footer .footer-brands b{
+  display:block!important;
+  margin-top:4px!important;
+  color:#fff!important;
+  font-family:"Songti SC","STSong","Noto Serif SC","Source Han Serif SC",serif!important;
+  font-size:20px!important;
+  line-height:1.25!important;
+  font-weight:700!important;
+  letter-spacing:0!important;
+  white-space:nowrap!important;
+}
+.publication-footer .share-line{
+  margin:38px 0 25px!important;
+  color:var(--gold)!important;
+  font-family:"Songti SC","STSong","Noto Serif SC","Source Han Serif SC",serif!important;
+  font-size:29px!important;
+  line-height:1.28!important;
+  font-weight:700!important;
+  letter-spacing:0!important;
+}
+
+@media (min-width:601px){
+  .publication-footer{
+    padding-top:32px!important;
+    padding-left:54px!important;
+    padding-right:54px!important;
+  }
+}
+
+@media (max-width:600px){
+  .publication-footer .footer-brands{
+    gap:14px!important;
+  }
+  .publication-footer .impactone-logo{
+    width:88px!important;
+    height:58px!important;
+  }
+  .publication-footer .faef-logo{
+    width:58px!important;
+    height:58px!important;
+  }
+  .publication-footer .footer-brands b{
+    margin-top:3px!important;
+    font-size:13px!important;
+    line-height:1.3!important;
+  }
+  .publication-footer .share-line{
+    margin:27px 0 22px!important;
+    font-size:20px!important;
+    line-height:1.35!important;
+  }
+}
+
+/* V3.17.1 — footer precision pass from approved sample.
+   Scope: footer visual layout only. Existing interaction/data/auth/PWA logic is untouched.
+   Two alignment rails are intentional:
+   1) brand row + gold share line use the wider brand rail;
+   2) contact/legal copy uses a slightly inset reading rail. */
+.publication-footer{
+  min-height:0!important;
+  padding:30px 54px 88px!important;
+}
+.publication-footer .footer-brands,
+.publication-footer .share-line{
+  width:100%!important;
+  max-width:650px!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+.publication-footer .footer-brands{
+  gap:30px!important;
+}
+.publication-footer .impactone-logo{
+  width:96px!important;
+  height:64px!important;
+  margin:0 auto!important;
+}
+.publication-footer .faef-logo{
+  width:62px!important;
+  height:62px!important;
+  margin:0 auto!important;
+}
+.publication-footer .footer-brands b{
+  margin-top:3px!important;
+  font-family:"Songti SC","STSong","Noto Serif SC","Source Han Serif SC",serif!important;
+  font-size:16px!important;
+  line-height:1.28!important;
+  font-weight:700!important;
+}
+.publication-footer .share-line{
+  margin-top:28px!important;
+  margin-bottom:23px!important;
+  font-size:22px!important;
+  line-height:1.34!important;
+  font-weight:700!important;
+  text-align:left!important;
+}
+.publication-footer .footer-info,
+.publication-footer .legal{
+  width:calc(100% - 28px)!important;
+  max-width:610px!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+.publication-footer .footer-info{
+  font-size:9.5px!important;
+  line-height:1.72!important;
+}
+.publication-footer .footer-info b,
+.publication-footer .legal b{
+  font-size:10px!important;
+}
+.publication-footer .legal{
+  margin-top:17px!important;
+  font-size:8.5px!important;
+  line-height:1.62!important;
+}
+
+@media(max-width:600px){
+  /* Keep the already-good mobile scale, but preserve the sample's two alignment rails. */
+  .publication-footer{
+    min-height:0!important;
+    padding:28px 20px 92px!important;
+  }
+  .publication-footer .footer-brands,
+  .publication-footer .share-line{
+    width:100%!important;
+    max-width:none!important;
+  }
+  .publication-footer .footer-brands{
+    gap:14px!important;
+  }
+  .publication-footer .impactone-logo{
+    width:88px!important;
+    height:58px!important;
+  }
+  .publication-footer .faef-logo{
+    width:58px!important;
+    height:58px!important;
+  }
+  .publication-footer .footer-brands b{
+    font-size:13px!important;
+    line-height:1.3!important;
+  }
+  .publication-footer .share-line{
+    margin-top:27px!important;
+    margin-bottom:21px!important;
+    font-size:20px!important;
+    line-height:1.35!important;
+  }
+  .publication-footer .footer-info,
+  .publication-footer .legal{
+    width:calc(100% - 16px)!important;
+    max-width:none!important;
+  }
+}
+
+/* V3.17.11 — footer brand/slogan exact anchor fix
+   Desktop only. The brand row and slogan share one 610px rail.
+   Crucially, the brand columns are max-content rather than 1fr, so the rail's
+   left edge is the visible left edge of “出品｜IMPACTONE”, not the empty
+   left side of a 1fr grid cell. */
+@media (min-width:601px){
+  .publication-footer .footer-brands{
+    box-sizing:border-box!important;
+    width:610px!important;
+    max-width:calc(100% - 24px)!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    display:grid!important;
+    grid-template-columns:max-content max-content!important;
+    justify-content:space-between!important;
+    column-gap:54px!important;
+    align-items:start!important;
+  }
+
+  .publication-footer .footer-brand,
+  .publication-footer .foundation{
+    width:max-content!important;
+    min-width:0!important;
+    align-items:center!important;
+    text-align:center!important;
+  }
+
+  .publication-footer .share-line{
+    box-sizing:border-box!important;
+    width:610px!important;
+    max-width:calc(100% - 24px)!important;
+    margin:28px auto 23px!important;
+    padding:0!important;
+    transform:none!important;
+    text-align:left!important;
+    white-space:nowrap!important;
+    font-size:30px!important;
+    line-height:1.34!important;
+    letter-spacing:.015em!important;
+  }
+}
+
+/* V3.17.12 — footer information rail separation
+   Approved sample uses two horizontal rails on desktop:
+   - brand row + gold slogan: 610px centered rail;
+   - contact + legal copy: 650px centered rail, so its left edge sits 20px left of the brand/slogan rail.
+   Mobile layout is intentionally unchanged. */
+@media (min-width:601px){
+  .publication-footer .footer-info,
+  .publication-footer .legal{
+    box-sizing:border-box!important;
+    width:650px!important;
+    max-width:calc(100% - 24px)!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+}
+
+/* V3.17.13 — footer brand spacing matched to approved sample.
+   Desktop only. Keep the left anchor shared by “出品” and the gold slogan,
+   but shorten the brand/slogan rail so the two brand groups sit closer together.
+   Contact/legal rail remains independent. */
+@media (min-width:601px){
+  .publication-footer .footer-brands,
+  .publication-footer .share-line{
+    width:550px!important;
+    max-width:calc(100% - 24px)!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+
+  .publication-footer .footer-brands{
+    grid-template-columns:max-content max-content!important;
+    justify-content:space-between!important;
+    column-gap:40px!important;
+  }
+}
+
+/* V3.17.14 — mobile footer anchor + oil caption alignment
+   Mobile only: make the visible left edge of “出品｜IMPACTONE” and the gold
+   slogan share the same rail. Desktop V3.17.13 spacing remains untouched. */
+@media (max-width:600px){
+  .publication-footer .footer-brands{
+    box-sizing:border-box!important;
+    width:100%!important;
+    max-width:none!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    display:grid!important;
+    grid-template-columns:max-content max-content!important;
+    justify-content:space-between!important;
+    column-gap:12px!important;
+    align-items:start!important;
+  }
+
+  .publication-footer .footer-brand,
+  .publication-footer .foundation{
+    width:max-content!important;
+    min-width:0!important;
+    align-items:center!important;
+    text-align:center!important;
+  }
+
+  .publication-footer .share-line{
+    box-sizing:border-box!important;
+    width:100%!important;
+    max-width:none!important;
+    margin:27px 0 21px!important;
+    padding-left:0!important;
+    padding-right:0!important;
+    transform:none!important;
+    text-align:left!important;
+    white-space:nowrap!important;
+  }
+}
+
+/* Center only the Daily Focus oil-image credit/caption. */
+.story figure:has(img[src*="sample-oil-clean-v315"]) figcaption{
+  display:block!important;
+  width:100%!important;
+  text-align:center!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+
+/* V3.17.15 — mobile upper-rail inset + FAEF logo vertical refinement.
+   Mobile only: brand row + gold slogan sit slightly to the right of the
+   contact/legal information rail, matching the approved sample hierarchy.
+   Desktop brand/slogan geometry is unchanged.
+   FAEF crest is lifted slightly on all viewports so its visual distance to
+   the sponsor text matches the IMPACTONE lockup more closely. */
+.publication-footer .faef-logo{
+  transform:translateY(-5px)!important;
+}
+
+@media (max-width:600px){
+  .publication-footer .footer-brands,
+  .publication-footer .share-line{
+    box-sizing:border-box!important;
+    width:calc(100% - 14px)!important;
+    max-width:none!important;
+    margin-left:14px!important;
+    margin-right:0!important;
+    transform:none!important;
+  }
+
+  .publication-footer .footer-brands{
+    grid-template-columns:max-content max-content!important;
+    justify-content:space-between!important;
+  }
+
+  .publication-footer .share-line{
+    padding-left:0!important;
+    padding-right:0!important;
+    text-align:left!important;
+  }
+}
+
+/* Daily Focus oil-image credit stays centered on all viewport sizes. */
+.story figure:has(img[src*="sample-oil-clean-v315"]) figcaption{
+  display:block!important;
+  width:100%!important;
+  text-align:center!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
 }
