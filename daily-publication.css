@@ -837,3 +837,23 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
     margin-right:auto!important;
   }
 }
+
+/* V3.17.5 — footer horizontal rail correction.
+   Keep the approved left alignment between “出品｜IMPACTONE” and the gold slogan,
+   but recenter that shared rail so the whole block is not pulled to the left.
+   The two brand groups remain slightly shorter than the slogan, matching the sample.
+   Desktop only; mobile and all interaction logic remain unchanged. */
+@media (min-width:601px){
+  .publication-footer .footer-brands,
+  .publication-footer .share-line{
+    width:100%!important;
+    max-width:545px!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+  .publication-footer .footer-brands{
+    grid-template-columns:max-content max-content!important;
+    justify-content:start!important;
+    column-gap:34px!important;
+  }
+}
