@@ -1,4 +1,4 @@
-const CACHE='impactone-daily-v317-footer-centered-final-20260906';
+const CACHE='impactone-daily-v317-mobile-rail-faef-caption-20260906';
 const STATIC=[
   '/daily-publication.css','/daily-interactions.js','/impactone-config.js','/manifest.webmanifest',
   '/images/brand/impactone-icon-192.png','/images/brand/impactone-icon-512.png',
@@ -78,3 +78,5 @@ self.addEventListener('notificationclick',event=>{
 });
 
 // V3.17.14 mobile footer + oil caption cache bump
+
+// V3.17.15 mobile upper rail + FAEF vertical + oil caption cache bump

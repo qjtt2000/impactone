@@ -897,3 +897,45 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
   margin-left:auto!important;
   margin-right:auto!important;
 }
+
+/* V3.17.15 — mobile upper-rail inset + FAEF logo vertical refinement.
+   Mobile only: brand row + gold slogan sit slightly to the right of the
+   contact/legal information rail, matching the approved sample hierarchy.
+   Desktop brand/slogan geometry is unchanged.
+   FAEF crest is lifted slightly on all viewports so its visual distance to
+   the sponsor text matches the IMPACTONE lockup more closely. */
+.publication-footer .faef-logo{
+  transform:translateY(-5px)!important;
+}
+
+@media (max-width:600px){
+  .publication-footer .footer-brands,
+  .publication-footer .share-line{
+    box-sizing:border-box!important;
+    width:calc(100% - 14px)!important;
+    max-width:none!important;
+    margin-left:14px!important;
+    margin-right:0!important;
+    transform:none!important;
+  }
+
+  .publication-footer .footer-brands{
+    grid-template-columns:max-content max-content!important;
+    justify-content:space-between!important;
+  }
+
+  .publication-footer .share-line{
+    padding-left:0!important;
+    padding-right:0!important;
+    text-align:left!important;
+  }
+}
+
+/* Daily Focus oil-image credit stays centered on all viewport sizes. */
+.story figure:has(img[src*="sample-oil-clean-v315"]) figcaption{
+  display:block!important;
+  width:100%!important;
+  text-align:center!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
