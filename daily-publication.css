@@ -799,7 +799,7 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
     width:100%!important;
     max-width:610px!important;
     margin:28px auto 23px!important;
-    padding-left:92px!important;
+    padding-left:141px!important;
     padding-right:0!important;
     transform:none!important;
     text-align:left!important;
@@ -816,6 +816,6 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
    Brand positions and spacing are unchanged. */
 @media (min-width:601px){
   .publication-footer .share-line{
-    padding-left:92px!important;
+    padding-left:141px!important;
   }
 }
