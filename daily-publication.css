@@ -830,3 +830,23 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
     margin-right:auto!important;
   }
 }
+
+/* V3.17.13 — footer brand spacing matched to approved sample.
+   Desktop only. Keep the left anchor shared by “出品” and the gold slogan,
+   but shorten the brand/slogan rail so the two brand groups sit closer together.
+   Contact/legal rail remains independent. */
+@media (min-width:601px){
+  .publication-footer .footer-brands,
+  .publication-footer .share-line{
+    width:550px!important;
+    max-width:calc(100% - 24px)!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+
+  .publication-footer .footer-brands{
+    grid-template-columns:max-content max-content!important;
+    justify-content:space-between!important;
+    column-gap:40px!important;
+  }
+}
