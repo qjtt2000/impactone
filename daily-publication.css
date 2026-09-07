@@ -773,11 +773,9 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
   }
 }
 
-/* V3.17.8 — footer slogan anchored to the visible brand caption rail.
-   Desktop only. This replaces the conflicting V3.17.2–V3.17.8 experiments.
-   Brand spacing/centers remain unchanged. The slogan begins exactly on the
-   visible left edge of “出品｜IMPACTONE”; with the approved 30px type size its
-   natural right edge lands near the “家” character of the right brand caption. */
+/* V3.17 FINAL — footer brand/slogan alignment
+   Desktop only. Brand positions remain unchanged.
+   Gold slogan left edge is exactly the same as the left edge of “出品｜IMPACTONE”. */
 @media (min-width:601px){
   .publication-footer .footer-brands{
     width:100%!important;
@@ -799,7 +797,7 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
     width:100%!important;
     max-width:610px!important;
     margin:28px auto 23px!important;
-    padding-left:141px!important;
+    padding-left:0!important;
     padding-right:0!important;
     transform:none!important;
     text-align:left!important;
@@ -807,15 +805,5 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
     font-size:30px!important;
     line-height:1.34!important;
     letter-spacing:.015em!important;
-  }
-}
-
-
-/* V3.17.9 — desktop footer caption/slogan baseline correction.
-   The gold slogan starts on the same vertical line as the visible “出品” caption.
-   Brand positions and spacing are unchanged. */
-@media (min-width:601px){
-  .publication-footer .share-line{
-    padding-left:141px!important;
   }
 }
