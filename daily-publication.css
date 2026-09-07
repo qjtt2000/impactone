@@ -814,3 +814,19 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
     letter-spacing:.015em!important;
   }
 }
+
+/* V3.17.12 — footer information rail separation
+   Approved sample uses two horizontal rails on desktop:
+   - brand row + gold slogan: 610px centered rail;
+   - contact + legal copy: 650px centered rail, so its left edge sits 20px left of the brand/slogan rail.
+   Mobile layout is intentionally unchanged. */
+@media (min-width:601px){
+  .publication-footer .footer-info,
+  .publication-footer .legal{
+    box-sizing:border-box!important;
+    width:650px!important;
+    max-width:calc(100% - 24px)!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+}
