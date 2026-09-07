@@ -773,32 +773,39 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
   }
 }
 
-/* V3.17 FINAL — footer brand/slogan alignment
-   Desktop only. Brand positions remain unchanged.
-   Gold slogan left edge is exactly the same as the left edge of “出品｜IMPACTONE”. */
+/* V3.17.11 — footer brand/slogan exact anchor fix
+   Desktop only. The brand row and slogan share one 610px rail.
+   Crucially, the brand columns are max-content rather than 1fr, so the rail's
+   left edge is the visible left edge of “出品｜IMPACTONE”, not the empty
+   left side of a 1fr grid cell. */
 @media (min-width:601px){
   .publication-footer .footer-brands{
-    width:100%!important;
-    max-width:610px!important;
+    box-sizing:border-box!important;
+    width:610px!important;
+    max-width:calc(100% - 24px)!important;
     margin-left:auto!important;
     margin-right:auto!important;
-    grid-template-columns:1fr 1fr!important;
+    display:grid!important;
+    grid-template-columns:max-content max-content!important;
+    justify-content:space-between!important;
     column-gap:54px!important;
     align-items:start!important;
   }
+
   .publication-footer .footer-brand,
   .publication-footer .foundation{
-    width:100%!important;
+    width:max-content!important;
+    min-width:0!important;
     align-items:center!important;
     text-align:center!important;
   }
+
   .publication-footer .share-line{
     box-sizing:border-box!important;
-    width:100%!important;
-    max-width:610px!important;
+    width:610px!important;
+    max-width:calc(100% - 24px)!important;
     margin:28px auto 23px!important;
-    padding-left:0!important;
-    padding-right:0!important;
+    padding:0!important;
     transform:none!important;
     text-align:left!important;
     white-space:nowrap!important;
