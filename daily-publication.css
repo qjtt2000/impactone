@@ -262,7 +262,7 @@ html,body{overflow-x:hidden}
 }
 .publication-footer .impactone-logo{width:min(260px,72%);height:auto;max-height:none;object-fit:contain;background:transparent!important}
 .story figure img[src*="sample-oil-clear"]{width:100%;height:auto;display:block;object-fit:contain;image-rendering:auto}
-.notification-optin{position:fixed;left:50%;bottom:78px;transform:translateX(-50%);z-index:1200;width:min(92vw,620px);background:#f7f4ee;border-top:3px solid #c8a84b;box-shadow:0 8px 28px rgba(0,0,0,.24);padding:15px 82px 15px 18px;color:#011c43}
+.notification-optin{position:fixed;left:50%;bottom:78px;transform:translateX(-50%);z-index:1200;width:min(92vw,620px);background:#f7f4ee;border-top:3px solid #C8A84B;box-shadow:0 8px 28px rgba(0,0,0,.24);padding:15px 82px 15px 18px;color:#011c43}
 .notification-optin:not([hidden]){display:block}
 .notification-optin strong,.notification-optin span{display:block}.notification-optin strong{font-size:16px;margin-bottom:3px}.notification-optin span{font-size:13px;color:#555}
 .notification-optin #enableNotificationButton{position:absolute;right:38px;top:50%;transform:translateY(-50%);border:0;background:#011c43;color:#fff;padding:9px 13px;font-weight:700;cursor:pointer}
@@ -324,7 +324,7 @@ html,body{overflow-x:hidden}
   left:10.0%!important;
   top:45.9%!important;
   margin:0!important;
-  color:#c8a84b!important;
+  color:#C8A84B!important;
   font-size:clamp(5.8px,3.0vw,17px)!important;
   line-height:1.1!important;
   font-weight:700!important;
@@ -389,7 +389,7 @@ html,body{overflow-x:hidden}
 :root{
   --navy:#011C43;
   --paper:#FFFFFF;
-  --gold:#D9AD3C;
+  --gold:#C8A84B;
   --ink:#17191d;
   --reader-size:15px;
 }
@@ -409,14 +409,14 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
   font-weight:700!important;
   font-style:italic!important;
 }
-.brand-subtitle{color:#D9AD3C!important;font-family:Arial,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif!important}
+.brand-subtitle{color:#C8A84B!important;font-family:Arial,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif!important}
 .issue-date{font-family:Arial,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif!important}
 .skyline.skyline-original>img{width:100%!important;height:auto!important;bottom:0!important;transform:none!important;filter:none!important}
 
 /* All navy publication blocks use the same approved deep navy. */
 .section-title,.view-section-title,.publication-footer,.fixed-actions{background:#011C43!important}
 .story h3,.scan-item h3,.view-title,.label{color:#011C43!important}
-.story-number,.scan-number,.section-en,.view-en,.share-line,.product-value strong{color:#D9AD3C!important}
+.story-number,.scan-number,.section-en,.view-en,.share-line,.product-value strong{color:#C8A84B!important}
 
 /* Typography families from top to bottom. */
 .section-title h2,.view-cn,.view-title,.story h3,.scan-item h3,.share-line,.product-value strong{

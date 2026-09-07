@@ -1,4 +1,4 @@
-const CACHE='impactone-daily-v317-mobile-rail-faef-caption-20260906';
+const CACHE='impactone-daily-v317-champagne-gold-c8a84b-20260907';
 const STATIC=[
   '/daily-publication.css','/daily-interactions.js','/impactone-config.js','/manifest.webmanifest',
   '/images/brand/impactone-icon-192.png','/images/brand/impactone-icon-512.png',
