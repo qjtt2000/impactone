@@ -1,4 +1,4 @@
-const CACHE='impactone-daily-v317-champagne-gold-c8a84b-20260907';
+const CACHE='impactone-daily-v317-sample-colors-20260907';
 const STATIC=[
   '/daily-publication.css','/daily-interactions.js','/impactone-config.js','/manifest.webmanifest',
   '/images/brand/impactone-icon-192.png','/images/brand/impactone-icon-512.png',
@@ -80,3 +80,5 @@ self.addEventListener('notificationclick',event=>{
 // V3.17.14 mobile footer + oil caption cache bump
 
 // V3.17.15 mobile upper rail + FAEF vertical + oil caption cache bump
+
+// V3.17.16 sample colors: navy #001B40, gold #C3A348

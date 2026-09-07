@@ -1,7 +1,7 @@
 # IMPACTONE V3.16 — Approved Sample Match
 
 - Approved long-form sample image is the final visual authority.
-- Deep navy unified to `#011C43` across cover, section bars, insight, footer and fixed actions.
+- Deep navy unified to `#001B40` across cover, section bars, insight, footer and fixed actions.
 - Mobile typography and spacing recalibrated from top to bottom to match the supplied sample.
 - Story column narrowed to the sample proportions.
 - 今日洞见 title moved into the navy insight header, as shown in the sample.
