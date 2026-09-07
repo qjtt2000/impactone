@@ -799,7 +799,7 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
     width:100%!important;
     max-width:610px!important;
     margin:28px auto 23px!important;
-    padding-left:44px!important;
+    padding-left:92px!important;
     padding-right:0!important;
     transform:none!important;
     text-align:left!important;
@@ -807,5 +807,15 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
     font-size:30px!important;
     line-height:1.34!important;
     letter-spacing:.015em!important;
+  }
+}
+
+
+/* V3.17.9 — desktop footer caption/slogan baseline correction.
+   The gold slogan starts on the same vertical line as the visible “出品” caption.
+   Brand positions and spacing are unchanged. */
+@media (min-width:601px){
+  .publication-footer .share-line{
+    padding-left:92px!important;
   }
 }
