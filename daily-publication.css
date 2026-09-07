@@ -850,3 +850,50 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
     column-gap:40px!important;
   }
 }
+
+/* V3.17.14 — mobile footer anchor + oil caption alignment
+   Mobile only: make the visible left edge of “出品｜IMPACTONE” and the gold
+   slogan share the same rail. Desktop V3.17.13 spacing remains untouched. */
+@media (max-width:600px){
+  .publication-footer .footer-brands{
+    box-sizing:border-box!important;
+    width:100%!important;
+    max-width:none!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    display:grid!important;
+    grid-template-columns:max-content max-content!important;
+    justify-content:space-between!important;
+    column-gap:12px!important;
+    align-items:start!important;
+  }
+
+  .publication-footer .footer-brand,
+  .publication-footer .foundation{
+    width:max-content!important;
+    min-width:0!important;
+    align-items:center!important;
+    text-align:center!important;
+  }
+
+  .publication-footer .share-line{
+    box-sizing:border-box!important;
+    width:100%!important;
+    max-width:none!important;
+    margin:27px 0 21px!important;
+    padding-left:0!important;
+    padding-right:0!important;
+    transform:none!important;
+    text-align:left!important;
+    white-space:nowrap!important;
+  }
+}
+
+/* Center only the Daily Focus oil-image credit/caption. */
+.story figure:has(img[src*="sample-oil-clean-v315"]) figcaption{
+  display:block!important;
+  width:100%!important;
+  text-align:center!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}

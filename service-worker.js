@@ -76,3 +76,5 @@ self.addEventListener('notificationclick',event=>{
     return clients.openWindow(target);
   })());
 });
+
+// V3.17.14 mobile footer + oil caption cache bump
