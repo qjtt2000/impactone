@@ -857,3 +857,33 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
     column-gap:34px!important;
   }
 }
+
+/* V3.17.6 — footer brand row centering correction.
+   The approved sample centers the two brand groups as one visual unit.
+   Each logo remains centered above its own caption. The brand row is
+   intentionally a little narrower than the gold slogan below.
+   Desktop only; mobile and all functional behavior remain unchanged. */
+@media (min-width:601px){
+  .publication-footer .footer-brands{
+    width:100%!important;
+    max-width:610px!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    grid-template-columns:1fr 1fr!important;
+    justify-content:center!important;
+    column-gap:54px!important;
+    align-items:start!important;
+  }
+  .publication-footer .footer-brand,
+  .publication-footer .foundation{
+    width:100%!important;
+    align-items:center!important;
+    text-align:center!important;
+  }
+  .publication-footer .share-line{
+    width:100%!important;
+    max-width:650px!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+}
