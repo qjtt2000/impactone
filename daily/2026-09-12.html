@@ -39,19 +39,23 @@
     .section-title {
       display: block !important;
     }
+
     .section-heading-row {
       display: flex;
       align-items: center;
       gap: .5em;
       line-height: 1;
     }
+
     .section-heading-row .section-icon-img {
       margin: 0 !important;
       flex: 0 0 auto;
     }
+
     .section-heading-row h2 {
       margin: 0 !important;
     }
+
     .section-title .section-sub {
       margin-top: .65em;
     }
@@ -61,29 +65,34 @@
       margin-top: 1.15em !important;
       margin-bottom: 1.15em !important;
     }
+
     .scan-collapse {
       display: inline-block;
       margin-top: .85em !important;
       margin-bottom: .35em !important;
     }
+
     .scan-quick {
       margin-top: 1.15em !important;
     }
 
-    /* 3. 排头/结尾直接使用批准样本裁出的固定图片，完全锁定字体、比例与位置 */
+    /* 3. 排头/结尾使用固定图片，锁定字体、比例与位置 */
     .brand-lockup-wrap {
       width: 100%;
       overflow: hidden;
     }
+
     .brand-lockup-image {
       display: block;
       width: 100%;
       height: auto;
       max-width: 100%;
     }
+
     .masthead-fixed {
       margin: 0 0 1.15rem 0;
     }
+
     .footer-brand-fixed {
       margin: 0 0 .9rem 0;
     }
@@ -95,22 +104,26 @@
       border-top: 1px solid rgba(195,163,72,.7);
       border-bottom: 1px solid rgba(195,163,72,.7);
     }
+
     .impactone-view .view-kicker {
       color: #C3A348;
       font-weight: 800;
       letter-spacing: .08em;
       margin-bottom: .4rem;
     }
+
     .impactone-view h2 {
       color: #001B40;
       margin: .2rem 0 1.2rem;
     }
+
     .impactone-view blockquote {
       margin: 1.35rem 0;
       padding: .2rem 0 .2rem 1rem;
       border-left: 4px solid #C3A348;
       font-weight: 700;
     }
+
     .issue-stats {
       margin: 2rem 0 1rem;
       text-align: center;
@@ -120,17 +133,19 @@
     }
   </style>
 </head>
+
 <body>
 
 <main class="page">
 <div class="content">
 
   <header class="brand-block">
-    <!-- 固定图片排头：直接采用批准样本版式，避免手机字体设置破坏比例 -->
+
+    <!-- 固定图片排头 -->
     <div class="brand-lockup-wrap" aria-label="IMPACTONE 影响力·每日必读">
       <img
         class="brand-lockup-image masthead-fixed"
-        src="../images/daily/impactone-masthead-fixed.png"
+        src="../images/daily/impactone-masthead-fixed.png?v=20260912-2"
         alt="IMPACTONE 影响力·每日必读｜筛选全球资讯，把握天下大势。"
       >
     </div>
@@ -140,7 +155,9 @@
     <div class="skyline skyline-original" aria-hidden="true">
       <img src="../images/daily/impactone-skyline-20260906.png" alt="">
     </div>
+
   </header>
+
 
   <div class="font-tool" aria-label="字号设置">
     字号
@@ -149,238 +166,953 @@
     <button data-font="large">大</button>
   </div>
 
+
+  <!-- =========================
+       今日焦点
+  ========================== -->
+
   <section>
+
     <header class="section-title">
       <div class="section-heading-row">
-        <img class="section-icon-img focus-icon" src="../images/daily/ui/focus-icon.png" alt="" aria-hidden="true">
-        <h2>今日焦点 <span class="section-en">DAILY FOCUS</span></h2>
+        <img
+          class="section-icon-img focus-icon"
+          src="../images/daily/ui/focus-icon.png"
+          alt=""
+          aria-hidden="true"
+        >
+        <h2>
+          今日焦点
+          <span class="section-en">DAILY FOCUS</span>
+        </h2>
       </div>
-      <div class="section-sub">4件事，看懂今天最重要的变化</div>
+
+      <div class="section-sub">
+        4件事，看懂今天最重要的变化
+      </div>
     </header>
 
+
     <article class="story">
+
       <div class="story-number">01｜</div>
-      <h3>沙特东西输油管道遇袭出现新线索，能源风险从海峡向陆上设施延伸</h3>
-      <p>沙特用于绕开霍尔木兹海峡的东西向输油管道遭无人机袭击后继续关闭。沙特与伊拉克均表示袭击来自伊拉克境内，伊拉克政府随后解除一名军事指挥官职务。美国总统特朗普9月12日表示，他认为伊朗“很可能”对此负责，但目前尚无独立证据确认伊朗直接实施或下令发动袭击。</p>
-      <p><b>来源｜</b>路透社</p>
-      <p class="analysis"><span class="label">观察｜</span><br>过去企业讨论中东能源安全，首先想到的是霍尔木兹海峡能否通行；但这次遇袭的恰恰是一条用于绕开海峡的替代路线。<br><br>风险评估因此需要再增加一层：<br><br><strong>备用路线本身是否足够安全。</strong></p>
+
+      <h3>
+        沙特东西输油管道遇袭出现新线索，能源风险从海峡向陆上设施延伸
+      </h3>
+
+      <p>
+        沙特用于绕开霍尔木兹海峡的东西向输油管道遭无人机袭击后继续关闭。沙特与伊拉克均表示袭击来自伊拉克境内，伊拉克政府随后解除一名军事指挥官职务。美国总统特朗普9月12日表示，他认为伊朗“很可能”对此负责，但目前尚无独立证据确认伊朗直接实施或下令发动袭击。
+      </p>
+
+      <p>
+        <b>来源｜</b>路透社
+      </p>
+
+      <p class="analysis">
+        <span class="label">观察｜</span>
+        <br>
+        过去企业讨论中东能源安全，首先想到的是霍尔木兹海峡能否通行；但这次遇袭的恰恰是一条用于绕开海峡的替代路线。
+        <br><br>
+        风险评估因此需要再增加一层：
+        <br><br>
+        <strong>备用路线本身是否足够安全。</strong>
+      </p>
+
     </article>
 
+
     <article class="story">
+
       <div class="story-number">02｜</div>
-      <h3>习近平与莫迪在新德里会晤，中印提出加强商业联系并处理贸易失衡</h3>
-      <p>中国国家主席习近平9月12日在新德里与印度总理莫迪会晤，这是习近平七年来首次访问印度。双方提出加强商业和交通联系，并讨论贸易失衡、供应链以及更具可预期性的市场准入。</p>
-      <p><b>来源｜</b>路透社</p>
-      <p class="analysis"><span class="label">观察｜</span><br>中印关系是否真正改善，最终不能只看外交表态。<br><br>对企业而言，更具体的验证指标是：<br><br><strong>市场准入、签证、供应链限制和投资审查是否开始出现实际变化。</strong></p>
+
+      <h3>
+        习近平与莫迪在新德里会晤，中印提出加强商业联系并处理贸易失衡
+      </h3>
+
+      <p>
+        中国国家主席习近平9月12日在新德里与印度总理莫迪会晤，这是习近平七年来首次访问印度。双方提出加强商业和交通联系，并讨论贸易失衡、供应链以及更具可预期性的市场准入。
+      </p>
+
+      <p>
+        <b>来源｜</b>路透社
+      </p>
+
+      <p class="analysis">
+        <span class="label">观察｜</span>
+        <br>
+        中印关系是否真正改善，最终不能只看外交表态。
+        <br><br>
+        对企业而言，更具体的验证指标是：
+        <br><br>
+        <strong>市场准入、签证、供应链限制和投资审查是否开始出现实际变化。</strong>
+      </p>
+
     </article>
 
+
     <article class="story">
+
       <div class="story-number">03｜</div>
-      <h3>中东战争迫使阿联酋重审5GW AI数据中心布局，算力基础设施开始计算地缘安全成本</h3>
-      <p>据路透社9月11日独家报道，伊朗战争正在促使阿联酋重新评估原计划集中建设于阿布扎比的5GW大型AI数据中心项目。</p>
-      <p>六名知情人士称，讨论中的方案包括把算力分散至阿联酋不同地点、强化防空保护，甚至考虑地下设施；目前调整方案尚未最终确定。</p>
-      <p><b>来源｜</b>路透社</p>
-      <p class="analysis"><span class="label">观察｜</span><br>超大型数据中心过去首先计算电力、土地、芯片和资本效率，现在地缘安全也开始进入选址模型。<br><br>对AI基础设施而言：<br><br><strong>集中建设带来的规模效率，与分散部署带来的安全冗余，正在成为新的成本权衡。</strong></p>
+
+      <h3>
+        中东战争迫使阿联酋重审5GW AI数据中心布局，算力基础设施开始计算地缘安全成本
+      </h3>
+
+      <p>
+        据路透社9月11日独家报道，伊朗战争正在促使阿联酋重新评估原计划集中建设于阿布扎比的5GW大型AI数据中心项目。
+      </p>
+
+      <p>
+        六名知情人士称，讨论中的方案包括把算力分散至阿联酋不同地点、强化防空保护，甚至考虑地下设施；目前调整方案尚未最终确定。
+      </p>
+
+      <p>
+        <b>来源｜</b>路透社
+      </p>
+
+      <p class="analysis">
+        <span class="label">观察｜</span>
+        <br>
+        超大型数据中心过去首先计算电力、土地、芯片和资本效率，现在地缘安全也开始进入选址模型。
+        <br><br>
+        对AI基础设施而言：
+        <br><br>
+        <strong>集中建设带来的规模效率，与分散部署带来的安全冗余，正在成为新的成本权衡。</strong>
+      </p>
+
     </article>
 
+
     <article class="story">
+
       <div class="story-number">04｜</div>
-      <h3>美国10年期国债收益率逼近5%，高油价与通胀重新抬高融资压力</h3>
-      <p>美国10年期国债收益率本周一度升至4.979%，随后回落至4.93%；与此同时，能源价格维持高位，美国8月CPI环比上涨0.4%、同比上涨3.4%。</p>
-      <p>全球主要债券市场经历了伊朗冲突以来幅度最大的一周收益率上升。</p>
-      <p><b>来源｜</b>路透社</p>
-      <p class="analysis"><span class="label">观察｜</span><br>接近5%的长期美债收益率，对企业的意义不只是“债市跌了”。<br><br>它是贷款、公司债、估值和资本配置的重要定价基准。<br><br>真正需要观察的是：<br><br><strong>接近5%究竟只是短期冲击，还是更高资本成本正在形成新的基准。</strong></p>
+
+      <h3>
+        美国10年期国债收益率逼近5%，高油价与通胀重新抬高融资压力
+      </h3>
+
+      <p>
+        美国10年期国债收益率本周一度升至4.979%，随后回落至4.93%；与此同时，能源价格维持高位，美国8月CPI环比上涨0.4%、同比上涨3.4%。
+      </p>
+
+      <p>
+        全球主要债券市场经历了伊朗冲突以来幅度最大的一周收益率上升。
+      </p>
+
+      <p>
+        <b>来源｜</b>路透社
+      </p>
+
+      <p class="analysis">
+        <span class="label">观察｜</span>
+        <br>
+        接近5%的长期美债收益率，对企业的意义不只是“债市跌了”。
+        <br><br>
+        它是贷款、公司债、估值和资本配置的重要定价基准。
+        <br><br>
+        真正需要观察的是：
+        <br><br>
+        <strong>接近5%究竟只是短期冲击，还是更高资本成本正在形成新的基准。</strong>
+      </p>
+
     </article>
+
   </section>
+
+
+  <!-- =========================
+       今日扫描
+  ========================== -->
 
   <section>
+
     <header class="section-title">
+
       <div class="section-heading-row">
-        <img class="section-icon-img scan-icon" src="../images/daily/ui/scan-icon.png" alt="" aria-hidden="true">
-        <h2>今日扫描 <span class="section-en">DAILY SCAN</span></h2>
+
+        <img
+          class="section-icon-img scan-icon"
+          src="../images/daily/ui/scan-icon.png"
+          alt=""
+          aria-hidden="true"
+        >
+
+        <h2>
+          今日扫描
+          <span class="section-en">DAILY SCAN</span>
+        </h2>
+
       </div>
-      <div class="section-sub">6个值得关注的信号</div>
+
+      <div class="section-sub">
+        6个值得关注的信号
+      </div>
+
     </header>
 
+
+    <!-- 05 -->
+
     <article class="scan-item">
+
       <div class="scan-number">05｜</div>
-      <h3>Oracle创始人Larry Ellison取消5000万股股票出售计划</h3>
-      <p class="scan-summary">据路透社9月12日报道，Oracle执行董事长Larry Ellison取消此前拟出售最多5000万股Oracle股票的交易计划。Oracle表示，该计划下没有出售任何股票，Ellison目前也没有其他出售Oracle持股的计划。 <button class="scan-toggle" type="button" aria-expanded="false">展开详情 ＋</button></p>
+
+      <h3>
+        Oracle创始人Larry Ellison取消5000万股股票出售计划
+      </h3>
+
+      <p class="scan-summary">
+        据路透社9月12日报道，Oracle执行董事长Larry Ellison取消此前拟出售最多5000万股Oracle股票的交易计划。Oracle表示，该计划下没有出售任何股票，Ellison目前也没有其他出售Oracle持股的计划。
+        <button
+          class="scan-toggle"
+          type="button"
+          aria-expanded="false"
+        >
+          展开详情 ＋
+        </button>
+      </p>
+
       <div class="scan-body" hidden>
-        <p><b>补充详情｜</b>这一变化发生在Oracle大规模扩张AI和云基础设施、资本需求明显上升的背景下；Ellison此前的交易计划原本允许其出售最多5000万股股票。</p>
-        <button class="scan-collapse" type="button">收起详情 －</button>
+
+        <p>
+          <b>补充详情｜</b>
+          这一变化发生在Oracle大规模扩张AI和云基础设施、资本需求明显上升的背景下；Ellison此前的交易计划原本允许其出售最多5000万股股票。
+        </p>
+
+        <button
+          class="scan-collapse"
+          type="button"
+        >
+          收起详情 －
+        </button>
+
       </div>
-      <p class="scan-quick"><span class="label">快评｜</span><br>取消个人减持并不会改变Oracle的AI资本开支需求，但在市场持续审视巨额AI投入能否兑现回报的阶段，核心股东是否出售持股本身就是一个值得观察的信号。</p>
+
+      <p class="scan-quick">
+        <span class="label">快评｜</span>
+        <br>
+        取消个人减持并不会改变Oracle的AI资本开支需求，但在市场持续审视巨额AI投入能否兑现回报的阶段，核心股东是否出售持股本身就是一个值得观察的信号。
+      </p>
+
     </article>
 
+
+    <!-- 06 -->
+
     <article class="scan-item">
+
       <div class="scan-number">06｜</div>
-      <h3>加拿大“买国货”运动开始改变超市供应链，美国农产品份额下降</h3>
-      <p class="scan-summary">据路透社9月12日报道，美加贸易摩擦正在改变加拿大消费者购买行为和超市采购策略。加拿大从美国进口的新鲜蔬菜占比已从2023年7月的69%下降至2026年7月的62.6%，部分零售商开始增加加拿大本地以及西班牙、巴西、洪都拉斯等非美国来源的商品。 <button class="scan-toggle" type="button" aria-expanded="false">展开详情 ＋</button></p>
+
+      <h3>
+        加拿大“买国货”运动开始改变超市供应链，美国农产品份额下降
+      </h3>
+
+      <p class="scan-summary">
+        据路透社9月12日报道，美加贸易摩擦正在改变加拿大消费者购买行为和超市采购策略。加拿大从美国进口的新鲜蔬菜占比已从2023年7月的69%下降至2026年7月的62.6%，部分零售商开始增加加拿大本地以及西班牙、巴西、洪都拉斯等非美国来源的商品。
+        <button
+          class="scan-toggle"
+          type="button"
+          aria-expanded="false"
+        >
+          展开详情 ＋
+        </button>
+      </p>
+
       <div class="scan-body" hidden>
-        <p><b>补充详情｜</b>加拿大政府计划未来十年投入约30亿加元发展温室农业，以提高本土食品供应能力；零售商同时加强商品原产地标识，以回应消费者对加拿大产品的偏好。</p>
-        <button class="scan-collapse" type="button">收起详情 －</button>
+
+        <p>
+          <b>补充详情｜</b>
+          加拿大政府计划未来十年投入约30亿加元发展温室农业，以提高本土食品供应能力；零售商同时加强商品原产地标识，以回应消费者对加拿大产品的偏好。
+        </p>
+
+        <button
+          class="scan-collapse"
+          type="button"
+        >
+          收起详情 －
+        </button>
+
       </div>
-      <p class="scan-quick"><span class="label">快评｜</span><br>贸易摩擦一旦改变消费者的原产地偏好，影响就不再局限于关税。<br><br>采购渠道、货架配置和品牌定位都可能随之调整。</p>
+
+      <p class="scan-quick">
+        <span class="label">快评｜</span>
+        <br>
+        贸易摩擦一旦改变消费者的原产地偏好，影响就不再局限于关税。
+        <br><br>
+        采购渠道、货架配置和品牌定位都可能随之调整。
+      </p>
+
     </article>
 
+
+    <!-- 07 -->
+
     <article class="scan-item">
+
       <div class="scan-number">07｜</div>
-      <h3>金砖国家通过《新德里宣言》，伊朗与阿联酋共同支持中东克制立场</h3>
-      <p class="scan-summary">据路透社9月12日报道，金砖国家在新德里通过联合声明，对中东冲突升级表示严重关切并呼吁“最大限度克制”。伊朗和阿联酋均加入声明；两国高级领导人还在峰会期间举行了冲突爆发以来最高级别会晤。声明同时对单边关税和非关税措施表达担忧。 <button class="scan-toggle" type="button" aria-expanded="false">展开详情 ＋</button></p>
+
+      <h3>
+        金砖国家通过《新德里宣言》，伊朗与阿联酋共同支持中东克制立场
+      </h3>
+
+      <p class="scan-summary">
+        据路透社9月12日报道，金砖国家在新德里通过联合声明，对中东冲突升级表示严重关切并呼吁“最大限度克制”。伊朗和阿联酋均加入声明；两国高级领导人还在峰会期间举行了冲突爆发以来最高级别会晤。声明同时对单边关税和非关税措施表达担忧。
+        <button
+          class="scan-toggle"
+          type="button"
+          aria-expanded="false"
+        >
+          展开详情 ＋
+        </button>
+      </p>
+
       <div class="scan-body" hidden>
-        <p><b>补充详情｜</b>金砖成员目前覆盖全球40%以上人口和接近四分之一的全球经济；中国将在下一年度接任金砖主席国。</p>
-        <button class="scan-collapse" type="button">收起详情 －</button>
+
+        <p>
+          <b>补充详情｜</b>
+          金砖成员目前覆盖全球40%以上人口和接近四分之一的全球经济；中国将在下一年度接任金砖主席国。
+        </p>
+
+        <button
+          class="scan-collapse"
+          type="button"
+        >
+          收起详情 －
+        </button>
+
       </div>
-      <p class="scan-quick"><span class="label">快评｜</span><br>金砖成员之间并不存在统一的地缘政治立场。<br><br>正因为如此，真正值得观察的是：<br><br><strong>在成员利益差异明显的情况下，贸易、支付和金融合作还能在哪些领域形成最低共同立场。</strong></p>
+
+      <p class="scan-quick">
+        <span class="label">快评｜</span>
+        <br>
+        金砖成员之间并不存在统一的地缘政治立场。
+        <br><br>
+        正因为如此，真正值得观察的是：
+        <br><br>
+        <strong>在成员利益差异明显的情况下，贸易、支付和金融合作还能在哪些领域形成最低共同立场。</strong>
+      </p>
+
     </article>
 
+
+    <!-- 08 -->
+
     <article class="scan-item">
+
       <div class="scan-number">08｜</div>
-      <h3>加拿大向全球资本提出“1万亿美元”投资叙事，167个基础设施项目成为核心</h3>
-      <p class="scan-summary">据英国《金融时报》9月12日报道，加拿大政府正向约200名全球金融高管推介大规模投资机会，希望从约120万亿美元的全球资本池中吸引额外约1%的资金。推介范围涉及167个加拿大基础设施项目，包括管道、核电、港口和AI数据中心。 <button class="scan-toggle" type="button" aria-expanded="false">展开详情 ＋</button></p>
+
+      <h3>
+        加拿大向全球资本提出“1万亿美元”投资叙事，167个基础设施项目成为核心
+      </h3>
+
+      <p class="scan-summary">
+        据英国《金融时报》9月12日报道，加拿大政府正向约200名全球金融高管推介大规模投资机会，希望从约120万亿美元的全球资本池中吸引额外约1%的资金。推介范围涉及167个加拿大基础设施项目，包括管道、核电、港口和AI数据中心。
+        <button
+          class="scan-toggle"
+          type="button"
+          aria-expanded="false"
+        >
+          展开详情 ＋
+        </button>
+      </p>
+
       <div class="scan-body" hidden>
-        <p><b>补充详情｜</b>加拿大正在以AAA信用评级、政策稳定性以及面向亚洲和欧洲的能源基础设施作为吸引资本的重要条件；与此同时，投资者仍把税收、监管、审批效率和生产率视为实际投资决策的重要约束。</p>
-        <button class="scan-collapse" type="button">收起详情 －</button>
+
+        <p>
+          <b>补充详情｜</b>
+          加拿大正在以AAA信用评级、政策稳定性以及面向亚洲和欧洲的能源基础设施作为吸引资本的重要条件；与此同时，投资者仍把税收、监管、审批效率和生产率视为实际投资决策的重要约束。
+        </p>
+
+        <button
+          class="scan-collapse"
+          type="button"
+        >
+          收起详情 －
+        </button>
+
       </div>
-      <p class="scan-quick"><span class="label">快评｜</span><br>“1万亿美元”首先是一套资本吸引目标，而不是已经承诺的投资。<br><br>真正决定这套叙事能否兑现的，是167个项目中有多少最终能够完成审批、融资并真正开工。</p>
+
+      <p class="scan-quick">
+        <span class="label">快评｜</span>
+        <br>
+        “1万亿美元”首先是一套资本吸引目标，而不是已经承诺的投资。
+        <br><br>
+        真正决定这套叙事能否兑现的，是167个项目中有多少最终能够完成审批、融资并真正开工。
+      </p>
+
     </article>
 
+
+    <!-- 09 -->
+
     <article class="scan-item">
+
       <div class="scan-number">09｜</div>
-      <h3>印度央行拒绝Tata Sons规避上市申请，印度最大企业集团控股公司更接近公开上市</h3>
-      <p class="scan-summary">据路透社9月12日报道，印度储备银行已拒绝Tata Sons提出的取消核心投资公司注册申请，使这家控制Tata Consultancy Services、Tata Motors、Tata Steel和Air India等企业的集团控股公司进一步接近公开上市。 <button class="scan-toggle" type="button" aria-expanded="false">展开详情 ＋</button></p>
+
+      <h3>
+        印度央行拒绝Tata Sons规避上市申请，印度最大企业集团控股公司更接近公开上市
+      </h3>
+
+      <p class="scan-summary">
+        据路透社9月12日报道，印度储备银行已拒绝Tata Sons提出的取消核心投资公司注册申请，使这家控制Tata Consultancy Services、Tata Motors、Tata Steel和Air India等企业的集团控股公司进一步接近公开上市。
+        <button
+          class="scan-toggle"
+          type="button"
+          aria-expanded="false"
+        >
+          展开详情 ＋
+        </button>
+      </p>
+
       <div class="scan-body" hidden>
-        <p><b>补充详情｜</b>印度监管规定，符合相关条件的大型非银行金融公司需要上市；截至2025年3月，Tata Sons单体资产约1.75万亿卢比，Tata Trusts持有Tata Sons约66%的股份。</p>
-        <button class="scan-collapse" type="button">收起详情 －</button>
+
+        <p>
+          <b>补充详情｜</b>
+          印度监管规定，符合相关条件的大型非银行金融公司需要上市；截至2025年3月，Tata Sons单体资产约1.75万亿卢比，Tata Trusts持有Tata Sons约66%的股份。
+        </p>
+
+        <button
+          class="scan-collapse"
+          type="button"
+        >
+          收起详情 －
+        </button>
+
       </div>
-      <p class="scan-quick"><span class="label">快评｜</span><br>这不是普通IPO故事。<br><br>如果Tata Sons最终真正走向公开市场，意味着印度最重要的企业集团之一，其控股公司的治理、估值和股东关系将面对公开资本市场更直接的约束。</p>
+
+      <p class="scan-quick">
+        <span class="label">快评｜</span>
+        <br>
+        这不是普通IPO故事。
+        <br><br>
+        如果Tata Sons最终真正走向公开市场，意味着印度最重要的企业集团之一，其控股公司的治理、估值和股东关系将面对公开资本市场更直接的约束。
+      </p>
+
     </article>
 
+
+    <!-- 10 -->
+
     <article class="scan-item">
+
       <div class="scan-number">10｜</div>
-      <h3>特朗普称可接受中国车企赴美建厂，前提是“在美国生产、雇美国工人”</h3>
-      <p class="scan-summary">据路透社9月12日报道，美国总统特朗普表示，如果中国汽车企业进入美国设厂、在美国生产汽车并雇佣美国工人，他对此可以接受；但他反对中国车企在墨西哥生产汽车后再出口美国。 <button class="scan-toggle" type="button" aria-expanded="false">展开详情 ＋</button></p>
+
+      <h3>
+        特朗普称可接受中国车企赴美建厂，前提是“在美国生产、雇美国工人”
+      </h3>
+
+      <p class="scan-summary">
+        据路透社9月12日报道，美国总统特朗普表示，如果中国汽车企业进入美国设厂、在美国生产汽车并雇佣美国工人，他对此可以接受；但他反对中国车企在墨西哥生产汽车后再出口美国。
+        <button
+          class="scan-toggle"
+          type="button"
+          aria-expanded="false"
+        >
+          展开详情 ＋
+        </button>
+      </p>
+
       <div class="scan-body" hidden>
-        <p><b>补充详情｜</b>这一表态与美国汽车行业及部分国会议员要求进一步限制中国车企进入美国市场的立场形成明显张力。美国现行联网汽车规则和针对中国电动车的高额关税仍然构成实际进入壁垒。</p>
-        <button class="scan-collapse" type="button">收起详情 －</button>
+
+        <p>
+          <b>补充详情｜</b>
+          这一表态与美国汽车行业及部分国会议员要求进一步限制中国车企进入美国市场的立场形成明显张力。美国现行联网汽车规则和针对中国电动车的高额关税仍然构成实际进入壁垒。
+        </p>
+
+        <button
+          class="scan-collapse"
+          type="button"
+        >
+          收起详情 －
+        </button>
+
       </div>
-      <p class="scan-quick"><span class="label">快评｜</span><br>这释放出一个值得企业关注的政策区别：<br><br><strong>“中国制造后出口美国”与“中国资本进入美国本土制造”，可能面对不同的政治逻辑。</strong><br><br>但总统表态并不等于现有监管壁垒已经改变，下一步要看是否真正转化为规则调整。</p>
+
+      <p class="scan-quick">
+        <span class="label">快评｜</span>
+        <br>
+        这释放出一个值得企业关注的政策区别：
+        <br><br>
+        <strong>“中国制造后出口美国”与“中国资本进入美国本土制造”，可能面对不同的政治逻辑。</strong>
+        <br><br>
+        但总统表态并不等于现有监管壁垒已经改变，下一步要看是否真正转化为规则调整。
+      </p>
+
     </article>
+
   </section>
+
+
+  <!-- =========================
+       IMPACTONE VIEW
+  ========================== -->
 
   <section class="impactone-view">
-    <div class="view-kicker">IMPACTONE VIEW</div>
-    <h2>效率最大化之后，企业开始重新给“冗余”定价</h2>
 
-    <p>过去几十年，全球企业不断压缩备用能力。</p>
-    <p>供应链要更集中，运输路线要更短，数据中心要更大，库存要更低——因为冗余意味着成本。</p>
-    <p>但今天两条新闻提出了同一个新的商业问题。</p>
-    <p>沙特用于<strong>绕开霍尔木兹海峡</strong>的东西向输油管道遭到袭击；阿联酋则因为战争重新考虑把5GW AI算力全部集中在一个超大型园区，讨论分散部署、防空保护甚至地下设施。</p>
-    <p>这并不能推出全球商业系统正在全面“去集中化”。</p>
-    <p>但它足以让企业重新问一个问题：</p>
+    <div class="view-kicker">
+      IMPACTONE VIEW
+    </div>
 
-    <blockquote>过去为了效率而省掉的备用能力，现在值多少钱？</blockquote>
+    <h2>
+      效率最大化之后，企业开始重新给“冗余”定价
+    </h2>
 
-    <p>对于能源、物流、云计算、制造业甚至企业自己的IT系统，下一阶段衡量效率时，可能需要同时计算另一项成本：</p>
-    <p><strong>如果最关键的节点突然不可用，第二条路在哪里？</strong></p>
+    <p>
+      过去几十年，全球企业不断压缩备用能力。
+    </p>
+
+    <p>
+      供应链要更集中，运输路线要更短，数据中心要更大，库存要更低——因为冗余意味着成本。
+    </p>
+
+    <p>
+      但今天两条新闻提出了同一个新的商业问题。
+    </p>
+
+    <p>
+      沙特用于<strong>绕开霍尔木兹海峡</strong>的东西向输油管道遭到袭击；阿联酋则因为战争重新考虑把5GW AI算力全部集中在一个超大型园区，讨论分散部署、防空保护甚至地下设施。
+    </p>
+
+    <p>
+      这并不能推出全球商业系统正在全面“去集中化”。
+    </p>
+
+    <p>
+      但它足以让企业重新问一个问题：
+    </p>
+
+    <blockquote>
+      过去为了效率而省掉的备用能力，现在值多少钱？
+    </blockquote>
+
+    <p>
+      对于能源、物流、云计算、制造业甚至企业自己的IT系统，下一阶段衡量效率时，可能需要同时计算另一项成本：
+    </p>
+
+    <p>
+      <strong>如果最关键的节点突然不可用，第二条路在哪里？</strong>
+    </p>
+
   </section>
 
-  <div class="issue-stats">FOCUS｜4　SCAN｜6　NEWS TOTAL｜10</div>
 
-  <nav class="issue-navigation" data-issue-number="004" data-previous-url="2026-09-11.html" aria-label="刊期导航">
-    <a class="previous-issue" href="2026-09-11.html">← 前一期 <span>PREVIOUS ISSUE</span></a>
+  <div class="issue-stats">
+    FOCUS｜4　SCAN｜6　NEWS TOTAL｜10
+  </div>
+
+
+  <!-- =========================
+       刊期导航
+  ========================== -->
+
+  <nav
+    class="issue-navigation"
+    data-issue-number="004"
+    data-previous-url="2026-09-11.html"
+    aria-label="刊期导航"
+  >
+
+    <a
+      class="previous-issue"
+      href="2026-09-11.html"
+    >
+      ← 前一期
+      <span>PREVIOUS ISSUE</span>
+    </a>
+
   </nav>
 
+
   <div class="product-value">
-    <strong>每天5分钟，读懂全球大事，看清变化背后的趋势。</strong>
-    <span>《影响力·每日必读》每日更新 · 订阅持续获取</span>
+
+    <strong>
+      每天5分钟，读懂全球大事，看清变化背后的趋势。
+    </strong>
+
+    <span>
+      《影响力·每日必读》每日更新 · 订阅持续获取
+    </span>
+
   </div>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
 
   <footer class="publication-footer">
 
-    <!-- 固定图片结尾：直接采用批准样本版式，锁定两个LOGO、出品/协办及金色文案 -->
-    <div class="brand-lockup-wrap" aria-label="IMPACTONE 与五大道企业家基金会">
+    <!-- 固定图片结尾 -->
+    <div
+      class="brand-lockup-wrap"
+      aria-label="IMPACTONE 与五大道企业家基金会"
+    >
+
       <img
         class="brand-lockup-image footer-brand-fixed"
-        src="../images/daily/impactone-footer-brand-fixed.png"
+        src="../images/daily/impactone-footer-brand-fixed.png?v=20260912-2"
         alt="出品 IMPACTONE｜协办 五大道企业家基金会｜把值得关注的事，转给值得的人。"
       >
+
     </div>
+
 
     <div class="footer-info">
-      <b>联络交流</b>
-      <span>内容建议｜采访线索｜品牌合作｜战略合作</span>
-      <a href="mailto:info@impactonenews.com">info@impactonenews.com</a>
-      <div class="social-profiles" id="socialProfiles" aria-label="IMPACTONE 社交媒体"></div>
+
+      <b>
+        联络交流
+      </b>
+
+      <span>
+        内容建议｜采访线索｜品牌合作｜战略合作
+      </span>
+
+      <a href="mailto:info@impactonenews.com">
+        info@impactonenews.com
+      </a>
+
+      <div
+        class="social-profiles"
+        id="socialProfiles"
+        aria-label="IMPACTONE 社交媒体"
+      ></div>
+
     </div>
 
+
     <div class="legal">
-      <b>免责声明</b>
-      <p>本刊由 IMPACTONE 独立策划、制作与运营。内容基于公开信息整理与分析，文中“观察”“快评”为 IMPACTONE 编辑观点，仅供参考，不构成投资、法律或财务建议。</p>
-      <b>版权声明</b>
-      <p>© 2026 IMPACTONE. All Rights Reserved. 本刊原创编辑内容及版式设计版权归 IMPACTONE 所有。未经授权，不得复制、汇编、转载或用于商业用途；欢迎个人完整转发分享，并请保留 IMPACTONE 标识及来源信息。</p>
+
+      <b>
+        免责声明
+      </b>
+
+      <p>
+        本刊由 IMPACTONE 独立策划、制作与运营。内容基于公开信息整理与分析，文中“观察”“快评”为 IMPACTONE 编辑观点，仅供参考，不构成投资、法律或财务建议。
+      </p>
+
+      <b>
+        版权声明
+      </b>
+
+      <p>
+        © 2026 IMPACTONE. All Rights Reserved. 本刊原创编辑内容及版式设计版权归 IMPACTONE 所有。未经授权，不得复制、汇编、转载或用于商业用途；欢迎个人完整转发分享，并请保留 IMPACTONE 标识及来源信息。
+      </p>
+
     </div>
+
   </footer>
 
 </div>
 </main>
 
-<nav class="fixed-actions" aria-label="互动功能">
-  <button id="subscribeAction"><span class="ico">＋</span><span>订阅</span></button>
-  <button id="shareAction"><span class="ico"><svg viewBox="0 0 24 24"><path d="M7 17c0-5 3-8 9-8h2"></path><path d="m14 5 4 4-4 4"></path></svg></span><span>转发</span></button>
-  <button id="favoriteAction"><span class="ico"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"></path></svg></span><span>收藏</span></button>
-  <button id="commentAction"><span class="ico">□</span><span>评论</span><small id="commentCount"></small></button>
+
+<!-- =========================
+     底部互动栏
+========================= -->
+
+<nav
+  class="fixed-actions"
+  aria-label="互动功能"
+>
+
+  <button id="subscribeAction">
+    <span class="ico">＋</span>
+    <span>订阅</span>
+  </button>
+
+
+  <button id="shareAction">
+
+    <span class="ico">
+
+      <svg viewBox="0 0 24 24">
+        <path d="M7 17c0-5 3-8 9-8h2"></path>
+        <path d="m14 5 4 4-4 4"></path>
+      </svg>
+
+    </span>
+
+    <span>转发</span>
+
+  </button>
+
+
+  <button id="favoriteAction">
+
+    <span class="ico">
+
+      <svg viewBox="0 0 24 24">
+        <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"></path>
+      </svg>
+
+    </span>
+
+    <span>收藏</span>
+
+  </button>
+
+
+  <button id="commentAction">
+
+    <span class="ico">
+      □
+    </span>
+
+    <span>
+      评论
+    </span>
+
+    <small id="commentCount"></small>
+
+  </button>
+
 </nav>
 
-<div class="modal-backdrop" id="shareModal" aria-hidden="true">
+
+<!-- =========================
+     SHARE MODAL
+========================= -->
+
+<div
+  class="modal-backdrop"
+  id="shareModal"
+  aria-hidden="true"
+>
+
   <section class="share-modal">
-    <button class="modal-close" data-close-share>×</button>
-    <h3>转发《影响力·每日必读》</h3>
-    <p>选择你常用的平台。微信与“更多”使用手机系统分享；其它平台尽量直接进入对应分享/发布流程。</p>
+
+    <button
+      class="modal-close"
+      data-close-share
+    >
+      ×
+    </button>
+
+    <h3>
+      转发《影响力·每日必读》
+    </h3>
+
+    <p>
+      选择你常用的平台。微信与“更多”使用手机系统分享；其它平台尽量直接进入对应分享/发布流程。
+    </p>
+
+
     <div class="share-grid share-grid-v311">
-      <button type="button" data-share="wechat">微信</button>
-      <a data-share-link="whatsapp" target="_blank" rel="noopener">WhatsApp</a>
-      <button type="button" data-share="instagram">Instagram 发布</button>
-      <button type="button" data-share="facebook-native">Facebook</button>
-      <a data-share-link="linkedin" target="_blank" rel="noopener">LinkedIn</a>
-      <button type="button" data-share="xiaohongshu">小红书发布</button>
-      <button type="button" data-share="copy">复制链接</button>
-      <button type="button" data-share="system">更多</button>
+
+      <button
+        type="button"
+        data-share="wechat"
+      >
+        微信
+      </button>
+
+      <a
+        data-share-link="whatsapp"
+        target="_blank"
+        rel="noopener"
+      >
+        WhatsApp
+      </a>
+
+      <button
+        type="button"
+        data-share="instagram"
+      >
+        Instagram 发布
+      </button>
+
+      <button
+        type="button"
+        data-share="facebook-native"
+      >
+        Facebook
+      </button>
+
+      <a
+        data-share-link="linkedin"
+        target="_blank"
+        rel="noopener"
+      >
+        LinkedIn
+      </a>
+
+      <button
+        type="button"
+        data-share="xiaohongshu"
+      >
+        小红书发布
+      </button>
+
+      <button
+        type="button"
+        data-share="copy"
+      >
+        复制链接
+      </button>
+
+      <button
+        type="button"
+        data-share="system"
+      >
+        更多
+      </button>
+
     </div>
-    <div class="wechat-share-hint" id="wechatShareHint" aria-live="polite"></div>
+
+
+    <div
+      class="wechat-share-hint"
+      id="wechatShareHint"
+      aria-live="polite"
+    ></div>
+
   </section>
+
 </div>
 
-<div class="modal-backdrop" id="subscribeModal" aria-hidden="true">
+
+<!-- =========================
+     SUBSCRIBE MODAL
+========================= -->
+
+<div
+  class="modal-backdrop"
+  id="subscribeModal"
+  aria-hidden="true"
+>
+
   <section class="subscribe-modal subscribe-modal-v313">
-    <button class="modal-close" data-close-subscribe aria-label="关闭">×</button>
-    <h3>订阅《影响力·每日必读》</h3>
-    <p>新一期发布时，通过微信服务通知提醒你。</p>
-    <button type="button" class="install-primary" id="wechatMiniProgramSubscribe">微信订阅下一期更新</button>
-    <div id="wechatSubscribeHelp" class="install-help" aria-live="polite">每次授权接收下一期提醒。</div>
-    <button type="button" class="email-backup-toggle" data-toggle-email>邮件订阅（备用）</button>
-    <form id="subscribeForm" class="email-subscribe-form" hidden>
-      <input id="subscribeEmail" type="email" placeholder="你的邮箱" required>
-      <button type="submit">邮件订阅</button>
+
+    <button
+      class="modal-close"
+      data-close-subscribe
+      aria-label="关闭"
+    >
+      ×
+    </button>
+
+
+    <h3>
+      订阅《影响力·每日必读》
+    </h3>
+
+
+    <p>
+      新一期发布时，通过微信服务通知提醒你。
+    </p>
+
+
+    <button
+      type="button"
+      class="install-primary"
+      id="wechatMiniProgramSubscribe"
+    >
+      微信订阅下一期更新
+    </button>
+
+
+    <div
+      id="wechatSubscribeHelp"
+      class="install-help"
+      aria-live="polite"
+    >
+      每次授权接收下一期提醒。
+    </div>
+
+
+    <button
+      type="button"
+      class="email-backup-toggle"
+      data-toggle-email
+    >
+      邮件订阅（备用）
+    </button>
+
+
+    <form
+      id="subscribeForm"
+      class="email-subscribe-form"
+      hidden
+    >
+
+      <input
+        id="subscribeEmail"
+        type="email"
+        placeholder="你的邮箱"
+        required
+      >
+
+      <button type="submit">
+        邮件订阅
+      </button>
+
     </form>
-    <div id="subscribeStatus" class="subscribe-status"></div>
+
+
+    <div
+      id="subscribeStatus"
+      class="subscribe-status"
+    ></div>
+
   </section>
+
 </div>
 
-<section class="comments-panel" id="commentsPanel" aria-hidden="true">
-  <button class="panel-close" data-close-comments>×</button>
-  <h3 class="panel-head">评论</h3>
-  <p class="comment-prompt">你今天最关注哪一条？</p>
+
+<!-- =========================
+     COMMENTS
+========================= -->
+
+<section
+  class="comments-panel"
+  id="commentsPanel"
+  aria-hidden="true"
+>
+
+  <button
+    class="panel-close"
+    data-close-comments
+  >
+    ×
+  </button>
+
+
+  <h3 class="panel-head">
+    评论
+  </h3>
+
+
+  <p class="comment-prompt">
+    你今天最关注哪一条？
+  </p>
+
+
   <form id="commentForm">
-    <input id="commentName" placeholder="昵称" required>
-    <textarea id="commentText" placeholder="写下你的看法……" required></textarea>
-    <button type="submit">发布</button>
+
+    <input
+      id="commentName"
+      placeholder="昵称"
+      required
+    >
+
+    <textarea
+      id="commentText"
+      placeholder="写下你的看法……"
+      required
+    ></textarea>
+
+    <button type="submit">
+      发布
+    </button>
+
   </form>
+
+
   <div id="commentList"></div>
+
 </section>
 
 
 </body>
 </html>
-
