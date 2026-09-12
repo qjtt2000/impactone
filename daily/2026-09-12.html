@@ -70,24 +70,22 @@
       margin-top: 1.15em !important;
     }
 
-    /* 3. 排头/结尾品牌区以 Canvas 栅格化，手机字体设置不会改变内部排版 */
-    .fixed-brand-canvas {
+    /* 3. 排头/结尾直接使用批准样本裁出的固定图片，完全锁定字体、比例与位置 */
+    .brand-lockup-wrap {
+      width: 100%;
+      overflow: hidden;
+    }
+    .brand-lockup-image {
       display: block;
       width: 100%;
       height: auto;
       max-width: 100%;
     }
-    .brand-lockup-wrap {
-      width: 100%;
-      overflow: hidden;
+    .masthead-fixed {
+      margin: 0 0 1.15rem 0;
     }
-    .brand-lockup-fallback {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-      clip: rect(0 0 0 0);
-      white-space: nowrap;
+    .footer-brand-fixed {
+      margin: 0 0 .9rem 0;
     }
 
     /* IMPACTONE VIEW */
@@ -128,12 +126,13 @@
 <div class="content">
 
   <header class="brand-block">
-    <!-- 固定图片化排头：IMPACTONE / 影响力·每日必读 / 筛选全球资讯，把握天下大势。 -->
+    <!-- 固定图片排头：直接采用批准样本版式，避免手机字体设置破坏比例 -->
     <div class="brand-lockup-wrap" aria-label="IMPACTONE 影响力·每日必读">
-      <canvas id="mastheadCanvas" class="fixed-brand-canvas" width="1600" height="430"></canvas>
-      <div class="brand-lockup-fallback">
-        IMPACTONE。影响力·每日必读。筛选全球资讯，把握天下大势。
-      </div>
+      <img
+        class="brand-lockup-image masthead-fixed"
+        src="../images/daily/impactone-masthead-fixed.png"
+        alt="IMPACTONE 影响力·每日必读｜筛选全球资讯，把握天下大势。"
+      >
     </div>
 
     <div class="issue-date">2026年9月12日　纽约　第004期</div>
@@ -300,12 +299,13 @@
 
   <footer class="publication-footer">
 
-    <!-- 固定图片化结尾：两个LOGO / 出品协办 / 把值得关注的事 -->
+    <!-- 固定图片结尾：直接采用批准样本版式，锁定两个LOGO、出品/协办及金色文案 -->
     <div class="brand-lockup-wrap" aria-label="IMPACTONE 与五大道企业家基金会">
-      <canvas id="footerBrandCanvas" class="fixed-brand-canvas" width="1600" height="660"></canvas>
-      <div class="brand-lockup-fallback">
-        出品 IMPACTONE。协办 五大道企业家基金会。把值得关注的事，转给值得的人。
-      </div>
+      <img
+        class="brand-lockup-image footer-brand-fixed"
+        src="../images/daily/impactone-footer-brand-fixed.png"
+        alt="出品 IMPACTONE｜协办 五大道企业家基金会｜把值得关注的事，转给值得的人。"
+      >
     </div>
 
     <div class="footer-info">
@@ -380,103 +380,7 @@
   <div id="commentList"></div>
 </section>
 
-<script>
-(function () {
-  const NAVY = '#001B40';
-  const GOLD = '#C3A348';
-  const WHITE = '#FFFFFF';
-
-  function drawSpacedText(ctx, text, x, y, spacing) {
-    let cursor = x;
-    for (const ch of text) {
-      ctx.fillText(ch, cursor, y);
-      cursor += ctx.measureText(ch).width + spacing;
-    }
-  }
-
-  function containDraw(ctx, img, x, y, w, h) {
-    const scale = Math.min(w / img.naturalWidth, h / img.naturalHeight);
-    const dw = img.naturalWidth * scale;
-    const dh = img.naturalHeight * scale;
-    ctx.drawImage(img, x + (w - dw) / 2, y + (h - dh) / 2, dw, dh);
-  }
-
-  function drawMasthead() {
-    const c = document.getElementById('mastheadCanvas');
-    if (!c) return;
-    const ctx = c.getContext('2d');
-
-    ctx.clearRect(0, 0, c.width, c.height);
-    ctx.fillStyle = NAVY;
-    ctx.fillRect(0, 0, c.width, c.height);
-
-    ctx.textBaseline = 'alphabetic';
-
-    ctx.fillStyle = WHITE;
-    ctx.font = '500 44px Arial, Helvetica, sans-serif';
-    drawSpacedText(ctx, 'IMPACTONE', 145, 105, 15);
-
-    ctx.font = '800 108px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif';
-    ctx.fillText('影响力·每日必读', 145, 245);
-
-    ctx.fillStyle = GOLD;
-    ctx.font = '700 43px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif';
-    ctx.fillText('筛选全球资讯，把握天下大势。', 145, 348);
-  }
-
-  function drawFooter() {
-    const c = document.getElementById('footerBrandCanvas');
-    if (!c) return;
-    const ctx = c.getContext('2d');
-
-    ctx.clearRect(0, 0, c.width, c.height);
-    ctx.fillStyle = NAVY;
-    ctx.fillRect(0, 0, c.width, c.height);
-
-    const impact = new Image();
-    const faef = new Image();
-    let loaded = 0;
-
-    function finish() {
-      loaded++;
-      if (loaded < 2) return;
-
-      if (impact.naturalWidth) containDraw(ctx, impact, 185, 55, 420, 210);
-      if (faef.naturalWidth) containDraw(ctx, faef, 1030, 55, 250, 210);
-
-      ctx.textAlign = 'center';
-      ctx.fillStyle = WHITE;
-      ctx.font = '700 50px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif';
-      ctx.fillText('出品｜IMPACTONE    协办｜五大道企业家基金会', 800, 350);
-
-      ctx.fillStyle = GOLD;
-      ctx.font = '800 62px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif';
-      ctx.fillText('把值得关注的事，转给值得的人。', 800, 505);
-
-      ctx.textAlign = 'left';
-    }
-
-    impact.onload = finish;
-    impact.onerror = finish;
-    faef.onload = finish;
-    faef.onerror = finish;
-
-    impact.src = '../images/brand/impactone-logo-raw-20260906.png';
-    faef.src = '../images/brand/faef-logo.png';
-  }
-
-  function drawAll() {
-    drawMasthead();
-    drawFooter();
-  }
-
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(drawAll);
-  } else {
-    window.addEventListener('load', drawAll);
-  }
-})();
-</script>
 
 </body>
 </html>
+
