@@ -1,6 +1,10 @@
 name: Send WeChat Daily Brief Notification
 
 on:
+  # 手动测试
+  workflow_dispatch:
+
+  # 正式自动触发
   push:
     branches:
       - main
@@ -17,10 +21,19 @@ jobs:
         with:
           fetch-depth: 2
 
+      # Push 情况下：
+      # 只有真正新增 daily/*.html 才发送，
+      # 修改旧文章不重复发送。
       - name: Check for newly added daily issue
         id: check
         shell: bash
         run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "send=true" >> "$GITHUB_OUTPUT"
+            echo "Manual test requested."
+            exit 0
+          fi
+
           NEW_FILE=$(git diff --diff-filter=A --name-only HEAD^ HEAD | grep -E '^daily/.*\.html$' | head -n 1 || true)
 
           if [ -n "$NEW_FILE" ]; then
@@ -29,11 +42,15 @@ jobs:
             echo "New daily issue detected: $NEW_FILE"
           else
             echo "send=false" >> "$GITHUB_OUTPUT"
-            echo "No new daily issue. Notification skipped."
+            echo "No newly added daily issue. Notification skipped."
           fi
 
+      # 自动发布时等待 Vercel 完成部署。
+      # 手动测试无需等待。
       - name: Wait for Vercel production deployment
-        if: steps.check.outputs.send == 'true'
+        if: >
+          steps.check.outputs.send == 'true' &&
+          github.event_name == 'push'
         run: sleep 45
 
       - name: Send WeChat notification
