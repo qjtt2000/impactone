@@ -1,10 +1,8 @@
 name: Send WeChat Daily Brief Notification
 
 on:
-  # 手动测试
   workflow_dispatch:
 
-  # 正式自动触发
   push:
     branches:
       - main
@@ -21,50 +19,77 @@ jobs:
         with:
           fetch-depth: 2
 
-      # Push 情况下：
-      # 只有真正新增 daily/*.html 才发送，
-      # 修改旧文章不重复发送。
-      - name: Check for newly added daily issue
+      - name: Detect new daily issue
         id: check
         shell: bash
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "send=true" >> "$GITHUB_OUTPUT"
+            echo "date=" >> "$GITHUB_OUTPUT"
             echo "Manual test requested."
             exit 0
           fi
 
-          NEW_FILE=$(git diff --diff-filter=A --name-only HEAD^ HEAD | grep -E '^daily/.*\.html$' | head -n 1 || true)
+          NEW_FILE=$(git diff --diff-filter=A --name-only HEAD^ HEAD | grep -E '^daily/[0-9]{4}-[0-9]{2}-[0-9]{2}\.html$' | head -n 1 || true)
 
           if [ -n "$NEW_FILE" ]; then
+            BASENAME=$(basename "$NEW_FILE" .html)
+            MESSAGE_DATE=$(echo "$BASENAME" | tr '-' '/')
+
             echo "send=true" >> "$GITHUB_OUTPUT"
             echo "file=$NEW_FILE" >> "$GITHUB_OUTPUT"
-            echo "New daily issue detected: $NEW_FILE"
+            echo "date=$MESSAGE_DATE" >> "$GITHUB_OUTPUT"
+
+            echo "New daily issue: $NEW_FILE"
+            echo "Message date: $MESSAGE_DATE"
           else
             echo "send=false" >> "$GITHUB_OUTPUT"
-            echo "No newly added daily issue. Notification skipped."
+            echo "No new official daily issue. Notification skipped."
           fi
 
-      # 自动发布时等待 Vercel 完成部署。
-      # 手动测试无需等待。
       - name: Wait for Vercel production deployment
         if: >
           steps.check.outputs.send == 'true' &&
           github.event_name == 'push'
-        run: sleep 45
+        run: sleep 60
 
       - name: Send WeChat notification
         if: steps.check.outputs.send == 'true'
         env:
           WECHAT_SEND_ADMIN_KEY: ${{ secrets.WECHAT_SEND_ADMIN_KEY }}
+          MESSAGE_DATE: ${{ steps.check.outputs.date }}
         shell: bash
         run: |
+          if [ -n "$MESSAGE_DATE" ]; then
+            BODY=$(jq -n \
+              --arg key "$WECHAT_SEND_ADMIN_KEY" \
+              --arg date "$MESSAGE_DATE" \
+              '{
+                adminKey: $key,
+                content: "影响力·每日必读已更新",
+                author: "IMPACTONE",
+                source: "影响力·每日必读",
+                date: $date,
+                page: "pages/index/index"
+              }')
+          else
+            BODY=$(jq -n \
+              --arg key "$WECHAT_SEND_ADMIN_KEY" \
+              '{
+                adminKey: $key,
+                content: "影响力·每日必读已更新",
+                author: "IMPACTONE",
+                source: "影响力·每日必读",
+                page: "pages/index/index"
+              }')
+          fi
+
           RESPONSE=$(curl --fail-with-body \
             --silent \
             --show-error \
             --request POST \
             "https://impactone-gamma.vercel.app/api/wechat-send" \
             --header "Content-Type: application/json" \
-            --data "{\"adminKey\":\"${WECHAT_SEND_ADMIN_KEY}\"}")
+            --data "$BODY")
 
           echo "$RESPONSE"
