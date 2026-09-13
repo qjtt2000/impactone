@@ -13,7 +13,6 @@ export default async function handler(req, res) {
       data
     } = req.body || {}
 
-    // 1. 后台发送接口鉴权
     const expectedAdminKey =
       process.env.WECHAT_SEND_ADMIN_KEY
 
@@ -62,19 +61,19 @@ export default async function handler(req, res) {
       })
     }
 
-    // 2. 查询所有 pending 授权
-    const subscriptionResponse = await fetch(
-      `${supabaseUrl}/rest/v1/wechat_subscriptions` +
-      `?status=eq.pending` +
-      `&template_id=eq.${encodeURIComponent(templateId)}` +
-      `&order=subscribed_at.asc`,
-      {
-        headers: {
-          apikey: supabaseKey,
-          Authorization: `Bearer ${supabaseKey}`
+    // 1. 读取 pending 订阅
+    const subscriptionResponse =
+      await fetch(
+        `${supabaseUrl}/rest/v1/wechat_subscriptions` +
+        `?status=eq.pending` +
+        `&template_id=eq.${encodeURIComponent(templateId)}` +
+        `&order=subscribed_at.asc`,
+        {
+          headers: {
+            apikey: supabaseKey
+          }
         }
-      }
-    )
+      )
 
     if (!subscriptionResponse.ok) {
       const detail =
@@ -82,12 +81,14 @@ export default async function handler(req, res) {
 
       console.error(
         'Load subscriptions failed:',
+        subscriptionResponse.status,
         detail
       )
 
       return res.status(500).json({
         success: false,
-        error: 'Failed to load subscriptions'
+        error: 'Failed to load subscriptions',
+        detail
       })
     }
 
@@ -106,9 +107,8 @@ export default async function handler(req, res) {
       })
     }
 
-    // 3. 同一个 OpenID 本期只使用一条授权
+    // 同一微信用户本期只消费一条授权
     const uniqueSubscriptions = []
-
     const usedOpenids = new Set()
 
     for (const item of subscriptions) {
@@ -118,7 +118,7 @@ export default async function handler(req, res) {
       }
     }
 
-    // 4. 获取微信 access_token
+    // 2. 获取微信 access_token
     const tokenUrl =
       'https://api.weixin.qq.com/cgi-bin/token' +
       '?grant_type=client_credential' +
@@ -146,40 +146,30 @@ export default async function handler(req, res) {
       })
     }
 
-    const accessToken =
-      tokenData.access_token
-
     let sent = 0
     let failed = 0
-
     const results = []
 
-    // 5. 给每个用户发送一条
+    // 3. 发送微信订阅消息
     for (const subscription of uniqueSubscriptions) {
       try {
         const sendUrl =
           'https://api.weixin.qq.com/cgi-bin/message/subscribe/send' +
           '?access_token=' +
-          encodeURIComponent(accessToken)
+          encodeURIComponent(tokenData.access_token)
 
         const sendResponse =
           await fetch(sendUrl, {
             method: 'POST',
 
             headers: {
-              'Content-Type':
-                'application/json'
+              'Content-Type': 'application/json'
             },
 
             body: JSON.stringify({
-              touser:
-                subscription.openid,
-
-              template_id:
-                templateId,
-
+              touser: subscription.openid,
+              template_id: templateId,
               page,
-
               data
             })
           })
@@ -187,30 +177,20 @@ export default async function handler(req, res) {
         const sendData =
           await sendResponse.json()
 
-        // 发送成功
         if (sendData.errcode === 0) {
           sent++
 
-          // 6. 把这一条 pending 标记为 sent
+          // 4. 成功后更新为 sent
           const updateResponse =
             await fetch(
-              `${supabaseUrl}/rest/v1/wechat_subscriptions` +
-              `?id=eq.${subscription.id}`,
+              `${supabaseUrl}/rest/v1/wechat_subscriptions?id=eq.${subscription.id}`,
               {
                 method: 'PATCH',
 
                 headers: {
-                  'Content-Type':
-                    'application/json',
-
-                  apikey:
-                    supabaseKey,
-
-                  Authorization:
-                    `Bearer ${supabaseKey}`,
-
-                  Prefer:
-                    'return=minimal'
+                  'Content-Type': 'application/json',
+                  apikey: supabaseKey,
+                  Prefer: 'return=minimal'
                 },
 
                 body: JSON.stringify({
@@ -222,9 +202,12 @@ export default async function handler(req, res) {
             )
 
           if (!updateResponse.ok) {
+            const updateDetail =
+              await updateResponse.text()
+
             console.error(
               'Failed to update subscription:',
-              subscription.id
+              updateDetail
             )
           }
 
@@ -236,12 +219,6 @@ export default async function handler(req, res) {
         } else {
           failed++
 
-          console.error(
-            'Send failed:',
-            subscription.id,
-            sendData
-          )
-
           results.push({
             id: subscription.id,
             success: false,
@@ -251,12 +228,6 @@ export default async function handler(req, res) {
 
       } catch (error) {
         failed++
-
-        console.error(
-          'Send exception:',
-          subscription.id,
-          error
-        )
 
         results.push({
           id: subscription.id,
