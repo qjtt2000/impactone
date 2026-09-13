@@ -11,17 +11,11 @@ export default async function handler(req, res) {
       adminKey,
       page = 'pages/index/index',
 
-      // 以下三个参数以后可以由网站发布程序传入
-      // 不传则自动使用默认值
       content = '影响力·每日必读已更新',
       author = 'IMPACTONE',
       source = '影响力·每日必读',
       date
     } = req.body || {}
-
-    // =====================================================
-    // 1. 验证后台发送密钥
-    // =====================================================
 
     const expectedAdminKey =
       process.env.WECHAT_SEND_ADMIN_KEY
@@ -35,10 +29,6 @@ export default async function handler(req, res) {
         error: 'Unauthorized'
       })
     }
-
-    // =====================================================
-    // 2. 环境变量
-    // =====================================================
 
     const appid =
       process.env.WECHAT_MINIPROGRAM_APPID
@@ -73,7 +63,7 @@ export default async function handler(req, res) {
     }
 
     // =====================================================
-    // 3. 生成纽约日期
+    // 生成纽约日期
     // =====================================================
 
     let messageDate = date
@@ -90,7 +80,6 @@ export default async function handler(req, res) {
           }
         )
 
-      // en-CA 一般得到 YYYY-MM-DD
       messageDate =
         formatter
           .format(new Date())
@@ -98,13 +87,7 @@ export default async function handler(req, res) {
     }
 
     // =====================================================
-    // 4. 微信模板内容
-    //
-    // 模板：
-    // thing1 = 更新内容
-    // date2  = 更新时间
-    // name3  = 作者
-    // thing4 = 来源
+    // 微信模板内容
     // =====================================================
 
     const templateData = {
@@ -126,36 +109,92 @@ export default async function handler(req, res) {
     }
 
     // =====================================================
-    // 5. 查询所有 pending 订阅
+    // 工具函数：等待
     // =====================================================
 
-    const subscriptionResponse =
-      await fetch(
-        `${supabaseUrl}/rest/v1/wechat_subscriptions` +
-        `?status=eq.pending` +
-        `&template_id=eq.${encodeURIComponent(templateId)}` +
-        `&order=subscribed_at.asc`,
-        {
-          headers: {
-            apikey: supabaseKey
-          }
+    const sleep = (ms) =>
+      new Promise(resolve =>
+        setTimeout(resolve, ms)
+      )
+
+    // =====================================================
+    // 查询 pending 订阅
+    // 遇到 502 / 503 / 504 自动重试
+    // =====================================================
+
+    const subscriptionUrl =
+      `${supabaseUrl}/rest/v1/wechat_subscriptions` +
+      `?status=eq.pending` +
+      `&template_id=eq.${encodeURIComponent(templateId)}` +
+      `&order=subscribed_at.asc`
+
+    let subscriptionResponse = null
+    let lastSubscriptionError = ''
+
+    const retryDelays = [0, 3000, 6000]
+
+    for (
+      let attempt = 0;
+      attempt < retryDelays.length;
+      attempt++
+    ) {
+      if (retryDelays[attempt] > 0) {
+        await sleep(retryDelays[attempt])
+      }
+
+      try {
+        subscriptionResponse =
+          await fetch(
+            subscriptionUrl,
+            {
+              headers: {
+                apikey: supabaseKey
+              }
+            }
+          )
+
+        if (subscriptionResponse.ok) {
+          break
         }
-      )
 
-    if (!subscriptionResponse.ok) {
-      const detail =
-        await subscriptionResponse.text()
+        lastSubscriptionError =
+          await subscriptionResponse.text()
 
-      console.error(
-        'Load subscriptions failed:',
-        subscriptionResponse.status,
-        detail
-      )
+        console.error(
+          `Load subscriptions failed, attempt ${attempt + 1}:`,
+          subscriptionResponse.status,
+          lastSubscriptionError
+        )
 
+        const retryable =
+          [502, 503, 504]
+            .includes(subscriptionResponse.status)
+
+        if (!retryable) {
+          break
+        }
+
+      } catch (error) {
+        lastSubscriptionError =
+          error instanceof Error
+            ? error.message
+            : String(error)
+
+        console.error(
+          `Load subscriptions exception, attempt ${attempt + 1}:`,
+          lastSubscriptionError
+        )
+      }
+    }
+
+    if (
+      !subscriptionResponse ||
+      !subscriptionResponse.ok
+    ) {
       return res.status(500).json({
         success: false,
-        error: 'Failed to load subscriptions',
-        detail
+        error: 'Failed to load subscriptions after retries',
+        detail: lastSubscriptionError
       })
     }
 
@@ -175,11 +214,7 @@ export default async function handler(req, res) {
     }
 
     // =====================================================
-    // 6. 同一用户本期只使用一次授权
-    //
-    // 例如同一个人有两条 pending：
-    // 本期只发送一条；
-    // 另一条留给下一期。
+    // 同一用户本期只消费一条授权
     // =====================================================
 
     const uniqueSubscriptions = []
@@ -196,7 +231,7 @@ export default async function handler(req, res) {
     }
 
     // =====================================================
-    // 7. 获取微信 access_token
+    // 获取微信 access_token
     // =====================================================
 
     const tokenUrl =
@@ -229,14 +264,14 @@ export default async function handler(req, res) {
     const accessToken =
       tokenData.access_token
 
-    // =====================================================
-    // 8. 逐个发送
-    // =====================================================
-
     let sent = 0
     let failed = 0
 
     const results = []
+
+    // =====================================================
+    // 逐个发送
+    // =====================================================
 
     for (
       const subscription
@@ -277,19 +312,11 @@ export default async function handler(req, res) {
         const sendData =
           await sendResponse.json()
 
-        // =================================================
-        // 发送成功
-        // =================================================
-
         if (sendData.errcode === 0) {
           sent++
 
           const sentAt =
             new Date().toISOString()
-
-          // -----------------------------------------------
-          // 9. 当前这一条 pending → sent
-          // -----------------------------------------------
 
           const updateResponse =
             await fetch(
@@ -335,10 +362,6 @@ export default async function handler(req, res) {
           continue
         }
 
-        // =================================================
-        // 微信返回发送失败
-        // =================================================
-
         failed++
 
         console.error(
@@ -372,10 +395,6 @@ export default async function handler(req, res) {
         })
       }
     }
-
-    // =====================================================
-    // 10. 返回发送统计
-    // =====================================================
 
     return res.status(200).json({
       success: true,
