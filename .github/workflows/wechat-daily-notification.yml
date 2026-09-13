@@ -1,0 +1,53 @@
+name: Send WeChat Daily Brief Notification
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "daily/*.html"
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check for newly added daily issue
+        id: check
+        shell: bash
+        run: |
+          NEW_FILE=$(git diff --diff-filter=A --name-only HEAD^ HEAD | grep -E '^daily/.*\.html$' | head -n 1 || true)
+
+          if [ -n "$NEW_FILE" ]; then
+            echo "send=true" >> "$GITHUB_OUTPUT"
+            echo "file=$NEW_FILE" >> "$GITHUB_OUTPUT"
+            echo "New daily issue detected: $NEW_FILE"
+          else
+            echo "send=false" >> "$GITHUB_OUTPUT"
+            echo "No new daily issue. Notification skipped."
+          fi
+
+      - name: Wait for Vercel production deployment
+        if: steps.check.outputs.send == 'true'
+        run: sleep 45
+
+      - name: Send WeChat notification
+        if: steps.check.outputs.send == 'true'
+        env:
+          WECHAT_SEND_ADMIN_KEY: ${{ secrets.WECHAT_SEND_ADMIN_KEY }}
+        shell: bash
+        run: |
+          RESPONSE=$(curl --fail-with-body \
+            --silent \
+            --show-error \
+            --request POST \
+            "https://impactone-gamma.vercel.app/api/wechat-send" \
+            --header "Content-Type: application/json" \
+            --data "{\"adminKey\":\"${WECHAT_SEND_ADMIN_KEY}\"}")
+
+          echo "$RESPONSE"
