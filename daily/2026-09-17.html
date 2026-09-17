@@ -35,43 +35,30 @@
       text-size-adjust: 100%;
     }
 
-    /* 1. 中段标题使用固定图片；副标题数字可按每期内容修改 */
-    .section-title-fixed {
+    /* 1. 图标与标题成为一个整体：间距固定为约半个中文字 */
+    .section-title {
       display: block !important;
-      margin: 0 0 1.5rem !important;
-      padding: 0 0 5.6% !important;
-      overflow: hidden;
-      background: #001B40;
     }
 
-    .section-title-fixed .middle-fixed-image {
-      display: block;
-      width: 100%;
-      max-width: 100%;
-      height: auto;
-      margin: 0;
+    .section-heading-row {
+      display: flex;
+      align-items: center;
+      gap: .5em;
+      line-height: 1;
     }
 
-    .section-title-fixed .section-sub {
-      display: block !important;
-      box-sizing: border-box;
-      width: 100% !important;
-      margin: -1.8% 0 0 !important;
-      padding: 0 5% 0 var(--subtitle-indent) !important;
-      color: #F2F2F2;
-      background: transparent;
-      font-size: clamp(18px, 3.8vw, 31px);
-      font-weight: 400;
-      line-height: 1.45;
-      letter-spacing: 0;
-      text-align: left;
-      text-indent: 0 !important;
-      transform: none !important;
+    .section-heading-row .section-icon-img {
+      margin: 0 !important;
+      flex: 0 0 auto;
     }
 
-    /* 分别锁定到两张图片中“今”字的左边缘 */
-    .focus-title-fixed { --subtitle-indent: 24.4%; }
-    .scan-title-fixed { --subtitle-indent: 23.3%; }
+    .section-heading-row h2 {
+      margin: 0 !important;
+    }
+
+    .section-title .section-sub {
+      margin-top: .65em;
+    }
 
     /* 2. 今日扫描展开后的留白 */
     .scan-body:not([hidden]) {
@@ -158,12 +145,11 @@
   ========================== -->
 
   <section>
-    <header class="section-title section-title-fixed focus-title-fixed">
-      <img
-        class="middle-fixed-image"
-        src="../images/daily/impactone-middle-fixed1.png?v=20260917"
-        alt="今日焦点 DAILY FOCUS"
-      >
+    <header class="section-title">
+      <div class="section-heading-row">
+        <img class="section-icon-img focus-icon" src="../images/daily/ui/focus-icon.png" alt="" aria-hidden="true">
+        <h2>今日焦点 <span class="section-en">DAILY FOCUS</span></h2>
+      </div>
       <div class="section-sub">4件事，看懂今天最重要的变化</div>
     </header>
 
@@ -177,10 +163,10 @@
 
     <article class="story">
       <div class="story-number">02｜</div>
-      <h3>万斯：对伊朗战争进入“经济施压”新阶段</h3>
-      <p>美国副总统万斯表示，对伊朗的战争已经进入一个以经济压力为重要工具的“新阶段”。美国政府正在推动扩大对伊朗的经济孤立，并要求其他国家及金融机构配合相关行动。财政部长贝森特表示，美方希望通过更广泛的国际协同行动进一步压缩伊朗获得金融和贸易支持的空间。</p>
-      <p><b>来源｜</b>CBS新闻</p>
-      <p class="analysis"><span class="label">观察｜</span><br>经济压力能否真正改变伊朗的政策选择，最终仍需要现实数据验证。对存在涉伊朗贸易链条的企业而言，更重要的是美国是否进一步扩大二级制裁、金融限制或执法范围；在正式措施出台前，政治施压不能直接等同于新的合规规则。</p>
+      <h3>万斯：对伊朗战争进入“经济施压”新阶段，贝森特称将推动大规模协同经济孤立</h3>
+      <p>美国副总统万斯周三表示，对伊朗的战争已进入“新阶段”，并称经济施压将成为重要工具；他表示，尽管伊朗持续袭击商业船只，美国仍能通过霍尔木兹海峡运输大量油气，这削弱了德黑兰的谈判筹码。美国财政部长贝森特同日表示，美方正推动大规模协同经济孤立行动，并呼吁盟友和贸易伙伴配合。</p>
+      <p><b>来源｜</b>CBS新闻、CNBC</p>
+      <p class="analysis"><span class="label">观察｜</span><br>万斯关于伊朗承受更大压力的判断可以被现实数据验证：接下来应观察伊朗汇率、通胀和燃油供应是否继续恶化。对存在涉伊朗贸易链条的企业而言，更重要的是美国是否进一步扩大二级制裁、金融限制或执法范围；在正式措施出台前，政治施压不能直接等同于新的合规规则。</p>
     </article>
 
     <article class="story">
@@ -194,7 +180,7 @@
     <article class="story">
       <div class="story-number">04｜</div>
       <h3>新西兰议会以93票对29票通过法案，批准新西兰—印度自贸协定</h3>
-      <p>新西兰议会周三通过实施新西兰—印度自由贸易协定所需立法。根据协定，新西兰绝大多数对印度出口商品将最终获得关税取消或大幅削减，其中超过一半将在协定生效首日实现零关税。</p>
+      <p>新西兰议会周三以93票对29票通过实施新西兰—印度自由贸易协定所需立法。根据协定，新西兰约95%的对印度出口商品将最终获得关税取消或大幅削减，其中57%将在协定生效首日实现零关税。</p>
       <p><b>来源｜</b>Reuters</p>
       <p class="analysis"><span class="label">观察｜</span><br>目前两国贸易规模仍然有限，但当全球贸易政策不确定性上升，中等经济体通过双边FTA扩大市场准入的价值正在提高。对企业而言，更值得关注的是新协定具体改变哪些商品的关税、原产地规则和市场进入成本，以及类似安排是否继续增加。</p>
     </article>
@@ -206,91 +192,90 @@
   ========================== -->
 
   <section>
-    <header class="section-title section-title-fixed scan-title-fixed">
-      <img
-        class="middle-fixed-image"
-        src="../images/daily/impactone-middle-fixed2.png?v=20260917"
-        alt="今日扫描 DAILY SCAN"
-      >
+    <header class="section-title">
+      <div class="section-heading-row">
+        <img class="section-icon-img scan-icon" src="../images/daily/ui/scan-icon.png" alt="" aria-hidden="true">
+        <h2>今日扫描 <span class="section-en">DAILY SCAN</span></h2>
+      </div>
       <div class="section-sub">6个值得关注的信号</div>
     </header>
 
     <article class="scan-item">
-      <div class="scan-number">1.</div>
+      <div class="scan-number">05｜</div>
       <h3>核能企业Holtec暂停最高约9亿美元IPO计划</h3>
-      <p class="scan-summary">据路透社报道，核技术公司Holtec Nuclear暂停原定本周进行的美国IPO，目前尚未公布新的发行时间。
+      <p class="scan-summary">据路透社报道，核技术公司Holtec Nuclear周三暂停原定本周进行的美国IPO。公司原计划最高募资约9亿美元，目前尚未公布新的发行时间。
         <button class="scan-toggle" type="button" aria-expanded="false">展开详情 ＋</button>
       </p>
       <div class="scan-body" hidden>
-        <p><b>补充详情｜</b>Holtec原计划发行约5000万股，发行价区间为每股15至18美元，最高募资规模约9亿美元。公司表示仍将评估未来发行时机，并未宣布永久取消上市计划。</p>
+        <p><b>补充详情｜</b>Holtec原计划成为今年秋季美国IPO窗口中规模较大的新股之一。此次暂停发生之际，投资者正在提高对AI相关行业巨额资本投入回报的审视力度，而核能又与数据中心快速增长的电力需求密切相关。Holtec表示仍将继续评估未来发行时机，并未宣布永久取消上市计划。</p>
         <button class="scan-collapse" type="button">收起详情 －</button>
       </div>
       <p class="scan-quick"><span class="label">快评｜</span><br>Holtec暂停发行，说明资本市场正在对“AI电力需求—核能投资”这条叙事进行更严格的估值检验。</p>
     </article>
 
     <article class="scan-item">
-      <div class="scan-number">2.</div>
-      <h3>Orion180据悉考虑下调IPO定价</h3>
-      <p class="scan-summary">据彭博社报道，保险公司Orion180正在考虑以低于此前发行区间的价格完成IPO，最终定价仍待确认。
+      <div class="scan-number">06｜</div>
+      <h3>Orion180据悉拟以12美元为IPO定价，低于此前15-17美元区间</h3>
+      <p class="scan-summary">据彭博社报道，Orion180 Insurance Group据悉正考虑将IPO定价设在每股12美元，低于此前15-17美元的发行区间；最终定价预计在周四美股收盘后确认，公司计划随后在纳斯达克挂牌。
         <button class="scan-toggle" type="button" aria-expanded="false">展开详情 ＋</button>
       </p>
       <div class="scan-body" hidden>
-        <p><b>补充详情｜</b>公司此前计划以每股15至17美元发行约2000万股，目前据悉考虑将价格降至12美元。若最终按这一价格发行，基础募资规模约2.4亿美元，低于原发行区间对应的约3亿至3.4亿美元。最终价格预计在周四美股收盘后确定。</p>
+        <p><b>补充详情｜</b>Orion180计划发行约2000万股，若最终按12美元定价，对应基础募资规模约2.4亿美元，低于按照原发行区间计算的约3亿至3.4亿美元。此次交易由加拿大皇家银行、瑞银及Raymond James等机构参与承销。由于最终价格尚未确认，目前12美元仍属于拟定价格，不能作为已经完成的发行结果。</p>
         <button class="scan-collapse" type="button">收起详情 －</button>
       </div>
-      <p class="scan-quick"><span class="label">快评｜</span><br>Holtec暂停发行、Orion180考虑下调定价，是两个独立案例；如果类似情况继续增加，一级市场风险偏好的变化会更加清晰。</p>
+      <p class="scan-quick"><span class="label">快评｜</span><br>Holtec暂停发行、Orion180考虑低于原区间定价，是两个独立案例；如果类似情况继续增加，一级市场风险偏好的变化会更加清晰。</p>
     </article>
 
     <article class="scan-item">
-      <div class="scan-number">3.</div>
+      <div class="scan-number">07｜</div>
       <h3>沙特拦截弹库存下降，向多国寻求防空支援</h3>
-      <p class="scan-summary">据美联社报道，沙特阿拉伯的导弹拦截系统库存正在减少，并已向多个国家寻求防空支援。
+      <p class="scan-summary">据美联社援引两名地区官员报道，沙特阿拉伯的导弹拦截系统库存正在减少，已向法国、英国、巴基斯坦和埃及寻求防空支援；美国自身的拦截弹库存也因持续的地区冲突面临压力。
         <button class="scan-toggle" type="button" aria-expanded="false">展开详情 ＋</button>
       </p>
       <div class="scan-body" hidden>
-        <p><b>补充详情｜</b>美联社援引两名地区官员称，沙特已向法国、英国、巴基斯坦和埃及寻求帮助。截至报道发布时，相关国家尚未公开承诺提供军事支援；美国自身的部分拦截弹库存也面临压力。</p>
+        <p><b>补充详情｜</b>截至报道发布时，法国、英国、巴基斯坦和埃及尚未承诺提供军事支援。美国继续向沙特提供情报合作，但没有直接介入沙特与胡塞武装的军事冲突。</p>
         <button class="scan-collapse" type="button">收起详情 －</button>
       </div>
-      <p class="scan-quick"><span class="label">快评｜</span><br>提出请求不等于已经获得支援，但沙特同时向多个国家寻找防空资源，反映关键拦截弹的供应压力正在向盟友体系外溢。</p>
+      <p class="scan-quick"><span class="label">快评｜</span><br>提出请求不等于已经获得支援，但沙特开始同时向多个国家寻找防空资源，反映关键拦截弹的供应压力正在向盟友体系外溢。</p>
     </article>
 
     <article class="scan-item">
-      <div class="scan-number">4.</div>
-      <h3>美国众议院再次通过限制对伊朗军事行动的战争权力决议</h3>
-      <p class="scan-summary">据CBS新闻报道，美国众议院再次通过战争权力决议，要求在未经国会授权的情况下终止相关军事行动，共和党内部支持人数较此前增加。
+      <div class="scan-number">08｜</div>
+      <h3>美国众议院第三次通过限制对伊朗军事行动的战争权力决议</h3>
+      <p class="scan-summary">据CBS新闻报道，美国众议院周二（9月15日）以220票对204票通过一项战争权力决议，要求在未经国会授权的情况下终止相关军事行动；7名共和党议员加入支持阵营。
         <button class="scan-toggle" type="button" aria-expanded="false">展开详情 ＋</button>
       </p>
       <div class="scan-body" hidden>
-        <p><b>补充详情｜</b>本次表决结果为220票赞成、204票反对，共有7名共和党议员加入支持阵营。这是众议院今年第三次通过针对对伊朗军事行动的类似措施，本次共和党支持人数为三次中最多。目前该措施并未产生要求政府立即撤军的实际法律效果。</p>
+        <p><b>补充详情｜</b>这是众议院今年第三次通过针对对伊朗军事行动的类似措施，本次共和党支持人数为三次中最多。该措施目前并未产生要求政府立即撤军的实际法律效果，此前两次类似表决也未改变美国对伊朗的军事行动。后续仍需观察参议院程序及行政部门回应。</p>
         <button class="scan-collapse" type="button">收起详情 －</button>
       </div>
       <p class="scan-quick"><span class="label">快评｜</span><br>这次表决更值得记录的是跨党派支持人数的变化，而不是把一次众议院投票直接理解为美国战争政策已经转向。</p>
     </article>
 
     <article class="scan-item">
-      <div class="scan-number">5.</div>
-      <h3>美国8月零售销售明显反弹，消费支出保持韧性</h3>
-      <p class="scan-summary">据美国人口普查局数据，美国8月零售及餐饮服务销售明显回升，扭转了7月下降走势。
+      <div class="scan-number">09｜</div>
+      <h3>美国8月零售销售环比增长1.2%，同比增长6.0%</h3>
+      <p class="scan-summary">据美国人口普查局数据，美国8月零售及餐饮服务销售额为7739亿美元，环比增长1.2%，同比增长6.0%；7月环比数据由此前下降0.6%修正为下降0.5%。
         <button class="scan-toggle" type="button" aria-expanded="false">展开详情 ＋</button>
       </p>
       <div class="scan-body" hidden>
-        <p><b>补充详情｜</b>8月零售及餐饮服务销售额为7739亿美元，环比增长1.2%，同比增长6.0%；7月环比降幅由此前公布的0.6%修正为0.5%。数据经过季节、节假日和交易日因素调整，但没有剔除价格变化。</p>
+        <p><b>补充详情｜</b>美国人口普查局的零售销售统计覆盖零售及餐饮服务企业，数据经过季节性因素以及节假日和交易日差异调整，但不进行价格变化调整。因此，这组数据首先反映的是消费者支出的名义金额变化，而不是经过通胀调整后的实际消费量变化。</p>
         <button class="scan-collapse" type="button">收起详情 －</button>
       </div>
-      <p class="scan-quick"><span class="label">快评｜</span><br>消费金额仍显示韧性，但在价格波动较大的阶段，销售额增长不能完全等同于实际消费量增长。</p>
+      <p class="scan-quick"><span class="label">快评｜</span><br>消费金额仍显示韧性，但在价格波动较大的阶段，销售额增长并不能完全等同于实际消费量增长。</p>
     </article>
 
     <article class="scan-item">
-      <div class="scan-number">6.</div>
-      <h3>Bank7收购Century Financial Services，进入新墨西哥州</h3>
-      <p class="scan-summary">据Bank7与Century Financial Services联合公告及Bank7提交的SEC文件，Bank7宣布收购Century Financial Services，交易完成后将进一步扩大其在美国西南部的银行业务版图。
+      <div class="scan-number">10｜</div>
+      <h3>Bank7约1.37亿美元收购Century Financial Services，进入新墨西哥州</h3>
+      <p class="scan-summary">据Bank7与Century Financial Services联合公告及Bank7提交的SEC文件，Bank7周四宣布收购Century全部流通普通股，交易价值约1.373亿美元；交易完成后，合并机构总资产预计约33亿美元。交易仍需获得Century股东、银行监管机构等批准，预计于2026年第四季度完成。
         <button class="scan-toggle" type="button" aria-expanded="false">展开详情 ＋</button>
       </p>
       <div class="scan-body" hidden>
-        <p><b>补充详情｜</b>交易价值约1.373亿美元，包括7000万美元现金及1,232,657股Bank7普通股；合并机构总资产预计约33亿美元。交易仍需获得Century股东及相关监管机构批准，预计于2026年第四季度完成。Bank7此前已在法院监督的拍卖中成为Century约71%控股权益的中标方。</p>
+        <p><b>补充详情｜</b>根据交易协议，交易对价包括7000万美元现金及1,232,657股Bank7普通股。Century随后将并入Bank7，旗下Century Bank也将并入Bank7。Bank7此前已在法院监督的拍卖中成为Century约71%控股权益的中标方，目前整体收购是其首选交易路径；如果整体交易未能完成，此前的控股权益收购协议仍然有效。</p>
         <button class="scan-collapse" type="button">收起详情 －</button>
       </div>
-      <p class="scan-quick"><span class="label">快评｜</span><br>相比单纯扩大资产规模，这笔交易更值得关注的是Bank7借整体收购进入新墨西哥州，并进一步扩大区域经营版图。</p>
+      <p class="scan-quick"><span class="label">快评｜</span><br>相比单纯扩大资产规模，这笔交易更值得关注的是Bank7借整体收购进入新墨西哥州，并进一步扩大其美国西南部区域银行版图。</p>
     </article>
 
   </section>
@@ -307,8 +292,11 @@
       <h2 class="view-title">利率重新上行，企业融资窗口正在接受现实检验</h2>
     </header>
     <div class="daily-view">
-      <p>美联储启动三年来首次加息；Holtec暂停最高约9亿美元IPO；Orion180据报道考虑下调IPO定价，最终价格仍待确认。前两项事实已经发生，Orion180仍处于拟定价格阶段，三者之间不能建立直接因果关系，但分别提供了货币政策、发行决策和新股定价三个观察融资环境的切面。</p>
-      <p>对企业而言，与其笼统判断“市场情绪变差”，不如跟踪两个具体指标：新股最终定价相对发行区间的偏离程度，以及暂停、延期案例是否继续增加。这些变化更接近企业真正能够以什么条件获得资本。</p>
+      <p>美联储启动三年来首次加息；Holtec暂停最高约9亿美元IPO；Orion180据报道考虑以12美元定价，低于此前15-17美元区间，最终价格仍待确认。</p>
+      <p>前两项事实已经发生，Orion180仍处于拟定价格阶段，三者之间也不能建立直接因果关系，但分别提供了货币政策、发行决策和新股定价三个观察融资环境的切面。</p>
+      <p>对企业而言，与其笼统判断“市场情绪变差”，不如跟踪两个具体指标：</p>
+      <p><strong>新股最终定价相对发行区间的偏离程度，以及暂停、延期案例是否继续增加。</strong></p>
+      <p class="view-final">这些变化更接近企业真正能够以什么条件获得资本。</p>
     </div>
   </section>
 
