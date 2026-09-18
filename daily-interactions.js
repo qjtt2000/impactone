@@ -480,19 +480,8 @@
   const wechatSubscribeHelp =
     $('#wechatSubscribeHelp');
 
-
-  /*
-    下一步生成微信小程序 URL Link 后，
-    只需要替换下面这一行。
-
-    示例格式：
-    https://wxaurl.cn/xxxxxxxx
-
-    不要填写 AppID。
-  */
-
-  const MINI_PROGRAM_URL =
-    'YOUR_MINIPROGRAM_URL_LINK';
+  const MINI_PROGRAM_CODE =
+    '/images/wechat-miniprogram-code.png';
 
 
   subscribeAction
@@ -543,71 +532,51 @@
       'click',
       () => {
 
-        const userAgent =
-          navigator.userAgent
-            .toLowerCase();
-
-        const isWechat =
-          userAgent.includes(
-            'micromessenger'
-          );
-
-
-        /*
-          用户不是从微信打开网页
-        */
-
-        if (!isWechat) {
-
-          if (
-            wechatSubscribeHelp
-          ) {
-
-            wechatSubscribeHelp.innerHTML =
-              '请先在微信中打开本页面，再点击“微信订阅下一期更新”。';
-
-          }
-
-          return;
-
-        }
-
-
-        /*
-          小程序 URL Link 尚未填写
-        */
-
         if (
-          !MINI_PROGRAM_URL ||
-          MINI_PROGRAM_URL ===
-            'YOUR_MINIPROGRAM_URL_LINK'
+          !wechatSubscribeHelp
         ) {
-
-          if (
-            wechatSubscribeHelp
-          ) {
-
-            wechatSubscribeHelp.innerHTML =
-              '微信订阅入口正在配置中。';
-
-          }
-
           return;
-
         }
 
+        wechatSubscribeHelp.innerHTML = `
+          <div style="
+            text-align:center;
+            padding-top:16px;
+          ">
+            <div style="
+              font-size:16px;
+              font-weight:600;
+              color:#001B40;
+              margin-bottom:14px;
+            ">
+              微信扫码进入「影响力必读」
+            </div>
 
-        /*
-          打开微信小程序
-        */
+            <img
+              src="${MINI_PROGRAM_CODE}"
+              alt="影响力必读小程序码"
+              style="
+                display:block;
+                width:220px;
+                max-width:75%;
+                height:auto;
+                margin:0 auto 14px;
+              "
+            >
 
-        window.location.href =
-          MINI_PROGRAM_URL;
+            <div style="
+              font-size:14px;
+              line-height:1.7;
+              color:#666;
+            ">
+              扫码进入小程序后<br>
+              点击“接收下一期更新”
+            </div>
+          </div>
+        `;
 
       }
     );
-
-
   /* ========================================
      邮件订阅备用
   ======================================== */
