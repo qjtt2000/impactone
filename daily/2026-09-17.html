@@ -112,9 +112,13 @@
 
     /* 日期左端与排头图中的“筛选全球资讯”对齐 */
     .issue-date {
+      display: block !important;
       box-sizing: border-box;
       width: 100%;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
       padding-left: 12.25% !important;
+      padding-right: 0 !important;
       text-align: left !important;
     }
 
@@ -129,8 +133,15 @@
     }
 
     .story-figure figcaption {
+      display: block !important;
+      box-sizing: border-box;
+      width: 100% !important;
       margin-top: .6rem;
-      text-align: center;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      text-align: center !important;
       color: #6f6f6f;
       font-size: .78em;
       line-height: 1.5;
@@ -252,7 +263,7 @@
         <button class="scan-toggle" type="button" aria-expanded="false">展开详情 ＋</button>
       </p>
       <div class="scan-body" hidden>
-        <p><b>补充详情｜</b>原计划以每股15-18美元发行5000万股，募资规模最高约9亿美元，公司表示将继续评估未来发行时机；据世界核新闻网报道，公司管理层称市场对AI板块的担忧是导致暂停的因素之一，此前已上市的核能同行股价表现同样偏弱。</p>
+        <p><b>补充详情｜</b>原计划以每股15-18美元发行5000万股，募资规模最高约9亿美元；据世界核新闻网报道，公司管理层将暂停归因于市场对AI相关板块估值的担忧，公司表示将继续评估未来发行时机，未设定新的时间表。此前已上市的核能同行Standard Nuclear和X-Energy股价均已跌破发行价，成为此次暂停决定的市场背景。</p>
         <button class="scan-collapse" type="button">收起详情 －</button>
       </div>
       <p class="scan-quick"><span class="label">快评｜</span><br>近期几家核能相关新股表现偏弱，Holtec此时暂停发行，或许说明市场对“AI电力需求—核能投资”这条叙事正在进入更严格的估值检验阶段。</p>
@@ -265,7 +276,7 @@
         <button class="scan-toggle" type="button" aria-expanded="false">展开详情 ＋</button>
       </p>
       <div class="scan-body" hidden>
-        <p><b>补充详情｜</b>公司拟发行2000万股，定价预计于本周四美股收盘后进行，股票定于周五在纳斯达克挂牌；此次配售预计将高度集中于大型共同基金。</p>
+        <p><b>补充详情｜</b>公司拟发行2000万股，定价预计于本周四美股收盘后进行，股票定于周五在纳斯达克挂牌；此次配售预计将高度集中于大型共同基金，而非分散给零售投资者，这与原本更宽泛的机构配售计划形成对比。</p>
         <button class="scan-collapse" type="button">收起详情 －</button>
       </div>
       <p class="scan-quick"><span class="label">快评｜</span><br>若最终按拟定价格发行，同一周内一家新股暂停、另一家压价，两个信号叠加，比单一新闻更直接地反映一级市场风险偏好的变化。</p>
@@ -278,10 +289,10 @@
         <button class="scan-toggle" type="button" aria-expanded="false">展开详情 ＋</button>
       </p>
       <div class="scan-body" hidden>
-        <p><b>补充详情｜</b>报道称，此次求助的背景是美国自身的拦截弹库存也在下降；这些国家是否同意提供支援尚未确认。</p>
+        <p><b>补充详情｜</b>这次求助的背景是沙特主要盟友兼武器供应国美国自身的拦截弹库存，也在与伊朗六个月战争中持续下降；沙特此前已将圣城麦加列为“红线”，称已拦截一架无人机，胡塞武装否认曾以麦加为目标。英国首相发言人证实英沙存在“密切防务伙伴关系”，但拒绝确认是否已收到军事援助请求或英军是否已在沙特境内；巴基斯坦、土耳其官员则向美联社表示尚未收到沙特方面的正式求助，而沙特、土耳其、巴基斯坦三方防务协定这次也是首次接受实战考验。</p>
         <button class="scan-collapse" type="button">收起详情 －</button>
       </div>
-      <p class="scan-quick"><span class="label">快评｜</span><br>提出请求不等于已经获得支援，但当美国自身的拦截弹库存都在吃紧，盟友主动寻求多元化防空支援，本身就是一项值得跟踪的供应链风险信号。</p>
+      <p class="scan-quick"><span class="label">快评｜</span><br>提出请求不等于已经获得支援，盟友各自的回应口径也不一致，这本身就是判断这套多边防务安排实际可靠度的一个信号。</p>
     </article>
 
     <article class="scan-item">
@@ -312,12 +323,12 @@
 
     <article class="scan-item">
       <div class="scan-number">6.</div>
-      <h3>Bank7收购Century金融</h3>
-      <p class="scan-summary">据SEC文件及双方联合公告，俄克拉荷马州Bank7周三宣布以约1.373亿美元的现金加股票方式收购新墨西哥州Century金融服务公司，进军新墨西哥州市场。
+      <h3>Bank7全资收购Century金融</h3>
+      <p class="scan-summary">据Bank7官方公告及SEC文件，俄克拉荷马州Bank7周三宣布与新墨西哥州Century金融服务公司签署最终合并协议，将收购Century全部已发行普通股，总对价约1.37亿美元。
         <button class="scan-toggle" type="button" aria-expanded="false">展开详情 ＋</button>
       </p>
       <div class="scan-body" hidden>
-        <p><b>补充详情｜</b>交易完成后合并资产规模约33亿美元，预计2026年四季度完成，尚待股东及监管批准。</p>
+        <p><b>补充详情｜</b>这笔交易是今年7月双方71%控股权收购协议的进一步升级——Bank7此前以6800万美元取得约71%股权，此次将收购比例扩大至100%。Century在新墨西哥州运营8家分行，截至二季度末总资产约13.5亿美元；交易完成后双方合并资产约33亿美元，仍待监管及法院批准，预计四季度完成。</p>
         <button class="scan-collapse" type="button">收起详情 －</button>
       </div>
       <p class="scan-quick"><span class="label">快评｜</span><br>这笔交易发生在利率重新上行的背景下，后续更值得观察的是融资成本上升是否会改变区域银行并购的估值、支付结构和成交节奏。</p>
