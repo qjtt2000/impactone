@@ -73,10 +73,24 @@
     /* 3. 今日洞见：上半部分固定图片，下方标题继续按每天内容更新 */
     .view-section-title.view-fixed-layout {
       display: block !important;
+      position: static !important;
       margin: 0 !important;
       padding: 0 !important;
+      height: auto !important;
+      min-height: 0 !important;
+      max-height: none !important;
+      gap: 0 !important;
+      grid-template-columns: none !important;
+      grid-template-rows: none !important;
+      align-items: initial !important;
       overflow: hidden;
       background: #001B40 !important;
+    }
+
+    .view-section-title.view-fixed-layout::before,
+    .view-section-title.view-fixed-layout::after {
+      display: none !important;
+      content: none !important;
     }
 
     .view-fixed-top {
@@ -95,6 +109,12 @@
       font-size: clamp(11px, 2.5vw, 22px) !important;
       line-height: 1.45 !important;
       letter-spacing: 0 !important;
+    }
+
+    @media (max-width: 600px) {
+      .view-section-title.view-fixed-layout .view-title {
+        padding-bottom: 14px !important;
+      }
     }
 
     /* 4. 排头/结尾使用固定图片，锁定字体、比例与位置 */
@@ -351,7 +371,7 @@
         src="../images/daily/impactone-view-fixed-top.png?v=20260918-2"
         alt="今日洞见 IMPACTONE VIEW"
       >
-      <h2 class="view-title">融资窗口正在收紧</h2>
+      <h2 class="view-title">融资窗口正在收紧，企业更要看具体信号</h2>
     </header>
     <div class="daily-view">
       <p>美联储启动三年来首次加息；Holtec暂停原定IPO；Orion180计划以低于此前区间的价格完成发行。三者分别来自货币政策、企业发行决策和新股定价，不能据此建立直接因果，但共同提供了观察融资环境的三个切面。</p>
