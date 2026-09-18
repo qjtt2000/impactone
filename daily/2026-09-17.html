@@ -70,7 +70,30 @@
       margin-top: 1.15em !important;
     }
 
-    /* 3. 排头/结尾使用固定图片，锁定字体、比例与位置 */
+    /* 3. 今日洞见：上半部分固定图片，下方标题继续按每天内容更新 */
+    .view-section-title.view-fixed-layout {
+      display: block !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow: hidden;
+      background: #001B40 !important;
+    }
+
+    .view-fixed-top {
+      display: block !important;
+      width: 100% !important;
+      height: auto !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    .view-section-title.view-fixed-layout .view-title {
+      display: block !important;
+      margin: 0 !important;
+      padding: 0 7.35% 28px !important;
+    }
+
+    /* 4. 排头/结尾使用固定图片，锁定字体、比例与位置 */
     .brand-lockup-wrap {
       width: 100%;
       overflow: hidden;
@@ -277,10 +300,12 @@
   ========================== -->
 
   <section>
-    <header class="view-section-title">
-      <span class="view-cn">今日洞见</span>
-      <span class="view-en sr-only">IMPACTONE VIEW</span>
-      <img class="view-mark" src="../images/daily/ui/view-mark.png" alt="IMPACTONE VIEW">
+    <header class="view-section-title view-fixed-layout">
+      <img
+        class="view-fixed-top"
+        src="../images/daily/impactone-view-fixed-top.png?v=20260918-1"
+        alt="今日洞见 IMPACTONE VIEW"
+      >
       <h2 class="view-title">利率重新上行，企业融资窗口正在接受现实检验</h2>
     </header>
     <div class="daily-view">
