@@ -26,6 +26,7 @@ jobs:
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "send=true" >> "$GITHUB_OUTPUT"
             echo "date=" >> "$GITHUB_OUTPUT"
+            echo "page_date=" >> "$GITHUB_OUTPUT"
             echo "Manual test requested."
             exit 0
           fi
@@ -39,9 +40,11 @@ jobs:
             echo "send=true" >> "$GITHUB_OUTPUT"
             echo "file=$NEW_FILE" >> "$GITHUB_OUTPUT"
             echo "date=$MESSAGE_DATE" >> "$GITHUB_OUTPUT"
+            echo "page_date=$BASENAME" >> "$GITHUB_OUTPUT"
 
             echo "New daily issue: $NEW_FILE"
             echo "Message date: $MESSAGE_DATE"
+            echo "Page date: $BASENAME"
           else
             echo "send=false" >> "$GITHUB_OUTPUT"
             echo "No new official daily issue. Notification skipped."
@@ -58,19 +61,24 @@ jobs:
         env:
           WECHAT_SEND_ADMIN_KEY: ${{ secrets.WECHAT_SEND_ADMIN_KEY }}
           MESSAGE_DATE: ${{ steps.check.outputs.date }}
+          PAGE_DATE: ${{ steps.check.outputs.page_date }}
         shell: bash
         run: |
-          if [ -n "$MESSAGE_DATE" ]; then
+          if [ -n "$MESSAGE_DATE" ] && [ -n "$PAGE_DATE" ]; then
+
+            PAGE="pages/webview/webview?date=$PAGE_DATE"
+
             BODY=$(jq -n \
               --arg key "$WECHAT_SEND_ADMIN_KEY" \
               --arg date "$MESSAGE_DATE" \
+              --arg page "$PAGE" \
               '{
                 adminKey: $key,
                 content: "影响力·每日必读已更新",
                 author: "IMPACTONE",
                 source: "影响力·每日必读",
                 date: $date,
-                page: "pages/index/index"
+                page: $page
               }')
           else
             BODY=$(jq -n \
@@ -80,9 +88,12 @@ jobs:
                 content: "影响力·每日必读已更新",
                 author: "IMPACTONE",
                 source: "影响力·每日必读",
-                page: "pages/index/index"
+                page: "pages/webview/webview"
               }')
           fi
+
+          echo "Sending notification..."
+          echo "$BODY"
 
           RESPONSE=$(curl --fail-with-body \
             --silent \
