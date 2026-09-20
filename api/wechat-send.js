@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   try {
     const {
       adminKey,
-      page = 'pages/index/index',
+      page = 'pages/webview/webview',
 
       content = '影响力·每日必读已更新',
       author = 'IMPACTONE',
