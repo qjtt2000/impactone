@@ -72,18 +72,22 @@
 
     /* 3. 今日洞见：上半部分固定图片，下方标题继续按每天内容更新 */
     .view-section-title.view-fixed-layout {
-      display: block !important;
+      display: flex !important;
+      flex-direction: column !important;
       position: static !important;
+      box-sizing: border-box !important;
+      width: 100% !important;
       margin: 0 !important;
       padding: 0 !important;
       height: auto !important;
       min-height: 0 !important;
       max-height: none !important;
       gap: 0 !important;
+      row-gap: 0 !important;
       grid-template-columns: none !important;
       grid-template-rows: none !important;
-      align-items: initial !important;
-      overflow: hidden;
+      align-items: stretch !important;
+      overflow: hidden !important;
       background: #001B40 !important;
     }
 
@@ -95,17 +99,24 @@
 
     .view-fixed-top {
       display: block !important;
+      flex: 0 0 auto !important;
       width: 100% !important;
       height: auto !important;
       margin: 0 !important;
       padding: 0 !important;
+      border: 0 !important;
+      vertical-align: top !important;
       image-rendering: auto !important;
     }
 
     .view-section-title.view-fixed-layout .view-title {
       display: block !important;
-      margin: 0 !important;
+      box-sizing: border-box !important;
+      width: 100% !important;
+      margin: -1px 0 0 !important;
       padding: 0 8.65% 56px !important;
+      background: #001B40 !important;
+      color: #ffffff !important;
       white-space: nowrap !important;
       font-family: "Noto Sans SC", "Microsoft YaHei", "PingFang SC", Arial, sans-serif !important;
       font-size: clamp(24px, 3.2vw, 36px) !important;
@@ -116,7 +127,7 @@
 
     @media (max-width: 600px) {
       .view-section-title.view-fixed-layout .view-title {
-        margin-top: 0 !important;
+        margin: -1px 0 0 !important;
         padding: 0 8.65% 28px !important;
         font-size: 22px !important;
         font-weight: 800 !important;
@@ -377,7 +388,7 @@
     <header class="view-section-title view-fixed-layout">
       <img
         class="view-fixed-top"
-        src="../images/daily/impactone-view-fixed-top.png?v=20260918-8"
+        src="../images/daily/impactone-view-fixed-top.png?v=20260920-9"
         alt="今日洞见 IMPACTONE VIEW"
       >
       <h2 class="view-title">同一场危机，不同货种给出不同恢复信号</h2>
