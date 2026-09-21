@@ -18,7 +18,7 @@ export default async function handler(req, res) {
     } = req.body || {}
 
     const expectedAdminKey =
-      process.env.WECHAT_SEND_ADMIN_KEY
+      process.env.WECHAT_SEND_ADMIN_KEY_NEW
 
     if (
       !expectedAdminKey ||
