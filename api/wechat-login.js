@@ -19,7 +19,7 @@ export default async function handler(req, res) {
 
     // 从 Vercel Environment Variables 读取
     const appid = process.env.WECHAT_MINIPROGRAM_APPID
-    const secret = process.env.WECHAT_MINIPROGRAM_APPSECRET
+    const secret = process.env.WECHAT_MINIPROGRAM_APPSECRET_NEW
 
     if (!appid || !secret) {
       console.error('Missing WeChat environment variables')
