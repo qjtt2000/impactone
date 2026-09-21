@@ -34,7 +34,7 @@ export default async function handler(req, res) {
       process.env.WECHAT_MINIPROGRAM_APPID
 
     const secret =
-      process.env.WECHAT_MINIPROGRAM_APPSECRET
+      process.env.WECHAT_MINIPROGRAM_APPSECRET_NEW
 
     const templateId =
       process.env.WECHAT_SUBSCRIBE_TEMPLATE_ID
