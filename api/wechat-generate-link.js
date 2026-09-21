@@ -8,7 +8,7 @@ export default async function handler(req, res) {
 
   try {
    const appid = process.env.WECHAT_MINIPROGRAM_APPID;
-const secret = process.env.WECHAT_MINIPROGRAM_APPSECRET;
+const secret = process.env.WECHAT_MINIPROGRAM_APPSECRET_NEW;
 
     if (!appid || !secret) {
       return res.status(500).json({
