@@ -133,8 +133,22 @@
       max-width: 100%;
     }
 
+    /* 纽约版排头：新图内容放大到旧版视觉比例 */
     .masthead-fixed {
-      margin: 0 0 1.15rem 0;
+      width: 120% !important;
+      max-width: none !important;
+      height: auto !important;
+      margin: 0 !important;
+      transform: translateX(-2.5%);
+      transform-origin: left top;
+    }
+
+    @media (max-width: 600px) {
+      .masthead-fixed {
+        width: 120% !important;
+        max-width: none !important;
+        transform: translateX(-2.5%);
+      }
     }
 
     /* 日期左端与排头图中的“筛选全球资讯”对齐 */
@@ -142,8 +156,10 @@
       display: block !important;
       box-sizing: border-box;
       width: 100%;
+      margin-top: -4.8% !important;
       margin-left: 0 !important;
       margin-right: 0 !important;
+      margin-bottom: 0 !important;
       padding-left: 3% !important;
       padding-right: 0 !important;
       text-align: left !important;
