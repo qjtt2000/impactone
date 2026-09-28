@@ -143,17 +143,19 @@
       transform-origin: left top;
     }
 
-    /* 日期：按样本校准位置、字号和纵向间距 */
+    /* 日期：按参考样本重新校准
+       目标：更小、更靠左、更靠上；建筑及其他内容不变 */
     .issue-date {
       display: block !important;
       box-sizing: border-box;
       width: 100%;
-      margin: -1.2% 0 0 0 !important;
-      padding: 0 0 0 6.2% !important;
+      margin: -7.2% 0 0 0 !important;
+      padding: 0 !important;
       position: relative;
+      left: -4% !important;
       z-index: 2;
       text-align: left !important;
-      font-size: 2rem !important;
+      font-size: 1.25rem !important;
       line-height: 1.35 !important;
       font-weight: 400 !important;
       letter-spacing: 0 !important;
@@ -186,9 +188,10 @@
       }
 
       .issue-date {
-        margin-top: -1.2% !important;
-        padding-left: 6.2% !important;
-        font-size: 1.55rem !important;
+        margin-top: -7.2% !important;
+        padding-left: 0 !important;
+        left: -4% !important;
+        font-size: 1.05rem !important;
         line-height: 1.35 !important;
       }
 
