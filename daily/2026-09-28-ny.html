@@ -133,7 +133,7 @@
       max-width: 100%;
     }
 
-    /* 纽约版排头：新图内容放大到旧版视觉比例 */
+    /* 纽约版排头：保持当前文字排头大小 */
     .masthead-fixed {
       width: 120% !important;
       max-width: none !important;
@@ -143,26 +143,60 @@
       transform-origin: left top;
     }
 
+    /* 日期：按样本放大，并放在副标题下方 */
+    .issue-date {
+      display: block !important;
+      box-sizing: border-box;
+      width: 100%;
+      margin: -4.2% 0 0 0 !important;
+      padding: 0 0 0 3% !important;
+      position: relative;
+      z-index: 2;
+      text-align: left !important;
+      font-size: 1.28rem !important;
+      line-height: 1.35 !important;
+      font-weight: 400 !important;
+      letter-spacing: 0 !important;
+      white-space: nowrap;
+    }
+
+    /* 纽约建筑线稿：按样本缩小，并靠右下方摆放 */
+    .skyline-original {
+      width: 72% !important;
+      max-width: 72% !important;
+      margin: 5.2rem 1.5% 0 auto !important;
+      padding: 0 !important;
+      overflow: visible !important;
+    }
+
+    .skyline-original img {
+      display: block !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      height: auto !important;
+      margin: 0 !important;
+      object-fit: contain !important;
+    }
+
     @media (max-width: 600px) {
       .masthead-fixed {
         width: 120% !important;
         max-width: none !important;
         transform: translateX(-2.5%);
       }
-    }
 
-    /* 日期左端与排头图中的“筛选全球资讯”对齐 */
-    .issue-date {
-      display: block !important;
-      box-sizing: border-box;
-      width: 100%;
-      margin-top: -4.8% !important;
-      margin-left: 0 !important;
-      margin-right: 0 !important;
-      margin-bottom: 0 !important;
-      padding-left: 3% !important;
-      padding-right: 0 !important;
-      text-align: left !important;
+      .issue-date {
+        margin-top: -4.2% !important;
+        padding-left: 3% !important;
+        font-size: 1.08rem !important;
+      }
+
+      .skyline-original {
+        width: 72% !important;
+        max-width: 72% !important;
+        margin-top: 3.2rem !important;
+        margin-right: 1.5% !important;
+      }
     }
 
     .story-figure {
