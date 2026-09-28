@@ -7,15 +7,27 @@ export default async function handler(req, res) {
   }
 
   try {
+    // =====================================================
+    // 1. 读取请求参数
+    //
+    // edition:
+    // international = 国际版
+    // ny            = 纽约版
+    // =====================================================
+
     const {
       adminKey,
-      page = 'pages/webview/webview',
+      edition = 'international',
 
-      content = '影响力·每日必读已更新',
+      content,
       author = 'IMPACTONE',
-      source = '影响力·每日必读',
+      source,
       date
     } = req.body || {}
+
+    // =====================================================
+    // 2. 验证管理员 Key
+    // =====================================================
 
     const expectedAdminKey =
       process.env.WECHAT_SEND_ADMIN_KEY_NEW
@@ -29,6 +41,52 @@ export default async function handler(req, res) {
         error: 'Unauthorized'
       })
     }
+
+    // =====================================================
+    // 3. 验证 edition
+    // =====================================================
+
+    if (
+      edition !== 'international' &&
+      edition !== 'ny'
+    ) {
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid edition'
+      })
+    }
+
+    // =====================================================
+    // 4. 根据版本决定跳转页面和默认文案
+    // =====================================================
+
+    const isNewYork =
+      edition === 'ny'
+
+    const page =
+      isNewYork
+        ? 'pages/daily/daily?edition=ny'
+        : 'pages/daily/daily?edition=international'
+
+    const defaultContent =
+      isNewYork
+        ? '纽约·每日必读已更新'
+        : '影响力·每日必读已更新'
+
+    const defaultSource =
+      isNewYork
+        ? '每日必读·纽约'
+        : '每日必读·国际'
+
+    const messageContent =
+      content || defaultContent
+
+    const messageSource =
+      source || defaultSource
+
+    // =====================================================
+    // 5. 环境变量
+    // =====================================================
 
     const appid =
       process.env.WECHAT_MINIPROGRAM_APPID
@@ -63,7 +121,7 @@ export default async function handler(req, res) {
     }
 
     // =====================================================
-    // 生成纽约日期
+    // 6. 生成纽约日期
     // =====================================================
 
     let messageDate = date
@@ -87,29 +145,36 @@ export default async function handler(req, res) {
     }
 
     // =====================================================
-    // 微信模板内容
+    // 7. 微信订阅消息模板内容
     // =====================================================
 
     const templateData = {
       thing1: {
-        value: String(content).slice(0, 20)
+        value:
+          String(messageContent)
+            .slice(0, 20)
       },
 
       date2: {
-        value: messageDate
+        value:
+          messageDate
       },
 
       name3: {
-        value: String(author).slice(0, 10)
+        value:
+          String(author)
+            .slice(0, 10)
       },
 
       thing4: {
-        value: String(source).slice(0, 20)
+        value:
+          String(messageSource)
+            .slice(0, 20)
       }
     }
 
     // =====================================================
-    // 工具函数：等待
+    // 8. 等待工具
     // =====================================================
 
     const sleep = (ms) =>
@@ -118,8 +183,7 @@ export default async function handler(req, res) {
       )
 
     // =====================================================
-    // 查询 pending 订阅
-    // 遇到 502 / 503 / 504 自动重试
+    // 9. 查询 pending 订阅
     // =====================================================
 
     const subscriptionUrl =
@@ -131,15 +195,20 @@ export default async function handler(req, res) {
     let subscriptionResponse = null
     let lastSubscriptionError = ''
 
-    const retryDelays = [0, 3000, 6000]
+    const retryDelays =
+      [0, 3000, 6000]
 
     for (
       let attempt = 0;
       attempt < retryDelays.length;
       attempt++
     ) {
-      if (retryDelays[attempt] > 0) {
-        await sleep(retryDelays[attempt])
+      if (
+        retryDelays[attempt] > 0
+      ) {
+        await sleep(
+          retryDelays[attempt]
+        )
       }
 
       try {
@@ -148,12 +217,18 @@ export default async function handler(req, res) {
             subscriptionUrl,
             {
               headers: {
-                apikey: supabaseKey
+                apikey:
+                  supabaseKey,
+
+                Authorization:
+                  `Bearer ${supabaseKey}`
               }
             }
           )
 
-        if (subscriptionResponse.ok) {
+        if (
+          subscriptionResponse.ok
+        ) {
           break
         }
 
@@ -168,7 +243,9 @@ export default async function handler(req, res) {
 
         const retryable =
           [502, 503, 504]
-            .includes(subscriptionResponse.status)
+            .includes(
+              subscriptionResponse.status
+            )
 
         if (!retryable) {
           break
@@ -193,8 +270,10 @@ export default async function handler(req, res) {
     ) {
       return res.status(500).json({
         success: false,
-        error: 'Failed to load subscriptions after retries',
-        detail: lastSubscriptionError
+        error:
+          'Failed to load subscriptions after retries',
+        detail:
+          lastSubscriptionError
       })
     }
 
@@ -207,31 +286,45 @@ export default async function handler(req, res) {
     ) {
       return res.status(200).json({
         success: true,
-        message: 'No pending subscriptions',
+        edition,
+        page,
+        message:
+          'No pending subscriptions',
         sent: 0,
         failed: 0
       })
     }
 
     // =====================================================
-    // 同一用户本期只消费一条授权
+    // 10. 同一用户本期只消费一条授权
     // =====================================================
 
     const uniqueSubscriptions = []
-    const usedOpenids = new Set()
+    const usedOpenids =
+      new Set()
 
-    for (const item of subscriptions) {
+    for (
+      const item
+      of subscriptions
+    ) {
       if (
         item.openid &&
-        !usedOpenids.has(item.openid)
+        !usedOpenids.has(
+          item.openid
+        )
       ) {
-        usedOpenids.add(item.openid)
-        uniqueSubscriptions.push(item)
+        usedOpenids.add(
+          item.openid
+        )
+
+        uniqueSubscriptions.push(
+          item
+        )
       }
     }
 
     // =====================================================
-    // 获取微信 access_token
+    // 11. 获取微信 access_token
     // =====================================================
 
     const tokenUrl =
@@ -248,7 +341,9 @@ export default async function handler(req, res) {
     const tokenData =
       await tokenResponse.json()
 
-    if (!tokenData.access_token) {
+    if (
+      !tokenData.access_token
+    ) {
       console.error(
         'Get access_token failed:',
         tokenData
@@ -256,13 +351,19 @@ export default async function handler(req, res) {
 
       return res.status(500).json({
         success: false,
-        error: 'Failed to get access token',
-        detail: tokenData
+        error:
+          'Failed to get access token',
+        detail:
+          tokenData
       })
     }
 
     const accessToken =
       tokenData.access_token
+
+    // =====================================================
+    // 12. 发送统计
+    // =====================================================
 
     let sent = 0
     let failed = 0
@@ -270,7 +371,7 @@ export default async function handler(req, res) {
     const results = []
 
     // =====================================================
-    // 逐个发送
+    // 13. 逐个发送订阅消息
     // =====================================================
 
     for (
@@ -281,7 +382,9 @@ export default async function handler(req, res) {
         const sendUrl =
           'https://api.weixin.qq.com/cgi-bin/message/subscribe/send' +
           '?access_token=' +
-          encodeURIComponent(accessToken)
+          encodeURIComponent(
+            accessToken
+          )
 
         const sendResponse =
           await fetch(
@@ -294,29 +397,45 @@ export default async function handler(req, res) {
                   'application/json; charset=utf-8'
               },
 
-              body: JSON.stringify({
-                touser:
-                  subscription.openid,
+              body:
+                JSON.stringify({
+                  touser:
+                    subscription.openid,
 
-                template_id:
-                  templateId,
+                  template_id:
+                    templateId,
 
-                page,
+                  // =========================================
+                  // 国际版：
+                  // pages/daily/daily?edition=international
+                  //
+                  // 纽约版：
+                  // pages/daily/daily?edition=ny
+                  // =========================================
 
-                data:
-                  templateData
-              })
+                  page,
+
+                  data:
+                    templateData
+                })
             }
           )
 
         const sendData =
           await sendResponse.json()
 
-        if (sendData.errcode === 0) {
+        // =================================================
+        // 发送成功
+        // =================================================
+
+        if (
+          sendData.errcode === 0
+        ) {
           sent++
 
           const sentAt =
-            new Date().toISOString()
+            new Date()
+              .toISOString()
 
           const updateResponse =
             await fetch(
@@ -332,18 +451,27 @@ export default async function handler(req, res) {
                   apikey:
                     supabaseKey,
 
+                  Authorization:
+                    `Bearer ${supabaseKey}`,
+
                   Prefer:
                     'return=minimal'
                 },
 
-                body: JSON.stringify({
-                  status: 'sent',
-                  sent_at: sentAt
-                })
+                body:
+                  JSON.stringify({
+                    status:
+                      'sent',
+
+                    sent_at:
+                      sentAt
+                  })
               }
             )
 
-          if (!updateResponse.ok) {
+          if (
+            !updateResponse.ok
+          ) {
             const updateDetail =
               await updateResponse.text()
 
@@ -355,12 +483,26 @@ export default async function handler(req, res) {
           }
 
           results.push({
-            id: subscription.id,
-            success: true
+            id:
+              subscription.id,
+
+            openid:
+              subscription.openid,
+
+            edition,
+
+            page,
+
+            success:
+              true
           })
 
           continue
         }
+
+        // =================================================
+        // 微信发送失败
+        // =================================================
 
         failed++
 
@@ -371,10 +513,22 @@ export default async function handler(req, res) {
         )
 
         results.push({
-          id: subscription.id,
-          success: false,
+          id:
+            subscription.id,
+
+          openid:
+            subscription.openid,
+
+          edition,
+
+          page,
+
+          success:
+            false,
+
           errcode:
             sendData.errcode,
+
           errmsg:
             sendData.errmsg
         })
@@ -389,17 +543,38 @@ export default async function handler(req, res) {
         )
 
         results.push({
-          id: subscription.id,
-          success: false,
-          error: 'Send exception'
+          id:
+            subscription.id,
+
+          openid:
+            subscription.openid,
+
+          edition,
+
+          page,
+
+          success:
+            false,
+
+          error:
+            'Send exception'
         })
       }
     }
 
+    // =====================================================
+    // 14. 返回结果
+    // =====================================================
+
     return res.status(200).json({
       success: true,
 
-      message: 'WeChat subscription send completed',
+      message:
+        'WeChat subscription send completed',
+
+      edition,
+
+      page,
 
       templateData,
 
@@ -424,7 +599,8 @@ export default async function handler(req, res) {
 
     return res.status(500).json({
       success: false,
-      error: 'Internal server error'
+      error:
+        'Internal server error'
     })
   }
 }
