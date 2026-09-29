@@ -133,13 +133,13 @@
       max-width: 100%;
     }
 
-    /* 纽约版排头：保持当前文字排头大小 */
+    /* 纽约版排头：按样本缩小标题比例 */
     .masthead-fixed {
-      width: 120% !important;
+      width: 100% !important;
       max-width: none !important;
       height: auto !important;
       margin: 0 !important;
-      transform: translateX(-2.5%);
+      transform: translateX(0);
       transform-origin: left top;
     }
 
@@ -182,9 +182,9 @@
 
     @media (max-width: 600px) {
       .masthead-fixed {
-        width: 120% !important;
+        width: 100% !important;
         max-width: none !important;
-        transform: translateX(-2.5%);
+        transform: translateX(0);
       }
 
       .issue-date {
