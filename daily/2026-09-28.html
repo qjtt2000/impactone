@@ -158,13 +158,14 @@ html {
   max-width: 100%;
 }
 
-/* 排头上半部分：按样本放大并略向下压 */
+/* 排头上半部分：按 9/27 样本校准。
+   重点：标题整体更大、更向右延伸，让“读”字靠近帝国大厦尖顶。 */
 .masthead-fixed {
   display: block;
-  width: 106% !important;
+  width: 118% !important;
   height: auto;
   max-width: none !important;
-  margin: 0 0 -1px -3% !important;
+  margin: 0 0 -1px -1.5% !important;
 }
 
 
@@ -184,8 +185,8 @@ html {
   margin: 0 !important;
   padding: 0 !important;
   position: absolute !important;
-  left: 8.5% !important;
-  top: 58.5% !important;
+  left: 12.5% !important;
+  top: 57.8% !important;
   z-index: 3 !important;
   text-align: left !important;
   color: #ffffff !important;
@@ -205,16 +206,18 @@ html {
 
 /* 建筑与标题衔接，不额外产生空白 */
 .skyline-original {
-  margin: 0 !important;
+  margin: -2.2% 0 0 !important;
   padding: 0 !important;
   line-height: 0 !important;
+  overflow: hidden !important;
 }
 
 .skyline-original img {
   display: block !important;
-  width: 100% !important;
+  width: 106% !important;
+  max-width: none !important;
   height: auto !important;
-  margin: 0 !important;
+  margin: 0 0 0 -3% !important;
 }
 
 
@@ -275,12 +278,23 @@ html {
 
 @media (max-width: 600px) {
 
-  /* 手机端标题稍放大并下压，接近样本比例 */
+  /* 手机端按样本进一步放大标题，主要增加横向延伸 */
   .masthead-fixed {
+    width: 120% !important;
+    max-width: none !important;
+    margin-left: -2% !important;
+    margin-bottom: -1px !important;
+  }
+
+  /* 建筑群略放大、上提，使尖顶更接近“读”字右侧 */
+  .skyline-original {
+    margin-top: -3.2% !important;
+  }
+
+  .skyline-original img {
     width: 108% !important;
     max-width: none !important;
     margin-left: -4% !important;
-    margin-bottom: -1px !important;
   }
 
   /* 日期放到建筑左上方，不再占独立一行 */
@@ -291,12 +305,12 @@ html {
     margin: 0 !important;
     padding: 0 !important;
     position: absolute !important;
-    left: 8.5% !important;
-    top: 57.2% !important;
+    left: 12.5% !important;
+    top: 58.4% !important;
     z-index: 3 !important;
     text-align: left !important;
     color: #ffffff !important;
-    font-size: 0.82rem !important;
+    font-size: 0.92rem !important;
     line-height: 1.25 !important;
     font-weight: 400 !important;
     letter-spacing: 0 !important;
