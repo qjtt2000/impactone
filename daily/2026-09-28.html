@@ -158,13 +158,13 @@ html {
   max-width: 100%;
 }
 
-/* 排头上半部分图片保持原比例 */
+/* 排头上半部分：按样本放大并略向下压 */
 .masthead-fixed {
   display: block;
-  width: 100%;
+  width: 106% !important;
   height: auto;
-  max-width: 100%;
-  margin: 0 0 1.15rem 0;
+  max-width: none !important;
+  margin: 0 0 -1px -3% !important;
 }
 
 
@@ -181,22 +181,42 @@ html {
   display: block !important;
   box-sizing: border-box !important;
   width: 100% !important;
-
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-
-  padding-left: 8.5% !important;
-  padding-right: 32% !important;
-
+  margin: 0 !important;
+  padding: 0 !important;
+  position: absolute !important;
+  left: 8.5% !important;
+  top: 58.5% !important;
+  z-index: 3 !important;
   text-align: left !important;
-
-  font-size: 1.05rem !important;
-  line-height: 1.35 !important;
+  color: #ffffff !important;
+  font-size: 1.02rem !important;
+  line-height: 1.25 !important;
   font-weight: 400 !important;
   letter-spacing: 0 !important;
-
   white-space: nowrap !important;
 }
+
+/* 排头作为日期叠加定位容器 */
+.brand-block {
+  position: relative !important;
+  overflow: hidden !important;
+  background: #001B40 !important;
+}
+
+/* 建筑与标题衔接，不额外产生空白 */
+.skyline-original {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 0 !important;
+}
+
+.skyline-original img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  margin: 0 !important;
+}
+
 
 
 /* =====================================================
@@ -255,36 +275,35 @@ html {
 
 @media (max-width: 600px) {
 
+  /* 手机端标题稍放大并下压，接近样本比例 */
+  .masthead-fixed {
+    width: 108% !important;
+    max-width: none !important;
+    margin-left: -4% !important;
+    margin-bottom: -1px !important;
+  }
+
+  /* 日期放到建筑左上方，不再占独立一行 */
   .issue-date {
     display: block !important;
     box-sizing: border-box !important;
-    width: 100% !important;
-
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-
-    /*
-      日期整体向右移动；
-      右侧给建筑留出空间。
-    */
-    padding-left: 8.5% !important;
-    padding-right: 34% !important;
-
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: absolute !important;
+    left: 8.5% !important;
+    top: 57.2% !important;
+    z-index: 3 !important;
     text-align: left !important;
-
-    /*
-      从原来的 0.96rem
-      调小到 0.88rem，
-      防止日期进入建筑区域。
-    */
-    font-size: 0.88rem !important;
-    line-height: 1.35 !important;
+    color: #ffffff !important;
+    font-size: 0.82rem !important;
+    line-height: 1.25 !important;
     font-weight: 400 !important;
     letter-spacing: 0 !important;
-
     white-space: nowrap !important;
   }
 }
+
 
 </style>
 </head>
