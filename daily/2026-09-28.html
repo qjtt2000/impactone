@@ -185,7 +185,26 @@
       font-weight: 800;
       letter-spacing: .06em;
     }
-  </style>
+  
+    /* 9/28 国际版：仅修正手机端日期显示，桌面端保持不变 */
+    @media (max-width: 600px) {
+      .issue-date {
+        box-sizing: border-box !important;
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 5% !important;
+        padding-right: 0 !important;
+        text-align: left !important;
+        font-size: 0.88rem !important;
+        line-height: 1.35 !important;
+        font-weight: 400 !important;
+        letter-spacing: 0 !important;
+        white-space: nowrap !important;
+      }
+    }
+
+</style>
 </head>
 <body>
 <main class="page">
@@ -195,7 +214,7 @@
 <div aria-label="IMPACTONE 影响力·每日必读" class="brand-lockup-wrap">
 <img alt="IMPACTONE 影响力·每日必读｜筛选全球资讯，把握天下大势。" class="brand-lockup-image masthead-fixed" src="../images/daily/impactone-masthead-fixed.png?v=20260918-2"/>
 </div>
-<div class="issue-date">2026年9月28日　国际　第020期</div>
+<div class="issue-date">2026年9月28日｜国际　第020期</div>
 <div aria-hidden="true" class="skyline skyline-original">
 <img alt="" src="../images/daily/impactone-skyline-20260906.png"/>
 </div>
