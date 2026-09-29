@@ -57,16 +57,18 @@ export default async function handler(req, res) {
     }
 
     // =====================================================
-    // 4. 根据版本决定跳转页面和默认文案
+    // 4. 通知点击后的跳转页面
+    //
+    // 先统一进入已经在 app.json 注册的 daily 页面。
+    // 不附带 query 参数，避免微信服务通知直接启动时
+    // 出现“页面不存在”。
     // =====================================================
 
     const isNewYork =
       edition === 'ny'
 
     const page =
-      isNewYork
-        ? 'pages/daily/daily?edition=ny'
-        : 'pages/daily/daily?edition=international'
+      'pages/daily/daily'
 
     const defaultContent =
       isNewYork
@@ -405,15 +407,10 @@ export default async function handler(req, res) {
                   template_id:
                     templateId,
 
-                  // =========================================
-                  // 国际版：
-                  // pages/daily/daily?edition=international
-                  //
-                  // 纽约版：
-                  // pages/daily/daily?edition=ny
-                  // =========================================
-
-                  page,
+                  // 通知点击后直接进入每日必读页面
+                  // 不附加 query 参数
+                  page:
+                    page,
 
                   data:
                     templateData
