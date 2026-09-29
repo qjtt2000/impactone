@@ -30,7 +30,7 @@ export default async function handler(req, res) {
     // =====================================================
 
     const expectedAdminKey =
-      process.env.WECHAT_SEND_ADMIN_KEY_NEW
+      process.env.WECHAT_SEND_ADMIN_KEY
 
     if (
       !expectedAdminKey ||
