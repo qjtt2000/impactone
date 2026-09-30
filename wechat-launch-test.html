@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
+  >
+
+  <title>IMPACTONE 微信测试</title>
+
+  <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      font-family: Arial, sans-serif;
+      background: #ffffff;
+      text-align: center;
+    }
+
+    h1 {
+      color: #001B40;
+      margin-top: 60px;
+    }
+
+    p {
+      color: #666;
+      line-height: 1.7;
+    }
+
+    .launch-btn {
+      width: 260px;
+      height: 52px;
+      border: 0;
+      border-radius: 6px;
+      background: #001B40;
+      color: white;
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    #status {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>IMPACTONE</h1>
+
+  <p>
+    测试网页直接进入<br>
+    「影响力必读」小程序
+  </p>
+
+  <div id="launchArea" style="display:none;">
+
+    <wx-open-launch-weapp
+      id="launch-btn"
+      username="这里稍后填写小程序原始ID"
+      path="pages/index/index"
+    >
+
+      <template>
+        <style>
+          .launch-btn {
+            width: 260px;
+            height: 52px;
+            border: 0;
+            border-radius: 6px;
+            background: #001B40;
+            color: white;
+            font-size: 17px;
+            font-weight: 600;
+          }
+        </style>
+
+        <button class="launch-btn">
+          打开影响力必读小程序
+        </button>
+
+      </template>
+
+    </wx-open-launch-weapp>
+
+  </div>
+
+  <div id="status">
+    正在初始化微信环境……
+  </div>
+
+
+<script>
+
+async function initWechat() {
+
+  const status =
+    document.getElementById('status')
+
+  try {
+
+    /*
+      微信签名 URL 不能包含 # 后面的部分
+    */
+
+    const currentUrl =
+      window.location.href.split('#')[0]
+
+    const response =
+      await fetch(
+        '/api/wechat-js-config?url=' +
+        encodeURIComponent(currentUrl)
+      )
+
+    const data =
+      await response.json()
+
+    if (!data.success) {
+      throw new Error(
+        data.error || '获取微信配置失败'
+      )
+    }
+
+    wx.config({
+
+      debug: false,
+
+      appId:
+        data.appId,
+
+      timestamp:
+        data.timestamp,
+
+      nonceStr:
+        data.nonceStr,
+
+      signature:
+        data.signature,
+
+      jsApiList: [],
+
+      openTagList: [
+        'wx-open-launch-weapp'
+      ]
+
+    })
+
+
+    wx.ready(function () {
+
+      status.innerText =
+        '微信环境初始化成功'
+
+      document
+        .getElementById('launchArea')
+        .style.display = 'block'
+
+    })
+
+
+    wx.error(function (res) {
+
+      console.error(
+        'wx.config error:',
+        res
+      )
+
+      status.innerText =
+        '微信配置失败：' +
+        JSON.stringify(res)
+
+    })
+
+  } catch (error) {
+
+    console.error(error)
+
+    status.innerText =
+      '初始化失败：' +
+      error.message
+
+  }
+}
+
+initWechat()
+
+</script>
+
+</body>
+</html>
