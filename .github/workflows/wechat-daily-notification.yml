@@ -64,9 +64,9 @@ jobs:
           PAGE_DATE: ${{ steps.check.outputs.page_date }}
         shell: bash
         run: |
-          if [ -n "$MESSAGE_DATE" ] && [ -n "$PAGE_DATE" ]; then
+          PAGE="pages/index/index"
 
-            PAGE="pages/webview/webview?date=$PAGE_DATE"
+          if [ -n "$MESSAGE_DATE" ] && [ -n "$PAGE_DATE" ]; then
 
             BODY=$(jq -n \
               --arg key "$WECHAT_SEND_ADMIN_KEY" \
@@ -83,12 +83,13 @@ jobs:
           else
             BODY=$(jq -n \
               --arg key "$WECHAT_SEND_ADMIN_KEY" \
+              --arg page "$PAGE" \
               '{
                 adminKey: $key,
                 content: "影响力·每日必读已更新",
                 author: "IMPACTONE",
                 source: "影响力·每日必读",
-                page: "pages/webview/webview"
+                page: $page
               }')
           fi
 
