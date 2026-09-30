@@ -67,8 +67,8 @@ export default async function handler(req, res) {
     const isNewYork =
       edition === 'ny'
 
-    const page =
-      'pages/daily/daily'
+   const page =
+  'pages/index/index'
 
     const defaultContent =
       isNewYork
