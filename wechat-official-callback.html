@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><title>微信绑定处理中｜IMPACTONE</title></head>
+<body><p>正在完成微信身份绑定，请稍候…</p>
+<script>
+(() => {
+  const q = new URLSearchParams(location.search);
+  const code = q.get('code');
+  const state = q.get('state');
+  if (!state || !/^[0-9a-f]{32}$/.test(state) || (code && !/^[\w-]{1,512}$/.test(code))) {
+    document.body.textContent = '授权参数无效，请返回日报重新绑定。';
+    return;
+  }
+  const target = new URL('https://impactone-gamma.vercel.app/api/wechat-official-callback');
+  target.searchParams.set('state', state);
+  if (code) target.searchParams.set('code', code);
+  location.replace(target.toString());
+})();
+</script></body></html>
