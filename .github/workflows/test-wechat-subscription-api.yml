@@ -11,33 +11,54 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Check subscription account API credentials and IP allowlist
+      - name: Validate fixed-egress configuration and test WeChat API
         shell: bash
         env:
           WECHAT_APPID: ${{ secrets.WECHAT_SUBSCRIPTION_APPID }}
           WECHAT_APPSECRET: ${{ secrets.WECHAT_SUBSCRIPTION_APPSECRET }}
+          WECHAT_FIXED_EGRESS_PROXY: ${{ secrets.WECHAT_FIXED_EGRESS_PROXY }}
+          WECHAT_FIXED_EGRESS_IP: ${{ vars.WECHAT_FIXED_EGRESS_IP }}
         run: |
           set -euo pipefail
           if [[ -z "${WECHAT_APPSECRET:-}" ]]; then
-            echo "::error::Missing WECHAT_SUBSCRIPTION_APPSECRET GitHub Actions secret."
+            echo "::error::Missing WECHAT_SUBSCRIPTION_APPSECRET secret."
+            exit 1
+          fi
+          VERIFIED_APPID="wx760f0fc6c1a6f33e"
+          if [[ "${WECHAT_APPID:-}" != "$VERIFIED_APPID" ]]; then
+            echo "::error::WECHAT_SUBSCRIPTION_APPID does not match the verified 北岸美学 AppID."
             exit 1
           fi
 
-          # Verified against the official account screenshot. AppID is public; AppSecret remains secret.
-          VERIFIED_APPID="wx760f0fc6c1a6f33e"
-          if [[ "$WECHAT_APPID" != "$VERIFIED_APPID" ]]; then
-            echo "::warning::WECHAT_SUBSCRIPTION_APPID secret differs from the verified official AppID; using verified AppID for this connection test."
-          else
-            echo "Configured AppID matches the verified official account."
+          # GitHub-hosted runners have rotating public IPs. Do not repeatedly
+          # whitelist their temporary addresses. Require a fixed-egress proxy.
+          if [[ -z "${WECHAT_FIXED_EGRESS_PROXY:-}" || -z "${WECHAT_FIXED_EGRESS_IP:-}" ]]; then
+            echo "::notice::WeChat credentials were not sent; GitHub runner IPs rotate."
+            echo "::error::Configure WECHAT_FIXED_EGRESS_PROXY (secret) and WECHAT_FIXED_EGRESS_IP (variable), then whitelist that fixed IP in the 北岸美学 account."
+            exit 1
           fi
-          # This test only requests an access token. It does not create a draft or send messages.
+          case "$WECHAT_FIXED_EGRESS_IP" in
+            *[!0-9.]*|'') echo "::error::WECHAT_FIXED_EGRESS_IP must be a public IPv4 address."; exit 1 ;;
+          esac
+          export HTTPS_PROXY="$WECHAT_FIXED_EGRESS_PROXY"
+          export HTTP_PROXY="$WECHAT_FIXED_EGRESS_PROXY"
+          export https_proxy="$WECHAT_FIXED_EGRESS_PROXY"
+          export http_proxy="$WECHAT_FIXED_EGRESS_PROXY"
+          unset NO_PROXY no_proxy
+
+          # Check public egress through the exact same proxy before requesting a token.
+          ACTUAL_IP=$(curl --silent --show-error --fail --max-time 15 \
+            --noproxy '' https://api.ipify.org)
+          if [[ "$ACTUAL_IP" != "$WECHAT_FIXED_EGRESS_IP" ]]; then
+            echo "::error::Proxy egress IP mismatch: observed $ACTUAL_IP, expected $WECHAT_FIXED_EGRESS_IP. No WeChat token requested."
+            exit 1
+          fi
+          echo "Fixed egress IP verified: $ACTUAL_IP"
           RESPONSE=$(curl --silent --show-error --fail-with-body --max-time 25 \
-            --get 'https://api.weixin.qq.com/cgi-bin/token' \
+            --noproxy '' --get 'https://api.weixin.qq.com/cgi-bin/token' \
             --data-urlencode 'grant_type=client_credential' \
             --data-urlencode "appid=$VERIFIED_APPID" \
             --data-urlencode "secret=$WECHAT_APPSECRET")
-
-          # Never print an access token or raw response (which may contain credentials).
           ERR_CODE=$(jq -r '.errcode // empty' <<< "$RESPONSE")
           if [[ -n "$ERR_CODE" && "$ERR_CODE" != "0" ]]; then
             ERR_MSG=$(jq -r '.errmsg // "Unknown WeChat API error"' <<< "$RESPONSE")
