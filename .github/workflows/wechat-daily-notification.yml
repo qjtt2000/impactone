@@ -130,4 +130,5 @@ jobs:
             --header "Content-Type: application/json" \
             --data "$BODY")
 
-          echo "$RESPONSE"
+          # Print only aggregate counts; never expose recipient openids or payloads.
+          echo "$RESPONSE" | jq -c '{success, message, sent, failed, totalPending, uniqueUsers, error}'
