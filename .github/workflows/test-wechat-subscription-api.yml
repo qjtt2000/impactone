@@ -1,0 +1,47 @@
+name: Test WeChat Subscription API Connection
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-connection:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check subscription account API credentials and IP allowlist
+        shell: bash
+        env:
+          WECHAT_APPID: ${{ secrets.WECHAT_SUBSCRIPTION_APPID }}
+          WECHAT_APPSECRET: ${{ secrets.WECHAT_SUBSCRIPTION_APPSECRET }}
+        run: |
+          set -euo pipefail
+          if [[ -z "${WECHAT_APPID:-}" || -z "${WECHAT_APPSECRET:-}" ]]; then
+            echo "::error::Missing WECHAT_SUBSCRIPTION_APPID or WECHAT_SUBSCRIPTION_APPSECRET GitHub Actions secret."
+            exit 1
+          fi
+
+          # This test only requests an access token. It does not create a draft or send messages.
+          RESPONSE=$(curl --silent --show-error --fail-with-body --max-time 25 \
+            --get 'https://api.weixin.qq.com/cgi-bin/token' \
+            --data-urlencode 'grant_type=client_credential' \
+            --data-urlencode "appid=$WECHAT_APPID" \
+            --data-urlencode "secret=$WECHAT_APPSECRET")
+
+          # Never print an access token or raw response (which may contain credentials).
+          ERR_CODE=$(jq -r '.errcode // empty' <<< "$RESPONSE")
+          if [[ -n "$ERR_CODE" && "$ERR_CODE" != "0" ]]; then
+            ERR_MSG=$(jq -r '.errmsg // "Unknown WeChat API error"' <<< "$RESPONSE")
+            echo "::error::WeChat API rejected token request: errcode=$ERR_CODE, errmsg=$ERR_MSG"
+            exit 1
+          fi
+          TOKEN=$(jq -r '.access_token // empty' <<< "$RESPONSE")
+          if [[ -z "$TOKEN" ]]; then
+            echo "::error::WeChat API response did not contain an access token."
+            exit 1
+          fi
+          echo "::add-mask::$TOKEN"
+          echo "WeChat subscription account API connection succeeded."
+          echo "No draft was created and no message was sent."
