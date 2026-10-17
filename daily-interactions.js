@@ -261,30 +261,21 @@
 
   renderSubscription();
 
-  // 微信公众号绑定为单独的用户主动操作；不会假装已经获得消息推送授权。
-  if (/MicroMessenger/i.test(navigator.userAgent) && subscribeAction?.parentElement) {
-    const bindButton = document.createElement('button');
-    bindButton.type = 'button';
-    bindButton.textContent = '绑定微信';
-    bindButton.style.cssText = 'font:inherit;color:inherit;background:transparent;border:0;padding:8px;cursor:pointer';
-    bindButton.setAttribute('aria-label', '绑定微信公众号接收可用通知');
-    subscribeAction.parentElement.appendChild(bindButton);
-    bindButton.addEventListener('click', async () => {
-      if (!getSubscriptionState()) { toast('请先点击订阅'); return; }
-      bindButton.disabled = true;
-      const start = new URL(`${API_BASE}/api/wechat-official-start`);
-      start.searchParams.set('client_id', clientId);
-      start.searchParams.set('return_url', location.href);
-      location.assign(start.toString());
-    });
-    const status = new URLSearchParams(location.search).get('wechat_bind');
-    if (status === 'success') {
-      bindButton.textContent = '微信已绑定';
-      toast('微信身份绑定成功（消息通知尚待开通）');
-      history.replaceState(null,'',location.pathname + location.search.replace(/([?&])wechat_bind=success&?/,'$1').replace(/[?&]$/,'') + location.hash);
-    } else if (status) {
-      toast('微信绑定未完成，请稍后重试');
+  // 微信内订阅：一个按钮完成网站订阅与服务号身份授权。
+  const inWeChat = /MicroMessenger/i.test(navigator.userAgent);
+  const bindStatus = new URLSearchParams(location.search).get('wechat_bind');
+  if (inWeChat && bindStatus) {
+    if (bindStatus === 'success') {
+      storage.set(SUBSCRIPTION_KEY, true);
+      storage.set(CONFIRMED_KEY, true);
+      renderSubscription();
+      toast('微信身份已绑定，网站订阅成功（微信通知尚未开通）');
+    } else {
+      toast('微信身份绑定未完成，网站订阅状态不变');
     }
+    const cleanUrl = new URL(location.href);
+    cleanUrl.searchParams.delete('wechat_bind');
+    history.replaceState(null, '', cleanUrl.pathname + cleanUrl.search + cleanUrl.hash);
   }
 
   subscribeAction?.addEventListener('click', async () => {
@@ -335,6 +326,15 @@
       storage.set(CONFIRMED_KEY, true);
 
       closeOverlay(subscribeModal);
+
+      if (next && inWeChat) {
+        toast('网站订阅成功，正在绑定微信身份…');
+        const start = new URL(`${API_BASE}/api/wechat-official-start`);
+        start.searchParams.set('client_id', clientId);
+        start.searchParams.set('return_url', location.href);
+        location.assign(start.toString());
+        return;
+      }
 
       toast(
         next
