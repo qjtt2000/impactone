@@ -1,4 +1,3 @@
-
 (() => {
   'use strict';
 
@@ -261,6 +260,38 @@
   }
 
   renderSubscription();
+
+  // 微信公众号绑定为单独的用户主动操作；不会假装已经获得消息推送授权。
+  if (/MicroMessenger/i.test(navigator.userAgent) && subscribeAction?.parentElement) {
+    const bindButton = document.createElement('button');
+    bindButton.type = 'button';
+    bindButton.textContent = '绑定微信';
+    bindButton.style.cssText = 'font:inherit;color:inherit;background:transparent;border:0;padding:8px;cursor:pointer';
+    bindButton.setAttribute('aria-label', '绑定微信公众号接收可用通知');
+    subscribeAction.parentElement.appendChild(bindButton);
+    bindButton.addEventListener('click', async () => {
+      if (!getSubscriptionState()) { toast('请先点击订阅'); return; }
+      bindButton.disabled = true;
+      try {
+        const response = await fetch(`${API_BASE}/api/wechat-official-start`, {
+          method:'POST', credentials:'include',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({client_id:clientId,return_url:location.href})
+        });
+        const result = await response.json();
+        if (!response.ok || !result.authorize_url) throw new Error(result.error || 'OAuth unavailable');
+        location.assign(result.authorize_url);
+      } catch(error) { console.error('Official bind failed',error);toast('微信绑定暂不可用，请稍后重试');bindButton.disabled=false; }
+    });
+    const status = new URLSearchParams(location.search).get('wechat_bind');
+    if (status === 'success') {
+      bindButton.textContent = '微信已绑定';
+      toast('微信身份绑定成功（消息通知尚待开通）');
+      history.replaceState(null,'',location.pathname + location.search.replace(/([?&])wechat_bind=success&?/,'$1').replace(/[?&]$/,'') + location.hash);
+    } else if (status) {
+      toast('微信绑定未完成，请稍后重试');
+    }
+  }
 
   subscribeAction?.addEventListener('click', async () => {
     if (subscriptionBusy) return;
