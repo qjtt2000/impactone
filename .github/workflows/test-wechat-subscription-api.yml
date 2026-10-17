@@ -23,7 +23,14 @@ jobs:
             exit 1
           fi
 
-          # Verified against the official account screenshot. AppID is public; AppSecret remains secret.\n          VERIFIED_APPID="wx760f0fc6c1a6f33e"\n          if [[ "$WECHAT_APPID" != "$VERIFIED_APPID" ]]; then\n            echo "::warning::WECHAT_SUBSCRIPTION_APPID secret differs from the verified official AppID; using verified AppID for this connection test."\n          else\n            echo "Configured AppID matches the verified official account."\n          fi\n          # This test only requests an access token. It does not create a draft or send messages.
+          # Verified against the official account screenshot. AppID is public; AppSecret remains secret.
+          VERIFIED_APPID="wx760f0fc6c1a6f33e"
+          if [[ "$WECHAT_APPID" != "$VERIFIED_APPID" ]]; then
+            echo "::warning::WECHAT_SUBSCRIPTION_APPID secret differs from the verified official AppID; using verified AppID for this connection test."
+          else
+            echo "Configured AppID matches the verified official account."
+          fi
+          # This test only requests an access token. It does not create a draft or send messages.
           RESPONSE=$(curl --silent --show-error --fail-with-body --max-time 25 \
             --get 'https://api.weixin.qq.com/cgi-bin/token' \
             --data-urlencode 'grant_type=client_credential' \
