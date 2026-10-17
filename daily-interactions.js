@@ -262,12 +262,20 @@
   renderSubscription();
 
   // 微信内订阅：一个按钮完成网站订阅与服务号身份授权。
-  const inWeChat = /MicroMessenger/i.test(navigator.userAgent);
+  const inWeChat = /MicroMessenger|WeChat|Weixin/i.test(navigator.userAgent) || typeof window.WeixinJSBridge !== 'undefined';
+  const WECHAT_BOUND_KEY = 'impactone_wechat_official_bound';
+  function startWeChatAuthorization() {
+    const start = new URL(`${API_BASE}/api/wechat-official-start`);
+    start.searchParams.set('client_id', clientId);
+    start.searchParams.set('return_url', location.href);
+    location.assign(start.toString());
+  }
   const bindStatus = new URLSearchParams(location.search).get('wechat_bind');
   if (inWeChat && bindStatus) {
     if (bindStatus === 'success') {
       storage.set(SUBSCRIPTION_KEY, true);
       storage.set(CONFIRMED_KEY, true);
+      storage.set(WECHAT_BOUND_KEY, true);
       renderSubscription();
       toast('微信身份已绑定，网站订阅成功（微信通知尚未开通）');
     } else {
@@ -281,6 +289,11 @@
   subscribeAction?.addEventListener('click', async () => {
     if (subscriptionBusy) return;
 
+    // 已订阅但尚未绑定微信：再次点击时完成授权，而不是误取消订阅。
+    if (inWeChat && getSubscriptionState() && storage.get(WECHAT_BOUND_KEY, false) !== true) {
+      startWeChatAuthorization();
+      return;
+    }
     const next = !getSubscriptionState();
 
     subscriptionBusy = true;
@@ -329,16 +342,13 @@
 
       if (next && inWeChat) {
         toast('网站订阅成功，正在绑定微信身份…');
-        const start = new URL(`${API_BASE}/api/wechat-official-start`);
-        start.searchParams.set('client_id', clientId);
-        start.searchParams.set('return_url', location.href);
-        location.assign(start.toString());
+        startWeChatAuthorization();
         return;
       }
 
       toast(
         next
-          ? '网站订阅成功（微信通知尚未开通）'
+          ? '网站订阅成功。请在微信内打开日报以完成微信身份授权'
           : '已取消网站订阅'
       );
 
