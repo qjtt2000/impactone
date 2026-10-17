@@ -1,5 +1,3 @@
-
-
 (() => {
   'use strict';
 
@@ -13,6 +11,8 @@
     location.pathname.split('/').pop().replace('.html', '') || 'daily';
 
   const cfg = window.IMPACTONE_CONFIG || {};
+
+  const API_BASE = 'https://impactone-gamma.vercel.app';
 
   /* ========================================
      LOCAL STORAGE
@@ -239,30 +239,55 @@
   }
 
   /* ========================================
-     IMPACTONE 一键订阅
-     当前浏览器保存订阅状态
-     微信通知等待公众号认证后接入
+     IMPACTONE 网站订阅
+
+     通过 Vercel API 写入 Supabase。
+     数据库确认成功后才更新订阅状态。
+
+     注意：
+     网站订阅不等于微信消息授权。
   ======================================== */
 
   const subscribeAction = $('#subscribeAction');
   const subscribeModal = $('#subscribeModal');
 
   const SUBSCRIPTION_KEY = 'impactone_daily_subscribed';
+  const SUBSCRIPTION_CONFIRMED_KEY =
+    'impactone_daily_subscription_confirmed';
+
+  const SUBSCRIBE_ENDPOINT =
+    `${API_BASE}/api/daily-subscribe`;
+
+  let subscriptionBusy = false;
+
+  // 旧版只保存在浏览器中的状态不再视为有效订阅。
+  // 只有新版 API 成功返回后才记录 confirmed 标志。
+  function getSubscriptionState() {
+    const confirmed =
+      storage.get(SUBSCRIPTION_CONFIRMED_KEY, false) === true;
+
+    if (!confirmed) return false;
+
+    return storage.get(SUBSCRIPTION_KEY, false) === true;
+  }
 
   function renderSubscription() {
     if (!subscribeAction) return;
 
-    const subscribed =
-      storage.get(SUBSCRIPTION_KEY, false) === true;
+    const subscribed = getSubscriptionState();
 
-    subscribeAction.innerHTML = subscribed
-      ? `${icon('check')}<span>已订阅</span>`
-      : `${icon('plus')}<span>订阅</span>`;
+    subscribeAction.innerHTML = subscriptionBusy
+      ? '<span>处理中…</span>'
+      : subscribed
+        ? `${icon('check')}<span>已订阅</span>`
+        : `${icon('plus')}<span>订阅</span>`;
 
     subscribeAction.classList.toggle(
       'active',
       subscribed
     );
+
+    subscribeAction.disabled = subscriptionBusy;
 
     subscribeAction.setAttribute(
       'aria-pressed',
@@ -272,33 +297,85 @@
     subscribeAction.setAttribute(
       'aria-label',
       subscribed
-        ? '取消订阅每日必读'
-        : '一键订阅每日必读'
+        ? '取消网站每日必读订阅'
+        : '订阅网站每日必读'
     );
 
     subscribeAction.title = subscribed
-      ? '点击取消订阅'
-      : '点击一键订阅';
+      ? '点击取消网站订阅'
+      : '点击订阅每日必读';
   }
 
   renderSubscription();
 
-  subscribeAction?.addEventListener('click', () => {
-    const subscribed =
-      storage.get(SUBSCRIPTION_KEY, false) === true;
+  subscribeAction?.addEventListener('click', async () => {
+    if (subscriptionBusy) return;
 
+    const subscribed = getSubscriptionState();
     const next = !subscribed;
 
-    storage.set(SUBSCRIPTION_KEY, next);
+    subscriptionBusy = true;
     renderSubscription();
 
-    closeOverlay(subscribeModal);
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 12000);
 
-    toast(
-      next
-        ? '已订阅每日必读（当前浏览器）'
-        : '已取消订阅'
-    );
+      let response;
+
+      try {
+        response = await fetch(SUBSCRIBE_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            client_id: clientId,
+            subscribed: next
+          }),
+          signal: controller.signal,
+          cache: 'no-store'
+        });
+      } finally {
+        clearTimeout(timeout);
+      }
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      const result = await response.json();
+
+      if (
+        result?.success !== true ||
+        result?.subscribed !== next
+      ) {
+        throw new Error('Subscription not confirmed');
+      }
+
+      // 只有数据库确认成功才保存状态。
+      storage.set(SUBSCRIPTION_KEY, next);
+      storage.set(SUBSCRIPTION_CONFIRMED_KEY, true);
+
+      closeOverlay(subscribeModal);
+
+      toast(
+        next
+          ? '网站订阅成功（微信通知尚未开通）'
+          : '已取消网站订阅'
+      );
+    } catch (error) {
+      console.error('IMPACTONE subscription failed:', error);
+
+      toast(
+        error?.name === 'AbortError'
+          ? '订阅请求超时，请稍后重试'
+          : '订阅操作失败，请稍后重试'
+      );
+    } finally {
+      subscriptionBusy = false;
+      renderSubscription();
+    }
   });
 
   $('[data-close-subscribe]')?.addEventListener(
@@ -477,7 +554,6 @@
 
   $('[data-close-share]')?.addEventListener('click', () => {
     closeOverlay(shareModal);
-
     $('#wechatShareHint')?.classList.remove('show');
   });
 
