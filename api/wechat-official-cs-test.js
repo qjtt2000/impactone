@@ -2,7 +2,7 @@
 // Does not run on publication and does not broadcast to stored OAuth identities.
 // WeChat requires a valid customer-service interaction window for the recipient.
 const TARGET = 'https://www.impactone.news/daily.html';
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
   if (req.method !== 'POST') return res.status(405).json({error:'Method not allowed'});
   const key = process.env.WECHAT_SEND_ADMIN_KEY;
