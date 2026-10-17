@@ -120,7 +120,7 @@ jobs:
           fi
 
           echo "Sending notification..."
-          echo "$BODY"
+          # Never print the JSON body: it contains the administrator credential.
 
           RESPONSE=$(curl --fail-with-body \
             --silent \
