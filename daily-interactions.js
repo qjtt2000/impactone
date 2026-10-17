@@ -272,16 +272,10 @@
     bindButton.addEventListener('click', async () => {
       if (!getSubscriptionState()) { toast('请先点击订阅'); return; }
       bindButton.disabled = true;
-      try {
-        const response = await fetch(`${API_BASE}/api/wechat-official-start`, {
-          method:'POST', credentials:'include',
-          headers:{'Content-Type':'application/json'},
-          body:JSON.stringify({client_id:clientId,return_url:location.href})
-        });
-        const result = await response.json();
-        if (!response.ok || !result.authorize_url) throw new Error(result.error || 'OAuth unavailable');
-        location.assign(result.authorize_url);
-      } catch(error) { console.error('Official bind failed',error);toast('微信绑定暂不可用，请稍后重试');bindButton.disabled=false; }
+      const start = new URL(`${API_BASE}/api/wechat-official-start`);
+      start.searchParams.set('client_id', clientId);
+      start.searchParams.set('return_url', location.href);
+      location.assign(start.toString());
     });
     const status = new URLSearchParams(location.search).get('wechat_bind');
     if (status === 'success') {
