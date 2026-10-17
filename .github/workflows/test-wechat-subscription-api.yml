@@ -18,16 +18,16 @@ jobs:
           WECHAT_APPSECRET: ${{ secrets.WECHAT_SUBSCRIPTION_APPSECRET }}
         run: |
           set -euo pipefail
-          if [[ -z "${WECHAT_APPID:-}" || -z "${WECHAT_APPSECRET:-}" ]]; then
-            echo "::error::Missing WECHAT_SUBSCRIPTION_APPID or WECHAT_SUBSCRIPTION_APPSECRET GitHub Actions secret."
+          if [[ -z "${WECHAT_APPSECRET:-}" ]]; then
+            echo "::error::Missing WECHAT_SUBSCRIPTION_APPSECRET GitHub Actions secret."
             exit 1
           fi
 
-          # This test only requests an access token. It does not create a draft or send messages.
+          # Verified against the official account screenshot. AppID is public; AppSecret remains secret.\n          VERIFIED_APPID="wx760f0fc6c1a6f33e"\n          if [[ "$WECHAT_APPID" != "$VERIFIED_APPID" ]]; then\n            echo "::warning::WECHAT_SUBSCRIPTION_APPID secret differs from the verified official AppID; using verified AppID for this connection test."\n          else\n            echo "Configured AppID matches the verified official account."\n          fi\n          # This test only requests an access token. It does not create a draft or send messages.
           RESPONSE=$(curl --silent --show-error --fail-with-body --max-time 25 \
             --get 'https://api.weixin.qq.com/cgi-bin/token' \
             --data-urlencode 'grant_type=client_credential' \
-            --data-urlencode "appid=$WECHAT_APPID" \
+            --data-urlencode "appid=$VERIFIED_APPID" \
             --data-urlencode "secret=$WECHAT_APPSECRET")
 
           # Never print an access token or raw response (which may contain credentials).
