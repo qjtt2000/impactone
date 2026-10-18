@@ -213,167 +213,31 @@
     }
   }
 
-  // ===== 网站订阅 / Supabase =====
+  // ===== 企业微信获客助手：日报底部订阅入口 =====
+  // 用户需在微信中确认添加企业联系人；网页本身不标记为已订阅。
   const subscribeAction = $('#subscribeAction');
   const subscribeModal = $('#subscribeModal');
+  const WECOM_ACQUISITION_URL = 'https://work.weixin.qq.com/ca/cawcde6626e4fd76ef';
 
-  const SUBSCRIPTION_KEY = 'impactone_daily_subscribed';
-  const CONFIRMED_KEY =
-    'impactone_daily_subscription_confirmed';
-  const SUBSCRIBE_ENDPOINT =
-    `${API_BASE}/api/daily-subscribe`;
-
-  let subscriptionBusy = false;
-
-  function getSubscriptionState() {
-    return (
-      storage.get(CONFIRMED_KEY, false) === true &&
-      storage.get(SUBSCRIPTION_KEY, false) === true
-    );
+  if (subscribeAction) {
+    subscribeAction.innerHTML = `${icon('plus')}<span>订阅</span>`;
+    subscribeAction.classList.remove('active');
+    subscribeAction.disabled = false;
+    subscribeAction.removeAttribute('aria-pressed');
+    subscribeAction.setAttribute('aria-label', '通过企业微信订阅每日必读');
+    subscribeAction.title = '添加 IMPACTONE 企业微信联系人，接收日报通知';
+    subscribeAction.addEventListener('click', () => {
+      // 在用户点击事件中直接跳转，兼容微信内置浏览器。
+      window.location.assign(WECOM_ACQUISITION_URL);
+    });
   }
-
-  function renderSubscription() {
-    if (!subscribeAction) return;
-
-    const subscribed = getSubscriptionState();
-
-    subscribeAction.innerHTML = subscriptionBusy
-      ? '<span>处理中…</span>'
-      : subscribed
-        ? `${icon('check')}<span>已订阅</span>`
-        : `${icon('plus')}<span>订阅</span>`;
-
-    subscribeAction.classList.toggle('active', subscribed);
-    subscribeAction.disabled = subscriptionBusy;
-    subscribeAction.setAttribute(
-      'aria-pressed', String(subscribed)
-    );
-    subscribeAction.setAttribute(
-      'aria-label',
-      subscribed
-        ? '取消网站每日必读订阅'
-        : '订阅网站每日必读'
-    );
-    subscribeAction.title = subscribed
-      ? '点击取消网站订阅'
-      : '点击订阅每日必读';
-  }
-
-  renderSubscription();
-
-  // 微信内订阅：一个按钮完成网站订阅与服务号身份授权。
-  const inWeChat = /MicroMessenger|WeChat|Weixin/i.test(navigator.userAgent) || typeof window.WeixinJSBridge !== 'undefined';
-  const WECHAT_BOUND_KEY = 'impactone_wechat_official_bound';
-  function startWeChatAuthorization() {
-    const start = new URL(`${API_BASE}/api/wechat-official-start`);
-    start.searchParams.set('client_id', clientId);
-    start.searchParams.set('return_url', location.href);
-    location.assign(start.toString());
-  }
-  const bindStatus = new URLSearchParams(location.search).get('wechat_bind');
-  if (inWeChat && bindStatus) {
-    if (bindStatus === 'success') {
-      storage.set(SUBSCRIPTION_KEY, true);
-      storage.set(CONFIRMED_KEY, true);
-      storage.set(WECHAT_BOUND_KEY, true);
-      renderSubscription();
-      toast('微信身份已绑定，网站订阅成功（微信通知尚未开通）');
-    } else {
-      toast('微信身份绑定未完成，网站订阅状态不变');
-    }
-    const cleanUrl = new URL(location.href);
-    cleanUrl.searchParams.delete('wechat_bind');
-    history.replaceState(null, '', cleanUrl.pathname + cleanUrl.search + cleanUrl.hash);
-  }
-
-  subscribeAction?.addEventListener('click', async () => {
-    if (subscriptionBusy) return;
-
-    // 已订阅但尚未绑定微信：再次点击时完成授权，而不是误取消订阅。
-    if (inWeChat && getSubscriptionState() && storage.get(WECHAT_BOUND_KEY, false) !== true) {
-      startWeChatAuthorization();
-      return;
-    }
-    const next = !getSubscriptionState();
-
-    subscriptionBusy = true;
-    renderSubscription();
-
-    try {
-      const controller = new AbortController();
-      const timeout = setTimeout(
-        () => controller.abort(), 12000
-      );
-
-      let response;
-
-      try {
-        response = await fetch(SUBSCRIBE_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            client_id: clientId,
-            subscribed: next
-          }),
-          signal: controller.signal,
-          cache: 'no-store'
-        });
-      } finally {
-        clearTimeout(timeout);
-      }
-
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-
-      const result = await response.json();
-
-      if (
-        result?.success !== true ||
-        result?.subscribed !== next
-      ) {
-        throw new Error('Subscription not confirmed');
-      }
-
-      storage.set(SUBSCRIPTION_KEY, next);
-      storage.set(CONFIRMED_KEY, true);
-
-      closeOverlay(subscribeModal);
-
-      if (next && inWeChat) {
-        toast('网站订阅成功，正在绑定微信身份…');
-        startWeChatAuthorization();
-        return;
-      }
-
-      toast(
-        next
-          ? '网站订阅成功。请在微信内打开日报以完成微信身份授权'
-          : '已取消网站订阅'
-      );
-
-    } catch (error) {
-      console.error('IMPACTONE subscription failed:', error);
-
-      toast(
-        error?.name === 'AbortError'
-          ? '订阅请求超时，请稍后重试'
-          : '订阅操作失败，请稍后重试'
-      );
-    } finally {
-      subscriptionBusy = false;
-      renderSubscription();
-    }
-  });
 
   $('[data-close-subscribe]')?.addEventListener(
     'click', () => closeOverlay(subscribeModal)
   );
 
   subscribeModal?.addEventListener('click', event => {
-    if (event.target === subscribeModal) {
-      closeOverlay(subscribeModal);
-    }
+    if (event.target === subscribeModal) closeOverlay(subscribeModal);
   });
 
   // ===== 邮件订阅备用 =====
