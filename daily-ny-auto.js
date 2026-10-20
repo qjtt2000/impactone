@@ -6,8 +6,7 @@
   const API =
     `https://api.github.com/repos/${OWNER}/${REPO}/contents/daily?ref=${BRANCH}`;
 
-  const RAW =
-    `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/daily/`;
+  const RAW = 'daily/';
 
   /*
    * 只识别纽约版：
@@ -48,39 +47,10 @@
    * 所有纽约版日报。
    */
   async function issues() {
-    const r = await fetch(API, {
-      headers: {
-        Accept: 'application/vnd.github+json'
-      },
-      cache: 'no-store'
-    });
-
-    if (!r.ok) {
-      throw new Error(
-        `GitHub API ${r.status}`
-      );
-    }
-
-    const data = await r.json();
-
-    return data
-      .map(f => {
-        const m =
-          ISSUE_RE.exec(f.name);
-
-        return m
-          ? {
-              name: f.name,
-              y: m[1],
-              m: m[2],
-              d: m[3]
-            }
-          : null;
-      })
-      .filter(Boolean)
-      .sort((a, b) =>
-        b.name.localeCompare(a.name)
-      );
+    return ["2026-09-24-ny.html","2026-09-25-ny.html","2026-09-26-ny.html","2026-09-27-ny.html","2026-09-28-ny.html","2026-09-29-ny.html","2026-09-30-ny.html","2026-10-01-ny.html","2026-10-02-ny.html","2026-10-05-ny.html","2026-10-06-ny.html"].map(name => {
+      const m = ISSUE_RE.exec(name);
+      return {name, y:m[1], m:m[2], d:m[3]};
+    }).sort((a,b)=>b.name.localeCompare(a.name));
   }
 
 
