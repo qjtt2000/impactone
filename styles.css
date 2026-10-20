@@ -2117,3 +2117,14 @@ footer {
   }
 
 }
+
+/* IMPACTONE editorial footer refinement — 2026-10-20 */
+.footer-grid{grid-template-columns:minmax(0,1.55fr) minmax(0,.7fr) minmax(280px,1fr);gap:clamp(28px,5vw,90px);align-items:start}
+.footer-grid .footer-heading{display:block;color:#cba85b;font-size:13px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;margin:0 0 19px}
+.footer-grid .footer-company{margin-top:20px;padding-top:17px;border-top:1px solid rgba(203,168,91,.27);font-size:13px;line-height:1.8;color:#cbd2dc}
+.footer-grid .footer-company .detail{display:grid;grid-template-columns:65px minmax(0,1fr);gap:8px;margin:5px 0;align-items:start}
+.footer-grid .footer-company .detail-label{color:#cba85b;white-space:nowrap}
+.footer-grid .footer-company a{display:inline;margin:0;color:#f4f1e9;overflow-wrap:anywhere}
+.footer-grid .footer-company a:hover{color:#cba85b}
+@media(max-width:760px){.footer-grid{grid-template-columns:1fr 1fr;gap:32px 22px}.footer-grid>div:first-child{grid-column:1/-1}.footer-grid .footer-company .detail{grid-template-columns:52px minmax(0,1fr)}}
+@media(max-width:420px){.footer-grid{grid-template-columns:1fr}.footer-grid>div:first-child{grid-column:auto}}
