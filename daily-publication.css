@@ -953,3 +953,9 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
 .publication-footer .legal b{display:block;color:var(--gold);font-size:11px;letter-spacing:.07em;margin:18px 0 7px}
 .publication-footer .legal p{margin:0 0 12px}
 @media(max-width:520px){.publication-footer{padding-left:22px;padding-right:22px}.publication-footer .footer-info .colophon-row{grid-template-columns:64px minmax(0,1fr);gap:8px;font-size:11px}}
+
+/* Match legal and operator typography; hide obsolete colophon lead-ins */
+.publication-footer .footer-info .colophon-heading,.publication-footer .footer-info .colophon-note{display:none!important}
+.publication-footer .footer-info .colophon-row,.publication-footer .legal,.publication-footer .legal p{font-size:12px!important;line-height:1.75!important}
+.publication-footer .footer-info .colophon-row{align-items:start}
+@media(max-width:520px){.publication-footer .footer-info .colophon-row,.publication-footer .legal,.publication-footer .legal p{font-size:11px!important}}
