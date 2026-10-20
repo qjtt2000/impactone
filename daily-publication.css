@@ -939,3 +939,17 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
   margin-left:auto!important;
   margin-right:auto!important;
 }
+
+/* Editorial publication colophon — refined legal and contact hierarchy */
+.publication-footer{padding-bottom:105px}
+.publication-footer .footer-info{margin:26px 0 0;padding:22px 0 19px;border-top:1px solid rgba(203,168,91,.42);border-bottom:1px solid rgba(203,168,91,.22);gap:10px;font-size:12px;line-height:1.7;color:#d9e0e9}
+.publication-footer .footer-info .colophon-heading{font-size:13px;letter-spacing:.12em;font-weight:700;color:var(--gold)}
+.publication-footer .footer-info .colophon-note{color:#c4cfdf;font-size:11px}
+.publication-footer .footer-info .colophon-row{display:grid;grid-template-columns:76px minmax(0,1fr);gap:12px;align-items:baseline;font-size:12px;line-height:1.75}
+.publication-footer .footer-info .colophon-label{color:var(--gold);font-weight:600;white-space:nowrap}
+.publication-footer .footer-info .colophon-row a{color:#fff;text-decoration:none;overflow-wrap:anywhere}
+.publication-footer .footer-info .colophon-row a:hover{text-decoration:underline;text-decoration-color:var(--gold)}
+.publication-footer .legal{margin-top:25px;color:#bdc8d6;font-size:10px;line-height:1.8}
+.publication-footer .legal b{display:block;color:var(--gold);font-size:11px;letter-spacing:.07em;margin:18px 0 7px}
+.publication-footer .legal p{margin:0 0 12px}
+@media(max-width:520px){.publication-footer{padding-left:22px;padding-right:22px}.publication-footer .footer-info .colophon-row{grid-template-columns:64px minmax(0,1fr);gap:8px;font-size:11px}}
