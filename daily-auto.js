@@ -135,7 +135,7 @@
       `daily/${latest.name}`;
 
     a.textContent =
-      `阅读${Number(latest.m)}月${Number(latest.d)}日完整每日必读 →`;
+      `阅读${Number(latest.m)}月${Number(latest.d)}日完整国际日报 →`;
   }
 
   function renderDaily(list) {
@@ -172,7 +172,7 @@
       `daily/${latest.name}`;
 
     latestLink.textContent =
-      `阅读 ${dot(latest)} 完整每日必读 →`;
+      `阅读 ${dot(latest)} 完整国际日报 →`;
 
     archive.innerHTML = '';
 
@@ -199,7 +199,7 @@
           </span>
 
           <h3>
-            影响力·每日必读
+            影响力·每日必读·国际
           </h3>
 
           <p>
