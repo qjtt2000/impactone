@@ -953,3 +953,12 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
    The complete lower skyline and Empire State Building remain untouched. */
 .brand-lockup-wrap{position:relative}
 .brand-lockup-wrap::after{content:"";position:absolute;z-index:1;pointer-events:none;left:77.5%;top:67.5%;width:10.5%;height:32.5%;background:linear-gradient(180deg,#071b3c 0%,#061b3b 55%,#051a39 100%)}
+
+/* Approved footer spacing: give the motto breathing room, then separate heading and contact rows. */
+.publication-footer .footer-info{margin-top:52px!important}
+.publication-footer .footer-info::before{margin-bottom:18px!important}
+.publication-footer .footer-info .colophon-contact{margin-top:0!important}
+.publication-footer .footer-info .colophon-contact > b{display:block!important;margin-bottom:18px!important;color:#cba647!important}
+/* International issues have their own heading: never generate a second one. */
+.publication-footer .footer-info:has(.colophon-contact)::before{content:none!important;display:none!important}
+@media(max-width:600px){.publication-footer .footer-info{margin-top:40px!important}.publication-footer .footer-info::before{margin-bottom:14px!important}.publication-footer .footer-info .colophon-contact > b{margin-bottom:14px!important}}
