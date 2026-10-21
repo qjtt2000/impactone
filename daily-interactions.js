@@ -214,131 +214,30 @@
     }
   }
 
-  // ===== 网站订阅 / Supabase =====
+  // ===== 企业微信获客助手：日报底部订阅入口 =====
+  // 由用户确认添加企业微信联系人；不误标记网站订阅状态。
   const subscribeAction = $('#subscribeAction');
   const subscribeModal = $('#subscribeModal');
+  const WECOM_ACQUISITION_URL = 'https://work.weixin.qq.com/ca/cawcde6626e4fd76ef';
 
-  const SUBSCRIPTION_KEY = 'impactone_daily_subscribed';
-  const CONFIRMED_KEY =
-    'impactone_daily_subscription_confirmed';
-  const SUBSCRIBE_ENDPOINT =
-    `${API_BASE}/api/daily-subscribe`;
-
-  let subscriptionBusy = false;
-
-  function getSubscriptionState() {
-    return (
-      storage.get(CONFIRMED_KEY, false) === true &&
-      storage.get(SUBSCRIPTION_KEY, false) === true
-    );
+  if (subscribeAction) {
+    subscribeAction.innerHTML = `${icon('plus')}<span>订阅</span>`;
+    subscribeAction.classList.remove('active');
+    subscribeAction.disabled = false;
+    subscribeAction.removeAttribute('aria-pressed');
+    subscribeAction.setAttribute('aria-label', '通过企业微信订阅每日必读');
+    subscribeAction.title = '添加企业微信联系人，接收日报通知';
+    subscribeAction.addEventListener('click', () => {
+      window.location.assign(WECOM_ACQUISITION_URL);
+    });
   }
-
-  function renderSubscription() {
-    if (!subscribeAction) return;
-
-    const subscribed = getSubscriptionState();
-
-    subscribeAction.innerHTML = subscriptionBusy
-      ? '<span>处理中…</span>'
-      : subscribed
-        ? `${icon('check')}<span>已订阅</span>`
-        : `${icon('plus')}<span>订阅</span>`;
-
-    subscribeAction.classList.toggle('active', subscribed);
-    subscribeAction.disabled = subscriptionBusy;
-    subscribeAction.setAttribute(
-      'aria-pressed', String(subscribed)
-    );
-    subscribeAction.setAttribute(
-      'aria-label',
-      subscribed
-        ? '取消网站每日必读订阅'
-        : '订阅网站每日必读'
-    );
-    subscribeAction.title = subscribed
-      ? '点击取消网站订阅'
-      : '点击订阅每日必读';
-  }
-
-  renderSubscription();
-
-  subscribeAction?.addEventListener('click', async () => {
-    if (subscriptionBusy) return;
-
-    const next = !getSubscriptionState();
-
-    subscriptionBusy = true;
-    renderSubscription();
-
-    try {
-      const controller = new AbortController();
-      const timeout = setTimeout(
-        () => controller.abort(), 12000
-      );
-
-      let response;
-
-      try {
-        response = await fetch(SUBSCRIBE_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            client_id: clientId,
-            subscribed: next
-          }),
-          signal: controller.signal,
-          cache: 'no-store'
-        });
-      } finally {
-        clearTimeout(timeout);
-      }
-
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-
-      const result = await response.json();
-
-      if (
-        result?.success !== true ||
-        result?.subscribed !== next
-      ) {
-        throw new Error('Subscription not confirmed');
-      }
-
-      storage.set(SUBSCRIPTION_KEY, next);
-      storage.set(CONFIRMED_KEY, true);
-
-      closeOverlay(subscribeModal);
-
-      toast(
-        next
-          ? '网站订阅成功（微信通知尚未开通）'
-          : '已取消网站订阅'
-      );
-
-    } catch (error) {
-      console.error('IMPACTONE subscription failed:', error);
-
-      toast(
-        error?.name === 'AbortError'
-          ? '订阅请求超时，请稍后重试'
-          : '订阅操作失败，请稍后重试'
-      );
-    } finally {
-      subscriptionBusy = false;
-      renderSubscription();
-    }
-  });
 
   $('[data-close-subscribe]')?.addEventListener(
     'click', () => closeOverlay(subscribeModal)
   );
 
   subscribeModal?.addEventListener('click', event => {
-    if (event.target === subscribeModal) {
-      closeOverlay(subscribeModal);
-    }
+    if (event.target === subscribeModal) closeOverlay(subscribeModal);
   });
 
   // ===== 邮件订阅备用 =====
