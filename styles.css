@@ -2149,3 +2149,7 @@ footer .footer-grid .footer-company{border-top:0!important;padding-top:0!importa
 footer .footer-grid .footer-company .detail{display:grid!important;grid-template-columns:70px minmax(0,1fr)!important;gap:14px!important;align-items:start!important;margin:7px 0!important}
 footer .footer-grid .footer-company .detail-label,footer .footer-grid .footer-company .detail>span:last-child,footer .footer-grid .footer-company .detail>a{font-size:13px!important;line-height:1.7!important;color:#fff!important;font-weight:400!important;overflow-wrap:anywhere!important}
 @media(max-width:560px){footer .footer-grid .footer-company .detail{grid-template-columns:60px minmax(0,1fr)!important;gap:12px!important}}
+
+/* Home and section footers only; daily publication footer untouched. */
+footer .footer-grid .footer-heading{color:#fff!important}
+footer .footer-grid .footer-company .detail-label{color:#fff!important}

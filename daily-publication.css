@@ -949,3 +949,8 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
 .publication-footer .footer-info .colophon-row .colophon-label,.publication-footer .footer-info .colophon-row span,.publication-footer .footer-info .colophon-row a{color:#fff!important;font-size:inherit!important;font-weight:400!important;line-height:inherit!important;overflow-wrap:anywhere!important}
 .publication-footer .footer-info .colophon-row a{text-decoration:none!important}
 @media(max-width:600px){.publication-footer .footer-info .colophon-row{grid-template-columns:62px minmax(0,1fr)!important;gap:8px!important;font-size:9px!important}}
+
+/* New York edition: conceal ONLY the isolated, upper half-spire embedded in the masthead image.
+   The complete lower skyline and Empire State Building remain untouched. */
+.brand-lockup-wrap{position:relative}
+.brand-lockup-wrap::after{content:"";position:absolute;z-index:1;pointer-events:none;left:77.5%;top:67.5%;width:10.5%;height:32.5%;background:linear-gradient(180deg,#071b3c 0%,#061b3b 55%,#051a39 100%)}
