@@ -940,8 +940,7 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
   margin-right:auto!important;
 }
 
-/* Hide disabled account, subscription and comments UI during review */
-.fixed-actions #subscribeAction,.fixed-actions #commentAction,#subscribeModal,#commentsPanel{display:none!important}
+/* Subscription and comments controls restored after review. */
 
 /* NYC contact block: separate heading, aligned white details */
 .publication-footer .footer-info::before{content:"商业合作与联系";display:block!important;margin:0 0 10px!important;color:#cba647!important;font-size:10px!important;font-weight:700!important;line-height:1.5!important}
