@@ -2142,3 +2142,10 @@ footer .footer-grid .footer-company .detail>span:last-child,footer .footer-grid 
 footer .footer-grid .footer-company a:hover{color:#fff;text-decoration:underline}
 @media(max-width:850px){footer .footer-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px 24px}footer .footer-grid>div:first-child{grid-column:1/-1}footer .footer-grid>div:last-child{max-width:none}}
 @media(max-width:560px){footer .footer-grid{grid-template-columns:1fr;gap:28px}footer .footer-grid>div:first-child{grid-column:auto}footer .footer-grid .footer-company .detail{grid-template-columns:70px minmax(0,1fr);gap:12px}}
+
+/* Approved contact-footer mockup, compact original typography */
+footer .footer-grid .footer-heading{color:#cba85b!important;font-size:14px!important;line-height:1.5!important;letter-spacing:0!important;margin:0 0 12px!important}
+footer .footer-grid .footer-company{border-top:0!important;padding-top:0!important;margin-top:0!important;color:#fff!important;font-size:13px!important;line-height:1.7!important}
+footer .footer-grid .footer-company .detail{display:grid!important;grid-template-columns:70px minmax(0,1fr)!important;gap:14px!important;align-items:start!important;margin:7px 0!important}
+footer .footer-grid .footer-company .detail-label,footer .footer-grid .footer-company .detail>span:last-child,footer .footer-grid .footer-company .detail>a{font-size:13px!important;line-height:1.7!important;color:#fff!important;font-weight:400!important;overflow-wrap:anywhere!important}
+@media(max-width:560px){footer .footer-grid .footer-company .detail{grid-template-columns:60px minmax(0,1fr)!important;gap:12px!important}}
