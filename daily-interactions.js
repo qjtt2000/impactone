@@ -218,7 +218,7 @@
   // 由用户确认添加企业微信联系人；不误标记网站订阅状态。
   const subscribeAction = $('#subscribeAction');
   const subscribeModal = $('#subscribeModal');
-  const WECOM_ACQUISITION_URL = 'https://work.weixin.qq.com/ca/cawcde6626e4fd76ef';
+  const WECOM_ACQUISITION_URL = 'https://work.weixin.qq.com/ca/cawcde0794b5110428';
 
   if (subscribeAction) {
     subscribeAction.innerHTML = `${icon('plus')}<span>订阅</span>`;
