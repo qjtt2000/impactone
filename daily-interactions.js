@@ -439,6 +439,12 @@
 
   $('[data-share="wechat"]')?.addEventListener(
     'click', async () => {
+      if (/MicroMessenger/i.test(navigator.userAgent)) {
+        closeOverlay(shareModal);
+        toast('请点微信右上角「⋯」，选择「发送给朋友」');
+        return;
+      }
+
       if (!await nativeShare()) {
         await copyLink();
         toast('链接已复制，请在微信中发送');
