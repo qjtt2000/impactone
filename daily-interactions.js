@@ -437,11 +437,18 @@
     }
   );
 
-  $('[data-share="wechat"]')?.addEventListener(
+  const wechatShare = shareModal?.querySelector('[data-share="wechat"]');
+  const xiaohongshuShare = shareModal?.querySelector('[data-share="xiaohongshu"]');
+
+  if (wechatShare && xiaohongshuShare && wechatShare.parentElement === xiaohongshuShare.parentElement) {
+    xiaohongshuShare.before(wechatShare);
+  }
+
+  wechatShare?.addEventListener(
     'click', async () => {
       if (/MicroMessenger/i.test(navigator.userAgent)) {
         closeOverlay(shareModal);
-        toast('请直接在微信里转发：点右上角「⋯」→「发送给朋友」');
+        toast('点微信里的分享图标，或点右上角「⋯」→「发送给朋友」');
         return;
       }
 
