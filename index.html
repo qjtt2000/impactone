@@ -25,6 +25,17 @@
   >
 
   <link rel="stylesheet" href="styles.css?v=20261111-brand-header">
+  <style>
+    #video .video-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+    #video .video-cover { display: block; }
+    #video .video-cover img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+    #about .about-content { margin: 24px 0; }
+    #about .about-content dt { font-weight: 700; margin-top: 12px; }
+    #about .about-content dd { margin: 2px 0 0; }
+    @media (max-width: 760px) {
+      #video .video-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 
 <body>
@@ -539,40 +550,34 @@
 
 
     <div class="video-grid">
-
       <article class="video-card">
-
-        <div class="video-placeholder">
-          ▶
-        </div>
-
-        <h3>
-          今日全球商业变化
-        </h3>
-
-        <p>
-          用几分钟理解
-          今天真正重要的商业与资本动态。
-        </p>
-
+        <a class="video-cover" href="https://www.youtube.com/watch?v=lXLBTBBil2U" aria-label="在 YouTube 观看：黄仁勋谈英伟达的创业与转型">
+          <img src="https://i.ytimg.com/vi/lXLBTBBil2U/hqdefault.jpg" width="480" height="360" alt="" loading="lazy" decoding="async">
+        </a>
+        <h3>黄仁勋谈英伟达的创业与转型</h3>
+        <p>黄仁勋回顾创办英伟达的经历，谈企业如何在技术转型中做长期判断。</p>
+        <p>来源｜斯坦福大学商学院 · 英语</p>
+        <a class="text-link" href="https://www.youtube.com/watch?v=lXLBTBBil2U">在 YouTube 观看 →</a>
       </article>
 
+      <article class="video-card">
+        <a class="video-cover" href="https://www.youtube.com/watch?v=u-x7PdnvCyI" aria-label="在 YouTube 观看：张忠谋与黄仁勋对谈">
+          <img src="https://i.ytimg.com/vi/u-x7PdnvCyI/hqdefault.jpg" width="480" height="360" alt="" loading="lazy" decoding="async">
+        </a>
+        <h3>张忠谋与黄仁勋对谈</h3>
+        <p>从两位创业者的对谈，了解台积电与专业晶圆代工模式的起点。</p>
+        <p>来源｜计算机历史博物馆 · 英语</p>
+        <a class="text-link" href="https://www.youtube.com/watch?v=u-x7PdnvCyI">在 YouTube 观看 →</a>
+      </article>
 
       <article class="video-card">
-
-        <div class="video-placeholder">
-          ▶
-        </div>
-
-        <h3>
-          企业家正在关注什么？
-        </h3>
-
-        <p>
-          从重要事件中提取
-          真正影响企业决策的信息。
-        </p>
-
+        <a class="video-cover" href="https://www.youtube.com/watch?v=1crLOLanGww" aria-label="在 YouTube 观看：纽约市介绍小企业改革">
+          <img src="https://i.ytimg.com/vi/1crLOLanGww/hqdefault.jpg" width="480" height="360" alt="" loading="lazy" decoding="async">
+        </a>
+        <h3>纽约市介绍小企业改革</h3>
+        <p>了解纽约市公布的小企业改革方向，以及市府如何着手简化经营流程。</p>
+        <p>来源｜纽约市长办公室 · 英语</p>
+        <a class="text-link" href="https://www.youtube.com/watch?v=1crLOLanGww">在 YouTube 观看 →</a>
       </article>
 
     </div>
@@ -660,32 +665,26 @@
   class="section"
   id="about"
 >
-
   <div class="wrap narrow">
-
-    <div class="eyebrow">
-      ABOUT IMPACTONE
-    </div>
-
-    <h2>
-      关于 IMPACTONE
-    </h2>
-
-    <p class="lead">
-      IMPACTONE 是一个面向企业家、
-      投资人及决策者的商业信息与影响力平台。
-    </p>
-
-    <p>
-      我们关注全球经济、
-      商业、资本、科技与政策变化，
-      从大量信息中筛选真正值得关注的内容，
-      帮助读者理解趋势、
-      判断变化并发现机会。
-    </p>
-
+    <div class="eyebrow">ABOUT IMPACTONE</div>
+    <h2>关于 IMPACTONE</h2>
+    <p class="lead">IMPACTONE（影响力）是面向华人企业家、投资人和商业读者的中文商业资讯平台，关注全球商业变化，也关注这些变化如何影响纽约的工作、生活和经营。</p>
+    <dl class="about-content">
+      <dt><a href="daily.html">每日必读·国际</a></dt>
+      <dd>追踪全球经济、商业、资本、科技和政策，梳理重要事件及其对企业和投资者的影响。</dd>
+      <dt><a href="daily-ny.html">每日必读·纽约</a></dt>
+      <dd>关注纽约的民生、公共服务、商业环境和本地政策，帮助读者找到与工作和生活相关的信息。</dd>
+      <dt><a href="people.html">影响力人物</a></dt>
+      <dd>从全球华人企业家的经历出发，记录他们如何建立企业、进入新市场和应对行业变化。</dd>
+      <dt><a href="#video">视频</a></dt>
+      <dd>精选公开访谈、演讲和城市资讯，标明发布机构，方便读者观看原片。</dd>
+    </dl>
+    <h3>编辑原则</h3>
+    <p>我们依据公开资料整理信息，注明来源，并区分事实与编辑观察。</p>
+    <h3>联系交流</h3>
+    <p>欢迎提供内容建议、采访线索，或洽谈品牌与活动合作。<a href="mailto:info@impactone.news">info@impactone.news</a></p>
+    <p>主办｜IMPACT ONE LLC</p>
   </div>
-
 </section>
 
 
