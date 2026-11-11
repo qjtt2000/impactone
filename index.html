@@ -26,32 +26,101 @@
 
   <link rel="stylesheet" href="styles.css?v=20261111-brand-header">
   <style>
-    #video .video-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
-    #video .video-cover { display: block; }
-    #video .video-cover img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
-    #video .video-cover-jensen { object-position: center 18%; }
-    #events .event-recaps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
-    #events .event-recap { padding: 24px; background: #fff; border: 1px solid #e7e7e2; border-radius: 8px; }
-    #events .event-recap time { color: #526072; font-size: 14px; }
-    @media (max-width: 760px) {
-      #events .event-recaps { grid-template-columns: 1fr; }
+    main {
+      --home-card-gap: clamp(16px, 2.4vw, 28px);
+      --home-card-pad: clamp(20px, 2.5vw, 30px);
     }
-    #about .about-content { margin: 24px 0; }
-    #about .about-content dt { font-weight: 700; margin-top: 12px; }
-    #about .about-content dd { margin: 2px 0 0; }
-    @media (max-width: 760px) {
-      #video .video-grid { grid-template-columns: 1fr; }
+
+    main > .section { padding-block: clamp(48px, 7vw, 88px); }
+    main > .section[id] { scroll-margin-top: 96px; }
+    main .section-title { gap: 16px 28px; flex-wrap: wrap; margin-bottom: clamp(24px, 3vw, 36px); }
+    main .section-title h2 { margin-bottom: 10px; }
+    main .section-title p { margin: 0; line-height: 1.7; }
+
+    #insights .cards-grid,
+    .home-people .cards-grid,
+    #video .video-grid,
+    #events .event-recaps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--home-card-gap);
     }
-      #insights .content-card, .home-people .content-card { position: relative; }
+
+    #insights .content-card,
+    .home-people .content-card,
+    #video .video-card,
+    #events .event-recap {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #e4e2dc;
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    #insights .content-card, .home-people .content-card {
+      position: relative;
+      padding: var(--home-card-pad);
+    }
+
+    #insights .content-card:hover, .home-people .content-card:hover { border-color: #b29a63; }
     .homepage-card-link { color: inherit; }
     .homepage-card-link::after { content: ""; position: absolute; inset: 0; }
-    .homepage-card-link:focus-visible::after { outline: 2px solid currentColor; outline-offset: 3px; }
-    #events .event-recap { padding: 0; overflow: hidden; }
-    #events .event-recap-photo { display: block; }
-    #events .event-recap-photo img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
-    #events .event-recap-copy { padding: 20px; }
-      #events .event-recap-art img { object-fit: contain; background: #eef0f2; }
+    #insights .content-card:focus-within, .home-people .content-card:focus-within {
+      outline: 2px solid #8c6a28;
+      outline-offset: 3px;
+    }
+
+    #video .video-card { padding: var(--home-card-pad); }
+    #video .video-cover, #events .event-recap-photo { display: block; }
+    #video .video-cover { margin-bottom: 18px; overflow: hidden; border-radius: 4px; }
+    #video .video-cover img, #events .event-recap-photo img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+
+    #video .video-cover-jensen { object-position: center 18%; }
+    #events .event-recap { overflow: hidden; }
+    #events .event-recap-copy { display: flex; flex: 1; flex-direction: column; padding: var(--home-card-pad); }
+    #events .event-recap-art img { object-fit: contain; background: #eef0f2; }
+    #events .event-recap time { color: #526072; font-size: 14px; margin-bottom: 10px; }
     #events .event-image-credit { color: #526072; font-size: 13px; }
+
+    main :is(#insights, .home-people, #video, #events) h3 {
+      margin: 0 0 12px;
+      font-size: clamp(20px, 2vw, 25px);
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+    }
+
+    main :is(.content-card, .video-card, .event-recap-copy) p {
+      margin: 0 0 14px;
+      line-height: 1.7;
+    }
+
+    main :is(.content-card, .video-card, .event-recap-copy) p:last-child { margin-bottom: 0; }
+    #video .video-card > .text-link, #events .event-recap-copy > .text-link { margin-top: auto; }
+    #about .wrap { max-width: 800px; }
+    #about p, #about dd { line-height: 1.75; }
+    #about h3 { margin: 28px 0 10px; }
+    #about .about-content { margin: 28px 0; }
+    #about .about-content dt { font-weight: 700; margin-top: 16px; }
+    #about .about-content dd { margin: 5px 0 0; }
+
+    @media (max-width: 900px) {
+      #insights .cards-grid, .home-people .cards-grid, #video .video-grid, #events .event-recaps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 600px) {
+      #insights .cards-grid, .home-people .cards-grid, #video .video-grid, #events .event-recaps {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
   </style>
 </head>
 
