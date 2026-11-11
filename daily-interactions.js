@@ -441,7 +441,7 @@
     'click', async () => {
       if (/MicroMessenger/i.test(navigator.userAgent)) {
         closeOverlay(shareModal);
-        toast('请点微信右上角「⋯」，选择「发送给朋友」');
+        toast('请直接在微信里转发：点右上角「⋯」→「发送给朋友」');
         return;
       }
 
