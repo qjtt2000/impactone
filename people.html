@@ -35,6 +35,9 @@
     @media (max-width: 680px) {
       .people-feature { grid-template-columns: 1fr; gap: 8px; }
     }
+      .person-category { display: block; color: inherit; text-decoration: none; }
+    .person-category:hover, .person-category:focus-visible { border-color: #ad8236; }
+    :is(#entrepreneurs, #investors, #innovators, #jensen-huang, #morris-chang, #ren-zhengfei) { scroll-margin-top: 110px; }
   </style>
 </head>
 
@@ -166,7 +169,7 @@
 
 <section class="section">
   <div class="wrap">
-    <h2>全球华人企业家</h2>
+    <h2 id="entrepreneurs">全球华人企业家</h2>
     <div class="people-grid large">
       <article class="person-card">
         <figure class="people-photo">
@@ -254,7 +257,7 @@
     <div class="cards three">
 
 
-      <article class="content-card">
+      <a class="content-card person-category" href="#entrepreneurs">
 
         <div class="card-body">
 
@@ -273,10 +276,10 @@
 
         </div>
 
-      </article>
+      </a>
 
 
-      <article class="content-card">
+      <a class="content-card person-category" href="#investors">
 
         <div class="card-body">
 
@@ -295,10 +298,10 @@
 
         </div>
 
-      </article>
+      </a>
 
 
-      <article class="content-card">
+      <a class="content-card person-category" href="#innovators">
 
         <div class="card-body">
 
@@ -317,12 +320,38 @@
 
         </div>
 
-      </article>
+      </a>
 
     </div>
 
   </div>
 
+</section>
+
+<section class="section" aria-labelledby="investors">
+  <div class="wrap">
+    <h2 id="investors">投资人</h2>
+    <div class="cards three">
+      <article class="content-card">
+        <div class="card-body">
+          <h3>单伟建 Weijian Shan</h3>
+          <p>PAG 联合创始人兼执行董事长。关注亚洲私募股权、困境投资与投后经营。</p>
+          <a class="text-link" href="https://www.pag.com/en/about/">查看 PAG 官方资料 →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section soft" aria-labelledby="innovators">
+  <div class="wrap">
+    <h2 id="innovators">创新者</h2>
+    <ul>
+      <li><a class="text-link" href="#jensen-huang">黄仁勋 · NVIDIA</a></li>
+      <li><a class="text-link" href="#morris-chang">张忠谋 · 台积电</a></li>
+      <li><a class="text-link" href="#ren-zhengfei">任正非 · 华为</a></li>
+    </ul>
+  </div>
 </section>
 
 
