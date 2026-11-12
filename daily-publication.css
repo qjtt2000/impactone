@@ -995,3 +995,32 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
   text-underline-offset: .15em;
   overflow-wrap: anywhere;
 }
+
+
+/* Footer layout approved for the November 12 editions. */
+.publication-footer.reference-footer--spaced {
+  container-type: inline-size;
+  background: #021a3b !important;
+  padding: 0 0 calc(var(--action-h, 68px) + var(--safe-bottom, 0px) + 24px) !important;
+}
+.reference-footer--spaced .reference-footer-brand-wrap {
+  padding-top: clamp(25px, 5.6cqw, 43px);
+}
+.reference-footer--spaced .reference-footer-brand-crop {
+  aspect-ratio: 735 / 127;
+  overflow: hidden;
+}
+.reference-footer--spaced .reference-footer-motto {
+  color: #dcb650;
+  margin: clamp(12px, 2.5cqw, 19px) 6% 0 13.8%;
+  font: 700 clamp(16px, 3.65cqw, 28px)/1.45 "Noto Serif CJK SC", "Songti SC", serif;
+}
+.reference-footer--spaced .reference-footer-copy {
+  gap: clamp(28px, 6cqw, 46px);
+  padding: clamp(38px, 7.5cqw, 58px) 6% 0;
+  font-size: clamp(12px, 1.85cqw, 14px);
+  line-height: 1.65;
+}
+.reference-footer--spaced .reference-footer-copy h2 {
+  margin-bottom: 4px;
+}
