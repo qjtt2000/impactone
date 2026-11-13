@@ -5,12 +5,15 @@ on:
       edition_date:
         description: Edition date (YYYY-MM-DD)
         required: true
-        default: '2026-11-12'
         type: string
+concurrency:
+  group: publish-daily-audio
+  cancel-in-progress: false
 permissions:
-  contents: read
+  contents: write
 jobs:
   audio:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
@@ -43,3 +46,17 @@ jobs:
           name: daily-audio-${{ inputs.edition_date }}
           path: daily/audio/*.mp3
           if-no-files-found: error
+      - name: Publish both editions to main
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git fetch origin main
+          # Abort if either edition changed while Azure was reading it.
+          git diff --exit-code HEAD origin/main -- "daily/$EDITION_DATE.html" "daily/$EDITION_DATE-ny.html"
+          git merge --ff-only origin/main
+          python scripts/publish-daily-audio.py "daily/$EDITION_DATE.html" "daily/$EDITION_DATE-ny.html"
+          git add -- "daily/$EDITION_DATE.html" "daily/$EDITION_DATE-ny.html" "daily/audio/$EDITION_DATE.mp3" "daily/audio/$EDITION_DATE-ny.mp3"
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish daily audio for $EDITION_DATE"
+            git push origin HEAD:main
+          fi
