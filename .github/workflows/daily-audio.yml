@@ -1,0 +1,45 @@
+name: Generate Daily MP3
+on:
+  workflow_dispatch:
+    inputs:
+      edition_date:
+        description: Edition date (YYYY-MM-DD)
+        required: true
+        default: '2026-11-12'
+        type: string
+permissions:
+  contents: read
+jobs:
+  audio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      EDITION_DATE: ${{ inputs.edition_date }}
+      AZURE_SPEECH_KEY: ${{ secrets.AZURE_SPEECH_KEY }}
+      AZURE_SPEECH_REGION: ${{ vars.AZURE_SPEECH_REGION }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate settings
+        run: |
+          python -c 'import datetime, os; d=os.environ["EDITION_DATE"]; assert datetime.date.fromisoformat(d).isoformat() == d'
+          test -n "$AZURE_SPEECH_KEY" || { echo 'Missing AZURE_SPEECH_KEY repository secret'; exit 1; }
+          test -n "$AZURE_SPEECH_REGION" || { echo 'Missing AZURE_SPEECH_REGION repository variable'; exit 1; }
+          test -f "daily/$EDITION_DATE.html"
+          test -f "daily/$EDITION_DATE-ny.html"
+      - name: Install audio dependencies
+        run: |
+          python -m pip install lxml
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+      - name: Generate global and New York MP3s
+        run: |
+          python scripts/synthesize-daily.py "daily/$EDITION_DATE.html"
+          python scripts/synthesize-daily.py "daily/$EDITION_DATE-ny.html"
+          for suffix in '' '-ny'; do
+            ffprobe -v error -select_streams a:0 -show_entries stream=codec_name "daily/audio/$EDITION_DATE$suffix.mp3" | grep -qx 'codec_name=mp3'
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: daily-audio-${{ inputs.edition_date }}
+          path: daily/audio/*.mp3
+          if-no-files-found: error
