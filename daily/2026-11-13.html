@@ -210,8 +210,9 @@
 </style>
 <style id="daily-edition-tools-style">
   .daily-edition-tools{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:4px clamp(12px,4%,38px);background:inherit;border-bottom:1px solid #c8a84b66}
-  #daily-audio-toggle{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 13px 0 10px;border:0;border-radius:5px;background:#06417c;color:#fff;font-family:inherit;font-size:14px;font-weight:600;white-space:nowrap;cursor:pointer}
-  #daily-audio-toggle span{font-size:20px;line-height:1}
+  #daily-audio-toggle{display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:0 4px 0 0;border:0;background:transparent;color:#001b40;font-family:inherit;font-size:14px;font-weight:600;white-space:nowrap;cursor:pointer}
+  #daily-audio-toggle span{display:inline-grid;place-items:center;flex:0 0 44px;width:44px;height:44px;box-sizing:border-box;padding-left:2px;border-radius:50%;background:#06417c;color:#fff;font-size:20px;line-height:1}
+  #daily-audio-toggle[aria-pressed="true"] span{padding-left:0}
   #daily-audio-toggle:focus-visible{outline:2px solid #a47b21;outline-offset:2px}
   .daily-edition-tools .font-tool{display:flex;align-items:center;gap:2px;margin:0;padding:0;white-space:nowrap;background:transparent}
   .daily-edition-tools .font-tool button{min-width:26px;min-height:32px;padding:0;margin:0}
