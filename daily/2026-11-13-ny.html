@@ -265,6 +265,14 @@
 .brand-block .skyline{position:relative!important;left:0!important;right:0!important;top:auto!important;bottom:auto!important;height:170px!important;margin-top:10px!important;}
 @media(max-width:600px){.brand-block .skyline{height:110px!important;}}
 </style>
+<style id="daily-edition-tools-style">
+  .daily-edition-tools{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:4px clamp(12px,4%,38px);background:inherit;border-bottom:1px solid #c8a84b66}
+  #daily-audio-toggle{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 13px 0 10px;border:0;border-radius:5px;background:#06417c;color:#fff;font-family:inherit;font-size:14px;font-weight:600;white-space:nowrap;cursor:pointer}
+  #daily-audio-toggle span{font-size:20px;line-height:1}
+  #daily-audio-toggle:focus-visible{outline:2px solid #a47b21;outline-offset:2px}
+  .daily-edition-tools .font-tool{display:flex;align-items:center;gap:2px;margin:0;padding:0;white-space:nowrap;background:transparent}
+  .daily-edition-tools .font-tool button{min-width:26px;min-height:32px;padding:0;margin:0}
+</style>
 </head>
 <body>
 <main class="page">
@@ -280,13 +288,18 @@
 <img alt="" src="../images/daily/impactone.20260928.png"/>
 </div>
 </header>
-<section id="daily-audio" aria-labelledby="daily-audio-title" style="display:flex;align-items:center;justify-content:center;gap:12px;margin:8px auto;padding:0;color:#001b40;background:transparent">
-  <button type="button" id="daily-audio-toggle" aria-label="播放新闻" aria-pressed="false" style="display:inline-grid;place-items:center;box-sizing:border-box;width:54px;height:54px;padding:0;border:0;border-radius:50%;background:#0054a8;color:#fff;font-size:24px;line-height:1;cursor:pointer">
-    <span aria-hidden="true">▶</span>
+<div class="daily-edition-tools">
+  <button type="button" id="daily-audio-toggle" aria-pressed="false">
+    <span aria-hidden="true">▶</span> 听新闻
   </button>
-  <h2 id="daily-audio-title" style="font-size:1rem;margin:0;color:inherit">听新闻</h2>
+  <div aria-label="字号设置" class="font-tool">
+    字号
+    <button data-font="small">小</button>
+<button class="active" data-font="medium">中</button>
+<button data-font="large">大</button>
+</div>
   <audio id="daily-audio-track" preload="metadata" src="audio/2026-11-13-ny.mp3" hidden></audio>
-</section>
+</div>
 <p id="daily-audio-status" role="status" hidden style="text-align:center;margin:0 0 8px">暂时无法播放，请再点一次重试。</p>
 <script>
   (() => {
@@ -297,7 +310,6 @@
 
     function updateButton() {
       const playing = !audio.paused && !audio.ended;
-      button.setAttribute('aria-label', playing ? '暂停新闻' : '播放新闻');
       button.setAttribute('aria-pressed', String(playing));
       icon.textContent = playing ? 'Ⅱ' : '▶';
     }
@@ -326,12 +338,7 @@
   })();
 </script>
 
-<div aria-label="字号设置" class="font-tool">
-    字号
-    <button data-font="small">小</button>
-<button class="active" data-font="medium">中</button>
-<button data-font="large">大</button>
-</div>
+
 <!-- =========================
        今日焦点
   ========================== -->
