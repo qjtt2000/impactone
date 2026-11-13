@@ -5,7 +5,9 @@ import os
 import re
 import subprocess
 import tempfile
+import time
 from pathlib import Path
+from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 from xml.sax.saxutils import escape
 
@@ -32,6 +34,20 @@ def extract_sections(path):
             raise ValueError(f"{path}: missing {title}")
         sections.append([title + "。", *(" ".join(" ".join(node.itertext()).split()) for node in nodes)])
     return sections
+
+
+def write_track(request, track):
+    for attempt in range(4):
+        try:
+            with urlopen(request, timeout=60) as response:
+                track.write_bytes(response.read())
+            return
+        except HTTPError as error:
+            if error.code != 429 or attempt == 3:
+                raise
+            retry_after = error.headers.get("Retry-After", "")
+            delay = max(30 * (attempt + 1), int(retry_after)) if retry_after.isdecimal() else 30 * (attempt + 1)
+            time.sleep(delay)
 
 
 def synthesize(sections, output):
@@ -62,8 +78,9 @@ def synthesize(sections, output):
                     },
                 )
                 track = work / f"{len(tracks):03}.mp3"
-                with urlopen(req, timeout=60) as result:
-                    track.write_bytes(result.read())
+                # Azure Speech F0 allows 20 requests in a 60-second window.
+                time.sleep(3.2)
+                write_track(req, track)
                 tracks.append(track.name)
 
         playlist = work / "tracks.txt"
