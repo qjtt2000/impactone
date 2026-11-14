@@ -27,7 +27,7 @@
     `${i.y}.${i.m}.${i.d}`;
 
   async function issues() {
-    return ["2026-11-13.html","2026-11-12.html","2026-11-11.html","2026-09-24.html","2026-09-25.html","2026-09-26.html","2026-09-27.html","2026-09-28.html","2026-09-29.html","2026-09-30.html","2026-10-01.html","2026-10-02.html","2026-10-05.html","2026-10-06.html"].map(name => {
+    return ["2026-11-14.html","2026-11-13.html","2026-11-12.html","2026-11-11.html","2026-09-24.html","2026-09-25.html","2026-09-26.html","2026-09-27.html","2026-09-28.html","2026-09-29.html","2026-09-30.html","2026-10-01.html","2026-10-02.html","2026-10-05.html","2026-10-06.html"].map(name => {
       const m = ISSUE_RE.exec(name);
       return {name, y:m[1], m:m[2], d:m[3]};
     }).sort((a,b) => b.name.localeCompare(a.name));
@@ -245,3 +245,4 @@
     init();
   }
 })();
+
