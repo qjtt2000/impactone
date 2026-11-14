@@ -523,7 +523,11 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
   .daily-view p{font-size:var(--reader-size)!important;line-height:1.6!important;margin-bottom:18px!important}
 
   .product-value{padding:28px 20px 30px!important;border-top:0!important}
-  .product-value strong{font-size:13px!important;line-height:1.65!important}
+  .product-value strong{
+    font-size:min(12px, calc((100vw - 42px) / 23))!important;
+    line-height:1.65!important;
+    white-space:nowrap;
+  }
   .product-value span{margin-top:7px!important;font-size:8.5px!important}
 
   /* Footer in the sample has generous side insets and the same dark navy. */
@@ -1014,6 +1018,12 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
   color: #dcb650;
   margin: clamp(12px, 2.5cqw, 19px) 6% 0 13.8%;
   font: 700 clamp(16px, 3.65cqw, 28px)/1.45 "Noto Serif CJK SC", "Songti SC", serif;
+}
+@media (max-width:600px) {
+  .reference-footer--spaced .reference-footer-motto {
+    font-size:min(15px, 5.2vw);
+    white-space:nowrap;
+  }
 }
 .reference-footer--spaced .reference-footer-copy {
   gap: clamp(28px, 6cqw, 46px);
