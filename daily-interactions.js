@@ -2,6 +2,18 @@
 (() => {
   'use strict';
 
+  if (location.hostname === 'www.impactone.news' &&
+      /^\/daily\/\d{4}-\d{2}-\d{2}(?:-ny)?\.html$/.test(location.pathname) &&
+      !document.querySelector('script[data-impactone-analytics]')) {
+    window.va = window.va || function () {
+      (window.vaq = window.vaq || []).push(arguments);
+    };
+    const analytics = document.createElement('script');
+    analytics.src = '/_vercel/insights/script.js';
+    analytics.dataset.impactoneAnalytics = '';
+    document.head.appendChild(analytics);
+  }
+
   const $ = (s, root = document) => root.querySelector(s);
   const $$ = (s, root = document) => [...root.querySelectorAll(s)];
 
