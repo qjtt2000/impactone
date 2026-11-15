@@ -1,5 +1,9 @@
 name: Generate Daily MP3
 on:
+  push:
+    branches: [main]
+    paths:
+      - daily/audio-request.txt
   workflow_dispatch:
     inputs:
       edition_date:
@@ -22,6 +26,11 @@ jobs:
       AZURE_SPEECH_REGION: ${{ vars.AZURE_SPEECH_REGION }}
     steps:
       - uses: actions/checkout@v4
+      - name: Resolve edition date
+        run: |
+          if [ -z "$EDITION_DATE" ]; then
+            printf 'EDITION_DATE=%s\n' "$(cat daily/audio-request.txt)" >> "$GITHUB_ENV"
+          fi
       - name: Validate settings
         run: |
           python -c 'import datetime, os; d=os.environ["EDITION_DATE"]; assert datetime.date.fromisoformat(d).isoformat() == d'
@@ -43,7 +52,7 @@ jobs:
           done
       - uses: actions/upload-artifact@v4
         with:
-          name: daily-audio-${{ inputs.edition_date }}
+          name: daily-audio-${{ env.EDITION_DATE }}
           path: daily/audio/*.mp3
           if-no-files-found: error
       - name: Publish both editions to main
