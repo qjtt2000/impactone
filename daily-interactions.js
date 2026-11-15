@@ -22,6 +22,26 @@
   const issueKey =
     location.pathname.split('/').pop().replace('.html', '') || 'daily';
 
+  const issue = /^\/daily\/(\d{4}-\d{2}-\d{2}(?:-ny)?)\.html$/.exec(location.pathname);
+  const newsPlayer = document.querySelector('#daily-audio-track, #daily-audio audio');
+  if (location.hostname === 'www.impactone.news' && issue && newsPlayer && globalThis.crypto?.randomUUID) {
+    newsPlayer.addEventListener('playing', async () => {
+      const body = JSON.stringify({ issue: issue[1], play: crypto.randomUUID() });
+      const send = () => fetch('/api/daily-listen', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body,
+        keepalive: true
+      });
+      try {
+        const response = await send();
+        if (response.status >= 500) await send();
+      } catch {
+        try { await send(); } catch {}
+      }
+    }, { once: true });
+  }
+
   // ===== 本地数据 =====
   const storage = {
     get(key, fallback) {
