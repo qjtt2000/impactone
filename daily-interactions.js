@@ -167,8 +167,9 @@
     el.textContent = String(index + 1).padStart(2, '0') + '｜';
   });
 
-  $$('.scan-number').forEach((el, index) => {
-    el.textContent = String(index + 5).padStart(2, '0') + '｜';
+  const scanStart = Number(document.documentElement.dataset.scanStart || 5);
+  $('.scan-number').forEach((el, index) => {
+    el.textContent = String(index + scanStart).padStart(2, '0') + '｜';
   });
 
   const scanSubtitle = $$('.section-title .section-sub')
