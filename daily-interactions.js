@@ -168,7 +168,7 @@
   });
 
   const scanStart = Number(document.documentElement.dataset.scanStart || 5);
-  $('.scan-number').forEach((el, index) => {
+  $$('.scan-number').forEach((el, index) => {
     el.textContent = String(index + scanStart).padStart(2, '0') + '｜';
   });
 
