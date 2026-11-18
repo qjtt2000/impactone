@@ -350,8 +350,15 @@
   // ===== 转发 =====
   const shareModal = $('#shareModal');
   const shareTitle = document.title;
-  const shareText = '筛选全球资讯，把握天下大势。';
-  const shareUrl = location.href;
+  const shareText =
+    $('meta[property="og:description"]')?.content?.trim() ||
+    $('meta[name="description"]')?.content?.trim() ||
+    $('.story h3').slice(0, 4)
+      .map((title, index) => `${index + 1}. ${title.textContent.trim()}`)
+      .join('｜');
+  const shareUrl =
+    $('meta[name="impactone:share-url"]')?.content?.trim() ||
+    location.href;
   const encode = encodeURIComponent;
 
   const links = {

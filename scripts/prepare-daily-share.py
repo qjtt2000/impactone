@@ -16,11 +16,11 @@ def prepare_share(edition: Path) -> None:
     page = edition.read_text(encoding="utf-8")
     head, marker, body = page.partition("</head>")
     stories = STORY.findall(body)
-    if not marker or len(stories) < 3:
+    if not marker or len(stories) < 4:
         raise ValueError(f"Missing focus stories in {edition}")
 
     titles = []
-    for story in stories[:3]:
+    for story in stories[:4]:
         title = re.search(r"<h3[^>]*>(.*?)</h3>", story, re.S)
         if not title:
             raise ValueError(f"Missing focus headline in {edition}")
@@ -40,7 +40,7 @@ def prepare_share(edition: Path) -> None:
 
     image_url = f"https://{urlsplit(canonical[1]).netloc}/{quote(thumbnail.relative_to(ROOT).as_posix())}"
     description = "｜".join(f"{index}. {title}" for index, title in enumerate(titles, 1))
-    tags = [
+    entry_url = f"https://{urlsplit(canonical[1]).netloc}/share/{quote(edition.name)}"\n    tags = [\n        ("name", "impactone:share-url", entry_url),
         ("name", "description", description),
         ("property", "og:description", description),
         ("property", "og:image", image_url),
