@@ -41,6 +41,7 @@ def prepare_share(edition: Path) -> None:
     image_url = f"https://{urlsplit(canonical[1]).netloc}/{quote(thumbnail.relative_to(ROOT).as_posix())}"
     description = "｜".join(f"{index}. {title}" for index, title in enumerate(titles, 1))
     tags = [
+        ("name", "description", description),
         ("property", "og:description", description),
         ("property", "og:image", image_url),
         ("property", "og:image:type", "image/jpeg"),
@@ -55,6 +56,8 @@ def prepare_share(edition: Path) -> None:
         f'  <meta {attribute}="{key}" content="{escape(value, quote=True)}">'
         for attribute, key, value in tags
     )
+    head = re.sub(r'(?m)^ *<link rel="image_src"[^>]*>\n', "", head)
+    metadata += f'\n  <link rel="image_src" href="{escape(image_url, quote=True)}">'
     head = re.sub(r'(?m)^( *<meta property="og:url"[^>]*>)$', lambda m: f"{m[1]}\n{metadata}", head)
     edition.write_text(head + marker + body, encoding="utf-8")
 
