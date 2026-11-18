@@ -62,6 +62,47 @@ def prepare_share(edition: Path) -> None:
     edition.write_text(head + marker + body, encoding="utf-8")
 
 
+    title = re.search(r'<meta property="og:title" content="([^"]+)"', head)
+    if not title:
+        raise ValueError(f"Missing card title in {edition}")
+    entry = ROOT / "share" / edition.name
+    entry.parent.mkdir(exist_ok=True)
+    article = escape(unescape(canonical[1]), quote=True)
+    entry_url = f"https://{urlsplit(canonical[1]).netloc}/share/{quote(entry.name)}"
+    headlines = "\n".join(f"    <li>{escape(item)}</li>" for item in titles)
+    entry.write_text(f"""<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{title[1]}</title>
+  <meta name="robots" content="noindex">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{title[1]}">
+  <meta property="og:url" content="{entry_url}">
+{metadata}
+  <style>
+    body {{ margin: 0; background: #f7f7f5; color: #001b40; font: 17px/1.6 system-ui, sans-serif; }}
+    main {{ max-width: 36rem; margin: auto; padding: 1.5rem; }}
+    img {{ display: block; width: min(100%, 24rem); height: auto; border-radius: .5rem; }}
+    h1 {{ font-size: 1.4rem; }}
+    .read {{ display: inline-block; padding: .6rem 1rem; background: #001b40; color: white; border-radius: .3rem; }}
+  </style>
+</head>
+<body>
+<main>
+  <a href="{article}"><img src="{image_url}" width="600" height="600" alt="{escape(titles[0], quote=True)}"></a>
+  <h1>{title[1]}</h1>
+  <ol>
+{headlines}
+  </ol>
+  <a class="read" href="{article}">阅读本期全文</a>
+</main>
+</body>
+</html>
+""", encoding="utf-8")
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("editions", type=Path, nargs="+")
