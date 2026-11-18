@@ -40,7 +40,9 @@ def prepare_share(edition: Path) -> None:
 
     image_url = f"https://{urlsplit(canonical[1]).netloc}/{quote(thumbnail.relative_to(ROOT).as_posix())}"
     description = "｜".join(f"{index}. {title}" for index, title in enumerate(titles, 1))
-    entry_url = f"https://{urlsplit(canonical[1]).netloc}/share/{quote(edition.name)}"\n    tags = [\n        ("name", "impactone:share-url", entry_url),
+    entry_url = f"https://{urlsplit(canonical[1]).netloc}/share/{quote(edition.name)}"
+    tags = [
+        ("name", "impactone:share-url", entry_url),
         ("name", "description", description),
         ("property", "og:description", description),
         ("property", "og:image", image_url),
