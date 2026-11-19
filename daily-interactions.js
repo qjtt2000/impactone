@@ -357,6 +357,7 @@
       .map((title, index) => `${index + 1}. ${title.textContent.trim()}`)
       .join('｜');
   const shareUrl =
+    $('meta[name="impactone:share-url"]')?.content?.trim() ||
     $('link[rel="canonical"]')?.href?.trim() ||
     location.href;
   const encode = encodeURIComponent;

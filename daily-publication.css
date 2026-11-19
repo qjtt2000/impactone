@@ -158,7 +158,7 @@ html,body{overflow-x:hidden}
 
 /* V3.7 — exact approved sample skyline artwork + preserved reader controls */
 .skyline{pointer-events:none}
-.skyline img{position:absolute;left:0;right:0;bottom:0;width:100%;height:100%;object-fit:fill;display:block;pointer-events:none}
+.skyline :is(img,canvas){position:absolute;left:0;right:0;bottom:0;width:100%;height:100%;object-fit:fill;display:block;pointer-events:none}
 /* We intentionally use the approved sample artwork rather than re-drawing the buildings in SVG. */
 .font-tool{position:relative;z-index:3}
 .wechat-share-hint{display:none;margin-top:12px;padding:10px 12px;border:1px solid rgba(195,163,72,.35);background:#fffaf0;color:#665d50;font-size:11px;line-height:1.55}
@@ -173,24 +173,24 @@ html,body{overflow-x:hidden}
 .skyline .skyline-ground{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
 .skyline .skyline-ground path{fill:none;stroke:var(--gold);stroke-width:.8;vector-effect:non-scaling-stroke;opacity:.9}
 .skyline .skyline-ground .skyline-ground-soft{opacity:.22;stroke-dasharray:1.4 3}
-.skyline img.skyline-buildings{position:absolute!important;right:-1px!important;left:auto!important;bottom:1px!important;width:79%!important;height:auto!important;max-width:none!important;object-fit:contain!important;object-position:right bottom!important;display:block!important;pointer-events:none}
+.skyline :is(img,canvas).skyline-buildings{position:absolute!important;right:-1px!important;left:auto!important;bottom:1px!important;width:79%!important;height:auto!important;max-width:none!important;object-fit:contain!important;object-position:right bottom!important;display:block!important;pointer-events:none}
 @media(max-width:600px){
   .skyline{height:145px}
-  .skyline img.skyline-buildings{width:80%!important;bottom:0!important}
+  .skyline :is(img,canvas).skyline-buildings{width:80%!important;bottom:0!important}
   .skyline .skyline-ground path{stroke-width:.72}
 }
 
 
 /* V3.9 — use the approved sample's skyline geometry without redrawing or stretching */
 .skyline{overflow:hidden!important;pointer-events:none}
-.skyline img.skyline-buildings{
+.skyline :is(img,canvas).skyline-buildings{
   position:absolute!important;right:0!important;left:auto!important;bottom:0!important;
   width:62%!important;height:auto!important;max-width:none!important;
   object-fit:contain!important;object-position:right bottom!important;display:block!important;
   filter:none!important;transform:none!important;image-rendering:auto!important;
 }
 @media(max-width:600px){
-  .skyline img.skyline-buildings{width:100%!important;right:0!important;bottom:0!important}
+  .skyline :is(img,canvas).skyline-buildings{width:100%!important;right:0!important;bottom:0!important}
 }
 
 
@@ -200,7 +200,7 @@ html,body{overflow-x:hidden}
 .brand-block .brand-subtitle{position:absolute;left:42px;top:153px;margin:0}
 .brand-block .issue-date{left:42px;bottom:93px}
 .skyline.skyline-original{position:absolute!important;left:0!important;right:0!important;bottom:0!important;width:100%!important;height:168px!important;overflow:hidden!important}
-.skyline.skyline-original>img{position:absolute!important;left:0!important;right:auto!important;bottom:-1px!important;width:100%!important;height:auto!important;max-width:none!important;object-fit:contain!important;object-position:center bottom!important;transform:none!important;filter:none!important;display:block!important}
+.skyline.skyline-original>:is(img,canvas){position:absolute!important;left:0!important;right:auto!important;bottom:-1px!important;width:100%!important;height:auto!important;max-width:none!important;object-fit:contain!important;object-position:center bottom!important;transform:none!important;filter:none!important;display:block!important}
 .share-grid-v310{grid-template-columns:repeat(4,1fr)}
 .subscribe-channels{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
 .subscribe-channels button{border:1px solid #d8d1c5;background:transparent;color:var(--navy);padding:12px 5px;font-size:11px;cursor:pointer}
@@ -212,7 +212,7 @@ html,body{overflow-x:hidden}
  .brand-block .brand-subtitle{left:20px;top:126px}
  .brand-block .issue-date{left:20px;bottom:89px}
  .skyline.skyline-original{height:148px!important}
- .skyline.skyline-original>img{width:100%!important;bottom:0!important}
+ .skyline.skyline-original>:is(img,canvas){width:100%!important;bottom:0!important}
  .share-grid-v310,.subscribe-channels{grid-template-columns:repeat(2,1fr)}
 }
 
@@ -220,7 +220,7 @@ html,body{overflow-x:hidden}
 /* Keep the original skyline artwork undistorted. Desktop scales the whole asset down
    instead of stretching/cropping it; mobile retains the approved full-width rendering. */
 .skyline.skyline-original{height:205px!important;overflow:visible!important;left:0!important;right:0!important;bottom:0!important;width:100%!important}
-.skyline.skyline-original>img{
+.skyline.skyline-original>:is(img,canvas){
   width:100%!important;height:auto!important;max-width:none!important;
   left:auto!important;right:0!important;bottom:0!important;
   object-fit:contain!important;object-position:right bottom!important;
@@ -235,7 +235,7 @@ html,body{overflow-x:hidden}
 .email-backup-toggle{display:block;margin:10px auto 0;border:0;background:transparent;color:#777;text-decoration:underline;cursor:pointer;font-size:11px}
 @media(max-width:600px){
   .skyline.skyline-original{height:148px!important;overflow:visible!important}
-  .skyline.skyline-original>img{width:100%!important;right:0!important;bottom:0!important;transform:none!important}
+  .skyline.skyline-original>:is(img,canvas){width:100%!important;right:0!important;bottom:0!important;transform:none!important}
   .share-grid-v311{grid-template-columns:repeat(2,1fr)}
 }
 
@@ -354,7 +354,7 @@ html,body{overflow-x:hidden}
   pointer-events:none!important;
   z-index:1!important;
 }
-.skyline.skyline-original>img{
+.skyline.skyline-original>:is(img,canvas){
   position:absolute!important;
   left:0!important;
   right:0!important;
@@ -379,7 +379,7 @@ html,body{overflow-x:hidden}
   .brand-subtitle{left:10.0%!important;top:45.9%!important;font-size:3.0vw!important}
   .issue-date{left:10.0%!important;top:66.4%!important;bottom:auto!important;font-size:2.7vw!important}
   .skyline.skyline-original{inset:auto 0 0 0!important;width:100%!important;height:auto!important}
-  .skyline.skyline-original>img{width:100%!important;bottom:0!important}
+  .skyline.skyline-original>:is(img,canvas){width:100%!important;bottom:0!important}
   .story figure{width:100%!important;margin:18px 0 16px!important}
 }
 
@@ -411,7 +411,7 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
 }
 .brand-subtitle{color:#C3A348!important;font-family:Arial,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif!important}
 .issue-date{font-family:Arial,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif!important}
-.skyline.skyline-original>img{width:100%!important;height:auto!important;bottom:0!important;transform:none!important;filter:none!important}
+.skyline.skyline-original>:is(img,canvas){width:100%!important;height:auto!important;bottom:0!important;transform:none!important;filter:none!important}
 
 /* All navy publication blocks use the same approved deep navy. */
 .section-title,.view-section-title,.publication-footer,.fixed-actions{background:#001B40!important}
