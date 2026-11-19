@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/share/:issue.html",
+      "destination": "/daily/:issue.html",
+      "permanent": false
+    }
+  ]
+}
