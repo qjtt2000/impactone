@@ -47,7 +47,7 @@
    * 所有纽约版日报。
    */
   async function issues() {
-    return ["2026-11-21-ny.html","2026-11-20-ny.html","2026-11-19-ny.html","2026-11-18-ny.html","2026-11-17-ny.html","2026-11-16-ny.html","2026-11-15-ny.html","2026-11-14-ny.html","2026-11-13-ny.html","2026-11-12-ny.html","2026-11-11-ny.html","2026-09-24-ny.html","2026-09-25-ny.html","2026-09-26-ny.html","2026-09-27-ny.html","2026-09-28-ny.html","2026-09-29-ny.html","2026-09-30-ny.html","2026-10-01-ny.html","2026-10-02-ny.html","2026-10-05-ny.html","2026-10-06-ny.html"].map(name => {
+    return ["2026-11-22-ny.html","2026-11-21-ny.html","2026-11-20-ny.html","2026-11-19-ny.html","2026-11-18-ny.html","2026-11-17-ny.html","2026-11-16-ny.html","2026-11-15-ny.html","2026-11-14-ny.html","2026-11-13-ny.html","2026-11-12-ny.html","2026-11-11-ny.html","2026-09-24-ny.html","2026-09-25-ny.html","2026-09-26-ny.html","2026-09-27-ny.html","2026-09-28-ny.html","2026-09-29-ny.html","2026-09-30-ny.html","2026-10-01-ny.html","2026-10-02-ny.html","2026-10-05-ny.html","2026-10-06-ny.html"].map(name => {
       const m = ISSUE_RE.exec(name);
       return {name, y:m[1], m:m[2], d:m[3]};
     }).sort((a,b)=>b.name.localeCompare(a.name));
@@ -413,5 +413,6 @@
   }
 
 })();
+
 
 
