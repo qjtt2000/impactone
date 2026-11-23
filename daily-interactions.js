@@ -848,13 +848,12 @@
             text,
             time: Date.now(),
             likes: 0,
-            pending: true,
             ...created
           },
           ...(remoteComments || [])
         ];
 
-        toast('评论已提交，审核后公开显示');
+        toast('评论已发布');
       } else {
         const comments = getLocalComments();
 
