@@ -3,7 +3,7 @@
    Production: deploy Supabase Edge Functions and paste their URLs here. */
 window.IMPACTONE_CONFIG = {
   subscribeEndpoint: "",
-  commentsEndpoint: "",
+  commentsEndpoint: "/api/comments",
   favoriteEndpoint: "",
   sendDailyEndpoint: "",
   /* Web Push: leave blank during front-end testing. Fill these after the push backend is deployed. */
