@@ -639,6 +639,22 @@
   const commentList = $('#commentList');
   const commentCount = $('#commentCount');
 
+  if (commentsPanel && window.visualViewport) {
+    const viewport = window.visualViewport;
+
+    function updateCommentViewport() {
+      if (!commentsPanel.classList.contains('open')) return;
+
+      const bottom = Math.max(0, document.documentElement.clientHeight - viewport.height - viewport.offsetTop);
+      commentsPanel.style.setProperty('--comment-viewport-bottom', bottom + 'px');
+      commentsPanel.style.setProperty('--comment-viewport-height', viewport.height + 'px');
+    }
+
+    viewport.addEventListener('resize', updateCommentViewport);
+    viewport.addEventListener('scroll', updateCommentViewport);
+    commentAction?.addEventListener('click', () => requestAnimationFrame(updateCommentViewport));
+  }
+
   const commentsKey = 'impactone_comments_' + issueKey;
 
   const getLocalComments = () =>
