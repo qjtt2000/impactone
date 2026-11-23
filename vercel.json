@@ -5,5 +5,10 @@
       "destination": "/daily/:issue.html",
       "permanent": false
     }
-  ]
+  ],
+  "git": {
+    "deploymentEnabled": {
+      "reader-comments": false
+    }
+  }
 }
