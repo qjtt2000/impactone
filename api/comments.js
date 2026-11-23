@@ -38,7 +38,7 @@ module.exports = async function handler(req, res) {
     'X-GitHub-Api-Version': '2022-11-28'
   };
   const url = git + '/comments/' + issue + '.json';
-  const created = { id: randomUUID(), name, text, time: Date.now(), likes: 0, pending: true };
+  const created = { id: randomUUID(), name, text, time: Date.now(), likes: 0, pending: false };
 
   try {
     for (let attempt = 0; attempt < 4; attempt++) {
@@ -54,11 +54,11 @@ module.exports = async function handler(req, res) {
       }
 
       if (!isPost) {
-        return res.status(200).json(comments.filter(comment => comment.pending === false));
+        return res.status(200).json(comments.map(comment => ({ ...comment, pending: false })));
       }
 
       if (isLike) {
-        const comment = comments.find(entry => entry.id === body.id && entry.pending === false);
+        const comment = comments.find(entry => entry.id === body.id);
         if (!comment) return res.status(404).json({ error: 'Comment not found' });
         comment.likes = Number(comment.likes || 0) + 1;
       } else {
