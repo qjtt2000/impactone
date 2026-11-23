@@ -1,6 +1,7 @@
 """Add the native audio player to an edition after its MP3 is generated."""
 
 import argparse
+from hashlib import sha256
 import re
 from pathlib import Path
 
@@ -14,9 +15,10 @@ def add_player(edition: Path) -> None:
     page = edition.read_text(encoding="utf-8")
     if 'id="daily-audio"' in page:
         if edition.stem.endswith(".A"):
+            version = sha256(audio.read_bytes()).hexdigest()[:12]
             page, count = re.subn(
                 r'(<audio id="daily-audio-track"[^>]*? src=")[^"]+',
-                lambda match: match[1] + "audio/" + track,
+                lambda match: match[1] + f"audio/{track}?v={version}",
                 page,
                 count=1,
             )
