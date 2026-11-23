@@ -16,6 +16,10 @@ from lxml import html
 
 def extract_sections(path):
     document = html.fromstring(path.read_text(encoding="utf-8"))
+    spoken_script = document.xpath('normalize-space(//meta[@name="impactone:audio-script"]/@content)')
+    if spoken_script:
+        return [[spoken_script]]
+
     for control in document.xpath("//button | //figure | //script | //style"):
         control.drop_tree()
 

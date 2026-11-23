@@ -14,7 +14,7 @@ on:
         description: Edition to publish
         default: both
         type: choice
-        options: [both, global, ny]
+        options: [both, global, ny, special]
 concurrency:
   group: publish-daily-audio
   cancel-in-progress: false
@@ -46,6 +46,7 @@ jobs:
           test -n "$AZURE_SPEECH_REGION" || { echo 'Missing AZURE_SPEECH_REGION repository variable'; exit 1; }
           case "$EDITION_SCOPE" in
             global) printf 'daily/%s.html\n' "$EDITION_DATE" > .daily-audio-targets ;;
+            special) printf 'daily/%s.A.html\n' "$EDITION_DATE" > .daily-audio-targets ;;
             ny) printf 'daily/%s-ny.html\n' "$EDITION_DATE" > .daily-audio-targets ;;
             both) printf 'daily/%s.html\ndaily/%s-ny.html\n' "$EDITION_DATE" "$EDITION_DATE" > .daily-audio-targets ;;
             *) echo 'Invalid edition scope'; exit 1 ;;

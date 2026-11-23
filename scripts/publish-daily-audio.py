@@ -1,6 +1,7 @@
 """Add the native audio player to an edition after its MP3 is generated."""
 
 import argparse
+import re
 from pathlib import Path
 
 
@@ -12,6 +13,16 @@ def add_player(edition: Path) -> None:
 
     page = edition.read_text(encoding="utf-8")
     if 'id="daily-audio"' in page:
+        if edition.stem.endswith(".A"):
+            page, count = re.subn(
+                r'(<audio id="daily-audio-track"[^>]*? src=")[^"]+',
+                lambda match: match[1] + "audio/" + track,
+                page,
+                count=1,
+            )
+            if count != 1:
+                raise ValueError(f"Missing special edition audio source: {edition}")
+            edition.write_text(page, encoding="utf-8")
         return
 
     before, closing_header, after = page.partition("</header>")
