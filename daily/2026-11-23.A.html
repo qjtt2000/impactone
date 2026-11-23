@@ -47,8 +47,12 @@
     }
     .special-banner::before {
       position: absolute;
-      inset: 0 86% 0 0;
-      background: url("../images/daily/impactone-middle-focus-4.png?v=20260918-2") left center / auto 100% no-repeat;
+      top: 50%;
+      left: 7%;
+      width: 7cqw;
+      height: 7cqw;
+      transform: translateY(-50%);
+      background: url("../images/daily/impactone-middle-focus-4.png?v=20260918-2") -6.9cqw -9.8cqw / 100cqw auto no-repeat;
       content: "";
     }
     .special-banner h2 {
@@ -181,7 +185,13 @@
     .market-chart-head strong { font-size: 1.12em; }
     .market-chart-crop { overflow: hidden; }
     .market-chart-crop img { margin-top: -6.6% !important; }
-    .special-banner h2 { top: 50%; transform: translateY(-50%); }
+    .special-banner h2 {
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+    }
       @media (max-width: 600px) {
       .special-longread > h3 {
         white-space: nowrap;
