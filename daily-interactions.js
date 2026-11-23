@@ -786,8 +786,12 @@
 
     if (cfg.commentsEndpoint && comments[index].id) {
       fetch(
-        `${cfg.commentsEndpoint}/${comments[index].id}/like`,
-        { method: 'POST' }
+        cfg.commentsEndpoint,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ issue: issueKey, action: 'like', id: comments[index].id })
+        }
       ).catch(() => {});
     }
   }
