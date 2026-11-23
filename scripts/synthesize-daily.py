@@ -16,6 +16,22 @@ from lxml import html
 
 def extract_sections(path):
     document = html.fromstring(path.read_text(encoding="utf-8"))
+    mode = document.xpath('normalize-space(//meta[@name="impactone:audio-mode"]/@content)')
+    if mode == "full-special":
+        articles = document.xpath("//article[contains(concat(' ', normalize-space(@class), ' '), ' special-longread ')]")
+        if not articles:
+            raise ValueError(f"{path}: missing special edition articles")
+        paragraphs = ["这里是影响力全球风云特刊。"]
+        for article in articles:
+            for node in article.xpath("./h3 | ./h4 | ./p"):
+                text = " ".join("".join(node.itertext()).split())
+                if not text or text.startswith("来源｜"):
+                    continue
+                if node.tag in {"h3", "h4"} and not text.endswith(("。", "？", "！")):
+                    text += "。"
+                paragraphs.append(text)
+        return [[" ".join(paragraphs)]]
+
     spoken_script = document.xpath('normalize-space(//meta[@name="impactone:audio-script"]/@content)')
     if spoken_script:
         return [[spoken_script]]
