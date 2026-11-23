@@ -15,7 +15,7 @@ module.exports = async function handler(req, res) {
   }
   const body = req.body || {};
   const issue = isPost ? body.issue : req.query.issue;
-  if (typeof issue !== 'string' || !/^\d{4}-\d{2}-\d{2}(?:-ny)?$/.test(issue)) {
+  if (typeof issue !== 'string' || !/^\d{4}-\d{2}-\d{2}(?:-ny|\.A)?$/.test(issue)) {
     return res.status(400).json({ error: 'Invalid issue' });
   }
 
