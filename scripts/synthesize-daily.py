@@ -87,6 +87,10 @@ def synthesize(sections, output):
                 write_track(req, track)
                 tracks.append(track.name)
 
+        if len(tracks) == 1:
+            (work / tracks[0]).replace(output)
+            return
+
         playlist = work / "tracks.txt"
         playlist.write_text("".join(f"file {track}\n" for track in tracks))
         merged = work / "edition.mp3"
