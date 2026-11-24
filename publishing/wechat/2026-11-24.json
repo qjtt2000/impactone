@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-24",
+  "state": "materials_ready_account_required",
+  "distribution": "企业微信继续分发；拟用公众号原生音频承载收听。",
+  "platform_publication_status": "未发布到公众号；尚无公众号账号及平台原生音频实测。",
+  "completion_test": "从微信原生音频开始播放后直接返回聊天；无需手动点浮窗，声音持续且能正常聊天。",
+  "prerequisites": [
+    "用户开通并完成平台要求的公众号主体与功能审核",
+    "确认该账号提供原生音频/语音消息或文章内音频能力",
+    "将现有MP3上传为平台原生音频，而不是外链网页播放器",
+    "取得实际发布链接后，在手机微信验证返回聊天持续播放"
+  ],
+  "editions": [
+    {
+      "edition": "国际版",
+      "title": "Impact One｜影响力·每日必读｜2026年11月24日国际版",
+      "focus": [
+        "英伟达领涨美股",
+        "纽联储主席：仍须压低通胀",
+        "原油跌近4%，外交预期压价",
+        "乌称击沉停靠利比亚的俄舰"
+      ],
+      "description": "1. 英伟达领涨美股｜2. 纽联储主席：仍须压低通胀｜3. 原油跌近4%，外交预期压价｜4. 乌称击沉停靠利比亚的俄舰",
+      "audio_url": "https://www.impactone.news/daily/audio/2026-11-24.mp3?v=20261124-v1",
+      "duration_seconds": 399.48,
+      "article_url": "https://www.impactone.news/daily/2026-11-24.html",
+      "cover_url": "https://www.impactone.news/images/daily/2026-11-24-global-focus1-left.jpg"
+    },
+    {
+      "edition": "纽约版",
+      "title": "Impact One｜影响力·每日必读｜2026年11月24日纽约版",
+      "focus": [
+        "纽约起诉住房补助身份新规",
+        "特朗普封口费案获移审机会",
+        "纽约州高院维护租券反歧视",
+        "皇后区图书馆多数服务恢复"
+      ],
+      "description": "1. 纽约起诉住房补助身份新规｜2. 特朗普封口费案获移审机会｜3. 纽约州高院维护租券反歧视｜4. 皇后区图书馆多数服务恢复",
+      "audio_url": "https://www.impactone.news/daily/audio/2026-11-24-ny.mp3?v=20261124-v1",
+      "duration_seconds": 404.112,
+      "article_url": "https://www.impactone.news/daily/2026-11-24-ny.html",
+      "cover_url": "https://www.impactone.news/images/daily/share-2026-11-24-ny.jpg"
+    }
+  ]
+}
