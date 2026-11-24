@@ -266,40 +266,7 @@
   <audio id="daily-audio-track" preload="metadata" src="audio/2026-11-24.mp3?v=20261124-v1" hidden></audio>
 </div>
 <p id="daily-audio-status" role="status" hidden style="text-align:center;margin:0 0 8px">暂时无法播放，请再点一次重试。</p>
-<script>
-  (() => {
-    const audio = document.getElementById('daily-audio-track');
-    const button = document.getElementById('daily-audio-toggle');
-    const status = document.getElementById('daily-audio-status');
-
-    function updateButton() {
-      const playing = !audio.paused && !audio.ended;
-      button.setAttribute('aria-pressed', String(playing));
-    }
-
-    function showError() {
-      status.hidden = false;
-      updateButton();
-    }
-
-    button.addEventListener('click', () => {
-      status.hidden = true;
-      if (!audio.paused) {
-        audio.pause();
-        return;
-      }
-      if (audio.error) audio.load();
-      const playback = audio.play();
-      if (playback) playback.catch(error => {
-        if (error.name !== 'AbortError') showError();
-      });
-    });
-    for (const event of ['play', 'pause', 'ended']) {
-      audio.addEventListener(event, updateButton);
-    }
-    audio.addEventListener('error', showError);
-  })();
-</script>
+<script src="../daily-audio.js?v=20261124-1" defer></script>
 
 
 
