@@ -1,0 +1,90 @@
+{
+  "date": "2026-11-26",
+  "timezone": "America/New_York",
+  "window": {
+    "from": "2026-11-25T06:00:00-05:00",
+    "to": "2026-11-26T06:00:00-05:00"
+  },
+  "production": "Reused the same-day editions already completed by the overlapping production run after inspecting actual period-specific Claude locks; did not publish the separate preliminary research draft from this heartbeat.",
+  "global": {
+    "url": "https://www.impactone.news/daily/2026-11-26.html",
+    "claudeReview": "https://claude.ai/chat/eb26de19-125b-4d4f-91b1-4964290cb2fc",
+    "actualLock": "PUBLICATION PASS | FINAL LOCKED: November 26 complete text, focus photo and Thanksgiving introduction; revised complete text actually resubmitted.",
+    "focus": [
+      "美国公布14经济体关税方案",
+      "美国PCE通胀升至3.8%",
+      "美国三季度GDP上修至4.3%",
+      "韩国央行加息至3.25%"
+    ],
+    "photo": {
+      "asset": "images/daily/focus-global-20261126.jpg",
+      "share": "images/daily/share-2026-11-26.jpg",
+      "originalSource": "Associated Press",
+      "originalCaptionContext": "US Trade Representative Jamieson Greer at Shenzhen APEC welcome banquet, November 18, 2026.",
+      "originalCredit": "Maxim Shemetov / Pool Photo via AP",
+      "readerCaption": "图｜美国公布新关税提案。图片来源｜美联社。"
+    },
+    "audio": {
+      "url": "https://www.impactone.news/daily/audio/2026-11-26.mp3?v=20261126-v1",
+      "durationSeconds": 367.464,
+      "actualPlaybackObservedSeconds": 10.237125
+    }
+  },
+  "ny": {
+    "url": "https://www.impactone.news/daily/2026-11-26-ny.html",
+    "claudeReview": "https://claude.ai/chat/e51c280e-365a-45f1-b030-ed816af08782",
+    "actualLock": "PUBLICATION PASS | FINAL LOCKED: November 26 New York edition; revised full text and actual photo reviewed.",
+    "photo": {
+      "asset": "images/daily/focus-ny-20261126.jpg",
+      "share": "images/daily/share-2026-11-26-ny.jpg",
+      "originalSource": "Associated Press",
+      "originalCaptionContext": "Workers deflate balloons after the Thanksgiving parade was postponed, New York, November 25, 2026.",
+      "originalCredit": "Yuki Iwamura / AP",
+      "readerCaption": "图｜梅西百年游行延期。图片来源｜美联社。"
+    },
+    "audio": {
+      "url": "https://www.impactone.news/daily/audio/2026-11-26-ny.mp3?v=20261126-v1",
+      "durationSeconds": 352.128,
+      "actualPlaybackObservedSeconds": [
+        2.513626,
+        12.305814
+      ]
+    },
+    "checks": {
+      "focus": 4,
+      "scan": 6,
+      "detailsExpanded": true,
+      "previous": "2026-11-25-ny.html",
+      "sourcesBlackNoHyperlinks": true
+    }
+  },
+  "editorialAccessLimits": "Actual Claude reviews disclose that some original media pages were unavailable to Claude; it independently cross-checked some facts and relied on the producer full-text readings for inaccessible details. Do not claim every original source was independently opened by both editors.",
+  "audioWorkflow": {
+    "id": 45817703069,
+    "conclusion": "success",
+    "publicationCommit": "276d4c6ab4094c10db31472642a2db48b4367cab"
+  },
+  "presentationCorrections": {
+    "captionCommit": "1aefd0d6fdd2b95ae297c700dfba9a4273fe11c6",
+    "shareCommit": "e20b031d939049783dc1bea9677bc4a32cf43592",
+    "reason": "Applied publisher current short captions with media only; preserved true photo date and original credit internally. Fixed international metadata inherited from previous issue that pointed to nonexistent November 26 left-v2 asset. Existing 600x600 current focus thumbnail verified visually, used by og:image/twitter:image/image_src; current first img remains real focus photograph. Text and audio unchanged."
+  },
+  "advertisement": "images/daily/faef-christmas-2026-sponsors-20261121-v1.jpg; selected by effective date, historical editions untouched.",
+  "social": {
+    "x": {
+      "account": "@IMPACTONENEWS",
+      "url": "https://x.com/IMPACTONENEWS/status/2125929844907081784",
+      "publishedTimeEastern": "2026-11-26 07:29",
+      "verified": "Opened actual permalink, read complete four headlines, visually saw current focus photo card."
+    },
+    "facebook": {
+      "account": "Marie Taylor / 61591628082781",
+      "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02vjkU39qTp7C6r25kFXqdc4CFrGwTfSzDqVD28BK7dYyz22J2br2R8SrZqMFqtmQPl&id=61591628082781",
+      "verified": "Success alert 你的帖子已发布; actual permalink opened and full four headlines/current focus image visually verified."
+    },
+    "target": "https://www.impactone.news/daily/2026-11-26.html?share=focus4&v=20261126-final",
+    "order": "Both website editions and actual MP3 playback verified before international social posts."
+  },
+  "wechatClient": "Metadata and first image verified on website; no claim of actual new WeCom/WeChat phone card testing.",
+  "status": "complete"
+}
