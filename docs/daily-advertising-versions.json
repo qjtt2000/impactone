@@ -69,7 +69,7 @@
       "width": 887,
       "height": 1774,
       "git_blob_sha": "50821331daa2c34b563a5420204a27b9a60df10b",
-      "note": "User-provided Cootutor advertisement. Display original image without outer advertisement frame. Preserve all earlier issue versions."
+      "note": "User-provided Cootutor advertisement. Preserve original placement, image display width and side spacing; remove only outer advertisement border. Preserve all earlier issue versions."
     }
   ]
 }

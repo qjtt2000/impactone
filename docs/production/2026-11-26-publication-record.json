@@ -125,7 +125,8 @@
         ],
         "effectiveFrom": "2026-11-26",
         "historicalFilesUnchanged": true,
-        "outerFrameRemoved": true
+        "outerFrameRemoved": true,
+        "display": "Original figure margins 18px 4.5% 0; 7px invisible padding replaces old 6px padding plus 1px border so rendered image width is unchanged. No full-bleed enlargement."
       },
       "audio": "No spoken news text changed. Extractor selects story/scan/view only; opening and figures are excluded.",
       "liveVerification": "Pending post-deployment check"
