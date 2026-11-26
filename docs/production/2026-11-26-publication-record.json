@@ -17,12 +17,13 @@
       "韩国央行加息至3.25%"
     ],
     "photo": {
-      "asset": "images/daily/focus-global-20261126.jpg",
-      "share": "images/daily/share-2026-11-26.jpg",
-      "originalSource": "Associated Press",
-      "originalCaptionContext": "US Trade Representative Jamieson Greer at Shenzhen APEC welcome banquet, November 18, 2026.",
-      "originalCredit": "Maxim Shemetov / Pool Photo via AP",
-      "readerCaption": "图｜美国公布新关税提案。图片来源｜美联社。"
+      "left": "images/daily/2026-11-26-focus1-left-v6.jpg",
+      "right": "images/daily/2026-11-26-focus1-right-v6.jpg",
+      "share": "images/daily/2026-11-26-focus1-share-v6.jpg",
+      "readerCaption": "图｜美国公布新关税提案｜Impact One编辑部",
+      "credit": "Impact One编辑部",
+      "provenance": "Generated with built-in image_gen tool following publisher authorization; two generic illustrations, not documentary photographs. No third-party media credit claimed.",
+      "order": "Original Trump + tariff proposal collage on LEFT, unchanged; global routes + port collage on RIGHT, Trump portrait removed from RIGHT only."
     },
     "audio": {
       "url": "https://www.impactone.news/daily/audio/2026-11-26.mp3?v=20261126-v1",
@@ -69,7 +70,7 @@
     "shareCommit": "e20b031d939049783dc1bea9677bc4a32cf43592",
     "reason": "Applied publisher current short captions with media only; preserved true photo date and original credit internally. Fixed international metadata inherited from previous issue that pointed to nonexistent November 26 left-v2 asset. Existing 600x600 current focus thumbnail verified visually, used by og:image/twitter:image/image_src; current first img remains real focus photograph. Text and audio unchanged."
   },
-  "advertisement": "images/daily/faef-christmas-2026-sponsors-20261121-v1.jpg; selected by effective date, historical editions untouched.",
+  "advertisement": "images/daily/cootutor-sat-20261126-v1.jpg; effective November 26; original display width and side margins preserved; outer border removed; historical issues unchanged.",
   "social": {
     "x": {
       "account": "@IMPACTONENEWS",
@@ -85,7 +86,7 @@
     "target": "https://www.impactone.news/daily/2026-11-26.html?share=focus4&v=20261126-final",
     "order": "Both website editions and actual MP3 playback verified before international social posts."
   },
-  "wechatClient": "Metadata and first image verified on website; no claim of actual new WeCom/WeChat phone card testing.",
+  "wechatClient": "Current global first img is left Trump tariff proposal collage; og:image/twitter:image/image_src use its 600x600 thumbnail. Fresh share URL v=20261126-thanksgiving-v6. Actual WeChat phone card not tested.",
   "status": "complete",
   "revisions": [
     {
@@ -129,7 +130,59 @@
         "display": "Original figure margins 18px 4.5% 0; 7px invisible padding replaces old 6px padding plus 1px border so rendered image width is unchanged. No full-bleed enlargement."
       },
       "audio": "No spoken news text changed. Extractor selects story/scan/view only; opening and figures are excluded.",
-      "liveVerification": "Pending post-deployment check"
+      "liveVerification": {
+        "status": "Verified on both public edition URLs",
+        "implementationCommit": "9d9dc4add2c1f8bc90225aa84cfb378729d35fa0",
+        "banner": {
+          "pageWidth": 760,
+          "openingHeight": 253.828125,
+          "focusHeight": 253.81509399414065,
+          "titleFontPixels": 42,
+          "iconCenterDifferencePixels": 0.0000095367431640625,
+          "noLeafMotif": true,
+          "holidayGreeting": "感恩节快乐",
+          "signoffBothEditions": "right"
+        },
+        "advertisement": {
+          "displayWidthPixels": 677.6301879882812,
+          "originalExpectedWidth": "760 * 0.91 - 14 = 677.6, fractional layout observed",
+          "figureMargin": "18px 34.1927px 0px",
+          "figurePadding": "7px",
+          "border": "0px",
+          "naturalWidth": 887,
+          "naturalHeight": 1774,
+          "loaded": true
+        },
+        "globalFocusImages": {
+          "bothLoaded": true,
+          "equalSquares": true,
+          "displaySquarePixels": 325.01300048828125,
+          "caption": "图｜美国公布新关税提案｜Impact One编辑部",
+          "leftUsedAsFirstImageAndShareMetadata": true
+        },
+        "structureBothEditions": {
+          "focus": 4,
+          "scan": 6,
+          "exactPublisherGreetingParagraphs": 7
+        },
+        "audioDurations": {
+          "global": 367.464,
+          "ny": 352.128
+        },
+        "previousGlobalIssueUnchanged": {
+          "path": "daily/2026-11-25.html",
+          "sha": "8fee619ffda0971ed3655c197edb1b361a935d99"
+        },
+        "wechat": "Website image selection and metadata verified; no claim of actual refreshed mobile WeChat card testing"
+      },
+      "previousGlobalPhoto": {
+        "asset": "images/daily/focus-global-20261126.jpg",
+        "share": "images/daily/share-2026-11-26.jpg",
+        "originalSource": "Associated Press",
+        "originalCaptionContext": "US Trade Representative Jamieson Greer at Shenzhen APEC welcome banquet, November 18, 2026.",
+        "originalCredit": "Maxim Shemetov / Pool Photo via AP",
+        "readerCaption": "图｜美国公布新关税提案。图片来源｜美联社。"
+      }
     }
   ]
 }
