@@ -98,21 +98,24 @@
         ],
         "position": "Before DAILY FOCUS, after audio controls",
         "copy": "Publisher exact seven-paragraph text and signature",
-        "design": "Deep navy heading, gold rule, pale blue body, right-aligned signature"
+        "design": "Match DAILY FOCUS banner proportions: full-width deep-blue gradient, gold round emblem, large white Chinese title, gold English label; exact greeting below on white, signature/date right aligned. Thanksgiving treatment: warm gold/amber, THANKSGIVING NOTE English label, subtle autumn leaf motif, thin gold baseline; gold open-book emblem in round frame."
       },
       "globalFocusImages": {
-        "left": "images/daily/2026-11-26-focus1-left-v4.jpg",
-        "right": "images/daily/2026-11-26-focus1-right-v4.jpg",
-        "share": "images/daily/2026-11-26-focus1-share-v4.jpg",
+        "left": "images/daily/2026-11-26-focus1-left-v6.jpg",
+        "right": "images/daily/2026-11-26-focus1-right-v6.jpg",
+        "share": "images/daily/2026-11-26-focus1-share-v6.jpg",
         "layout": "Equal square columns with 6px gap",
         "readerCaption": "图｜美国公布新关税提案｜Impact One编辑部",
         "provenance": "Generated with built-in image_gen tool following publisher authorization; two generic illustrations, not documentary photographs. No third-party media credit claimed.",
         "prompts": [
-          "Bright clear sunny daytime White House facade, vivid blue sky, bright white columns, green foliage and lawn, square, no text or people.",
-          "Bright sunny daytime freight container truck at generic inspection gate, vivid red container, white truck, blue sky, clear yellow markings, square, no text or people."
+          "Bright editorial collage: prominent Trump with tariff PROPOSAL paper, import containers and world-map elements; no numeric rates or claim to document a specific real press event.",
+          "Bright macro-scale global trade editorial collage: huge container megahub, ships, cranes, globe and routes linking North America, East Asia and Europe."
         ],
         "review": "Publisher-directed imagery and exact introduction; not represented as newly reviewed by Claude.",
-        "reason": "Publisher requested distinct images from yesterday and rejected dark evening rendering. Final selected assets are bright daylight scenes."
+        "reason": "Publisher requested immediately recognizable tariff theme, a recognizable policymaker, bright colors and trade scale across major economies; rejected yesterday repeated flags, nighttime scenes and local checkpoint concept.",
+        "order": "Original Trump + tariff proposal collage on LEFT, unchanged; global routes + port collage on RIGHT, Trump portrait removed from RIGHT only.",
+        "editTarget": "exec-97d5ccdd-2748-4cbc-81dd-abcf6a5b269f.png",
+        "editPrompt": "Remove Trump portrait only from global routes/port image; preserve globe, shipping routes, cranes, vessels and bright daytime scene."
       },
       "advertisement": {
         "asset": "images/daily/cootutor-sat-20261126-v1.jpg",
