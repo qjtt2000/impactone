@@ -99,7 +99,17 @@
         ],
         "position": "Before DAILY FOCUS, after audio controls",
         "copy": "Publisher exact seven-paragraph text and signature",
-        "design": "DAILY FOCUS-style navy banner with matching large white Chinese title and aligned gold book icon. Publisher requested removal of literal 感恩节快乐 badge and autumn leaf. Final accent uses a restrained warm-gold glow and two thin flowing gold curves at lower right, with exact greeting on warm white and right-aligned signature."
+        "design": "Inspired by the actual November 23 global special-report banner, with restrained warm champagne-gold horizon/globe and light ribbons on navy; live Chinese heading white/gold, book icon centered on heading row, exact publisher copy on warm white and signature/date right aligned. No NOTE label, leaf or holiday sticker.",
+        "english": "WITH GRATITUDE",
+        "background": {
+          "asset": "images/daily/2026-11-26-opening-gratitude-v1.jpg",
+          "width": 2172,
+          "height": 724,
+          "provenance": "Built-in image_gen background artwork; no lettering in bitmap. Typography remains live HTML.",
+          "prompt": "3:1 calm navy background, soft champagne-gold glow and restrained flowing ribbons, subtle globe at far right, clean text area; warm Thanksgiving gratitude atmosphere without leaves, badges, people or text."
+        },
+        "reference": "daily/2026-11-23.A.html, actually opened and inspected",
+        "refinementVerification": "Awaiting live visual check"
       },
       "globalFocusImages": {
         "left": "images/daily/2026-11-26-focus1-left-v6.jpg",
@@ -141,7 +151,7 @@
           "titleFontPixels": 42,
           "iconCenterDifferencePixels": 0.0000095367431640625,
           "noLeafMotif": true,
-          "holidayGreeting": "感恩节快乐",
+          "holidayGreeting": "Removed; replaced by warm graphical atmosphere and WITH GRATITUDE label",
           "signoffBothEditions": "right"
         },
         "advertisement": {
