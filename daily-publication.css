@@ -1062,3 +1062,47 @@ body{background:#e8e6e0;color:var(--ink);font-family:Arial,"PingFang SC","Micros
     min-height: 44px;
   }
 }
+
+/* Opening-message masthead: keep Chinese title intact on phone screens. */
+.opening-message.thanksgiving-opening {
+  container-type: inline-size;
+}
+.opening-message.thanksgiving-opening .opening-banner {
+  -webkit-text-size-adjust: 100% !important;
+  text-size-adjust: 100% !important;
+}
+.opening-message.thanksgiving-opening .opening-banner .opening-banner-title h2 {
+  flex: 0 0 auto !important;
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  overflow-wrap: normal !important;
+}
+@media (max-width: 600px) {
+  .opening-message.thanksgiving-opening .opening-banner .opening-banner-title {
+    flex-wrap: nowrap !important;
+    gap: clamp(7px, 2.3vw, 18px) !important;
+    gap: clamp(7px, 2.3cqw, 18px) !important;
+    min-width: 0;
+  }
+  .opening-message.thanksgiving-opening .opening-banner .opening-banner-title h2 {
+    font-size: clamp(20px, 5.5vw, 42px) !important;
+    font-size: clamp(20px, 5.5cqw, 42px) !important;
+  }
+  .opening-message.thanksgiving-opening .opening-banner .opening-banner-title > span {
+    flex: 0 0 auto !important;
+    font-size: clamp(10px, 2.4vw, 18px) !important;
+    font-size: clamp(10px, 2.4cqw, 18px) !important;
+    letter-spacing: .06em !important;
+    white-space: nowrap !important;
+  }
+  .opening-message.thanksgiving-opening .opening-banner .opening-emblem {
+    width: clamp(20px, 5.8vw, 44px) !important;
+    width: clamp(20px, 5.8cqw, 44px) !important;
+    flex: 0 0 auto !important;
+  }
+  .opening-message.thanksgiving-opening .opening-banner .opening-banner-copy > p {
+    margin-left: calc(clamp(20px, 5.8vw, 44px) + clamp(7px, 2.3vw, 18px)) !important;
+    margin-left: calc(clamp(20px, 5.8cqw, 44px) + clamp(7px, 2.3cqw, 18px)) !important;
+    white-space: nowrap !important;
+  }
+}
