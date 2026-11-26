@@ -7,7 +7,9 @@
   if (!audio || !button || audio.dataset.ioPlayer) return;
   audio.dataset.ioPlayer = '20261124';
   const edition = location.pathname.split('/').pop().replace(/\.html$/, '');
-  const storageKey = 'impactone_audio_position_' + edition;
+  const resumeVersion = audio.dataset.resumeVersion;
+  const storageKey = 'impactone_audio_position_' + edition +
+    (resumeVersion ? '_' + resumeVersion + '_' + audio.getAttribute('src') : '');
   const session = navigator.mediaSession;
   let savedPosition = 0, lastSaved = -1, controlsReady = false;
   try { savedPosition = Number(localStorage.getItem(storageKey)) || 0; } catch {}

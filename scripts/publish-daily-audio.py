@@ -27,16 +27,22 @@ def add_player(edition: Path) -> None:
 
     page = upgrade_player(edition.read_text(encoding="utf-8"))
     if 'id="daily-audio"' in page:
-        if edition.stem.endswith(".A"):
-            version = sha256(audio.read_bytes()).hexdigest()[:12]
+        version = sha256(audio.read_bytes()).hexdigest()[:12]
+        page, count = re.subn(
+            r'(<audio id="daily-audio-track"[^>]*? src=")[^"]+',
+            lambda match: match[1] + f"audio/{track}?v={version}",
+            page,
+            count=1,
+        )
+        if count == 0:
             page, count = re.subn(
-                r'(<audio id="daily-audio-track"[^>]*? src=")[^"]+',
+                r'(<source\s+src=")audio/[^"]+',
                 lambda match: match[1] + f"audio/{track}?v={version}",
                 page,
                 count=1,
             )
-            if count != 1:
-                raise ValueError(f"Missing special edition audio source: {edition}")
+        if count != 1:
+            raise ValueError(f"Missing edition audio source: {edition}")
         edition.write_text(page, encoding="utf-8")
         return
 

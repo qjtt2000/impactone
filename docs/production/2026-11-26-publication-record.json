@@ -212,6 +212,30 @@
         "originalCredit": "Maxim Shemetov / Pool Photo via AP",
         "readerCaption": "图｜美国公布新关税提案。图片来源｜美联社。"
       }
+    },
+    {
+      "type": "Include publisher opening in listening audio",
+      "date": "2026-11-26",
+      "request": "Read the complete opening before DAILY FOCUS in both editions.",
+      "narration": {
+        "startsWith": "刊首寄语。感恩信任，与您共读世界。",
+        "openingParagraphs": 7,
+        "openingCharacters": 473,
+        "followedBy": [
+          "今日焦点",
+          "今日扫描",
+          "今日洞见"
+        ],
+        "newsNarrationUnchanged": true
+      },
+      "implementation": {
+        "includeOpeningMessage": true,
+        "hashBasedAudioCacheVersion": true,
+        "resetOnlyTodayResumePositionForNewTrack": true,
+        "historicalHtmlUnchanged": true
+      },
+      "dryRun": "Both real editions passed: full seven-paragraph introduction and signature precede unchanged news sections; English decoration/ad copy excluded; publisher versioning and old nested-source player format verified.",
+      "status": "generating"
     }
   ]
 }

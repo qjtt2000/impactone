@@ -40,6 +40,26 @@ def extract_sections(path):
         control.drop_tree()
 
     sections = []
+    # Read editorial opening messages before the daily news sections.
+    openings = document.xpath(
+        "//*[contains(concat(' ', normalize-space(@class), ' '), ' opening-message ')]"
+    )
+    for opening in openings:
+        paragraphs = []
+        nodes = opening.xpath(
+            ".//h2 | .//p | "
+            ".//*[contains(concat(' ', normalize-space(@class), ' '), ' opening-signoff ')]"
+        )
+        for node in nodes:
+            text = " ".join("".join(node.itertext()).split())
+            if not text:
+                continue
+            if not text.endswith(("。", "？", "！", ".", "?", "!")):
+                text += "。"
+            paragraphs.append(text)
+        if paragraphs:
+            sections.append([" ".join(paragraphs)])
+
     for title, selector in [
         ("今日焦点", "story"),
         ("今日扫描", "scan-item"),
