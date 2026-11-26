@@ -86,5 +86,46 @@
     "order": "Both website editions and actual MP3 playback verified before international social posts."
   },
   "wechatClient": "Metadata and first image verified on website; no claim of actual new WeCom/WeChat phone card testing.",
-  "status": "complete"
+  "status": "complete",
+  "revisions": [
+    {
+      "type": "Publisher Thanksgiving presentation update",
+      "date": "2026-11-26",
+      "opening": {
+        "editions": [
+          "global",
+          "ny"
+        ],
+        "position": "Before DAILY FOCUS, after audio controls",
+        "copy": "Publisher exact seven-paragraph text and signature",
+        "design": "Deep navy heading, gold rule, pale blue body, right-aligned signature"
+      },
+      "globalFocusImages": {
+        "left": "images/daily/2026-11-26-focus1-left-v4.jpg",
+        "right": "images/daily/2026-11-26-focus1-right-v4.jpg",
+        "share": "images/daily/2026-11-26-focus1-share-v4.jpg",
+        "layout": "Equal square columns with 6px gap",
+        "readerCaption": "图｜美国公布新关税提案｜Impact One编辑部",
+        "provenance": "Generated with built-in image_gen tool following publisher authorization; two generic illustrations, not documentary photographs. No third-party media credit claimed.",
+        "prompts": [
+          "Bright clear sunny daytime White House facade, vivid blue sky, bright white columns, green foliage and lawn, square, no text or people.",
+          "Bright sunny daytime freight container truck at generic inspection gate, vivid red container, white truck, blue sky, clear yellow markings, square, no text or people."
+        ],
+        "review": "Publisher-directed imagery and exact introduction; not represented as newly reviewed by Claude.",
+        "reason": "Publisher requested distinct images from yesterday and rejected dark evening rendering. Final selected assets are bright daylight scenes."
+      },
+      "advertisement": {
+        "asset": "images/daily/cootutor-sat-20261126-v1.jpg",
+        "dimensions": [
+          887,
+          1774
+        ],
+        "effectiveFrom": "2026-11-26",
+        "historicalFilesUnchanged": true,
+        "outerFrameRemoved": true
+      },
+      "audio": "No spoken news text changed. Extractor selects story/scan/view only; opening and figures are excluded.",
+      "liveVerification": "Pending post-deployment check"
+    }
+  ]
 }

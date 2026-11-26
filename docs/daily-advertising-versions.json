@@ -52,7 +52,7 @@
     },
     {
       "effective_from": "2026-11-21",
-      "effective_through": null,
+      "effective_through": "2026-11-25",
       "asset": "images/daily/faef-christmas-2026-sponsors-20261121-v1.jpg",
       "width": 818,
       "height": 1750,
@@ -61,6 +61,15 @@
       "original_path": "images/daily/faef-christmas-2026-sponsors-20261120-v2.jpg",
       "original_commit_time_utc": null,
       "note": "User2026-11-20 explicitly scheduled newest attachment for2026-11-21, superseding immediate use."
+    },
+    {
+      "effective_from": "2026-11-26",
+      "effective_through": null,
+      "asset": "images/daily/cootutor-sat-20261126-v1.jpg",
+      "width": 887,
+      "height": 1774,
+      "git_blob_sha": "50821331daa2c34b563a5420204a27b9a60df10b",
+      "note": "User-provided Cootutor advertisement. Display original image without outer advertisement frame. Preserve all earlier issue versions."
     }
   ]
 }
