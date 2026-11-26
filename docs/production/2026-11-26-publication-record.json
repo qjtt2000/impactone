@@ -99,17 +99,18 @@
         ],
         "position": "Before DAILY FOCUS, after audio controls",
         "copy": "Publisher exact seven-paragraph text and signature",
-        "design": "Inspired by the actual November 23 global special-report banner, with restrained warm champagne-gold horizon/globe and light ribbons on navy; live Chinese heading white/gold, book icon centered on heading row, exact publisher copy on warm white and signature/date right aligned. No NOTE label, leaf or holiday sticker.",
+        "design": "Special-report-inspired navy/gold typography with WITH GRATITUDE; small orange and ivory pumpkins integrated along lower-right border, warm champagne glow and ribbons; no cornucopia, basket, fruit, wheat, leaf sticker or literal holiday badge. Aligned book icon, exact publisher copy, right-aligned signature.",
         "english": "WITH GRATITUDE",
         "background": {
-          "asset": "images/daily/2026-11-26-opening-gratitude-v1.jpg",
+          "asset": "images/daily/2026-11-26-opening-gratitude-v2.jpg",
           "width": 2172,
           "height": 724,
-          "provenance": "Built-in image_gen background artwork; no lettering in bitmap. Typography remains live HTML.",
-          "prompt": "3:1 calm navy background, soft champagne-gold glow and restrained flowing ribbons, subtle globe at far right, clean text area; warm Thanksgiving gratitude atmosphere without leaves, badges, people or text."
+          "provenance": "Built-in image_gen generated background artwork; live HTML typography.",
+          "prompt": "Refine calm wide navy/gold banner with two small natural pumpkins in orange and warm ivory along lower-right edge, softly integrated; clean left text area, no cornucopia, baskets, apples, wheat or Halloween faces.",
+          "reference": "https://www.creativefabrica.com/prod/autumn-pumpkins-with-leaves-backgrounds-8i9yu4yep/"
         },
         "reference": "daily/2026-11-23.A.html, actually opened and inspected",
-        "refinementVerification": "Awaiting live visual check"
+        "refinementVerification": "Pending final live rendering check"
       },
       "globalFocusImages": {
         "left": "images/daily/2026-11-26-focus1-left-v6.jpg",
