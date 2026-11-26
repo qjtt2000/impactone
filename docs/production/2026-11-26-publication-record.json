@@ -26,9 +26,10 @@
       "order": "Original Trump + tariff proposal collage on LEFT, unchanged; global routes + port collage on RIGHT, Trump portrait removed from RIGHT only."
     },
     "audio": {
-      "url": "https://www.impactone.news/daily/audio/2026-11-26.mp3?v=20261126-v1",
-      "durationSeconds": 367.464,
-      "actualPlaybackObservedSeconds": 10.237125
+      "url": "https://www.impactone.news/daily/audio/2026-11-26.mp3?v=9a2a0873f381",
+      "durationSeconds": 455.856,
+      "actualPlaybackObservedSeconds": 22.387535,
+      "includesOpening": true
     }
   },
   "ny": {
@@ -44,12 +45,10 @@
       "readerCaption": "图｜梅西百年游行延期。图片来源｜美联社。"
     },
     "audio": {
-      "url": "https://www.impactone.news/daily/audio/2026-11-26-ny.mp3?v=20261126-v1",
-      "durationSeconds": 352.128,
-      "actualPlaybackObservedSeconds": [
-        2.513626,
-        12.305814
-      ]
+      "url": "https://www.impactone.news/daily/audio/2026-11-26-ny.mp3?v=2c5602ba96c1",
+      "durationSeconds": 440.52,
+      "actualPlaybackObservedSeconds": 39.278192,
+      "includesOpening": true
     },
     "checks": {
       "focus": 4,
@@ -61,9 +60,9 @@
   },
   "editorialAccessLimits": "Actual Claude reviews disclose that some original media pages were unavailable to Claude; it independently cross-checked some facts and relied on the producer full-text readings for inaccessible details. Do not claim every original source was independently opened by both editors.",
   "audioWorkflow": {
-    "id": 45817703069,
+    "id": 45830480196,
     "conclusion": "success",
-    "publicationCommit": "276d4c6ab4094c10db31472642a2db48b4367cab"
+    "publicationCommit": "7b66503eee8639bfb4f91e2de8e72964a6824b15"
   },
   "presentationCorrections": {
     "captionCommit": "1aefd0d6fdd2b95ae297c700dfba9a4273fe11c6",
@@ -235,7 +234,49 @@
         "historicalHtmlUnchanged": true
       },
       "dryRun": "Both real editions passed: full seven-paragraph introduction and signature precede unchanged news sections; English decoration/ad copy excluded; publisher versioning and old nested-source player format verified.",
-      "status": "generating"
+      "status": "complete",
+      "workflow": {
+        "runId": 45830480196,
+        "conclusion": "success",
+        "generationCommit": "7b66503eee8639bfb4f91e2de8e72964a6824b15"
+      },
+      "liveAudio": {
+        "global": {
+          "url": "https://www.impactone.news/daily/audio/2026-11-26.mp3?v=9a2a0873f381",
+          "durationSeconds": 455.856,
+          "startedAtSeconds": 0,
+          "observedPlaybackSeconds": 22.387535
+        },
+        "ny": {
+          "url": "https://www.impactone.news/daily/audio/2026-11-26-ny.mp3?v=2c5602ba96c1",
+          "durationSeconds": 440.52,
+          "startedAtSeconds": 0,
+          "observedPlaybackSeconds": 39.278192
+        },
+        "validation": "Actual live audio files loaded and playback advanced. Complete opening text verified through real-page extraction dry run before unchanged daily news. No claim of a separate speech-recognition transcription."
+      },
+      "mobileHeadingCorrection": {
+        "commit": "285879e8bc3c928cd593b639eacee0c488f57347",
+        "stylesheetVersion": "20261126-opening-nowrap-v1",
+        "scope": "Only .opening-message.thanksgiving-opening; prior issue markup unchanged.",
+        "actualViewportCssPixels": 375,
+        "global": {
+          "headingHeight": 26.9921875,
+          "lineHeight": 27,
+          "fontSize": 20,
+          "whiteSpace": "nowrap",
+          "horizontalOverflow": false,
+          "englishFits": true,
+          "iconCenterDifferencePixels": 0.0000095367431640625
+        },
+        "ny": {
+          "headingHeight": 26.9921875,
+          "lineHeight": 27,
+          "whiteSpace": "nowrap",
+          "horizontalOverflow": false
+        },
+        "test": "Read actual browser layout metrics at phone viewport in both editions; Chinese heading occupies one line. Temporary phone preview closed and normal-width final page retained."
+      }
     }
   ]
 }
