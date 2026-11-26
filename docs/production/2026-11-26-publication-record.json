@@ -127,7 +127,8 @@
         "effectiveFrom": "2026-11-26",
         "historicalFilesUnchanged": true,
         "outerFrameRemoved": true,
-        "display": "Original figure margins 18px 4.5% 0; 7px invisible padding replaces old 6px padding plus 1px border so rendered image width is unchanged. No full-bleed enlargement."
+        "display": "Original figure margins 18px 4.5% 0; 7px invisible padding replaces old 6px padding plus 1px border so rendered image width is unchanged. No full-bleed enlargement.",
+        "header": "Restored original full-width 特别刊登 / SPECIAL ADVERTISING header and 品牌展示 · 活动推广 · 机构宣传 subtitle in both November 26 editions; image size/spacing unchanged."
       },
       "audio": "No spoken news text changed. Extractor selects story/scan/view only; opening and figures are excluded.",
       "liveVerification": {
