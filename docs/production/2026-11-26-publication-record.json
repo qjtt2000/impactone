@@ -110,7 +110,24 @@
           "publisherReference": "bb9711f8e02b369b1bd6b3e11602f943.jpg"
         },
         "reference": "daily/2026-11-23.A.html, actually opened and inspected",
-        "refinementVerification": "Pending final live rendering check"
+        "refinementVerification": {
+          "status": "Verified on both live public edition pages",
+          "implementationCommit": "7d720d3d78e6e71eeb3f234956c63750e474cd5a",
+          "background": "images/daily/2026-11-26-opening-gratitude-v3.jpg",
+          "english": "WITH GRATITUDE",
+          "titleFontPixels": 42,
+          "accentTitleFontPixels": 42,
+          "iconCenterDifferencePixels": {
+            "global": 0.0000209808349609375,
+            "ny": 0.0003261566162109375
+          },
+          "signatureBothEditions": "right",
+          "advertisingHeaderRestoredBothEditions": true,
+          "advertisementImageWidthPixels": 677.6301879882812,
+          "advertisementBorder": "0px",
+          "globalShareSelection": "Unchanged: left Trump tariff proposal thumbnail, first actual img remains focus image",
+          "visualObservation": "Actually viewed rendered full opening banner; small warm pumpkin/red-leaf group at right does not obscure heading or subtitle."
+        }
       },
       "globalFocusImages": {
         "left": "images/daily/2026-11-26-focus1-left-v6.jpg",
