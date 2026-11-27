@@ -1,3 +1,2 @@
-2026-11-26
+2026-11-27
 both
-# Include complete opening message; revision 20261126-opening-v2
