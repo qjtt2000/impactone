@@ -1,0 +1,44 @@
+{
+  "edition_date": "2026-11-27",
+  "timezone": "America/New_York",
+  "website": {
+    "global": "https://www.impactone.news/daily/2026-11-27.html",
+    "ny": "https://www.impactone.news/daily/2026-11-27-ny.html",
+    "verified_live": true
+  },
+  "social": {
+    "x": {
+      "status": "published_and_opened",
+      "account": "IMPACTONENEWS",
+      "url": "https://x.com/IMPACTONENEWS/status/2126399326377345363",
+      "card_image_loaded": true
+    },
+    "facebook": {
+      "status": "published_and_opened",
+      "profile_id": "61591628082781",
+      "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0BcWi19KYUWGqr8xyfY14LAhxE5nGzhd4YSggB1oCJxHeJfecrYdcRthseQvD5xq3l&id=61591628082781",
+      "card_image_loaded": true
+    }
+  },
+  "current_selected_global_artwork": {
+    "left": "images/daily/2026-11-27-match-minister-v8.jpg",
+    "right": "images/daily/2026-11-27-global-focus1-right.jpg",
+    "share_url": "https://www.impactone.news/daily/2026-11-27.html?share=focus4&v=20261127-match-v8",
+    "preserved_from_latest_main": true
+  },
+  "opening_message": {
+    "global": false,
+    "ny": false
+  },
+  "audio": {
+    "global": {
+      "url": "https://www.impactone.news/daily/audio/2026-11-27.mp3?v=5bb122cb603f",
+      "duration_seconds": 345.288,
+      "played_to_seconds": 6.200495,
+      "error": null
+    },
+    "workflow_run": 46057264191,
+    "workflow_result": "success"
+  },
+  "verification_commit": "e016827562b8dd5ab9c627aee9f5a67d56d4eacd"
+}
