@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/share/:issue.html",
+      "destination": "/daily/:issue.html",
+      "permanent": false
+    }
+  ],
+  "git": {
+    "deploymentEnabled": {
+      "reader-comments": false
+    }
+  }
+}
