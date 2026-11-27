@@ -1,2 +1,3 @@
 2026-11-27
-both
+global
+# Remove November 26 Thanksgiving opening from November 27 global audio; retain all latest news, selected artwork and advertisements.
